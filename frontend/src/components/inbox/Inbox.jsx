@@ -4,7 +4,26 @@ import { Box } from "@mui/material";
 
 function Inbox() {
   const name = ["Tea", "Meja", "Melwin"];
-  const message = ["veckoBrev", "info", "Förtydligande"];
+  const message = [
+    {
+      from: "Skolan",
+      title: "Veckobrev",
+      message:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?",
+    },
+    {
+      from: "ddanny",
+      title: "info",
+      message:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?",
+    },
+    {
+      from: "kaffe",
+      title: "Förtydligande",
+      message:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?",
+    },
+  ];
   return (
     <Box>
       <InboxName name={name} />
