@@ -3,13 +3,19 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
+import { useState } from "react";
 function InboxMessages({ message }) {
   return (
     <List>
       {message.map((msg, index) => {
         return (
           <ListItem key={index}>
-            <Card sx={{ width: "100%", cursor: "pointer" }}>
+            <Card
+              sx={{
+                cursor: "pointer",
+                "&:hover": { background: "rgba(0, 0, 0, 0.04)" },
+              }}
+            >
               <CardContent sx={{ display: "flex" }}>
                 <Box
                   width="11rem"
@@ -31,24 +37,34 @@ function InboxMessages({ message }) {
                     {msg.title}
                   </Typography>
                 </Box>
-                <CheckCircleOutlineOutlinedIcon sx={{ color: "green" }} />
-                <Typography
-                  variant="p"
-                  maxWidth="30rem"
-                  overflow="hidden"
-                  textOverflow="ellipsis"
-                  whiteSpace="nowrap"
-                  paddingLeft={2}
-                  marginTop="auto"
-                >
-                  {msg.message}
-                </Typography>
+                <Box maxWidth="28rem" whiteSpace={"nowrap"}>
+                  <Box display={"flex"} justifyContent={"right"}>
+                    {!msg.opened ? (
+                      <Typography>Nytt</Typography>
+                    ) : (
+                      <CheckCircleOutlineOutlinedIcon
+                        sx={{
+                          color: "green",
+                        }}
+                      />
+                    )}
+                  </Box>
+                  <Typography
+                    // variant="p"
+                    // width="1rem"
+                    overflow="hidden"
+                    textOverflow="ellipsis"
+                    // whiteSpace="nowrap"
+                    // marginTop="auto"
+                  >
+                    {msg.message}
+                  </Typography>
+                </Box>
               </CardContent>
             </Card>
           </ListItem>
         );
-      })}{" "}
-      har läst
+      })}
     </List>
   );
 }
