@@ -1,6 +1,6 @@
 import { List, ListItem, ListItemButton } from "@mui/material";
 
-function InboxName({ child, handleToggle }) {
+function InboxName({ inbox, handleToggle }) {
   return (
     <List
       sx={{
@@ -10,19 +10,19 @@ function InboxName({ child, handleToggle }) {
         paddingTop: "2.6rem",
       }}
     >
-      {child.map((c, index) => {
+      {inbox.map((c, index) => {
         return (
           <ListItem key={index} sx={{ width: "8rem", padding: "0" }}>
             <ListItemButton
-              onClick={() => handleToggle(c.name)}
+              onClick={() => handleToggle(c.child.name)}
               sx={{
                 display: "flex",
                 justifyContent: "center",
                 border: "1px solid black",
-                borderBottom: c.isSelected && "none",
+                borderBottom: c.child.isSelected && "none",
               }}
             >
-              {c.name}
+              {c.child.name}
             </ListItemButton>
           </ListItem>
         );
