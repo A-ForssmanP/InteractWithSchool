@@ -1,10 +1,10 @@
 import Box from "@mui/material/Box";
-import Inbox from "../inbox/Inbox";
+import Pages from "../../pages/Pages";
 
 function PagesWrapper() {
   return (
     <Box component="main" border="1px solid red" minWidth="85%">
-      <Inbox />
+      <Pages />
     </Box>
   );
 }
