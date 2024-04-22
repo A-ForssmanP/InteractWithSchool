@@ -1,4 +1,4 @@
-import { List, ListItem, Box, Alert } from "@mui/material";
+import { List, ListItem, Box } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -9,8 +9,8 @@ import { useNavigate } from "react-router-dom";
 function InboxMessages({ selectedInbox, deleteMessage }) {
   const navigate = useNavigate();
   // navigate to see full message
-  const handleClick = () => {
-    navigate("message");
+  const handleClick = (msg) => {
+    navigate(msg.id, { state: { message: msg } });
   };
 
   return (
@@ -19,7 +19,7 @@ function InboxMessages({ selectedInbox, deleteMessage }) {
         return (
           <ListItem key={crypto.randomUUID()}>
             <Card
-              onClick={handleClick}
+              onClick={() => handleClick(msg)}
               sx={{
                 cursor: "pointer",
                 "&:hover": { background: "rgba(0, 0, 0, 0.04)" },
