@@ -1,4 +1,4 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -6,9 +6,15 @@ import { Box } from "@mui/material";
 import ButtonBack from "../../../components/buttonBack/ButtonBack";
 
 function ViewMessage() {
+  const navigate = useNavigate();
   //   const { messageId } = useParams();
   const { state } = useLocation();
   const msg = state.message;
+
+  //navigate back to inbox
+  const navBack = () => {
+    navigate("/inbox");
+  };
 
   return (
     <Card>
@@ -22,7 +28,7 @@ function ViewMessage() {
 
         <Typography variant="p">{msg.text}</Typography>
         <Box marginTop={3} display={"flex"} justifyContent={"flex-end"}>
-          <ButtonBack />
+          <ButtonBack handleClick={navBack} />
         </Box>
       </CardContent>
     </Card>

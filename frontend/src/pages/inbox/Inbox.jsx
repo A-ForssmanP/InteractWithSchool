@@ -105,12 +105,26 @@ function Inbox() {
   };
 
   //Function for deleting message
+  // const deleteMessage = (id) => {
+  //   setSelectedInbox((currSelected) => {
+  //     return {
+  //       ...currSelected,
+  //       messages: currSelected.messages.filter((msg) => msg.id !== id),
+  //     };
+  //   });
+  // };
   const deleteMessage = (id) => {
-    setSelectedInbox((currSelected) => {
-      return {
-        ...currSelected,
-        messages: currSelected.messages.filter((msg) => msg.id !== id),
-      };
+    setInbox((currInbox) => {
+      return currInbox.map((msg) => {
+        if (msg.child.isSelected) {
+          return {
+            ...msg,
+            messages: msg.messages.filter((msg) => msg.id !== id),
+          };
+        } else {
+          return msg;
+        }
+      });
     });
   };
 

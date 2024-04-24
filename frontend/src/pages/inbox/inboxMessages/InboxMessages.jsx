@@ -57,10 +57,15 @@ function InboxMessages({ selectedInbox, deleteMessage }) {
                         }}
                       />
                     )}
+
                     <DeleteOutlineIcon
-                      onClick={() => deleteMessage(msg.id)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        deleteMessage(msg.id);
+                      }}
                       sx={{
                         marginLeft: "5px",
+
                         "&:hover": {
                           color: "red",
                           bgcolor: "lightGrey",
