@@ -7,13 +7,14 @@ import ButtonBack from "../../../components/buttonBack/ButtonBack";
 
 function ViewMessage() {
   const navigate = useNavigate();
+
   //   const { messageId } = useParams();
   const { state } = useLocation();
   const msg = state.message;
 
   //navigate back to inbox
   const navBack = () => {
-    navigate("/inbox");
+    navigate(`..`);
   };
 
   return (

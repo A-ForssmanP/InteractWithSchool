@@ -10,7 +10,7 @@ function Pages() {
       <Route path="/" element={<Layout />}>
         <Route index element={<h1>Homepage</h1>} />
 
-        <Route path="inbox" element={<InboxLayout />}>
+        <Route path="inbox/:child" element={<InboxLayout />}>
           <Route index element={<Inbox />} />
           <Route path=":messageId" element={<ViewMessage />} />
         </Route>

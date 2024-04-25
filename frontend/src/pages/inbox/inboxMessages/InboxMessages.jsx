@@ -6,11 +6,15 @@ import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutli
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { useNavigate } from "react-router-dom";
 
-function InboxMessages({ selectedInbox, deleteMessage }) {
+function InboxMessages({ selectedInbox, deleteMessage, setInbox }) {
   const navigate = useNavigate();
   // navigate to see full message
   const handleClick = (msg) => {
-    navigate(msg.id, { state: { message: msg } });
+    navigate(msg.id, {
+      state: {
+        message: msg,
+      },
+    });
   };
 
   return (

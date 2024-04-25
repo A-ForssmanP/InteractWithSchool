@@ -14,7 +14,7 @@ function InboxName({ inbox, handleToggle }) {
         return (
           <ListItem key={index} sx={{ width: "8rem", padding: "0" }}>
             <ListItemButton
-              onClick={() => handleToggle(c.child.name)}
+              onClick={() => handleToggle(c.child.name, index)}
               sx={{
                 display: "flex",
                 justifyContent: "center",

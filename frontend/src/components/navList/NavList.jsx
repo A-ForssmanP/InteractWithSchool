@@ -10,7 +10,7 @@ function NavList() {
       id: crypto.randomUUID(),
       text: "Inkorg",
       ikon: <InboxIcon />,
-      navPath: "inbox",
+      navPath: "inbox/0",
     },
   ];
 

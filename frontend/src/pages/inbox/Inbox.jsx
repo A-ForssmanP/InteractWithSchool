@@ -2,6 +2,7 @@ import InboxName from "./inboxName/InboxName";
 import InboxMessages from "./inboxMessages/InboxMessages";
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Inbox() {
   const [inbox, setInbox] = useState([
@@ -72,6 +73,7 @@ function Inbox() {
   ]);
 
   const [selectedInbox, setSelectedInbox] = useState(inbox[0]);
+  const navigate = useNavigate();
 
   //handle whos messages to render
   const handleInboxRender = () => {
@@ -86,7 +88,8 @@ function Inbox() {
   }, [inbox]);
 
   // Function for toggle which child is selected
-  const handleToggle = (name) => {
+  const handleToggle = (name, index) => {
+    navigate(`/inbox/${index}`);
     setInbox((currInbox) => {
       return currInbox.map((msg) => {
         if (msg.child.name === name) {
@@ -134,6 +137,7 @@ function Inbox() {
       <InboxMessages
         selectedInbox={selectedInbox}
         deleteMessage={deleteMessage}
+        setInbox={handleToggle}
       />
     </Box>
   );
