@@ -2,7 +2,7 @@ import InboxName from "./inboxName/InboxName";
 import InboxMessages from "./inboxMessages/InboxMessages";
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function Inbox() {
   const [inbox, setInbox] = useState([
@@ -74,25 +74,42 @@ function Inbox() {
 
   const [selectedInbox, setSelectedInbox] = useState(inbox[0]);
   const navigate = useNavigate();
+  const { child } = useParams();
 
   //handle whos messages to render
   const handleInboxRender = () => {
-    setSelectedInbox(() => {
-      const selected = inbox.filter((msg) => msg.child.isSelected === true);
-      return selected[0];
-    });
+    // setSelectedInbox(() => {
+    //   const selected = inbox.filter((msg) => msg.child.isSelected === true);
+    //   return selected[0];
+    // });
+    setSelectedInbox(inbox[child]);
   };
 
   useEffect(() => {
     handleInboxRender();
-  }, [inbox]);
+    setInbox((currInbox) => {
+      return currInbox.map((msg) => {
+        if (msg.child.name === currInbox[child].child.name) {
+          return {
+            ...msg,
+            child: { ...msg.child, isSelected: true },
+          };
+        } else {
+          return {
+            ...msg,
+            child: { ...msg.child, isSelected: false },
+          };
+        }
+      });
+    });
+  }, [child]);
 
   // Function for toggle which child is selected
   const handleToggle = (name, index) => {
     navigate(`/inbox/${index}`);
     setInbox((currInbox) => {
-      return currInbox.map((msg) => {
-        if (msg.child.name === name) {
+      return currInbox.map((msg, indx) => {
+        if (msg.child.name === currInbox[index].child.name) {
           return {
             ...msg,
             child: { ...msg.child, isSelected: true },
@@ -137,7 +154,7 @@ function Inbox() {
       <InboxMessages
         selectedInbox={selectedInbox}
         deleteMessage={deleteMessage}
-        setInbox={handleToggle}
+        // setInbox={handleToggle}
       />
     </Box>
   );
