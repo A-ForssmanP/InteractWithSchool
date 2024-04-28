@@ -5,9 +5,15 @@ import Typography from "@mui/material/Typography";
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-function InboxMessages({ selectedInbox, deleteMessage, setInbox }) {
+function InboxMessages({ selectedInbox, deleteMessage, childIndx }) {
+  console.log(selectedInbox);
+  const [inboxToRender, setInboxToRender] = useState(selectedInbox);
   const navigate = useNavigate();
+  useEffect(() => {
+    setInboxToRender(selectedInbox);
+  }, [selectedInbox]);
   // navigate to see full message
   const handleClick = (msg) => {
     navigate(msg.id, {
@@ -19,7 +25,7 @@ function InboxMessages({ selectedInbox, deleteMessage, setInbox }) {
 
   return (
     <List>
-      {selectedInbox.messages.map((msg) => {
+      {inboxToRender.messages.map((msg) => {
         return (
           <ListItem key={crypto.randomUUID()}>
             <Card
@@ -65,7 +71,7 @@ function InboxMessages({ selectedInbox, deleteMessage, setInbox }) {
                     <DeleteOutlineIcon
                       onClick={(e) => {
                         e.stopPropagation();
-                        deleteMessage(msg.id);
+                        deleteMessage(msg.id, childIndx);
                       }}
                       sx={{
                         marginLeft: "5px",

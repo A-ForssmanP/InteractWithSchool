@@ -73,55 +73,30 @@ function Inbox() {
   ]);
 
   const [selectedInbox, setSelectedInbox] = useState(inbox[0]);
-  const navigate = useNavigate();
-  const { child } = useParams();
+  const childIndx = useParams().child;
+
+  useEffect(() => {
+    setInbox((currInbox) => {
+      return currInbox.map((msg) => {
+        if (msg.child.name === currInbox[childIndx].child.name) {
+          return {
+            ...msg,
+            child: { ...msg.child, isSelected: true },
+          };
+        } else {
+          return {
+            ...msg,
+            child: { ...msg.child, isSelected: false },
+          };
+        }
+      });
+    });
+    handleInboxRender();
+  }, [childIndx]);
 
   //handle whos messages to render
   const handleInboxRender = () => {
-    // setSelectedInbox(() => {
-    //   const selected = inbox.filter((msg) => msg.child.isSelected === true);
-    //   return selected[0];
-    // });
-    setSelectedInbox(inbox[child]);
-  };
-
-  useEffect(() => {
-    handleInboxRender();
-    setInbox((currInbox) => {
-      return currInbox.map((msg) => {
-        if (msg.child.name === currInbox[child].child.name) {
-          return {
-            ...msg,
-            child: { ...msg.child, isSelected: true },
-          };
-        } else {
-          return {
-            ...msg,
-            child: { ...msg.child, isSelected: false },
-          };
-        }
-      });
-    });
-  }, [child]);
-
-  // Function for toggle which child is selected
-  const handleToggle = (name, index) => {
-    navigate(`/inbox/${index}`);
-    setInbox((currInbox) => {
-      return currInbox.map((msg, indx) => {
-        if (msg.child.name === currInbox[index].child.name) {
-          return {
-            ...msg,
-            child: { ...msg.child, isSelected: true },
-          };
-        } else {
-          return {
-            ...msg,
-            child: { ...msg.child, isSelected: false },
-          };
-        }
-      });
-    });
+    setSelectedInbox(inbox[childIndx]);
   };
 
   //Function for deleting message
@@ -133,10 +108,10 @@ function Inbox() {
   //     };
   //   });
   // };
-  const deleteMessage = (id) => {
-    setInbox((currInbox) => {
-      return currInbox.map((msg) => {
-        if (msg.child.isSelected) {
+  const deleteMessage = (id, index) => {
+    const newInbox = setInbox((currInbox) => {
+      return currInbox.map((msg, indx) => {
+        if (indx === Number(index)) {
           return {
             ...msg,
             messages: msg.messages.filter((msg) => msg.id !== id),
@@ -146,15 +121,19 @@ function Inbox() {
         }
       });
     });
+
+    console.log(newInbox);
+    // setSelectedInbox(newInbox[childIndx]);
   };
 
   return (
     <Box>
-      <InboxName inbox={inbox} handleToggle={handleToggle} />
+      <InboxName inbox={inbox} childIndx={childIndx} />
       <InboxMessages
         selectedInbox={selectedInbox}
         deleteMessage={deleteMessage}
         // setInbox={handleToggle}
+        childIndx={childIndx}
       />
     </Box>
   );
