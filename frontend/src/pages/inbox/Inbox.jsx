@@ -2,7 +2,7 @@ import InboxName from "./inboxName/InboxName";
 import InboxMessages from "./inboxMessages/InboxMessages";
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 function Inbox() {
   const [inbox, setInbox] = useState([
@@ -71,45 +71,52 @@ function Inbox() {
       ],
     },
   ]);
-
-  const [selectedInbox, setSelectedInbox] = useState(inbox[0]);
   const childIndx = useParams().child;
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   setInbox((currInbox) => {
+  //     return currInbox.map((msg) => {
+  //       if (msg.child.name === currInbox[childIndx].child.name) {
+  //         return {
+  //           ...msg,
+  //           child: { ...msg.child, isSelected: false },
+  //         };
+  //       } else {
+  //         return {
+  //           ...msg,
+  //           child: { ...msg.child, isSelected: false },
+  //         };
+  //       }
+  //     });
+  //   });
+  // }, [childIndx]);
+
+  //set the message to be opened
+  const messageOpened = (id, index) => {
     setInbox((currInbox) => {
-      return currInbox.map((msg) => {
-        if (msg.child.name === currInbox[childIndx].child.name) {
+      return currInbox.map((msg, indx) => {
+        if (indx === Number(index)) {
           return {
             ...msg,
-            child: { ...msg.child, isSelected: true },
-          };
-        } else {
-          return {
-            ...msg,
-            child: { ...msg.child, isSelected: false },
+            messages: msg.messages.map((msg) => {
+              if (msg.id === id) {
+                return {
+                  ...msg,
+                  opened: true,
+                };
+              } else {
+                return msg;
+              }
+            }),
           };
         }
       });
     });
-    handleInboxRender();
-  }, [childIndx]);
-
-  //handle whos messages to render
-  const handleInboxRender = () => {
-    setSelectedInbox(inbox[childIndx]);
   };
 
-  //Function for deleting message
-  // const deleteMessage = (id) => {
-  //   setSelectedInbox((currSelected) => {
-  //     return {
-  //       ...currSelected,
-  //       messages: currSelected.messages.filter((msg) => msg.id !== id),
-  //     };
-  //   });
-  // };
+  //Delete a message
   const deleteMessage = (id, index) => {
-    const newInbox = setInbox((currInbox) => {
+    setInbox((currInbox) => {
       return currInbox.map((msg, indx) => {
         if (indx === Number(index)) {
           return {
@@ -121,19 +128,16 @@ function Inbox() {
         }
       });
     });
-
-    console.log(newInbox);
-    // setSelectedInbox(newInbox[childIndx]);
   };
 
   return (
     <Box>
       <InboxName inbox={inbox} childIndx={childIndx} />
       <InboxMessages
-        selectedInbox={selectedInbox}
+        selectedInbox={inbox[childIndx]}
         deleteMessage={deleteMessage}
-        // setInbox={handleToggle}
         childIndx={childIndx}
+        messageOpened={messageOpened}
       />
     </Box>
   );

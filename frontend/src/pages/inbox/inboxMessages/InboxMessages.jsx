@@ -5,31 +5,32 @@ import Typography from "@mui/material/Typography";
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 
-function InboxMessages({ selectedInbox, deleteMessage, childIndx }) {
-  console.log(selectedInbox);
-  const [inboxToRender, setInboxToRender] = useState(selectedInbox);
+function InboxMessages({
+  selectedInbox,
+  deleteMessage,
+  childIndx,
+  messageOpened,
+}) {
   const navigate = useNavigate();
-  useEffect(() => {
-    setInboxToRender(selectedInbox);
-  }, [selectedInbox]);
+
   // navigate to see full message
-  const handleClick = (msg) => {
-    navigate(msg.id, {
-      state: {
-        message: msg,
-      },
-    });
+  const handleClick = (msg, indx) => {
+    messageOpened(msg.id, indx);
+    // navigate(msg.id, {
+    //   state: {
+    //     message: msg,
+    //   },
+    // });
   };
 
   return (
     <List>
-      {inboxToRender.messages.map((msg) => {
+      {selectedInbox.messages.map((msg, index) => {
         return (
           <ListItem key={crypto.randomUUID()}>
             <Card
-              onClick={() => handleClick(msg)}
+              onClick={() => handleClick(msg, index)}
               sx={{
                 cursor: "pointer",
                 "&:hover": { background: "rgba(0, 0, 0, 0.04)" },
