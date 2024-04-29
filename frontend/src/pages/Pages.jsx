@@ -18,8 +18,10 @@ function Pages() {
         </Route>
         <Route path="fronvaro" element={<AbsenceLayout />}>
           <Route index element={<Absence />} />
+          <Route path=":id/registrera" element={<h1>Registrera</h1>} />
         </Route>
       </Route>
+      <Route path="*" element={<h1>Page Not Found</h1>} />
     </Routes>
   );
 }

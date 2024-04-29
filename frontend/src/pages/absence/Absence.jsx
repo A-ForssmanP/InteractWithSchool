@@ -1,29 +1,32 @@
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import List from "@mui/material/List";
+import Container from "@mui/material/Container";
 
-import AbsenceItemChild from "./absenceItemChild/AbsenceItemChild";
+import AbsenceItemStudent from "./absenceItemStudent/AbsenceItemStudent";
 
 function Absence() {
-  const [child, setChild] = useState([]);
+  const [student, setStudent] = useState([]);
 
   useEffect(() => {
-    const child = [
+    const student = [
       { id: crypto.randomUUID(), name: "Barn 1" },
       { id: crypto.randomUUID(), name: "Barn 2" },
       { id: crypto.randomUUID(), name: "Barn 3" },
     ];
-    setChild(child);
+    setStudent(student);
   }, []);
 
   return (
-    <Box>
-      <h2>Registrera Frånvaro</h2>
-      <List>
-        {child.map((c) => {
-          return <AbsenceItemChild key={c.id} child={c} />;
-        })}
-      </List>
+    <Box mt={4.4}>
+      <Container maxWidth="xs" sx={{ padding: { xs: "0", md: "0 24px" } }}>
+        <h2>Registrera Frånvaro</h2>
+        <List sx={{ mt: ".6rem" }}>
+          {student.map((stnt) => {
+            return <AbsenceItemStudent key={stnt.id} student={stnt} />;
+          })}
+        </List>
+      </Container>
     </Box>
   );
 }
