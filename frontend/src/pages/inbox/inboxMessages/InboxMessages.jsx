@@ -15,22 +15,22 @@ function InboxMessages({
   const navigate = useNavigate();
 
   // navigate to see full message
-  const handleClick = (msg, indx) => {
-    messageOpened(msg.id, indx);
-    // navigate(msg.id, {
-    //   state: {
-    //     message: msg,
-    //   },
-    // });
+  const handleClick = (msg) => {
+    messageOpened(msg.id);
+    navigate(msg.id, {
+      state: {
+        message: msg,
+      },
+    });
   };
 
   return (
     <List>
-      {selectedInbox.messages.map((msg, index) => {
+      {selectedInbox.messages.map((msg) => {
         return (
           <ListItem key={crypto.randomUUID()}>
             <Card
-              onClick={() => handleClick(msg, index)}
+              onClick={() => handleClick(msg)}
               sx={{
                 cursor: "pointer",
                 "&:hover": { background: "rgba(0, 0, 0, 0.04)" },
@@ -85,14 +85,7 @@ function InboxMessages({
                       }}
                     />
                   </Box>
-                  <Typography
-                    // variant="p"
-                    // width="1rem"
-                    overflow="hidden"
-                    textOverflow="ellipsis"
-                    // whiteSpace="nowrap"
-                    // marginTop="auto"
-                  >
+                  <Typography overflow="hidden" textOverflow="ellipsis">
                     {msg.text}
                   </Typography>
                 </Box>

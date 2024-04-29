@@ -1,7 +1,7 @@
 import InboxName from "./inboxName/InboxName";
 import InboxMessages from "./inboxMessages/InboxMessages";
 import { Box } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 function Inbox() {
@@ -73,29 +73,11 @@ function Inbox() {
   ]);
   const childIndx = useParams().child;
 
-  // useEffect(() => {
-  //   setInbox((currInbox) => {
-  //     return currInbox.map((msg) => {
-  //       if (msg.child.name === currInbox[childIndx].child.name) {
-  //         return {
-  //           ...msg,
-  //           child: { ...msg.child, isSelected: false },
-  //         };
-  //       } else {
-  //         return {
-  //           ...msg,
-  //           child: { ...msg.child, isSelected: false },
-  //         };
-  //       }
-  //     });
-  //   });
-  // }, [childIndx]);
-
-  //set the message to be opened
-  const messageOpened = (id, index) => {
+  //set the message status to be opened
+  const messageOpened = (id) => {
     setInbox((currInbox) => {
       return currInbox.map((msg, indx) => {
-        if (indx === Number(index)) {
+        if (indx.toString() === childIndx) {
           return {
             ...msg,
             messages: msg.messages.map((msg) => {
@@ -109,6 +91,8 @@ function Inbox() {
               }
             }),
           };
+        } else {
+          return msg;
         }
       });
     });

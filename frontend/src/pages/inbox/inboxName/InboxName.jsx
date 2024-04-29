@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 function InboxName({ inbox, childIndx }) {
   const [names, setNames] = useState([]);
   const navigate = useNavigate();
+
   useEffect(() => {
     handleNames();
   }, [childIndx]);
@@ -47,7 +48,6 @@ function InboxName({ inbox, childIndx }) {
           <ListItem key={index} sx={{ width: "8rem", padding: "0" }}>
             <ListItemButton
               onClick={() => handleClickToggle(index)}
-              // onClick={() => handleToggle(c.name, index)}
               sx={{
                 display: "flex",
                 justifyContent: "center",
