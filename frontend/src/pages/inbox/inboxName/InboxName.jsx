@@ -31,7 +31,7 @@ function InboxName({ inbox, childIndx }) {
 
   // Toggle inbox when name is clicked
   const handleClickToggle = (index) => {
-    navigate(`/inbox/${index}`);
+    navigate(`/inkorg/${index}`);
   };
 
   return (

@@ -2,6 +2,7 @@ import List from "@mui/material/List";
 import NavListItem from "../navListItem/NavListItem";
 import InboxIcon from "@mui/icons-material/Inbox";
 import HomeIcon from "@mui/icons-material/Home";
+import CancelScheduleSendIcon from "@mui/icons-material/CancelScheduleSend";
 
 function NavList() {
   const listItems = [
@@ -10,7 +11,13 @@ function NavList() {
       id: crypto.randomUUID(),
       text: "Inkorg",
       ikon: <InboxIcon />,
-      navPath: "inbox/0",
+      navPath: "inkorg/0",
+    },
+    {
+      id: crypto.randomUUID(),
+      text: "Frånvaro",
+      ikon: <CancelScheduleSendIcon />,
+      navPath: "fronvaro",
     },
   ];
 
