@@ -5,6 +5,7 @@ import Inbox from "./inbox/Inbox";
 import ViewMessage from "./inbox/viewMessage/ViewMessage";
 import AbsenceLayout from "./absence/AbsenceLayout";
 import Absence from "./absence/Absence";
+import AbsenceForm from "./absence/absenceForm/AbsenceForm";
 
 function Pages() {
   return (
@@ -18,7 +19,7 @@ function Pages() {
         </Route>
         <Route path="fronvaro" element={<AbsenceLayout />}>
           <Route index element={<Absence />} />
-          <Route path=":id/registrera" element={<h1>Registrera</h1>} />
+          <Route path=":id/registrera" element={<AbsenceForm />} />
         </Route>
       </Route>
       <Route path="*" element={<h1>Page Not Found</h1>} />
