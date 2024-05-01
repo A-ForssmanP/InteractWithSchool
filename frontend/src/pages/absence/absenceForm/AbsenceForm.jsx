@@ -9,10 +9,12 @@ import {
   Button,
   TextField,
 } from "@mui/material";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { useState } from "react";
 
 function AbsenceForm() {
-  const [absence, setAbsence] = useState({ reason: "" });
+  const [absence, setAbsence] = useState({ reason: "", textReason: "" });
 
   //handle stateChange of the selected reason
   const handleChange = (e) => {
@@ -35,8 +37,12 @@ function AbsenceForm() {
       <Typography>Registrera frånvaro för NAMN</Typography>
       <Box component="form">
         <Box>
-          <Box display={"flex"} flexDirection={"column"}>
-            <FormControl sx={{ maxWidth: 130 }} size="small">
+          <Box
+            display={"flex"}
+            flexDirection={"row"}
+            justifyContent={"space-between"}
+          >
+            <FormControl sx={{ minWidth: 130 }} size="small">
               <InputLabel id="reason">Anledning</InputLabel>
               <Select
                 labelId="reason"
@@ -52,18 +58,30 @@ function AbsenceForm() {
                 <MenuItem value="other">Annan</MenuItem>
               </Select>
             </FormControl>
-            {absence.reason === "other" && (
+            <Box>
+              {!absence.reason && !absence.textReason ? (
+                <ErrorOutlineIcon color="disabled" />
+              ) : (
+                <CheckCircleOutlineIcon color="success" />
+              )}
+            </Box>
+          </Box>
+          {absence.reason === "other" && (
+            <Box>
               <TextField
-                id="outlined-multiline-static"
+                fullWidth
+                id="textReason"
                 label="Vänligen fyll i anledning"
                 multiline
                 rows={4}
                 defaultValue=""
               />
-            )}
-          </Box>
-        </Box>
 
+              <Button>Klar</Button>
+            </Box>
+          )}
+        </Box>
+        <Typography>Ange berörda datum </Typography>
         <Button type="submit" variant="contained">
           Registrera
         </Button>
