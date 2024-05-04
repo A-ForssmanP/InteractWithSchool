@@ -9,9 +9,11 @@ import {
   Button,
   TextField,
 } from "@mui/material";
+import DoneIcon from "@mui/icons-material/Done";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import Callendar from "../../../components/calendar/Callendar";
+import AbsenceSymmaryView from "../absenceSummaryView/AbsenceSymmaryView";
 import { useState } from "react";
 
 function AbsenceForm() {
@@ -30,8 +32,8 @@ function AbsenceForm() {
     });
   };
 
-  //set the selected dates
-  const setDates = (from, to) => {
+  //get the selected dates
+  const getDates = (from, to) => {
     setAbsence((currAbs) => {
       return {
         ...currAbs,
@@ -71,8 +73,8 @@ function AbsenceForm() {
                 // onChange={handleChange}
               >
                 {/* <MenuItem value={10}>Ten</MenuItem> */}
-                <MenuItem value="sickness">Sjukdom</MenuItem>
-                <MenuItem value="other">Annan</MenuItem>
+                <MenuItem value="Sjukdom">Sjukdom</MenuItem>
+                <MenuItem value="Annan">Annan</MenuItem>
               </Select>
             </FormControl>
             <Box>
@@ -93,19 +95,18 @@ function AbsenceForm() {
                 rows={4}
                 defaultValue=""
               />
-
-              <Button>Klar</Button>
             </Box>
           )}
+          <Button variant="contained" fullWidth color="success">
+            Klar <DoneIcon sx={{ height: "1.1rem" }} />
+          </Button>
         </Box>
         <Box>
           <Typography>Fyll i dag(ar) </Typography>
-          <Typography>{absence.dates.fromDate}</Typography>
-          <Typography>{absence.dates.toDate}</Typography>
-          <Callendar setDates={setDates} />
+          <Callendar getDates={getDates} isDisabled={false} />
         </Box>
-
-        <Button type="submit" variant="contained">
+        <AbsenceSymmaryView absence={absence} />
+        <Button type="submit" variant="contained" disabled={true}>
           Registrera
         </Button>
       </Box>
