@@ -12,6 +12,7 @@ import {
 import DoneIcon from "@mui/icons-material/Done";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import AbsenceReason from "../absenceReason/AbsenceReason";
 import Callendar from "../../../components/calendar/Callendar";
 import AbsenceSymmaryView from "../absenceSummaryView/AbsenceSymmaryView";
 import { useState } from "react";
@@ -19,10 +20,15 @@ import { useState } from "react";
 function AbsenceForm() {
   const [absence, setAbsence] = useState({
     reason: "",
-    textReason:
-      "fdfdfddsdsdsdsssdsdsdsdsdsdsdsdsdsdsddsdsdsdsfdsfdsfdsfsfdsfdsfdsdsdsdsdsdsdsdsdsds",
-    dates: { fromDate: null, toDate: null },
+    textReason: "",
+    dates: { fromDate: "", toDate: null },
   });
+
+  const [isDone, setIsDone] = useState({
+    reason: false,
+    dates: false,
+  });
+
   //handle stateChange of the selected reason
   const handleChange = (e) => {
     setAbsence((currAbsence) => {
@@ -33,7 +39,7 @@ function AbsenceForm() {
     });
   };
 
-  //get the selected dates
+  //update the selected dates for the state Absence.dates
   const getDates = (from, to) => {
     setAbsence((currAbs) => {
       return {
@@ -45,6 +51,28 @@ function AbsenceForm() {
       };
     });
   };
+
+  //update absence field to be done
+  const fieldIsDone = (name) => {
+    setIsDone((currState) => {
+      return {
+        ...currState,
+        [name]: true,
+      };
+    });
+  };
+
+  const handleText = (text) => {
+    if (text.length) {
+      setAbsence((currAbsence) => {
+        return {
+          ...currAbsence,
+          textReason: text,
+        };
+      });
+    }
+  };
+
   return (
     <Container
       maxWidth="sm"
@@ -54,62 +82,36 @@ function AbsenceForm() {
         marginTop: { sm: "2.6rem" },
       }}
     >
-      <Typography>Registrera frånvaro för NAMN</Typography>
+      <Typography variant="h1" fontSize={26}>
+        Registrera frånvaro för NAMN
+      </Typography>
       <Box component="form">
-        <Box>
-          <Box
-            display={"flex"}
-            flexDirection={"row"}
-            justifyContent={"space-between"}
-          >
-            <FormControl sx={{ minWidth: 130 }} size="small">
-              <InputLabel id="reason">Anledning</InputLabel>
-              <Select
-                labelId="reason"
-                id="reason"
-                // value={age}
-                label="Reason"
-                onChange={handleChange}
-                value={absence.reason}
-                // onChange={handleChange}
-              >
-                {/* <MenuItem value={10}>Ten</MenuItem> */}
-                <MenuItem value="Sjukdom">Sjukdom</MenuItem>
-                <MenuItem value="Annan">Annan</MenuItem>
-              </Select>
-            </FormControl>
-            <Box>
-              {!absence.reason && !absence.textReason ? (
-                <ErrorOutlineIcon color="disabled" />
-              ) : (
-                <CheckCircleOutlineIcon color="success" />
-              )}
-            </Box>
+        <AbsenceReason
+          handleChange={handleChange}
+          absence={absence}
+          handleText={handleText}
+          fieldIsDone={fieldIsDone}
+          isDone={isDone.reason}
+        />
+        {isDone.reason && (
+          <Box>
+            <Typography>Fyll i dag(ar) </Typography>
+            <Callendar
+              getDates={getDates}
+              isDisabled={isDone.dates}
+              fieldIsDone={fieldIsDone}
+              isDone={isDone.dates}
+            />
           </Box>
-          {absence.reason === "other" && (
-            <Box>
-              <TextField
-                fullWidth
-                id="textReason"
-                label="Vänligen fyll i anledning"
-                multiline
-                rows={4}
-                defaultValue=""
-              />
-            </Box>
-          )}
-          <Button variant="contained" fullWidth color="success">
-            Klar <DoneIcon sx={{ height: "1.1rem" }} />
-          </Button>
-        </Box>
-        <Box>
-          <Typography>Fyll i dag(ar) </Typography>
-          <Callendar getDates={getDates} isDisabled={false} />
-        </Box>
-        <AbsenceSymmaryView absence={absence} />
-        <Button type="submit" variant="contained" disabled={true}>
-          Registrera
-        </Button>
+        )}
+        {isDone.reason && isDone.dates && (
+          <>
+            <AbsenceSymmaryView absence={absence} />
+            <Button type="submit" variant="contained">
+              Registrera
+            </Button>
+          </>
+        )}
       </Box>
     </Container>
   );

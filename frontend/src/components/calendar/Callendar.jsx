@@ -8,7 +8,7 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-function Callendar({ getDates, isDisabled }) {
+function Callendar({ getDates, isDisabled, fieldIsDone, isDone }) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [dateIsDone, setDateIsDone] = useState(false);
@@ -22,7 +22,9 @@ function Callendar({ getDates, isDisabled }) {
     const fromD = new Date(startDate).toDateString();
     const toD = new Date(endDate).toDateString();
     getDates(fromD, toD);
+    fieldIsDone("dates");
   };
+
   return (
     <div>
       <Box display="flex" justifyContent={"space-between"}>
@@ -54,7 +56,7 @@ function Callendar({ getDates, isDisabled }) {
           showWeekNumbers
           disabled={isDisabled}
         />
-        {dateIsDone ? (
+        {isDone ? (
           <CheckCircleOutlineIcon color="success" />
         ) : (
           <ErrorOutlineIcon color="disabled" />
@@ -66,10 +68,8 @@ function Callendar({ getDates, isDisabled }) {
         fullWidth
         color="success"
         onClick={handleClick}
-        disabled={isDisabled}
       >
         KLAR
-        <DoneIcon sx={{ height: "1.1rem" }} />
       </Button>
     </div>
   );
