@@ -19,7 +19,8 @@ import { useState } from "react";
 function AbsenceForm() {
   const [absence, setAbsence] = useState({
     reason: "",
-    textReason: "",
+    textReason:
+      "fdfdfddsdsdsdsssdsdsdsdsdsdsdsdsdsdsddsdsdsdsfdsfdsfdsfsfdsfdsfdsdsdsdsdsdsdsdsdsds",
     dates: { fromDate: null, toDate: null },
   });
   //handle stateChange of the selected reason
