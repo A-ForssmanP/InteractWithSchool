@@ -1,17 +1,4 @@
-import {
-  Container,
-  Box,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Typography,
-  Button,
-  TextField,
-} from "@mui/material";
-import DoneIcon from "@mui/icons-material/Done";
-import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import { Container, Box, Typography, Button } from "@mui/material";
 import AbsenceReason from "../absenceReason/AbsenceReason";
 import Callendar from "../../../components/calendar/Callendar";
 import AbsenceSymmaryView from "../absenceSummaryView/AbsenceSymmaryView";
@@ -61,7 +48,17 @@ function AbsenceForm() {
       };
     });
   };
+  //update absence field to be NOT done
+  const fieldIsNotDone = (name) => {
+    setIsDone((currState) => {
+      return {
+        ...currState,
+        [name]: false,
+      };
+    });
+  };
 
+  // set absence.textReason to be the value of the textfield input
   const handleText = (text) => {
     if (text.length) {
       setAbsence((currAbsence) => {
@@ -82,16 +79,23 @@ function AbsenceForm() {
         marginTop: { sm: "2.6rem" },
       }}
     >
-      <Typography variant="h1" fontSize={26}>
+      <Typography variant="h1" fontSize={26} textAlign={"center"} mt={2}>
         Registrera frånvaro för NAMN
       </Typography>
-      <Box component="form">
+      <Box
+        component="form"
+        display={"flex"}
+        flexDirection={"column"}
+        gap={3}
+        mt={4}
+      >
         <AbsenceReason
           handleChange={handleChange}
           absence={absence}
           handleText={handleText}
           fieldIsDone={fieldIsDone}
           isDone={isDone.reason}
+          fieldIsNotDone={fieldIsNotDone}
         />
         {isDone.reason && (
           <Box>
@@ -101,13 +105,18 @@ function AbsenceForm() {
               isDisabled={isDone.dates}
               fieldIsDone={fieldIsDone}
               isDone={isDone.dates}
+              fieldIsNotDone={fieldIsNotDone}
             />
           </Box>
         )}
         {isDone.reason && isDone.dates && (
           <>
             <AbsenceSymmaryView absence={absence} />
-            <Button type="submit" variant="contained">
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{ marginBottom: "1rem" }}
+            >
               Registrera
             </Button>
           </>

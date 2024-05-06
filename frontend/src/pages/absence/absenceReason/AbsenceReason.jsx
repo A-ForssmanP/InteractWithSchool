@@ -1,6 +1,5 @@
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import DoneIcon from "@mui/icons-material/Done";
 import {
   Box,
   FormControl,
@@ -18,8 +17,10 @@ function AbsenceReason({
   handleText,
   fieldIsDone,
   isDone,
+  fieldIsNotDone,
 }) {
   const [text, setText] = useState("");
+
   //handle buttonClick
   const handleClick = () => {
     if (absence.reason === "Sjukdom") {
@@ -42,13 +43,11 @@ function AbsenceReason({
           <Select
             labelId="reason"
             id="reason"
-            // value={age}
             label="Reason"
             onChange={(e) => handleChange(e)}
             value={absence.reason}
-            // onChange={handleChange}
+            disabled={isDone}
           >
-            {/* <MenuItem value={10}>Ten</MenuItem> */}
             <MenuItem value="Sjukdom">Sjukdom</MenuItem>
             <MenuItem value="Annan">Annan</MenuItem>
           </Select>
@@ -57,13 +56,17 @@ function AbsenceReason({
           {!isDone ? (
             <ErrorOutlineIcon color="disabled" />
           ) : (
-            <CheckCircleOutlineIcon color="success" />
+            <>
+              <Button onClick={() => fieldIsNotDone("reason")}>Ändra</Button>
+              <CheckCircleOutlineIcon color="success" />
+            </>
           )}
         </Box>
       </Box>
-      {absence.reason === "Annan" && (
+      {absence.reason === "Annan" && !isDone && (
         <Box>
           <TextField
+            sx={{ marginTop: ".5rem" }}
             fullWidth
             id="textReason"
             label="Vänligen fyll i anledning"
@@ -74,15 +77,18 @@ function AbsenceReason({
           />
         </Box>
       )}
-      <Button
-        variant="contained"
-        fullWidth
-        color="success"
-        disabled={!absence.reason}
-        onClick={handleClick}
-      >
-        Klar
-      </Button>
+      {!isDone && (
+        <Button
+          sx={{ margin: "1rem 0" }}
+          variant="contained"
+          fullWidth
+          color="success"
+          disabled={!absence.reason}
+          onClick={handleClick}
+        >
+          Klar
+        </Button>
+      )}
     </Box>
   );
 }

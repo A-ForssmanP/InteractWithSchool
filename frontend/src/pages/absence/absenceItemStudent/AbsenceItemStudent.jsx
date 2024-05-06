@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 function AbsenceItemStudent({ student }) {
   const navigate = useNavigate();
+
   // naviagte to register absence for selected student
   const navigateToRegister = (id) => {
     navigate(`${id}/registrera`);

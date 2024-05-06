@@ -1,4 +1,4 @@
-import { Box, Typography, Card, CardContent } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 function AbsenceSymmaryView({ absence }) {
   return (
@@ -13,7 +13,9 @@ function AbsenceSymmaryView({ absence }) {
         </Box>
         <Box display={"flex"}>
           <Typography width={80}>Beskriving:</Typography>
-          <Typography ml={1}>{absence.textReason}</Typography>
+          <Typography ml={1}>
+            {absence.textReason || "Hemma pga sjukdom"}
+          </Typography>
         </Box>
         <Box display={"flex"}>
           <Typography width={80}>Dag(ar):</Typography>

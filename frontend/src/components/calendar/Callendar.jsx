@@ -1,23 +1,22 @@
 import DatePicker from "react-datepicker";
 import { useState } from "react";
 import { Button, Box } from "@mui/material";
-import DoneIcon from "@mui/icons-material/Done";
 
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-function Callendar({ getDates, isDisabled, fieldIsDone, isDone }) {
+function Callendar({
+  getDates,
+  isDisabled,
+  fieldIsDone,
+  isDone,
+  fieldIsNotDone,
+}) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [dateIsDone, setDateIsDone] = useState(false);
-  // //set the span of the selected dates.
-  // const onChange = (dates) => {
-  //   const [start, end] = dates;
-  //   setStartDate(start);
-  //   setEndDate(end);
-  // };
+
   const handleClick = () => {
     const fromD = new Date(startDate).toDateString();
     const toD = new Date(endDate).toDateString();
@@ -34,8 +33,6 @@ function Callendar({ getDates, isDisabled, fieldIsDone, isDone }) {
           startDate={startDate}
           endDate={endDate}
           selectsStart
-          // selectsRange
-          // inline
           showIcon
           dateFormat="dd/MM/yyyy"
           calendarStartDay={1}
@@ -57,20 +54,26 @@ function Callendar({ getDates, isDisabled, fieldIsDone, isDone }) {
           disabled={isDisabled}
         />
         {isDone ? (
-          <CheckCircleOutlineIcon color="success" />
+          <>
+            <Button onClick={() => fieldIsNotDone("dates")}>Ändra</Button>
+            <CheckCircleOutlineIcon color="success" />
+          </>
         ) : (
           <ErrorOutlineIcon color="disabled" />
         )}
       </Box>
 
-      <Button
-        variant="contained"
-        fullWidth
-        color="success"
-        onClick={handleClick}
-      >
-        KLAR
-      </Button>
+      {!isDone && (
+        <Button
+          sx={{ margin: "1rem 0" }}
+          variant="contained"
+          fullWidth
+          color="success"
+          onClick={handleClick}
+        >
+          KLAR
+        </Button>
+      )}
     </div>
   );
 }
