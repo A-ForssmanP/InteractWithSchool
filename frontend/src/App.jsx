@@ -1,6 +1,7 @@
 import Stack from "@mui/material/Stack";
 import Menu from "./components/menu/Menu";
 import PagesWrapper from "./components/pagesWrapper/PagesWrapper";
+import axios from "axios";
 
 function App() {
   return (

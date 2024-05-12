@@ -3,76 +3,88 @@ import InboxMessages from "./inboxMessages/InboxMessages";
 import { Box } from "@mui/material";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 function Inbox() {
-  const [inbox, setInbox] = useState([
-    {
-      child: { name: "Barn 1", isSelected: true },
-      messages: [
-        {
-          id: crypto.randomUUID(),
-          from: "Skolan",
-          title: "Veckobrev",
-          text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?",
-          opened: false,
-        },
-        {
-          id: crypto.randomUUID(),
-          from: "Skolan",
-          title: "Veckobrev",
-          text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?",
-          opened: false,
-        },
-        {
-          id: crypto.randomUUID(),
-          from: "Förskolan",
-          title: "Info",
-          text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?",
-          opened: true,
-        },
-        {
-          id: crypto.randomUUID(),
-          from: "Rektor",
-          title: "Insamling",
-          text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?",
-          opened: true,
-        },
-      ],
-    },
-    {
-      child: { name: "Barn 2", isSelected: false },
-      messages: [
-        {
-          id: crypto.randomUUID(),
-          from: "Fritids",
-          title: "Info",
-          text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?",
-          opened: true,
-        },
-        {
-          id: crypto.randomUUID(),
-          from: "Fritids",
-          title: "Förtydligande Tidigare Utskick",
-          text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?",
-          opened: true,
-        },
-      ],
-    },
-    {
-      child: { name: "Barn 3", isSelected: false },
-      messages: [
-        {
-          id: crypto.randomUUID(),
-          from: "Rektor",
-          title: "Kallelse",
-          text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?",
-          opened: false,
-        },
-      ],
-    },
-  ]);
+  // const [inbox, setInbox] = useState([
+  //   {
+  //     child: { name: "Barn 1", isSelected: true },
+  //     messages: [
+  //       {
+  //         id: crypto.randomUUID(),
+  //         from: "Skolan",
+  //         title: "Veckobrev",
+  //         text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?",
+  //         opened: false,
+  //       },
+  //       {
+  //         id: crypto.randomUUID(),
+  //         from: "Skolan",
+  //         title: "Veckobrev",
+  //         text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?",
+  //         opened: false,
+  //       },
+  //       {
+  //         id: crypto.randomUUID(),
+  //         from: "Förskolan",
+  //         title: "Info",
+  //         text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?",
+  //         opened: true,
+  //       },
+  //       {
+  //         id: crypto.randomUUID(),
+  //         from: "Rektor",
+  //         title: "Insamling",
+  //         text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?",
+  //         opened: true,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     child: { name: "Barn 2", isSelected: false },
+  //     messages: [
+  //       {
+  //         id: crypto.randomUUID(),
+  //         from: "Fritids",
+  //         title: "Info",
+  //         text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?",
+  //         opened: true,
+  //       },
+  //       {
+  //         id: crypto.randomUUID(),
+  //         from: "Fritids",
+  //         title: "Förtydligande Tidigare Utskick",
+  //         text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?",
+  //         opened: true,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     child: { name: "Barn 3", isSelected: false },
+  //     messages: [
+  //       {
+  //         id: crypto.randomUUID(),
+  //         from: "Rektor",
+  //         title: "Kallelse",
+  //         text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?",
+  //         opened: false,
+  //       },
+  //     ],
+  //   },
+  // ]);
+  const [inbox, setInbox] = useState([]);
   const childIndx = useParams().child;
 
+  // get inbox data
+  const getData = async () => {
+    try {
+      const res = await axios.get(`${import.meta.env.VITE_SERVER}/inbox`);
+      console.log(res.data);
+    } catch (err) {
+      throw new Error(err);
+    }
+  };
+  getData();
   //set the message status to be opened
   const messageOpened = (id) => {
     setInbox((currInbox) => {
@@ -116,13 +128,13 @@ function Inbox() {
 
   return (
     <Box>
-      <InboxName inbox={inbox} childIndx={childIndx} />
+      {/* <InboxName inbox={inbox} childIndx={childIndx} />
       <InboxMessages
         selectedInbox={inbox[childIndx]}
         deleteMessage={deleteMessage}
         childIndx={childIndx}
         messageOpened={messageOpened}
-      />
+      /> */}
     </Box>
   );
 }

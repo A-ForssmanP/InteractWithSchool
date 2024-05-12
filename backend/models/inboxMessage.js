@@ -10,7 +10,11 @@ const inboxMessageSchema = new Schema({
         required: true
     },
     title: String,
-    text: String
+    text: String,
+    opened: {
+        type: Boolean,
+        required: true
+    }
 })
 
 const InboxMessage = model("InboxMessage", inboxMessageSchema)
