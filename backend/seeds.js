@@ -10,7 +10,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/interactWithSchool').then(()=>{
 })
 
 
-
+// create and insert user and student document
 const insertNewUserandStudent = async () => {
   const students = [
     {firstName:"First",lastName:"Student"},
@@ -38,28 +38,50 @@ const insertNewUserandStudent = async () => {
     }
 }
 
+// create and point message to parent document
+const createMessage = async (inbox, studentId) => {
+  const inboxToInsert = inbox.map((msg) => {
+    return {
+      ...msg,
+      studentId: studentId
+    }
+  });
+  try {
+ await InboxMessage.insertMany(inboxToInsert)   
+  } catch(err) {
+    throw new Error(err)
+  }
+  
+}
+
 //insert inboxMessages to dB
 const insertInboxMessages = async () => {
-  const inboxStudentOne = [
+  const inboxFirstStudent = [
  {from: "skolan",title:"Veckobrev", text:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?"},
  {from: "skolan",title:"Veckobrev", text:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?"},
  {from: "Förskolan",title:"Info", text:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?"},
  {from: "Rektor",title:"Insamling", text:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?"}
   ]
-  const inboxStudentTwo = [
+  const inboxSecondStudent = [
  {from: "Fritids",title:"Info", text:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?"},
  {from: "Fritids",title:"Förtydligande tidigare utskick", text:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?"},
- 
   ]
-  const inboxStudentThree = [
+  const inboxThirdStudent = [
  {from: "Rektor",title:"Kallelse", text:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?"}
   ]
-  const firstStudent = await Student.find({firstName:"First"})
-  inboxStudentOne.forEach((msg)=>{
-    const inboxMsg = new InboxMessage(msg)
-    inboxMsg.studentId = firstStudent
-    inboxMsg.save()
-  })
+
+try {
+    const firstStudent = await Student.findOne({firstName:"First"})
+  const secondStudent = await Student.findOne({firstName:"Second"})
+  const thirdStudent = await Student.findOne({firstName:"Third"})
+
+  createMessage(inboxFirstStudent,firstStudent)
+  createMessage(inboxSecondStudent,secondStudent)
+  createMessage(inboxThirdStudent,thirdStudent)
+} catch(err) {
+  throw new Error(err)
+}
+
 }
 
 
@@ -68,6 +90,7 @@ const insertInboxMessages = async () => {
  const insertData = async () => {
   await insertNewUserandStudent()
   await insertInboxMessages()
+  console.log("Data inserted to DB!")
  }
 
  insertData()
