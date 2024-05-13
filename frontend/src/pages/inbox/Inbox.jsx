@@ -73,25 +73,27 @@ function Inbox() {
   //   },
   // ]);
   const [inbox, setInbox] = useState([]);
-  const childIndx = useParams().child;
-
-  // get inbox data
+  const studentIndx = useParams().child;
+  console.log(inbox);
+  // get data and set it to the inbox
   const getData = async () => {
     try {
-      const res = await axios.get(
-        `${import.meta.env.VITE_SERVER}/inbox/${childIndx}`
-      );
-      console.log(res.data);
+      const res = await axios.get(`${import.meta.env.VITE_SERVER}/inbox`);
+      setInbox(res.data);
     } catch (err) {
       throw new Error(err);
     }
   };
-  getData();
+
+  useState(() => {
+    getData();
+  }, []);
+
   //set the message status to be opened
   const messageOpened = (id) => {
     setInbox((currInbox) => {
       return currInbox.map((msg, indx) => {
-        if (indx.toString() === childIndx) {
+        if (indx.toString() === studentIndx) {
           return {
             ...msg,
             messages: msg.messages.map((msg) => {
@@ -130,13 +132,13 @@ function Inbox() {
 
   return (
     <Box>
-      {/* <InboxName inbox={inbox} childIndx={childIndx} />
-      <InboxMessages
-        selectedInbox={inbox[childIndx]}
+      <InboxName inbox={inbox} studentIndx={studentIndx} />
+      {/* <InboxMessages
+        selectedInbox={inbox[studentIndx]}
         deleteMessage={deleteMessage}
-        childIndx={childIndx}
+        studentIndx={studentIndx}
         messageOpened={messageOpened}
-      /> */}
+      />  */}
     </Box>
   );
 }

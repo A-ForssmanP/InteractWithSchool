@@ -2,26 +2,27 @@ import { List, ListItem, ListItemButton } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function InboxName({ inbox, childIndx }) {
+function InboxName({ inbox, studentIndx }) {
   const [names, setNames] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     handleNames();
-  }, [childIndx]);
+    console.log(inbox);
+  }, [studentIndx]);
 
   // Get names for inboxes and which one to be rendered
   const handleNames = () => {
     setNames((currnames) => {
       return inbox.map((inbx, index) => {
-        if (index === Number(childIndx)) {
+        if (index === Number(studentIndx)) {
           return {
-            name: inbx.child.name,
+            name: inbx.name,
             isSelected: true,
           };
         } else {
           return {
-            name: inbx.child.name,
+            name: inbx.name,
             isSelected: false,
           };
         }

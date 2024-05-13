@@ -24,16 +24,14 @@ app.get('/', (req, res) => {
     res.send('Welcome to server!!')
   })
 
-  app.get("/inbox/:index", async (req,res) => {
-    const user = await User.findOne({_id:'6641142e63f31d9c7eb6980a'}).populate("students","firstName")
-    const inboxData = []
-    user.students.forEach(async(s)=>{
-     const msgs = await InboxMessage.find({studentId:s._id})
-     inboxData.push("ddsd")
-    //  console.log(msgs)
-    })
-    console.log(inboxData)
-    res.send(inboxData)
+  app.get("/inbox", async (req,res) => {
+    const user = await User.findById('6641142e63f31d9c7eb6980a').populate("students","firstName")
+    const inbox = []
+    for(let student of user.students) {
+      const messages = await InboxMessage.find({studentId: student})
+      inbox.push({name: student.firstName, messages: messages})
+    }
+    res.send(inbox)
   })
 
 app.listen(port,()=>{
