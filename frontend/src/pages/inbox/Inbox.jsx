@@ -78,7 +78,9 @@ function Inbox() {
   // get inbox data
   const getData = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_SERVER}/inbox`);
+      const res = await axios.get(
+        `${import.meta.env.VITE_SERVER}/inbox/${childIndx}`
+      );
       console.log(res.data);
     } catch (err) {
       throw new Error(err);
