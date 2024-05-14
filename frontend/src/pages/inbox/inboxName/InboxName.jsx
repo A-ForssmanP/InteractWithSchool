@@ -8,8 +8,7 @@ function InboxName({ inbox, studentIndx }) {
 
   useEffect(() => {
     handleNames();
-    console.log(inbox);
-  }, [studentIndx]);
+  }, [inbox, studentIndx]);
 
   // Get names for inboxes and which one to be rendered
   const handleNames = () => {

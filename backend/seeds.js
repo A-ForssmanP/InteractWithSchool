@@ -88,7 +88,7 @@ try {
 
 // Insert data to dB
  const insertData = async () => {
-  await insertNewUserandStudent()
+  // await insertNewUserandStudent()
   await insertInboxMessages()
   console.log("Data inserted to DB!")
  }

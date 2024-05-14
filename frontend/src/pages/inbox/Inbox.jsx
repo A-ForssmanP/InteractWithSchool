@@ -73,8 +73,8 @@ function Inbox() {
   //   },
   // ]);
   const [inbox, setInbox] = useState([]);
-  const studentIndx = useParams().child;
-  console.log(inbox);
+  const studentIndx = useParams().student;
+
   // get data and set it to the inbox
   const getData = async () => {
     try {
@@ -97,7 +97,7 @@ function Inbox() {
           return {
             ...msg,
             messages: msg.messages.map((msg) => {
-              if (msg.id === id) {
+              if (msg._id === id) {
                 return {
                   ...msg,
                   opened: true,
@@ -115,13 +115,28 @@ function Inbox() {
   };
 
   //Delete a message
-  const deleteMessage = (id, index) => {
+  const deleteMessage = async (id, index) => {
+    // setInbox((currInbox) => {
+    //   return currInbox.map((msg, indx) => {
+    //     if (indx === Number(index)) {
+    //       return {
+    //         ...msg,
+    //         messages: msg.messages.filter((msg) => msg._id !== id),
+    //       };
+    //     } else {
+    //       return msg;
+    //     }
+    //   });
+    // });
+    const res = await axios.delete(
+      `${import.meta.env.VITE_SERVER}/inbox/${id}/delete`
+    );
     setInbox((currInbox) => {
       return currInbox.map((msg, indx) => {
         if (indx === Number(index)) {
           return {
             ...msg,
-            messages: msg.messages.filter((msg) => msg.id !== id),
+            messages: res.data,
           };
         } else {
           return msg;
@@ -133,12 +148,12 @@ function Inbox() {
   return (
     <Box>
       <InboxName inbox={inbox} studentIndx={studentIndx} />
-      {/* <InboxMessages
+      <InboxMessages
         selectedInbox={inbox[studentIndx]}
         deleteMessage={deleteMessage}
         studentIndx={studentIndx}
         messageOpened={messageOpened}
-      />  */}
+      />
     </Box>
   );
 }

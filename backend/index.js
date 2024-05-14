@@ -34,6 +34,14 @@ app.get('/', (req, res) => {
     res.send(inbox)
   })
 
+  app.delete("/inbox/:id/delete",async (req,res)=>{
+    const {id} = req.params
+    const deletedMessage = await InboxMessage.findByIdAndDelete(id)
+    const student = deletedMessage.studentId.toString()
+    const messages = await InboxMessage.find({studentId: student})
+    res.send(messages)
+  })
+
 app.listen(port,()=>{
 console.log(`SERVER IS UP AND RUNNING ON PORT ${port}!`)
 })

@@ -13,7 +13,7 @@ function Pages() {
       <Route path="/" element={<Layout />}>
         <Route index element={<h1>Homepage</h1>} />
 
-        <Route path="inkorg/:child" element={<InboxLayout />}>
+        <Route path="inkorg/:student" element={<InboxLayout />}>
           <Route index element={<Inbox />} />
           <Route path=":messageId" element={<ViewMessage />} />
         </Route>
