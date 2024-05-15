@@ -42,6 +42,14 @@ app.get('/', (req, res) => {
     res.send(messages)
   })
 
+  app.put("/inbox/:id/update",async (req,res) =>{
+    const {id} = req.params
+   const updatedMessage = await InboxMessage.findByIdAndUpdate(id,{opened:true})
+   const student = updatedMessage.studentId.toString()
+    const messages = await InboxMessage.find({studentId: student})
+    res.send(messages)
+  })
+
 app.listen(port,()=>{
 console.log(`SERVER IS UP AND RUNNING ON PORT ${port}!`)
 })

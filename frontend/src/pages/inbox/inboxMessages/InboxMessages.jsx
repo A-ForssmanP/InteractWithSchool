@@ -16,7 +16,7 @@ function InboxMessages({
 
   // navigate to see full message
   const handleClick = (msg) => {
-    messageOpened(msg._id);
+    messageOpened(msg.opened, msg._id);
     navigate(msg._id, {
       state: {
         message: msg,
