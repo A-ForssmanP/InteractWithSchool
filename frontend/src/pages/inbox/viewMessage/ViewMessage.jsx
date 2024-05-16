@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -8,7 +8,6 @@ import ButtonBack from "../../../components/buttonBack/ButtonBack";
 function ViewMessage() {
   const navigate = useNavigate();
 
-  //   const { messageId } = useParams();
   const { state } = useLocation();
   const msg = state.message;
 

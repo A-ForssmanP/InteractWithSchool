@@ -3,6 +3,8 @@ import AbsenceReason from "../absenceReason/AbsenceReason";
 import Callendar from "../../../components/calendar/Callendar";
 import AbsenceSymmaryView from "../absenceSummaryView/AbsenceSymmaryView";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 function AbsenceForm() {
   const [absence, setAbsence] = useState({
@@ -15,6 +17,9 @@ function AbsenceForm() {
     reason: false,
     dates: false,
   });
+
+  const { state } = useLocation();
+  const student = state.student;
 
   //handle stateChange of the selected reason
   const handleChange = (e) => {
@@ -48,6 +53,7 @@ function AbsenceForm() {
       };
     });
   };
+
   //update absence field to be NOT done
   const fieldIsNotDone = (name) => {
     setIsDone((currState) => {
@@ -70,6 +76,16 @@ function AbsenceForm() {
     }
   };
 
+  // handle submitting the form
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const res = await axios.put(
+      `${import.meta.env.VITE_EXPRESS_SERVER}/absence/${student._id}/register`,
+      { data: absence }
+    );
+    console.log(res);
+  };
+
   return (
     <Container
       maxWidth="sm"
@@ -80,10 +96,11 @@ function AbsenceForm() {
       }}
     >
       <Typography variant="h1" fontSize={26} textAlign={"center"} mt={2}>
-        Registrera frånvaro för NAMN
+        Registrera frånvaro för {student.firstName} {student.lastName}
       </Typography>
       <Box
         component="form"
+        onSubmit={handleSubmit}
         display={"flex"}
         flexDirection={"column"}
         gap={3}

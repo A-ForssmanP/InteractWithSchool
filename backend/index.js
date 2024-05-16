@@ -17,7 +17,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/interactWithSchool').then(()=>{
 const port = process.env.SERVER_PORT
 const corsOptions = {origin: process.env.VITE_SERVER, optionsSuccessStatus: 200}
 
-
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
 app.use(cors(corsOptions))
 
 app.get('/', (req, res) => {
@@ -34,7 +35,7 @@ app.get('/', (req, res) => {
     res.send(inbox)
   })
 
-  app.delete("/inbox/:id/delete",async (req,res)=>{
+  app.delete("/inbox/:id/delete",async (req,res) => {
     const {id} = req.params
     const deletedMessage = await InboxMessage.findByIdAndDelete(id)
     const student = deletedMessage.studentId.toString()
@@ -42,12 +43,35 @@ app.get('/', (req, res) => {
     res.send(messages)
   })
 
-  app.put("/inbox/:id/update",async (req,res) =>{
+  app.put("/inbox/:id/update",async (req,res) => {
     const {id} = req.params
    const updatedMessage = await InboxMessage.findByIdAndUpdate(id,{opened:true})
    const student = updatedMessage.studentId.toString()
     const messages = await InboxMessage.find({studentId: student})
     res.send(messages)
+  })
+
+  app.get("/absence", async(req,res) => {
+    try {
+      const user = await User.findById('6641142e63f31d9c7eb6980a').populate("students");
+      res.send(user.students)
+    } catch(err) {
+      throw new Error(err)
+    }
+  })
+
+  app.put("/absence/:id/register", async (req,res) => {
+    try {
+      const {data} = req.body
+      const {id} = req.params
+      const student = await Student.findByIdAndUpdate({_id: id})
+      student.absence.prevAbsences.push(data)
+      console.log(student.absence)
+      res.send("Registrated!")
+    } catch(err) {
+      throw new Error(err)
+    }
+   
   })
 
 app.listen(port,()=>{

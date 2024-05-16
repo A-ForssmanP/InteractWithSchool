@@ -11,7 +11,11 @@ function AbsenceItemStudent({ student }) {
 
   // naviagte to register absence for selected student
   const navigateToRegister = (id) => {
-    navigate(`${id}/registrera`);
+    navigate(`${id}/registrera`, {
+      state: {
+        student: student,
+      },
+    });
   };
   return (
     <Card
@@ -26,12 +30,12 @@ function AbsenceItemStudent({ student }) {
       <CardContent sx={{ width: "100%" }}>
         <Box display="flex" justifyContent={"center"} gap={"1.6rem"}>
           <Typography display={"flex"} alignItems={"center"}>
-            {student.name}
+            {student.firstName}
           </Typography>
           <CardActions>
             <Button
               variant="contained"
-              onClick={() => navigateToRegister(student.id)}
+              onClick={() => navigateToRegister(student._id)}
             >
               Välj
             </Button>

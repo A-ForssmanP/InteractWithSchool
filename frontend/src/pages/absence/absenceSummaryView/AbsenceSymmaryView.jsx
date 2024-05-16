@@ -13,9 +13,7 @@ function AbsenceSymmaryView({ absence }) {
         </Box>
         <Box display={"flex"}>
           <Typography width={80}>Beskriving:</Typography>
-          <Typography ml={1}>
-            {absence.textReason || "Hemma pga sjukdom"}
-          </Typography>
+          <Typography ml={1}>{absence.textReason}</Typography>
         </Box>
         <Box display={"flex"}>
           <Typography width={80}>Dag(ar):</Typography>

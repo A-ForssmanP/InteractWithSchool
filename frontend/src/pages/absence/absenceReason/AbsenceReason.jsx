@@ -24,6 +24,7 @@ function AbsenceReason({
   //handle buttonClick
   const handleClick = () => {
     if (absence.reason === "Sjukdom") {
+      handleText("Hemma pga sjukdom");
       fieldIsDone("reason");
     } else if (absence.reason === "Annan" && text) {
       handleText(text);
