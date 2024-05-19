@@ -65,7 +65,10 @@ app.get('/', (req, res) => {
       const {data} = req.body
       const {id} = req.params
       const student = await Student.findByIdAndUpdate({_id: id})
+      const date = new Date().toDateString()
+      console.log(date, student.absence.prevAbsences[0])
       student.absence.prevAbsences.push(data)
+      student.save()
       console.log(student.absence)
       res.send("Registrated!")
     } catch(err) {

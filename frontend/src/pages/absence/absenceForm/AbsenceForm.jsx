@@ -3,7 +3,7 @@ import AbsenceReason from "../absenceReason/AbsenceReason";
 import Callendar from "../../../components/calendar/Callendar";
 import AbsenceSymmaryView from "../absenceSummaryView/AbsenceSymmaryView";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 
 function AbsenceForm() {
@@ -18,6 +18,7 @@ function AbsenceForm() {
     dates: false,
   });
 
+  const navigate = useNavigate();
   const { state } = useLocation();
   const student = state.student;
 
@@ -83,6 +84,7 @@ function AbsenceForm() {
       `${import.meta.env.VITE_EXPRESS_SERVER}/absence/${student._id}/register`,
       { data: absence }
     );
+    navigate("..");
     console.log(res);
   };
 
