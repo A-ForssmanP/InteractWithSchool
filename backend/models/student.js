@@ -9,10 +9,10 @@ const studentSchema = new Schema({
         type: String,
         required: true
     },
-    absence: {
-        isAbsence: Boolean,
-        prevAbsences: []
-    }
+    // absence: {
+    //     isAbsence: Boolean,
+    //     prevAbsences: []
+    // }
 })
 
 const Student = model("Student",studentSchema)

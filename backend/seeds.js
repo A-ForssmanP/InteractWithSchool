@@ -22,14 +22,14 @@ const insertNewUserandStudent = async () => {
     const u = new User({firstName:"Demo", lastName:"User",password:"Kaffe"})
     await Student.insertMany(students)
     const stnts = await Student.find({})
-    stnts.forEach((s,indx)=>{
-      if(indx === 0 || indx === 2) {
-        s.absence.isAbsence = false
-      } else {
-        s.absence.isAbsence = true
-      }
-        s.save()
-    })
+    // stnts.forEach((s,indx)=>{
+    //   if(indx === 0 || indx === 2) {
+    //     s.absence.isAbsence = false
+    //   } else {
+    //     s.absence.isAbsence = true
+    //   }
+        // s.save()
+    // })
     u.students.push(...stnts)
     
         await u.save()
