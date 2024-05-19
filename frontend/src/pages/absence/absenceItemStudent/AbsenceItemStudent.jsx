@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-
+import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined";
 function AbsenceItemStudent({ student }) {
   const [isAbsence, setIsAbsence] = useState(false);
   const navigate = useNavigate();
@@ -15,19 +15,18 @@ function AbsenceItemStudent({ student }) {
   const checkisAbsence = () => {
     const currentDate = new Date().toDateString();
 
-    student &&
-      student.absence.prevAbsences.forEach((element) => {
-        console.log(element.dates.fromDate);
+    const checkForDate =
+      student &&
+      student.absence.prevAbsences.some((element) => {
+        return element.dates.fromDate === currentDate;
       });
-
-    // student.absences.prevAbsences.forEach((d) =>
-    //   console.log(d.fromDate.toDateString())
-    // );
+    setIsAbsence(checkForDate);
   };
 
   useEffect(() => {
     checkisAbsence();
   }, [student]);
+
   // naviagte to register absence for selected student
   const navigateToRegister = (id) => {
     navigate(`${id}/registrera`, {
@@ -48,11 +47,18 @@ function AbsenceItemStudent({ student }) {
       }}
     >
       <CardContent sx={{ width: "100%" }}>
+        <Typography sx={{ textAlign: "right" }}>
+          {isAbsence && "Frånvaro"}
+          <LightbulbOutlinedIcon
+            fontSize="medium"
+            color={isAbsence ? "error" : "success"}
+          />
+        </Typography>
+
         <Box display="flex" justifyContent={"center"} gap={"1.6rem"}>
           <Typography display={"flex"} alignItems={"center"}>
             {student.firstName}
           </Typography>
-          <Typography>{isAbsence ? "Borta" : "Här"}</Typography>
           <CardActions>
             <Button
               variant="contained"

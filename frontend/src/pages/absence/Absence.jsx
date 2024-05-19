@@ -11,20 +11,18 @@ function Absence() {
 
   // get data for the student(s)
   const getStudentData = async () => {
-    const res = await axios(`${import.meta.env.VITE_EXPRESS_SERVER}/absence`);
-    setStudents(res.data);
+    try {
+      const res = await axios(`${import.meta.env.VITE_EXPRESS_SERVER}/absence`);
+      setStudents(res.data);
+    } catch (err) {
+      throw new Error(err);
+    }
   };
 
   useEffect(() => {
-    // const student = [
-    //   { id: crypto.randomUUID(), name: "Barn 1" },
-    //   { id: crypto.randomUUID(), name: "Barn 2" },
-    //   { id: crypto.randomUUID(), name: "Barn 3" },
-    // ];
-    // setStudent(student);
     getStudentData();
   }, []);
-  console.log(students);
+
   return (
     <Box mt={4.4}>
       <Container maxWidth="xs" sx={{ padding: { xs: "0", md: "0 24px" } }}>

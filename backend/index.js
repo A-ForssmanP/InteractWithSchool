@@ -26,34 +26,47 @@ app.get('/', (req, res) => {
   })
 
   app.get("/inbox", async (req,res) => {
-    const user = await User.findById('6641142e63f31d9c7eb6980a').populate("students","firstName")
+    try {
+    const user = await User.findById('664a4f9721b7a91948cf6dc8').populate("students","firstName")
     const inbox = []
     for(let student of user.students) {
       const messages = await InboxMessage.find({studentId: student})
       inbox.push({name: student.firstName, messages: messages})
     }
     res.send(inbox)
+  } catch(err) {
+    throw new Error(err)
+  }
   })
 
   app.delete("/inbox/:id/delete",async (req,res) => {
+    try {
     const {id} = req.params
     const deletedMessage = await InboxMessage.findByIdAndDelete(id)
     const student = deletedMessage.studentId.toString()
     const messages = await InboxMessage.find({studentId: student})
     res.send(messages)
+    } catch (err) {
+      throw new Error(err)
+    }
   })
 
   app.put("/inbox/:id/update",async (req,res) => {
-    const {id} = req.params
+    try {
+          const {id} = req.params
    const updatedMessage = await InboxMessage.findByIdAndUpdate(id,{opened:true})
    const student = updatedMessage.studentId.toString()
     const messages = await InboxMessage.find({studentId: student})
     res.send(messages)
+    } catch(err) {
+      throw new Error(err)
+    }
+
   })
 
   app.get("/absence", async(req,res) => {
     try {
-      const user = await User.findById('6641142e63f31d9c7eb6980a').populate("students");
+      const user = await User.findById('664a4f9721b7a91948cf6dc8').populate("students");
       res.send(user.students)
     } catch(err) {
       throw new Error(err)
@@ -66,10 +79,8 @@ app.get('/', (req, res) => {
       const {id} = req.params
       const student = await Student.findByIdAndUpdate({_id: id})
       const date = new Date().toDateString()
-      console.log(date, student.absence.prevAbsences[0])
       student.absence.prevAbsences.push(data)
       student.save()
-      console.log(student.absence)
       res.send("Registrated!")
     } catch(err) {
       throw new Error(err)

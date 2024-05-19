@@ -80,12 +80,17 @@ function AbsenceForm() {
   // handle submitting the form
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.put(
-      `${import.meta.env.VITE_EXPRESS_SERVER}/absence/${student._id}/register`,
-      { data: absence }
-    );
-    navigate("..");
-    console.log(res);
+    try {
+      const res = await axios.put(
+        `${import.meta.env.VITE_EXPRESS_SERVER}/absence/${
+          student._id
+        }/register`,
+        { data: absence }
+      );
+      navigate(`/fronvaro/${student._id}/registrera/inskickad`);
+    } catch (err) {
+      throw new Error(err);
+    }
   };
 
   return (

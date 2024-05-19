@@ -88,9 +88,20 @@ try {
 
 // Insert data to dB
  const insertData = async () => {
-  // await insertNewUserandStudent()
+  await insertNewUserandStudent()
   await insertInboxMessages()
   console.log("Data inserted to DB!")
  }
 
- insertData()
+//  insertData()
+
+// delete absences
+const deleteAbsences = async () => {
+  const students = await Student.find({})
+  students.forEach(s => {
+    s.absence.prevAbsences = []
+    s.save()
+  })
+}
+
+deleteAbsences()
