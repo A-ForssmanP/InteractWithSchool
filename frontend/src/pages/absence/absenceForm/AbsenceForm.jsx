@@ -87,7 +87,9 @@ function AbsenceForm() {
         }/register`,
         { data: absence }
       );
-      navigate(`/fronvaro/${student._id}/registrera/inskickad`);
+      if (res) {
+        navigate(`/fronvaro/${student._id}/registrera/inskickad`);
+      }
     } catch (err) {
       throw new Error(err);
     }

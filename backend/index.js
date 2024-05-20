@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 
   app.get("/inbox", async (req,res) => {
     try {
-    const user = await User.findById('664a4f9721b7a91948cf6dc8').populate("students","firstName")
+    const user = await User.findById('664b244a418b0497b3634aaf').populate("students","firstName")
     const inbox = []
     for(let student of user.students) {
       const messages = await InboxMessage.find({studentId: student})
@@ -66,7 +66,7 @@ app.get('/', (req, res) => {
 
   app.get("/absence", async(req,res) => {
     try {
-      const user = await User.findById('664a4f9721b7a91948cf6dc8').populate("students");
+      const user = await User.findById('664b244a418b0497b3634aaf').populate("students");
       res.send(user.students)
     } catch(err) {
       throw new Error(err)
@@ -77,13 +77,15 @@ app.get('/', (req, res) => {
     try {
       const {data} = req.body
       const {id} = req.params
-      const student = await Student.findByIdAndUpdate({_id: id})
-      const date = new Date().toDateString()
+      const student = await Student.findById(id)
+      data._id = new mongoose.Types.ObjectId
       student.absence.prevAbsences.push(data)
       student.save()
-      res.send("Registrated!")
+      res.send(true)
     } catch(err) {
+      res.send(err)
       throw new Error(err)
+      
     }
    
   })
