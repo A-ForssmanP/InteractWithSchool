@@ -36,6 +36,11 @@ function AbsenceItemStudent({ student }) {
     });
   };
 
+  //navigate to the students absenceOverview
+  const navigateToOverview = (id) => {
+    navigate(`${id}/oversikt`);
+  };
+
   return (
     <Card
       sx={{
@@ -65,6 +70,9 @@ function AbsenceItemStudent({ student }) {
               onClick={() => navigateToRegister(student._id)}
             >
               Välj
+            </Button>
+            <Button onClick={() => navigateToOverview(student._id)}>
+              Link
             </Button>
           </CardActions>
         </Box>

@@ -7,6 +7,7 @@ import AbsenceLayout from "./absence/AbsenceLayout";
 import Absence from "./absence/Absence";
 import AbsenceForm from "./absence/absenceForm/AbsenceForm";
 import RegisterDone from "./absence/registerDone/RegisterDone";
+import AbsenceOverview from "./absence/absenceOverview/AbsenceOverview";
 
 function Pages() {
   return (
@@ -22,6 +23,7 @@ function Pages() {
           <Route index element={<Absence />} />
           <Route path=":id/registrera" element={<AbsenceForm />} />
           <Route path=":id/registrera/inskickad" element={<RegisterDone />} />
+          <Route path=":id/oversikt" element={<AbsenceOverview />} />
         </Route>
       </Route>
       <Route path="*" element={<h1>Page Not Found</h1>} />
