@@ -7,6 +7,7 @@ import { Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined";
+
 function AbsenceItemStudent({ student }) {
   const [isAbsence, setIsAbsence] = useState(false);
   const navigate = useNavigate();
@@ -38,7 +39,11 @@ function AbsenceItemStudent({ student }) {
 
   //navigate to the students absenceOverview
   const navigateToOverview = (id) => {
-    navigate(`${id}/oversikt`);
+    navigate(`${id}/oversikt`, {
+      state: {
+        student: student,
+      },
+    });
   };
 
   return (
