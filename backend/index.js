@@ -16,6 +16,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/interactWithSchool').then(()=>{
 
 const port = process.env.SERVER_PORT
 const corsOptions = {origin: process.env.VITE_SERVER, optionsSuccessStatus: 200}
+const userId  = process.env.USER_ID
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
@@ -27,7 +28,7 @@ app.get('/', (req, res) => {
 
   app.get("/inbox", async (req,res) => {
     try {
-    const user = await User.findById('664b244a418b0497b3634aaf').populate("students","firstName")
+    const user = await User.findById(userId).populate("students","firstName")
     const inbox = []
     for(let student of user.students) {
       const messages = await InboxMessage.find({studentId: student})
@@ -66,7 +67,7 @@ app.get('/', (req, res) => {
 
   app.get("/absence", async(req,res) => {
     try {
-      const user = await User.findById('664b244a418b0497b3634aaf').populate("students");
+      const user = await User.findById(userId).populate("students");
       res.send(user.students)
     } catch(err) {
       throw new Error(err)
