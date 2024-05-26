@@ -19,7 +19,7 @@ const insertNewUserandStudent = async () => {
   ]
 
   try {
-    const u = new User({firstName:"Demo", lastName:"User",password:"Kaffe"})
+    const u = new User({_id: "665341b1b835c5660d42c0fb" ,firstName:"Demo", lastName:"User",password:"Kaffe"})
     await Student.insertMany(students)
     const stnts = await Student.find({})
     // stnts.forEach((s,indx)=>{
@@ -93,7 +93,7 @@ try {
   console.log("Data inserted to DB!")
  }
 
-//  insertData()
+ insertData()
 
 // delete absences
 const deleteAbsences = async () => {
@@ -104,4 +104,4 @@ const deleteAbsences = async () => {
   })
 }
 
-deleteAbsences()
+// deleteAbsences()
