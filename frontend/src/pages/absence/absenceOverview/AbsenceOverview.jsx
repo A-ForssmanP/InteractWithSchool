@@ -42,7 +42,7 @@ function AbsenceOverview() {
                 <TableCell>{abs.dates.toDate}</TableCell>
                 <TableCell>{abs.reason}</TableCell>
                 <TableCell>{abs.textReason}</TableCell>
-                <TableCell>{}</TableCell>
+                <TableCell>{abs.status}</TableCell>
                 <TableCell>{}</TableCell>
               </TableRow>
             ))) || (

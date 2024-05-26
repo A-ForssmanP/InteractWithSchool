@@ -80,6 +80,7 @@ app.get('/', (req, res) => {
       const {id} = req.params
       const student = await Student.findById(id)
       data._id = new mongoose.Types.ObjectId
+      data.status= "Granskas"
       student.absence.prevAbsences.push(data)
       student.save()
       res.send(true)

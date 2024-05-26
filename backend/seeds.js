@@ -93,7 +93,7 @@ try {
   console.log("Data inserted to DB!")
  }
 
- insertData()
+//  insertData()
 
 // delete absences
 const deleteAbsences = async () => {
@@ -104,4 +104,4 @@ const deleteAbsences = async () => {
   })
 }
 
-// deleteAbsences()
+deleteAbsences()
