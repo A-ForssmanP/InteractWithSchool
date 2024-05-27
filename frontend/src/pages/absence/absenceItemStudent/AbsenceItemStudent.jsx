@@ -15,7 +15,6 @@ function AbsenceItemStudent({ student }) {
   // check if student is absence or not
   const checkisAbsence = () => {
     const currentDate = new Date().toDateString();
-
     const checkForDate =
       student &&
       student.absence.prevAbsences.some((element) => {
@@ -77,7 +76,7 @@ function AbsenceItemStudent({ student }) {
               Välj
             </Button>
             <Button onClick={() => navigateToOverview(student._id)}>
-              Link
+              Översikt
             </Button>
           </CardActions>
         </Box>

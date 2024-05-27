@@ -5,7 +5,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Button, Box, colors } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ButtonBack from "../../../components/buttonBack/ButtonBack";
@@ -26,6 +26,9 @@ function AbsenceOverview() {
 
   return (
     <Box>
+      <Typography pt={2} pb={2} pl={1.5} fontSize={28} variant="h2">
+        Översikt Frånvaro,{absenceData.firstName}
+      </Typography>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
