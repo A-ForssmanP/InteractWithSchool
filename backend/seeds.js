@@ -18,18 +18,57 @@ const insertNewUserandStudent = async () => {
     {firstName:"Third",lastName:"Student"}
   ]
 
+  const absenceSeeds = {
+    firstStud: [{
+      reason: 'Sjukdom',
+      textReason: 'Hemma pga sjukdom',
+      dates: { fromDate: 'Mon May 20 2024', toDate: 'Fri May 24 2024' },
+      status: 'Granskas',
+      _id: new mongoose.Types.ObjectId()
+    },{
+      reason: 'Sjukdom',
+      textReason: 'Hemma pga sjukdom',
+      dates: { fromDate: 'Web Jun 5 2024', toDate: 'Fri Jun 6 2024' },
+      status: 'Godkänd',
+      _id: new mongoose.Types.ObjectId()
+    },{
+      reason: 'Annan',
+      textReason: 'Behöver vara ledig för besök hos tandläkaren.',
+      dates: { fromDate: 'Tue Jun 25 2024', toDate: 'Tue Jun 25 2024' },
+      status: 'Godkänd',
+      _id: new mongoose.Types.ObjectId()
+    },{
+      reason: 'Annan',
+      textReason: 'Resa utomlands',
+      dates: { fromDate: 'Mon July 22 2024', toDate: 'Fri Aug 2 2024' },
+      status: 'Godkänd',
+      _id: new mongoose.Types.ObjectId()
+    }
+  ],
+  secondStud: [{
+    reason: 'Annan',
+    textReason: 'Avslutning på träning som börjar tidigt.',
+    dates: { fromDate: 'Tue Jun 13 2024', toDate: 'Tue Jun 13 2024' },
+    status: 'Granskas',
+    _id: new mongoose.Types.ObjectId()
+  },{
+    reason: 'Sjukdom',
+    textReason: 'Hemma pga sjukdom',
+    dates: { fromDate: 'Web Jun 5 2024', toDate: 'Fri Jun 6 2024' },
+    status: 'Godkänd',
+    _id: new mongoose.Types.ObjectId()
+  }]
+
+  }
+
   try {
     const u = new User({_id: "665341b1b835c5660d42c0fb" ,firstName:"Demo", lastName:"User",password:"Kaffe"})
     await Student.insertMany(students)
     const stnts = await Student.find({})
-    // stnts.forEach((s,indx)=>{
-    //   if(indx === 0 || indx === 2) {
-    //     s.absence.isAbsence = false
-    //   } else {
-    //     s.absence.isAbsence = true
-    //   }
-        // s.save()
-    // })
+ stnts[0].absence.prevAbsences = absenceSeeds.firstStud
+ stnts[0].save()
+ stnts[1].absence.prevAbsences = absenceSeeds.secondStud
+ stnts[1].save()
     u.students.push(...stnts)
     
         await u.save()
@@ -93,7 +132,7 @@ try {
   console.log("Data inserted to DB!")
  }
 
-//  insertData()
+ insertData()
 
 // delete absences
 const deleteAbsences = async () => {
@@ -104,4 +143,4 @@ const deleteAbsences = async () => {
   })
 }
 
-deleteAbsences()
+// deleteAbsences()
