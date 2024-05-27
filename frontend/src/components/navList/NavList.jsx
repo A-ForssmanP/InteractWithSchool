@@ -3,6 +3,7 @@ import NavListItem from "../navListItem/NavListItem";
 import InboxIcon from "@mui/icons-material/Inbox";
 import HomeIcon from "@mui/icons-material/Home";
 import CancelScheduleSendIcon from "@mui/icons-material/CancelScheduleSend";
+import DateRangeIcon from "@mui/icons-material/DateRange";
 
 function NavList() {
   const listItems = [
@@ -18,6 +19,12 @@ function NavList() {
       text: "Frånvaro",
       ikon: <CancelScheduleSendIcon />,
       navPath: "fronvaro",
+    },
+    {
+      id: crypto.randomUUID(),
+      text: "Tid-Schema",
+      ikon: <DateRangeIcon />,
+      navPath: "tidsschema",
     },
   ];
 
