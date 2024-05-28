@@ -1,7 +1,13 @@
-import React from "react";
+import AvatarCarousel from "../../components/avatarCarousel/AvatarCarousel";
+import CarouselSlider from "../../components/carouselSlider/CarouselSlider";
 
 function TimeSchedule() {
-  return <div>TimeSchedule</div>;
+  return (
+    <div>
+      <AvatarCarousel />
+      <CarouselSlider />
+    </div>
+  );
 }
 
 export default TimeSchedule;
