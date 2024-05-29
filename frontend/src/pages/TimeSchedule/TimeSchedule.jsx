@@ -1,11 +1,23 @@
 import AvatarCarousel from "../../components/avatarCarousel/AvatarCarousel";
-import CarouselSlider from "../../components/carouselSlider/CarouselSlider";
 
 function TimeSchedule() {
+  const avatarItems = [
+    {
+      firstName: "Name#1",
+      description: "Probably the most random thing you have ever seen!",
+    },
+    {
+      firstName: "Name#2",
+      description: "Hello World!",
+    },
+    {
+      firstName: "Name#3",
+      description: "I Love Coffe!",
+    },
+  ];
   return (
     <div>
-      <AvatarCarousel />
-      <CarouselSlider />
+      <AvatarCarousel avatarItems={avatarItems} />
     </div>
   );
 }
