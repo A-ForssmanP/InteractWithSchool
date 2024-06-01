@@ -13,7 +13,7 @@ function AvatarCarouselItem({ item, bgColor }) {
         <Avatar sx={{ bgcolor: bgColor, width: 55, height: 55 }}></Avatar>
         <Typography>{item.firstName}</Typography>
       </Box>
-      <Box>
+      <Box display={"flex"} justifyContent={"center"}>
         <RangeDatePicker />
       </Box>
     </Paper>

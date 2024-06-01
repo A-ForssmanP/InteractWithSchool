@@ -8,25 +8,32 @@ function RangeDatePicker() {
 
   //handle dateChange
   const onChange = (dates) => {
+    console.log(dates);
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
   };
 
+  const isWeekday = (date) => {
+    const day = date.getDay();
+    return day !== 0 && day !== 6;
+  };
+
   return (
     <DatePicker
-      swapRange
+      // swapRange
       selected={startDate}
       onChange={onChange}
       startDate={startDate}
       endDate={endDate}
-      // excludeDates={[addDays(new Date(), 1), addDays(new Date(), 5)]}
       selectsRange
-      selectsDisabledDaysInRange
+      // selectsDisabledDaysInRange
       inline
       calendarStartDay={1}
       showWeekNumbers
-      excludeD={["5-7-24"]}
+      filterDate={isWeekday}
+      // excludeDates={[addDays(new Date(), 1), addDays(new Date(), 5)]}
+      excludeDates={[new Date()]}
     />
   );
 }
