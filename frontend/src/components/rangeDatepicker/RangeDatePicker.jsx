@@ -1,8 +1,10 @@
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+// import "react-datepicker/dist/react-datepicker.css";
+import { DateRangeCalendar } from "@mui/x-date-pickers/DateTimePicker";
 import { useState } from "react";
 
 function RangeDatePicker() {
+  return <DateRangeCalendar />;
+
   // const [startDate, setStartDate] = useState(new Date());
   // const [endDate, setEndDate] = useState(null);
   // //handle dateChange
