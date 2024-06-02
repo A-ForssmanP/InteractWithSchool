@@ -19,10 +19,16 @@ function RangeDatePicker() {
     return day !== 0 && day !== 6;
   };
 
+  const handleDateSelect = () => {
+    console.log("hej");
+  };
+
   return (
     <DatePicker
+      onSelect={handleDateSelect}
+      highlightDates={[new Date(), new Date()]}
       // swapRange
-      selected={startDate}
+      // selected={startDate}
       onChange={onChange}
       startDate={startDate}
       endDate={endDate}
@@ -33,7 +39,7 @@ function RangeDatePicker() {
       showWeekNumbers
       filterDate={isWeekday}
       // excludeDates={[addDays(new Date(), 1), addDays(new Date(), 5)]}
-      excludeDates={[new Date()]}
+      excludeDates={["2024-06-15"]}
     />
   );
 }
