@@ -2,18 +2,18 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState, useEffect } from "react";
 import { addDays, eachDayOfInterval, setHours, setMinutes } from "date-fns";
-import {
-  List,
-  ListItem,
-  ListItemText,
-  ListSubheader,
-  Box,
-} from "@mui/material";
+import { Box, Card, Tab } from "@mui/material";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { StaticTimePicker } from "@mui/x-date-pickers/StaticTimePicker";
+import dayjs from "dayjs";
+import TabsBox from "../tabsBox/TabsBox";
 
 function RangeDatePicker() {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
   const [selectedDates, setSelectedDates] = useState([]);
+  const [timeValue, setTimeValue] = useState(dayjs(""));
 
   useEffect(() => {
     filterWeekDays();
@@ -33,13 +33,14 @@ function RangeDatePicker() {
       end: endDate,
     });
 
-    const filteredWeekDays = daysInInterval.filter((day) => {
+    const isFiltered = daysInInterval.filter((day) => {
       return day.getDay() !== 0 && day.getDay() !== 6;
     });
 
-    console.log(filteredWeekDays);
+    setSelectedDates(isFiltered);
   }
 
+  //filter the weeks from Sat-Sun
   const isWeekday = (date) => {
     // Disable weekends
     if (date.getDay() === 0 || date.getDay() === 6) {
@@ -48,60 +49,39 @@ function RangeDatePicker() {
     // Disable past dates
     return date >= new Date();
   };
-  // const handleDateSelect = () => {
-  //   console.log("hej");
-  // };
+
+  // handle accepting of date and time
+  const handleAccept = () => {};
+
   return (
-    <Box
-      bgcolor={"red"}
-      width={"100%"}
-      display={"flex"}
-      flexDirection={"column"}
-      justifyContent={"center"}
-      alignItems={"center"}
-      gap={1.2}
-    >
-      <DatePicker
-        // onSelect={handleDateSelect}
-        // highlightDates={[new Date(), new Date()]}
-        // swapRange
-        // selected={startDate}
-        onChange={onChange}
-        startDate={startDate}
-        endDate={endDate}
-        selectsRange
-        // selectsDisabledDaysInRange
-        inline
-        calendarStartDay={1}
-        showWeekNumbers
-        filterDate={isWeekday}
-        // excludeDates={[addDays(new Date().getDay()), addDays(new Date(), 5)]}
-      />
-      <List
-        sx={{
-          width: "100%",
-          maxWidth: "21rem",
-          bgcolor: "background.paper",
-          position: "relative",
-          overflow: "auto",
-          maxHeight: 300,
-          "& ul": { padding: 0 },
-        }}
-        subheader={<li />}
-      >
-        {[0, 1, 2, 3, 4].map((sectionId) => (
-          <li key={`section-${sectionId}`}>
-            <ul>
-              <ListSubheader>{`I'm sticky ${sectionId}`}</ListSubheader>
-              {[0, 1, 2].map((item) => (
-                <ListItem key={`item-${sectionId}-${item}`}>
-                  <ListItemText primary={`Item ${item}`} />
-                </ListItem>
-              ))}
-            </ul>
-          </li>
-        ))}
-      </List>
+    <Box bgcolor={"red"}>
+      <TabsBox>
+        <DatePicker
+          // onSelect={handleDateSelect}
+          // highlightDates={[new Date(), new Date()]}
+          // swapRange
+          // selected={startDate}
+          onChange={onChange}
+          startDate={startDate}
+          endDate={endDate}
+          selectsRange
+          // selectsDisabledDaysInRange
+          inline
+          calendarStartDay={1}
+          showWeekNumbers
+          filterDate={isWeekday}
+          // excludeDates={[addDays(new Date().getDay()), addDays(new Date(), 5)]}
+        />
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <StaticTimePicker
+            ampm={false}
+            value={timeValue}
+            onChange={(newValue) => setTimeValue(newValue)}
+            onAccept={handleAccept}
+            sx={{ bgcolor: "green" }}
+          />
+        </LocalizationProvider>
+      </TabsBox>
     </Box>
   );
 }
