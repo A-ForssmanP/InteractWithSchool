@@ -78,7 +78,6 @@ function RangeDatePicker() {
             value={timeValue}
             onChange={(newValue) => setTimeValue(newValue)}
             onAccept={handleAccept}
-            sx={{ bgcolor: "green" }}
           />
         </LocalizationProvider>
       </TabsBox>
