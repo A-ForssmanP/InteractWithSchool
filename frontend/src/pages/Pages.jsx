@@ -8,7 +8,9 @@ import Absence from "./absence/Absence";
 import AbsenceForm from "./absence/absenceForm/AbsenceForm";
 import RegisterDone from "./absence/registerDone/RegisterDone";
 import AbsenceOverview from "./absence/absenceOverview/AbsenceOverview";
+import TimeScheduleLayout from "./TimeSchedule/TimeScheduleLayout";
 import TimeSchedule from "./TimeSchedule/TimeSchedule";
+import TimeScheduleRegister from "./TimeSchedule/timeScheduleRegister/TimeScheduleRegister";
 
 function Pages() {
   return (
@@ -28,7 +30,13 @@ function Pages() {
           <Route path=":id/oversikt" element={<AbsenceOverview />} />
         </Route>
 
-        <Route path="tidsschema" element={<TimeSchedule />}></Route>
+        <Route path="tidsschema" element={<TimeScheduleLayout />}>
+          <Route index element={<TimeSchedule />} />
+          <Route
+            path=":id/registrera_omsorg"
+            element={<TimeScheduleRegister />}
+          />
+        </Route>
       </Route>
       <Route path="*" element={<h1>Page Not Found</h1>} />
     </Routes>

@@ -2,7 +2,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState, useEffect } from "react";
 import { addDays, eachDayOfInterval, setHours, setMinutes } from "date-fns";
-import { Box, Card, Tab } from "@mui/material";
+import { Box, Card, Tab, Button, Divider, Stack } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { StaticTimePicker } from "@mui/x-date-pickers/StaticTimePicker";
@@ -54,8 +54,17 @@ function RangeDatePicker() {
   const handleAccept = () => {};
 
   return (
-    <Box bgcolor={"red"}>
-      <TabsBox>
+    <Box>
+      <Stack
+        display={"flex"}
+        justifyContent={"center"}
+        direction={{ xs: "column", sm: "row" }}
+        spacing={{ xs: 1, sm: 2, md: 4 }}
+        divider={<Divider orientation="vertical" flexItem />}
+        marginTop={10}
+        pb={5}
+        // width={{ sm: 250 }}
+      >
         <DatePicker
           // onSelect={handleDateSelect}
           // highlightDates={[new Date(), new Date()]}
@@ -72,15 +81,8 @@ function RangeDatePicker() {
           filterDate={isWeekday}
           // excludeDates={[addDays(new Date().getDay()), addDays(new Date(), 5)]}
         />
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <StaticTimePicker
-            ampm={false}
-            value={timeValue}
-            onChange={(newValue) => setTimeValue(newValue)}
-            onAccept={handleAccept}
-          />
-        </LocalizationProvider>
-      </TabsBox>
+        <Button variant="contained">Dagar</Button>
+      </Stack>
     </Box>
   );
 }
