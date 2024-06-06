@@ -9,15 +9,15 @@ import { StaticTimePicker } from "@mui/x-date-pickers/StaticTimePicker";
 import dayjs from "dayjs";
 import TabsBox from "../tabsBox/TabsBox";
 
-function RangeDatePicker() {
+function RangeDatePicker({ addSelectedDates }) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
   const [selectedDates, setSelectedDates] = useState([]);
-  const [timeValue, setTimeValue] = useState(dayjs(""));
+  // const [timeValue, setTimeValue] = useState(dayjs(""));
 
   useEffect(() => {
     filterWeekDays();
-  }, [endDate]);
+  }, [startDate, endDate]);
 
   //handle dateChange
   const onChange = (dates) => {
@@ -50,8 +50,11 @@ function RangeDatePicker() {
     return date >= new Date();
   };
 
-  // handle accepting of date and time
-  const handleAccept = () => {};
+  // handle days is done
+  const daysIsDone = () => {
+    // console.log(selectedDates);
+    addSelectedDates(selectedDates);
+  };
 
   return (
     <Box>
@@ -67,7 +70,7 @@ function RangeDatePicker() {
       >
         <DatePicker
           // onSelect={handleDateSelect}
-          // highlightDates={[new Date(), new Date()]}
+          // highlightDates={[endDate]}
           // swapRange
           // selected={startDate}
           onChange={onChange}
@@ -81,7 +84,9 @@ function RangeDatePicker() {
           filterDate={isWeekday}
           // excludeDates={[addDays(new Date().getDay()), addDays(new Date(), 5)]}
         />
-        {/* <Button variant="contained">Dagar</Button> */}
+        <Button onClick={daysIsDone} variant="contained">
+          Dagar
+        </Button>
       </Stack>
     </Box>
   );
