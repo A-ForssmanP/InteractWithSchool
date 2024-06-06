@@ -81,7 +81,7 @@ function RangeDatePicker() {
           filterDate={isWeekday}
           // excludeDates={[addDays(new Date().getDay()), addDays(new Date(), 5)]}
         />
-        <Button variant="contained">Dagar</Button>
+        {/* <Button variant="contained">Dagar</Button> */}
       </Stack>
     </Box>
   );
