@@ -6,11 +6,11 @@ import { set, getMinutes, getHours } from "date-fns";
 
 function DayTimePicker() {
   const [selected, setSelected] = useState([]);
-  const [timeValue, setTimeValue] = useState();
-  const [isDone, setIsDone] = useState([]);
+  const [timeValue, setTimeValue] = useState({});
+  const [toBeExamined, setToBeExamined] = useState([]);
 
   const buttonDisabled = timeValue && timeValue.from && timeValue.to;
-
+  console.log(toBeExamined);
   // add the selected days to the selected array
   const addSelectedDates = (arr) => {
     setSelected((curr) => {

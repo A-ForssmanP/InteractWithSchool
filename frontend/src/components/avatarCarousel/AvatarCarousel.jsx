@@ -5,7 +5,7 @@ import { Box } from "@mui/material";
 
 function AvatarCarousel({ avatarItems }) {
   const bgColors = [deepOrange[400], deepPurple[400], green[400]];
-  console.log(avatarItems);
+
   return (
     <Carousel
       navButtonsAlwaysVisible="true"

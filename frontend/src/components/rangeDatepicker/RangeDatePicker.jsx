@@ -2,7 +2,15 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState, useEffect } from "react";
 import { addDays, eachDayOfInterval, setHours, setMinutes } from "date-fns";
-import { Box, Card, Tab, Button, Divider, Stack } from "@mui/material";
+import {
+  Box,
+  Card,
+  Tab,
+  Button,
+  Divider,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { StaticTimePicker } from "@mui/x-date-pickers/StaticTimePicker";
@@ -13,6 +21,7 @@ function RangeDatePicker({ addSelectedDates }) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
   const [selectedDates, setSelectedDates] = useState([]);
+  const [done, setDone] = useState(false);
   // const [timeValue, setTimeValue] = useState(dayjs(""));
 
   useEffect(() => {
@@ -21,6 +30,7 @@ function RangeDatePicker({ addSelectedDates }) {
 
   //handle dateChange
   const onChange = (dates) => {
+    setDone(false);
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
@@ -46,18 +56,23 @@ function RangeDatePicker({ addSelectedDates }) {
     if (date.getDay() === 0 || date.getDay() === 6) {
       return false;
     }
-    // Disable past dates
-    return date >= new Date();
+    return true;
+    // // Disable past dates
+    // // return date < dayjs(new Date());
+    // else if (new Date(date) === new Date()) {
+    //   return true;
+    // }
   };
 
   // handle days is done
   const daysIsDone = () => {
     // console.log(selectedDates);
     addSelectedDates(selectedDates);
+    setDone(true);
   };
 
   return (
-    <Box>
+    <Box pb={5}>
       <Stack
         display={"flex"}
         justifyContent={"center"}
@@ -65,7 +80,7 @@ function RangeDatePicker({ addSelectedDates }) {
         spacing={{ xs: 1, sm: 2, md: 4 }}
         divider={<Divider orientation="vertical" flexItem />}
         marginTop={10}
-        pb={5}
+
         // width={{ sm: 250 }}
       >
         <DatePicker
@@ -88,6 +103,15 @@ function RangeDatePicker({ addSelectedDates }) {
           Dagar
         </Button>
       </Stack>
+      {done && (
+        <Card sx={{ mt: 2 }}>
+          <Typography>
+            {selectedDates.length > 1
+              ? `Valda Dagar: ${startDate.toDateString()} - ${endDate.toDateString()}`
+              : `Vald Dag:${startDate.toDateString()}`}
+          </Typography>
+        </Card>
+      )}
     </Box>
   );
 }
