@@ -47,13 +47,13 @@ function RangeDatePicker({ addSelectedDates }) {
 
   //handle dateChange
   const onChange = (dates) => {
-    console.log(dates);
+    // console.log(dates);
     setDone(false);
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
     // if (end === null) {
-    //   setEndDate(startDate);
+    //   setEndDate(start);
     // } else {
     //   setEndDate(end);
     // }
@@ -61,11 +61,13 @@ function RangeDatePicker({ addSelectedDates }) {
 
   // filter days in interval to only include weekdays
   function filterWeekDays() {
+    const validEndDate = endDate === null ? startDate : endDate;
+    // console.log(validEndDate);
     const daysInInterval = eachDayOfInterval({
       start: startDate,
-      end: endDate,
+      end: validEndDate,
     });
-
+    // console.log(daysInInterval);
     const isFiltered = daysInInterval.filter((day) => {
       return day.getDay() !== 0 && day.getDay() !== 6;
     });
@@ -79,9 +81,14 @@ function RangeDatePicker({ addSelectedDates }) {
     if (date.getDay() === 0 || date.getDay() === 6) {
       return false;
     }
-    return true;
+    // console.log(new Date() < date);
+    // console.log(date);
     // // Disable past dates
-    // // return date < dayjs(new Date());
+    // if (date === Date()) {
+    //   return false;
+    // }
+
+    return true;
     // else if (new Date(date) === new Date()) {
     //   return true;
     // }
@@ -89,7 +96,7 @@ function RangeDatePicker({ addSelectedDates }) {
 
   // handle days is done
   const daysIsDone = () => {
-    console.log(selectedDates);
+    // console.log(selectedDates);
     addSelectedDates(selectedDates);
     setDone(true);
   };
@@ -122,6 +129,7 @@ function RangeDatePicker({ addSelectedDates }) {
           showWeekNumbers
           filterDate={isWeekday}
           // excludeDates={[addDays(new Date().getDay()), addDays(new Date(), 5)]}
+          // minDate={new Date()}
         />
         <Button onClick={daysIsDone} variant="contained">
           Dagar
@@ -129,21 +137,27 @@ function RangeDatePicker({ addSelectedDates }) {
       </Stack>
       {done && (
         <Card sx={{ mt: 2 }}>
-          <Typography>
-            {selectedDates.length > 1
-              ? `Valda Dagar: ${dayjs(selectedDates[0]).date()} ${
-                  months[dayjs(selectedDates[0]).month()]
-                }
+          {selectedDates.length ? (
+            <Typography fontSize={22}>
+              {selectedDates.length > 1
+                ? `Valda Dagar: ${dayjs(selectedDates[0]).date()} ${
+                    months[dayjs(selectedDates[0]).month()]
+                  }
                  - ${dayjs(selectedDates[selectedDates.length - 1]).date()} 
                  ${
                    months[
                      dayjs(selectedDates[selectedDates.length - 1]).month()
                    ]
                  }`
-              : `Vald Dag: ${dayjs(selectedDates).date()} ${
-                  months[dayjs(selectedDates).month()]
-                }`}
-          </Typography>
+                : `Vald Dag: ${dayjs(selectedDates).date()} ${
+                    months[dayjs(selectedDates).month()]
+                  }`}
+            </Typography>
+          ) : (
+            <Typography color={"red"} fontSize={22}>
+              Vald dag kan inte väljas
+            </Typography>
+          )}
         </Card>
       )}
     </Box>

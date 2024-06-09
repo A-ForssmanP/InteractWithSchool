@@ -1,16 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RangeDatePicker from "../rangeDatepicker/RangeDatePicker";
 import TimePickerResponsive from "../timePickerResponsive/TimePickerResponsive";
+import AlertSuccess from "../alertSuccess/AlertSuccess";
 import { Box, Button, Stack } from "@mui/material";
 import { set, getMinutes, getHours } from "date-fns";
+import zIndex from "@mui/material/styles/zIndex";
 
 function DayTimePicker() {
   const [selected, setSelected] = useState([]);
-  const [timeValue, setTimeValue] = useState({});
+  const [timeValue, setTimeValue] = useState({ from: null, to: null });
   const [toBeExamined, setToBeExamined] = useState([]);
+  const [pushToBeExamined, setPushToBeExamined] = useState(false);
 
-  const buttonDisabled = timeValue && timeValue.from && timeValue.to;
-  console.log(selected);
+  useEffect(() => {
+    console.log("PUSHED!");
+    checoutDates();
+    setPushToBeExamined(false);
+  }, [pushToBeExamined]);
+  console.log(toBeExamined);
+
+  // Clear the selected and timeValue arrays and
+  // push selected-items to the toBeExamined array
+  function checoutDates() {
+    setToBeExamined((curr) => {
+      return [...curr, ...selected];
+    });
+    setSelected([]);
+    setTimeValue({ from: null, to: null });
+  }
+
+  const buttonDisabled = timeValue.from && timeValue.to;
+  // console.log(selected);
   // add the selected days to the selected array
   const addSelectedDates = (arr) => {
     setSelected((curr) => {
@@ -18,7 +38,8 @@ function DayTimePicker() {
     });
   };
 
-  // add the time to the selected dates
+  // add the time to the selected dates and
+  // set pushToBeExamined to true
   const addTime = () => {
     setSelected((curr) => {
       return curr.map((date) => {
@@ -29,6 +50,7 @@ function DayTimePicker() {
         };
       });
     });
+    setPushToBeExamined(true);
   };
 
   // handle timeInput when it changes
@@ -43,7 +65,7 @@ function DayTimePicker() {
 
   return (
     <Box display={"flex"} justifyContent={"center"}>
-      <Box width={"fit-content"}>
+      <Box width={"fit-content"} position={"relative"}>
         <Stack
           spacing={0}
           display={"flex"}
@@ -71,6 +93,7 @@ function DayTimePicker() {
               >
                 Tid
               </Button>
+              <AlertSuccess text={"DATUM TILLAGDA!"} />
             </Box>
           </Box>
         </Stack>
