@@ -15,14 +15,31 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider/L
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { StaticTimePicker } from "@mui/x-date-pickers/StaticTimePicker";
 import dayjs from "dayjs";
+import { month } from "dayjs";
 import TabsBox from "../tabsBox/TabsBox";
 
 function RangeDatePicker({ addSelectedDates }) {
   const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(null);
+  // const [endDate, setEndDate] = useState(null);
+  const [endDate, setEndDate] = useState(new Date());
   const [selectedDates, setSelectedDates] = useState([]);
   const [done, setDone] = useState(false);
   // const [timeValue, setTimeValue] = useState(dayjs(""));
+
+  const months = [
+    "Jan",
+    "Feb",
+    "Mars",
+    "April",
+    "Maj",
+    "Juni",
+    "Juli",
+    "Aug",
+    "Sep",
+    "Okt",
+    "Nov",
+    "Dec",
+  ];
 
   useEffect(() => {
     filterWeekDays();
@@ -30,10 +47,16 @@ function RangeDatePicker({ addSelectedDates }) {
 
   //handle dateChange
   const onChange = (dates) => {
+    console.log(dates);
     setDone(false);
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
+    // if (end === null) {
+    //   setEndDate(startDate);
+    // } else {
+    //   setEndDate(end);
+    // }
   };
 
   // filter days in interval to only include weekdays
@@ -66,7 +89,7 @@ function RangeDatePicker({ addSelectedDates }) {
 
   // handle days is done
   const daysIsDone = () => {
-    // console.log(selectedDates);
+    console.log(selectedDates);
     addSelectedDates(selectedDates);
     setDone(true);
   };
@@ -90,6 +113,7 @@ function RangeDatePicker({ addSelectedDates }) {
           // selected={startDate}
           onChange={onChange}
           startDate={startDate}
+          // startDate={}
           endDate={endDate}
           selectsRange
           // selectsDisabledDaysInRange
@@ -107,8 +131,18 @@ function RangeDatePicker({ addSelectedDates }) {
         <Card sx={{ mt: 2 }}>
           <Typography>
             {selectedDates.length > 1
-              ? `Valda Dagar: ${startDate.toDateString()} - ${endDate.toDateString()}`
-              : `Vald Dag:${startDate.toDateString()}`}
+              ? `Valda Dagar: ${dayjs(selectedDates[0]).date()} ${
+                  months[dayjs(selectedDates[0]).month()]
+                }
+                 - ${dayjs(selectedDates[selectedDates.length - 1]).date()} 
+                 ${
+                   months[
+                     dayjs(selectedDates[selectedDates.length - 1]).month()
+                   ]
+                 }`
+              : `Vald Dag: ${dayjs(selectedDates).date()} ${
+                  months[dayjs(selectedDates).month()]
+                }`}
           </Typography>
         </Card>
       )}

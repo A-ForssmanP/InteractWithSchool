@@ -10,7 +10,7 @@ function DayTimePicker() {
   const [toBeExamined, setToBeExamined] = useState([]);
 
   const buttonDisabled = timeValue && timeValue.from && timeValue.to;
-  console.log(toBeExamined);
+  console.log(selected);
   // add the selected days to the selected array
   const addSelectedDates = (arr) => {
     setSelected((curr) => {
