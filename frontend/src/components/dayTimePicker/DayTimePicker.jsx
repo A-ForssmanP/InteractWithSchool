@@ -5,20 +5,27 @@ import AlertSuccess from "../alertSuccess/AlertSuccess";
 import { Box, Button, Stack } from "@mui/material";
 import { set, getMinutes, getHours } from "date-fns";
 import zIndex from "@mui/material/styles/zIndex";
+import dayjs from "dayjs";
 
 function DayTimePicker() {
   const [selected, setSelected] = useState([]);
-  const [timeValue, setTimeValue] = useState({ from: null, to: null });
+  const [timeValue, setTimeValue] = useState({
+    from: null,
+    to: null,
+  });
   const [toBeExamined, setToBeExamined] = useState([]);
   const [pushToBeExamined, setPushToBeExamined] = useState(false);
+  const [reset, setReset] = useState(false);
 
   useEffect(() => {
-    console.log("PUSHED!");
-    checoutDates();
-    setPushToBeExamined(false);
+    if (pushToBeExamined) {
+      console.log("PUSHED!");
+      checoutDates();
+      setPushToBeExamined(false);
+    }
   }, [pushToBeExamined]);
   console.log(toBeExamined);
-
+  // console.log(timeValue.to);
   // Clear the selected and timeValue arrays and
   // push selected-items to the toBeExamined array
   function checoutDates() {
@@ -27,6 +34,7 @@ function DayTimePicker() {
     });
     setSelected([]);
     setTimeValue({ from: null, to: null });
+    setReset(true);
   }
 
   const buttonDisabled = timeValue.from && timeValue.to;
@@ -54,11 +62,11 @@ function DayTimePicker() {
   };
 
   // handle timeInput when it changes
-  const timeValueChange = (timeValue, value) => {
+  const timeValueChange = (timeKey, value) => {
     setTimeValue((curr) => {
       return {
         ...curr,
-        [timeValue]: value,
+        [timeKey]: value,
       };
     });
   };
@@ -77,12 +85,16 @@ function DayTimePicker() {
             <TimePickerResponsive
               labelText={"FRÅN"}
               handleChange={timeValueChange}
-              timeValue="from"
+              timeKey="from"
+              reset={pushToBeExamined}
+              isDisabled={selected.length < 1}
             />
             <TimePickerResponsive
               labelText={"TILL"}
               handleChange={timeValueChange}
-              timeValue="to"
+              timeKey="to"
+              reset={pushToBeExamined}
+              isDisabled={selected.length < 1}
             />
             <Box mt={0.6}>
               <Button

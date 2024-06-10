@@ -95,10 +95,18 @@ function RangeDatePicker({ addSelectedDates }) {
   };
 
   // handle days is done
-  const daysIsDone = () => {
+  const daysIsDone = (e) => {
+    // console.log(e.target.style);
     // console.log(selectedDates);
+    //wORKING ON RESETING DATES. ADD AN ID BEFORE ADD THE SELECTED DATES???
+    console.log(selectedDates);
     addSelectedDates(selectedDates);
     setDone(true);
+    // e.target.textContent = "Återställ";
+  };
+
+  const resetDates = () => {
+    setDone(false);
   };
 
   return (
@@ -131,9 +139,15 @@ function RangeDatePicker({ addSelectedDates }) {
           // excludeDates={[addDays(new Date().getDay()), addDays(new Date(), 5)]}
           // minDate={new Date()}
         />
-        <Button onClick={daysIsDone} variant="contained">
-          Dagar
-        </Button>
+        {!done ? (
+          <Button onClick={daysIsDone} variant={"contained"}>
+            Dagar
+          </Button>
+        ) : (
+          <Button onClick={resetDates} variant={"contained"}>
+            Återställ
+          </Button>
+        )}
       </Stack>
       {done && (
         <Card sx={{ mt: 2 }}>
