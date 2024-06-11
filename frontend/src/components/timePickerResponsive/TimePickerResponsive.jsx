@@ -18,7 +18,6 @@ function TimePickerResponsive({
   useEffect(() => {
     //reset the value
     if (reset) {
-      console.log(reset);
       setValue(dayjs().set("hour", 24).set("minutes", 0));
     }
   }, [reset]);

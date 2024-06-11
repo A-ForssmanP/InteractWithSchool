@@ -18,7 +18,7 @@ import dayjs from "dayjs";
 import { month } from "dayjs";
 import TabsBox from "../tabsBox/TabsBox";
 
-function RangeDatePicker({ addSelectedDates }) {
+function RangeDatePicker({ addSelectedDates, resetSelected, reset }) {
   const [startDate, setStartDate] = useState(new Date());
   // const [endDate, setEndDate] = useState(null);
   const [endDate, setEndDate] = useState(new Date());
@@ -42,8 +42,12 @@ function RangeDatePicker({ addSelectedDates }) {
   ];
 
   useEffect(() => {
-    filterWeekDays();
-  }, [startDate, endDate]);
+    if (reset) {
+      resetSelectedDates();
+    } else {
+      filterWeekDays();
+    }
+  }, [startDate, endDate, reset]);
 
   //handle dateChange
   const onChange = (dates) => {
@@ -99,14 +103,18 @@ function RangeDatePicker({ addSelectedDates }) {
     // console.log(e.target.style);
     // console.log(selectedDates);
     //wORKING ON RESETING DATES. ADD AN ID BEFORE ADD THE SELECTED DATES???
-    console.log(selectedDates);
+    // console.log(selectedDates);
     addSelectedDates(selectedDates);
     setDone(true);
     // e.target.textContent = "Återställ";
   };
-
-  const resetDates = () => {
+  // reset selectedDates
+  const resetSelectedDates = () => {
+    resetSelected();
+    setSelectedDates([]);
     setDone(false);
+    setStartDate(new Date());
+    setEndDate(new Date());
   };
 
   return (
@@ -144,7 +152,7 @@ function RangeDatePicker({ addSelectedDates }) {
             Dagar
           </Button>
         ) : (
-          <Button onClick={resetDates} variant={"contained"}>
+          <Button onClick={resetSelectedDates} variant={"contained"}>
             Återställ
           </Button>
         )}

@@ -15,16 +15,17 @@ function DayTimePicker() {
   });
   const [toBeExamined, setToBeExamined] = useState([]);
   const [pushToBeExamined, setPushToBeExamined] = useState(false);
+  const [showSuccessFeedback, setShowSuccessFeedback] = useState(false);
   const [reset, setReset] = useState(false);
 
   useEffect(() => {
     if (pushToBeExamined) {
-      console.log("PUSHED!");
       checoutDates();
+      toogleSuccessFeedback();
       setPushToBeExamined(false);
     }
   }, [pushToBeExamined]);
-  console.log(toBeExamined);
+  // console.log(toBeExamined);
   // console.log(timeValue.to);
   // Clear the selected and timeValue arrays and
   // push selected-items to the toBeExamined array
@@ -44,6 +45,11 @@ function DayTimePicker() {
     setSelected((curr) => {
       return [...curr, ...arr];
     });
+  };
+
+  //reset selected array
+  const resetSelected = () => {
+    setSelected([]);
   };
 
   // add the time to the selected dates and
@@ -71,6 +77,15 @@ function DayTimePicker() {
     });
   };
 
+  // Toogle success feedback when both date and time has been added
+  //to the toBeExamined array
+  function toogleSuccessFeedback() {
+    setShowSuccessFeedback(true);
+    setTimeout(() => {
+      setShowSuccessFeedback(false);
+    }, 2600);
+  }
+
   return (
     <Box display={"flex"} justifyContent={"center"}>
       <Box width={"fit-content"} position={"relative"}>
@@ -80,7 +95,11 @@ function DayTimePicker() {
           justifyContent={"center"}
           alignItems={"center"}
         >
-          <RangeDatePicker addSelectedDates={addSelectedDates} />
+          <RangeDatePicker
+            addSelectedDates={addSelectedDates}
+            resetSelected={resetSelected}
+            reset={pushToBeExamined}
+          />
           <Box>
             <TimePickerResponsive
               labelText={"FRÅN"}
@@ -105,7 +124,7 @@ function DayTimePicker() {
               >
                 Tid
               </Button>
-              <AlertSuccess text={"DATUM TILLAGDA!"} />
+              {showSuccessFeedback && <AlertSuccess text={"DATUM TILLAGDA!"} />}
             </Box>
           </Box>
         </Stack>
