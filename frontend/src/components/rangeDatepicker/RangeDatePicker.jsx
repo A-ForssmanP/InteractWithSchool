@@ -18,7 +18,12 @@ import dayjs from "dayjs";
 import { month } from "dayjs";
 import TabsBox from "../tabsBox/TabsBox";
 
-function RangeDatePicker({ addSelectedDates, resetSelected, reset }) {
+function RangeDatePicker({
+  addSelectedDates,
+  resetSelected,
+  reset,
+  toBeExamined,
+}) {
   const [startDate, setStartDate] = useState(new Date());
   // const [endDate, setEndDate] = useState(null);
   const [endDate, setEndDate] = useState(new Date());
@@ -117,6 +122,22 @@ function RangeDatePicker({ addSelectedDates, resetSelected, reset }) {
     setEndDate(new Date());
   };
 
+  const highlightWithRanges = [
+    {
+      "react-datepicker__day--highlighted-custom-1": toBeExamined.map(
+        (date) => date.date
+      ),
+    },
+    {
+      "react-datepicker__day--highlighted-custom-2": [
+        // addDays(new Date(), 1),
+        // addDays(new Date(), 2),
+        // addDays(new Date(), 3),
+        // addDays(new Date(), 4),
+      ],
+    },
+  ];
+
   return (
     <Box pb={5}>
       <Stack
@@ -129,24 +150,38 @@ function RangeDatePicker({ addSelectedDates, resetSelected, reset }) {
 
         // width={{ sm: 250 }}
       >
-        <DatePicker
-          // onSelect={handleDateSelect}
-          // highlightDates={[endDate]}
-          // swapRange
-          // selected={startDate}
-          onChange={onChange}
-          startDate={startDate}
-          // startDate={}
-          endDate={endDate}
-          selectsRange
-          // selectsDisabledDaysInRange
-          inline
-          calendarStartDay={1}
-          showWeekNumbers
-          filterDate={isWeekday}
-          // excludeDates={[addDays(new Date().getDay()), addDays(new Date(), 5)]}
-          // minDate={new Date()}
-        />
+        <Box>
+          <DatePicker
+            // onSelect={handleDateSelect}
+            // highlightDates={[endDate]}
+            // swapRange
+            // selected={startDate}
+            onChange={onChange}
+            startDate={startDate}
+            // startDate={}
+            endDate={endDate}
+            selectsRange
+            // selectsDisabledDaysInRange
+            inline
+            calendarStartDay={1}
+            showWeekNumbers
+            filterDate={isWeekday}
+            highlightDates={highlightWithRanges}
+            // excludeDates={[addDays(new Date().getDay()), addDays(new Date(), 5)]}
+            // minDate={new Date()}
+          />
+          <Box display={"flex"} justifyContent={"space-between"} p="0 .6rem">
+            <Box display={"flex"} alignItems={"center"}>
+              <Box bgcolor={"green"} width={11} height={11}></Box>
+              Registrerade Dagar
+            </Box>
+            <Box display={"flex"} alignItems={"center"}>
+              <Box bgcolor={"magenta"} width={11} height={11}></Box>
+              Valda Dagar
+            </Box>
+          </Box>
+        </Box>
+
         {!done ? (
           <Button onClick={daysIsDone} variant={"contained"}>
             Dagar

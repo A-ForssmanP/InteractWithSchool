@@ -99,6 +99,7 @@ function DayTimePicker() {
             addSelectedDates={addSelectedDates}
             resetSelected={resetSelected}
             reset={pushToBeExamined}
+            toBeExamined={toBeExamined}
           />
           <Box>
             <TimePickerResponsive
@@ -128,7 +129,7 @@ function DayTimePicker() {
             </Box>
           </Box>
         </Stack>
-        <Button>Granska</Button>
+        <Button>Skicka in</Button>
       </Box>
     </Box>
   );
