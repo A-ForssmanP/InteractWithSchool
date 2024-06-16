@@ -3,6 +3,7 @@ import RangeDatePicker from "../rangeDatepicker/RangeDatePicker";
 import TimePickerResponsive from "../timePickerResponsive/TimePickerResponsive";
 import AlertSuccess from "../alertSuccess/AlertSuccess";
 import { Box, Button, Stack } from "@mui/material";
+import PopupList from "../popupList/PopupList";
 import { set, getMinutes, getHours } from "date-fns";
 import zIndex from "@mui/material/styles/zIndex";
 import dayjs from "dayjs";
@@ -87,7 +88,7 @@ function DayTimePicker() {
   }
 
   return (
-    <Box display={"flex"} justifyContent={"center"}>
+    <Box display={"flex"} justifyContent={"center"} position={"relative"}>
       <Box width={"fit-content"} position={"relative"}>
         <Stack
           spacing={0}
@@ -131,6 +132,7 @@ function DayTimePicker() {
         </Stack>
         <Button>Skicka in</Button>
       </Box>
+      <PopupList items={[1, 2, 3, 4, 5, 6, 7, 8]} />
     </Box>
   );
 }
