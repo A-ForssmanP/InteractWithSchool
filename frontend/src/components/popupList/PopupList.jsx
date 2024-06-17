@@ -1,7 +1,7 @@
 import PopupListItem from "../popupListItem/PopupListItem";
-import { Box, Card, List, Button } from "@mui/material";
+import { Box, Card, List, Button, Typography } from "@mui/material";
 
-function PopupList({ items }) {
+function PopupList({ items, closePopup }) {
   const styles = {
     position: "absolute",
     top: "50%",
@@ -10,8 +10,13 @@ function PopupList({ items }) {
   return (
     <Box style={styles} width={580} maxWidth={"100%"} zIndex={100}>
       <Card>
-        <Box display={"flex"} justifyContent={"end"} marginRight={"34px"}>
-          <Button>Stäng</Button>
+        <Box
+          display={"flex"}
+          justifyContent={"space-between"}
+          margin={"20px 34px 0 34px"}
+        >
+          <Typography>Granska valda datum:</Typography>
+          <Button onClick={closePopup}>Stäng</Button>
         </Box>
 
         <List sx={{ padding: { sm: 3 }, maxHeight: 450, overflow: "scroll" }}>

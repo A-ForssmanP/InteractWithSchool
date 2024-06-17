@@ -18,6 +18,7 @@ function DayTimePicker() {
   const [pushToBeExamined, setPushToBeExamined] = useState(false);
   const [showSuccessFeedback, setShowSuccessFeedback] = useState(false);
   const [reset, setReset] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     if (pushToBeExamined) {
@@ -130,9 +131,19 @@ function DayTimePicker() {
             </Box>
           </Box>
         </Stack>
-        <Button>Skicka in</Button>
+        <Button
+          disabled={showPopup || toBeExamined.length < 1}
+          onClick={() => setShowPopup(true)}
+        >
+          Skicka in
+        </Button>
       </Box>
-      <PopupList items={[1, 2, 3, 4, 5, 6, 7, 8]} />
+      {showPopup && (
+        <PopupList
+          items={toBeExamined}
+          closePopup={() => setShowPopup(false)}
+        />
+      )}
     </Box>
   );
 }
