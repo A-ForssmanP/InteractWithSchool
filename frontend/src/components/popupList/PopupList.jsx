@@ -21,7 +21,7 @@ function PopupList({ items, closePopup }) {
 
         <List sx={{ padding: { sm: 3 }, maxHeight: 450, overflow: "scroll" }}>
           {items.map((item) => {
-            return <PopupListItem item={item} />;
+            return <PopupListItem key={item.id} item={item} />;
           })}
         </List>
         <Button variant="contained" sx={{ width: "100%" }}>
