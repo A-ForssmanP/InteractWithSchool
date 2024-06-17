@@ -18,12 +18,12 @@ function PopupList({ items, closePopup }) {
           <Typography>Granska valda datum:</Typography>
           <Button onClick={closePopup}>Stäng</Button>
         </Box>
-
         <List sx={{ padding: { sm: 3 }, maxHeight: 450, overflow: "scroll" }}>
           {items.map((item) => {
             return <PopupListItem key={item.id} item={item} />;
           })}
         </List>
+        //FORM????
         <Button variant="contained" sx={{ width: "100%" }}>
           Skicka in
         </Button>
