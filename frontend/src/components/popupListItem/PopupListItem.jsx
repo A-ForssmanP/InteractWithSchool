@@ -16,17 +16,16 @@ import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { useState } from "react";
 
 function PopupListItem({ item }) {
-  const [from, setFrom] = useState(
-    dayjs().set("hour", 6).set("minute", 5).format("YYYY-MM-DDTHH:mm")
-  );
-  console.log(item);
-  console.log(item.times.from.split(":")[1]);
-  console.log(item.times.from);
-  console.log(from);
-  const [to, setTo] = useState({
-    hour: item.times.to.split(":")[0],
-    minute: item.times.to.split(":")[1],
-  });
+  const [times, setTimes] = useState(item.times);
+  const [changeTime, setChangeTime] = useState(false);
+  // console.log(item);
+  // console.log(item.times.from.split(":")[1]);
+  // console.log(item.times.from);
+  // console.log(from);
+  // const [to, setTo] = useState({
+  //   hour: item.times.to.split(":")[0],
+  //   minute: item.times.to.split(":")[1],
+  // });
 
   const weekdays = ["Mån", "Tis", "Ons", "Tors", "Fre"];
   const months = [
@@ -48,6 +47,7 @@ function PopupListItem({ item }) {
   const date = dayjs(item.date).date();
   const month = months[dayjs(item.date).month()];
   // const { from, to } = item.times;
+
   return (
     <Card sx={{ mb: 0.4 }}>
       <ListItem
@@ -58,21 +58,42 @@ function PopupListItem({ item }) {
       // }
       >
         <ListItemText primary={`${day} ${date} ${month}`} />
+        {!changeTime ? (
+          <Box
+            border={"1px solid lightgray"}
+            borderRadius={1.2}
+            sx={{ mr: 4, padding: [1.6] }}
+          >
+            {`${times.from} Till ${times.to}`}
+          </Box>
+        ) : (
+          <Box>
+            <Box display={"flex"}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <TimePicker
+                  defaultValue={dayjs().set("hour", "0").set("minute", 0)}
+                  value={dayjs()
+                    .hour(times.from.split(":")[0])
+                    .minute(times.from.split(":")[1])}
+                  ampm={false}
+                />
+                -
+                <TimePicker
+                  defaultValue={dayjs().set("hour", "0").set("minute", 0)}
+                  value={dayjs()
+                    .hour(times.to.split(":")[0])
+                    .minute(times.to.split(":")[1])}
+                  ampm={false}
+                />
+              </LocalizationProvider>
+            </Box>
+            <Button fullWidth={true}>Updatera tid</Button>
+          </Box>
+        )}
+        <Button onClick={() => setChangeTime(!changeTime)}>
+          {!changeTime ? "Ändra" : "Avbryt"}
+        </Button>
 
-        <Box
-          border={"1px solid lightgray"}
-          borderRadius={1.2}
-          sx={{ mr: 4, padding: [1.6] }}
-        >{`${from.split("T")[1].split(":")[0]}:${to.minute}`}</Box>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <TimePicker
-            defaultValue={dayjs().set("hour", 5).set("minute", 5)}
-            ampm={false}
-          />
-          <TimePicker defaultValue={dayjs()} ampm={false} />
-        </LocalizationProvider>
-
-        <Button>Ändra</Button>
         <IconButton>
           <DeleteIcon />
         </IconButton>

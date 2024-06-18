@@ -30,10 +30,13 @@ function TimePickerResponsive({
         ampm={false}
         label={labelText}
         onChange={(newValue) => {
-          console.log(getHours(newValue.$d));
-          const hours = getHours(newValue.$d);
-          const minutes = getMinutes(newValue.$d);
-          const updatedValue = hours + ":" + minutes;
+          const date = new Date(newValue);
+          const timeExtracted = date.toLocaleTimeString().slice(0, 5);
+          console.log(timeExtracted);
+          // const hours = getHours(newValue.$d);
+          // const minutes = getMinutes(newValue.$d);
+          // const updatedValue = hours + ":" + minutes;
+          const updatedValue = timeExtracted;
           handleChange(timeKey, updatedValue);
         }}
         disabled={isDisabled}
