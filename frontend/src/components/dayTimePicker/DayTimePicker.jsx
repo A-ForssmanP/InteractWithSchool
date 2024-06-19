@@ -87,6 +87,25 @@ function DayTimePicker() {
       setShowSuccessFeedback(false);
     }, 2600);
   }
+  console.log(toBeExamined);
+  // update time on date in toBeExamined arr.
+  const handleTimeUpdate = (id, newTime) => {
+    setToBeExamined((curr) => {
+      return curr.map((date) => {
+        if (date.id === id) {
+          return {
+            ...date,
+            times: {
+              from: newTime.from,
+              to: newTime.to,
+            },
+          };
+        } else {
+          return date;
+        }
+      });
+    });
+  };
 
   return (
     <Box display={"flex"} justifyContent={"center"} position={"relative"}>
@@ -142,6 +161,7 @@ function DayTimePicker() {
         <PopupList
           items={toBeExamined}
           closePopup={() => setShowPopup(false)}
+          handleTimeUpdate={handleTimeUpdate}
         />
       )}
     </Box>

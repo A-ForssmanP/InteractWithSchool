@@ -32,7 +32,6 @@ function TimePickerResponsive({
         onChange={(newValue) => {
           const date = new Date(newValue);
           const timeExtracted = date.toLocaleTimeString().slice(0, 5);
-          console.log(timeExtracted);
           // const hours = getHours(newValue.$d);
           // const minutes = getMinutes(newValue.$d);
           // const updatedValue = hours + ":" + minutes;

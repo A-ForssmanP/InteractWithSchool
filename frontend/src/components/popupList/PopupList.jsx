@@ -1,7 +1,7 @@
 import PopupListItem from "../popupListItem/PopupListItem";
 import { Box, Card, List, Button, Typography } from "@mui/material";
 
-function PopupList({ items, closePopup }) {
+function PopupList({ items, closePopup, handleTimeUpdate }) {
   const styles = {
     position: "absolute",
     top: "50%",
@@ -20,7 +20,13 @@ function PopupList({ items, closePopup }) {
         </Box>
         <List sx={{ padding: { sm: 3 }, maxHeight: 450, overflow: "scroll" }}>
           {items.map((item) => {
-            return <PopupListItem key={item.id} item={item} />;
+            return (
+              <PopupListItem
+                key={item.id}
+                item={item}
+                handleTimeUpdate={handleTimeUpdate}
+              />
+            );
           })}
         </List>
         //FORM????

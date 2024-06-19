@@ -15,8 +15,10 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { useState } from "react";
 
-function PopupListItem({ item }) {
+function PopupListItem({ item, handleTimeUpdate }) {
   const [times, setTimes] = useState(item.times);
+  const [pickerValues, setPickerValues] = useState(times);
+  // const [fromTimePickerValue,setFromTimePickerValue] = useState(times.from)
   const [changeTime, setChangeTime] = useState(false);
   // console.log(item);
   // console.log(item.times.from.split(":")[1]);
@@ -42,11 +44,32 @@ function PopupListItem({ item }) {
     "Nov",
     "Dec",
   ];
-
+  // console.log(times);
+  // console.log(pickerValues);
+  // console.log(item);
   const day = weekdays[dayjs(item.date).day() - 1];
   const date = dayjs(item.date).date();
   const month = months[dayjs(item.date).month()];
   // const { from, to } = item.times;
+
+  // update time
+  const updateTime = (id) => {
+    setTimes(pickerValues);
+    handleTimeUpdate(id, pickerValues);
+    setChangeTime(false);
+  };
+
+  //handle change
+  const handleChange = (newValue, valToUpd) => {
+    const date = new Date(newValue);
+    const timeExtracted = date.toLocaleTimeString().slice(0, 5);
+    setPickerValues((curr) => {
+      return {
+        ...curr,
+        [valToUpd]: timeExtracted,
+      };
+    });
+  };
 
   return (
     <Card sx={{ mb: 0.4 }}>
@@ -73,21 +96,28 @@ function PopupListItem({ item }) {
                 <TimePicker
                   defaultValue={dayjs().set("hour", "0").set("minute", 0)}
                   value={dayjs()
-                    .hour(times.from.split(":")[0])
-                    .minute(times.from.split(":")[1])}
+                    .hour(pickerValues.from.split(":")[0])
+                    .minute(pickerValues.from.split(":")[1])}
                   ampm={false}
+                  onChange={(newValue) => handleChange(newValue, "from")}
                 />
                 -
                 <TimePicker
                   defaultValue={dayjs().set("hour", "0").set("minute", 0)}
                   value={dayjs()
-                    .hour(times.to.split(":")[0])
-                    .minute(times.to.split(":")[1])}
+                    .hour(pickerValues.to.split(":")[0])
+                    .minute(pickerValues.to.split(":")[1])}
                   ampm={false}
+                  onChange={(newValue) => handleChange(newValue, "to")}
                 />
               </LocalizationProvider>
             </Box>
-            <Button fullWidth={true}>Updatera tid</Button>
+            <Button
+              fullWidth={true}
+              onClick={() => updateTime(item.id, "from")}
+            >
+              Updatera tid
+            </Button>
           </Box>
         )}
         <Button onClick={() => setChangeTime(!changeTime)}>
