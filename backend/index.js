@@ -89,7 +89,12 @@ app.get('/', (req, res) => {
       throw new Error(err)
       
     }
-   
+  })
+
+  app.post("/timeSchedule", async (req,res) => {
+    const {data} = req.body;
+    console.log(data)
+    res.send("GOT DATA")
   })
 
 app.listen(port,()=>{

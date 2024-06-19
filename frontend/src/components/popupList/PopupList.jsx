@@ -1,7 +1,38 @@
+import { useEffect, useState } from "react";
 import PopupListItem from "../popupListItem/PopupListItem";
 import { Box, Card, List, Button, Typography } from "@mui/material";
+import axios from "axios";
 
 function PopupList({ items, closePopup, handleTimeUpdate, handleDelete }) {
+  const [dataToSubmit, setDataToSubmit] = useState(items);
+
+  useEffect(() => {
+    setDataToSubmit(items);
+  }, [items]);
+
+  // Handle submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    sendToServer(dataToSubmit);
+  };
+
+  // send data to server
+  async function sendToServer(data) {
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_EXPRESS_SERVER}/timeSchedule`,
+        {
+          data: data,
+        }
+      );
+      if (res.status !== 200) {
+        throw new Error(`HTTP Error! Status: ${res.statusText}`);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   const styles = {
     position: "absolute",
     top: "50%",
@@ -30,10 +61,11 @@ function PopupList({ items, closePopup, handleTimeUpdate, handleDelete }) {
             );
           })}
         </List>
-        //FORM????
-        <Button variant="contained" sx={{ width: "100%" }}>
-          Skicka in
-        </Button>
+        <Box component="form" onSubmit={handleSubmit}>
+          <Button variant="contained" type="submit" sx={{ width: "100%" }}>
+            Skicka in
+          </Button>
+        </Box>
       </Card>
     </Box>
   );

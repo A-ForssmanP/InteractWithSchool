@@ -94,7 +94,7 @@ function DayTimePicker() {
       return curr.filter((d) => d.id !== id);
     });
   };
-  console.log(toBeExamined);
+  // console.log(toBeExamined);
   // update time on date in toBeExamined arr.
   const handleTimeUpdate = (id, newTime) => {
     setToBeExamined((curr) => {
