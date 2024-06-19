@@ -15,7 +15,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { useState } from "react";
 
-function PopupListItem({ item, handleTimeUpdate }) {
+function PopupListItem({ item, handleTimeUpdate, handleDelete }) {
   const [times, setTimes] = useState(item.times);
   const [pickerValues, setPickerValues] = useState(times);
   // const [fromTimePickerValue,setFromTimePickerValue] = useState(times.from)
@@ -60,7 +60,7 @@ function PopupListItem({ item, handleTimeUpdate }) {
   };
 
   //handle change
-  const handleChange = (newValue, valToUpd) => {
+  const handleChange = (newValue, valToUpd, handleDelete) => {
     const date = new Date(newValue);
     const timeExtracted = date.toLocaleTimeString().slice(0, 5);
     setPickerValues((curr) => {
@@ -124,7 +124,7 @@ function PopupListItem({ item, handleTimeUpdate }) {
           {!changeTime ? "Ändra" : "Avbryt"}
         </Button>
 
-        <IconButton>
+        <IconButton onClick={handleDelete}>
           <DeleteIcon />
         </IconButton>
       </ListItem>

@@ -87,6 +87,13 @@ function DayTimePicker() {
       setShowSuccessFeedback(false);
     }, 2600);
   }
+
+  // delete dates in toBeExamined
+  const deleteDates = (id) => {
+    setToBeExamined((curr) => {
+      return curr.filter((d) => d.id !== id);
+    });
+  };
   console.log(toBeExamined);
   // update time on date in toBeExamined arr.
   const handleTimeUpdate = (id, newTime) => {
@@ -162,6 +169,7 @@ function DayTimePicker() {
           items={toBeExamined}
           closePopup={() => setShowPopup(false)}
           handleTimeUpdate={handleTimeUpdate}
+          handleDelete={deleteDates}
         />
       )}
     </Box>

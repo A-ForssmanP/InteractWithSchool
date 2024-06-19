@@ -1,7 +1,7 @@
 import PopupListItem from "../popupListItem/PopupListItem";
 import { Box, Card, List, Button, Typography } from "@mui/material";
 
-function PopupList({ items, closePopup, handleTimeUpdate }) {
+function PopupList({ items, closePopup, handleTimeUpdate, handleDelete }) {
   const styles = {
     position: "absolute",
     top: "50%",
@@ -25,6 +25,7 @@ function PopupList({ items, closePopup, handleTimeUpdate }) {
                 key={item.id}
                 item={item}
                 handleTimeUpdate={handleTimeUpdate}
+                handleDelete={() => handleDelete(item.id)}
               />
             );
           })}
