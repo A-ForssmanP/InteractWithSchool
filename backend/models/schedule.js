@@ -1,6 +1,6 @@
 const {model,Schema,Types, Model} = require("mongoose");
 
-const ScheduleSchema = new Schema({
+const scheduleSchema = new Schema({
     studentId:{
         type: Types.ObjectId, ref:"Student",
         required:true,
@@ -12,6 +12,6 @@ const ScheduleSchema = new Schema({
     scheduledDays: []
 })
 
-const Schedule = model("Schedule",ScheduleSchema)
+const Schedule = model("Schedule",scheduleSchema)
 
 module.exports = Schedule;

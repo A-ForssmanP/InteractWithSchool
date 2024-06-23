@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const User = require("./models/user")
 const Student = require("./models/student");
 const InboxMessage = require("./models/inboxMessage")
+const Schedule = require("./models/schedule")
 
 mongoose.connect('mongodb://127.0.0.1:27017/interactWithSchool').then(()=>{
   console.log("CONNECTED TO DB!")
