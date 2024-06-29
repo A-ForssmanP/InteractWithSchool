@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const User = require("./models/user")
 const Student = require("./models/student")
 const InboxMessage = require("./models/inboxMessage")
+const Schedule = require("./models/schedule")
 
 
 mongoose.connect('mongodb://127.0.0.1:27017/interactWithSchool').then(()=>{
@@ -91,10 +92,19 @@ app.get('/', (req, res) => {
     }
   })
 
-  app.post("/timeSchedule", async (req,res) => {
-    const {data} = req.body;
-    console.log(data)
+  app.post("/timeSchedule/:id", async (req,res) => {
+    try {
+      const {data} = req.body;
+    const {id} = req.params
+    const studentSchedule = await Student.findById('6680751b53894313c5a7d013').populate("schedule")
+    studentSchedule.scheduledDays
+    console.log(studentSchedule.caring)
+    // console.log(data)
+    // console.log(id)
     res.send("GOT DATA")
+    } catch (err) {
+      throw new Error(err)
+    }
   })
 
 app.listen(port,()=>{

@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import PopupListItem from "../popupListItem/PopupListItem";
 import { Box, Card, List, Button, Typography } from "@mui/material";
 import axios from "axios";
 
 function PopupList({ items, closePopup, handleTimeUpdate, handleDelete }) {
   const [dataToSubmit, setDataToSubmit] = useState(items);
+  const params = useParams();
+  const studentId = params.id;
 
   useEffect(() => {
     setDataToSubmit(items);
@@ -20,7 +23,7 @@ function PopupList({ items, closePopup, handleTimeUpdate, handleDelete }) {
   async function sendToServer(data) {
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_EXPRESS_SERVER}/timeSchedule`,
+        `${import.meta.env.VITE_EXPRESS_SERVER}/timeSchedule/${studentId}`,
         {
           data: data,
         }
