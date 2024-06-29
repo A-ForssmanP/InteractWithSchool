@@ -1,4 +1,4 @@
-const {model, Schema} = require("mongoose")
+const {model, Schema, Types} = require("mongoose")
 
 const studentSchema = new Schema({
     firstName: {
@@ -12,6 +12,10 @@ const studentSchema = new Schema({
     absence: {
         // isAbsence: Boolean,
         prevAbsences: []
+    },
+    schedule: {
+        type:Types.ObjectId,
+        ref:"Schedule"
     }
 })
 

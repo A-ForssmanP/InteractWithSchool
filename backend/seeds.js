@@ -125,15 +125,39 @@ try {
 }
 
 
+const insertSchedule = async () => {
+  try {
+    const students = await Student.find()
+  students.forEach((student) => {
+
+    //get caring type by random
+    const getCaringType = () => {
+      const caringEnum = ["Fritids", "Förskola"]
+      const randomIndex = Math.floor(Math.random()*2)
+      return caringEnum[randomIndex]
+    }
+
+    const caringType = getCaringType()
+    const schedule = new Schedule({caring:caringType})
+    student.schedule = schedule;
+    schedule.save()
+    student.save()
+  })} catch(err) {
+    throw new Error(err)
+  }
+  
+ 
+}
+
+
 
 // Insert data to dB
  const insertData = async () => {
   await insertNewUserandStudent()
   await insertInboxMessages()
+  await insertSchedule()
   console.log("Data inserted to DB!")
  }
-
- insertData()
 
 // delete absences
 const deleteAbsences = async () => {
@@ -144,4 +168,27 @@ const deleteAbsences = async () => {
   })
 }
 
+
+
 // deleteAbsences()
+
+const deleteAllCollections = async () => {
+  const connection = mongoose.connection;
+  try {
+   await connection.collection("students").drop()
+   await connection.collection("Schedule").drop()
+   await connection.collection("inboxmessages").drop()
+    await connection.collection("users").drop()
+
+    console.log("ALL COLLECTIONS DELETED!")
+
+  } catch(err) {
+    throw new Error(err)
+  }
+}
+
+//insert Data to db
+insertData()
+
+// drop all collections 
+// deleteAllCollections()

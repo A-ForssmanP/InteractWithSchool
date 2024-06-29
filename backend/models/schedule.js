@@ -1,13 +1,15 @@
-const {model,Schema,Types, Model} = require("mongoose");
+const mongoose = require("mongoose")
+const {Schema,model} = mongoose
 
 const scheduleSchema = new Schema({
-    studentId:{
-        type: Types.ObjectId, ref:"Student",
-        required:true,
-    },
+    // studentId:{
+    //     type: Types.ObjectId, ref:"Student",
+    //     required:true,
+    // },
     caring: {
         type: String,
-        enum: ["Fritids", "Förskola"]
+        enum: ["Fritids", "Förskola"],
+        required: true,
     },
     scheduledDays: []
 })
