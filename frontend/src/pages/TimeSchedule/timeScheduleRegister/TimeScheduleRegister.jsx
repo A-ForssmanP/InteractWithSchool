@@ -5,9 +5,10 @@ import { Box } from "@mui/material";
 import axios from "axios";
 
 function TimeScheduleRegister() {
-  const [student, setStudent] = useState({});
+  const [schedule, setSchedule] = useState({});
   const params = useParams();
 
+  //Continue work here !!
   //get student schedule
   const getSchedule = async () => {
     try {
