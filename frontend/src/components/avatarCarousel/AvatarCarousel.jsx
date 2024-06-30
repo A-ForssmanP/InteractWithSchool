@@ -14,7 +14,7 @@ function AvatarCarousel({ avatarItems }) {
       animation={"slide"}
     >
       {avatarItems.map((item, i) => (
-        <AvatarCarouselItem key={i} item={item} bgColor={bgColors[i]} />
+        <AvatarCarouselItem key={item._id} item={item} bgColor={bgColors[i]} />
       ))}
     </Carousel>
   );

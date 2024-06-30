@@ -92,6 +92,22 @@ app.get('/', (req, res) => {
     }
   })
 
+  app.get("/timeSchedule", async (req,res) => {
+    try {
+      const userPopulated = await User.findById(userId).populate("students");
+    const students = userPopulated.students;
+    res.json({studentsData:students})
+    } catch(err) {
+      throw new Error(err)
+    }
+  })
+
+  app.get("/timeSchedule/:id/register", (req,res) => {
+    const {id} = req.params;
+    console.log(id)
+    res.send("")
+  })
+
   app.post("/timeSchedule/:id", async (req,res) => {
     try {
       const {data} = req.body;
@@ -106,11 +122,7 @@ app.get('/', (req, res) => {
     }
   })
 
-  app.get("/timeSchedule", async (req,res) => {
-    const userPopulated = await User.findById(userId).populate("students");
-    const students = userPopulated.students;
-    res.json({studentsData:students})
-  })
+  
 
 app.listen(port,()=>{
 console.log(`SERVER IS UP AND RUNNING ON PORT ${port}!`)

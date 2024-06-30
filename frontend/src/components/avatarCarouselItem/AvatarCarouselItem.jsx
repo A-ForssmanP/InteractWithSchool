@@ -36,7 +36,7 @@ function AvatarCarouselItem({ item, bgColor }) {
         // width={{ sm: 250 }}
       >
         <Button
-          onClick={() => navigate(`${item.id}/registrera_omsorg`)}
+          onClick={() => navigate(`${item._id}/registrera_omsorg`)}
           sx={{ width: { md: 170 } }}
           variant="contained"
           startIcon={""}
@@ -44,7 +44,7 @@ function AvatarCarouselItem({ item, bgColor }) {
           Registrera tid
         </Button>
         <Button
-          onClick={() => navigate(`${item.id}/planerad_omsorg`)}
+          onClick={() => navigate(`${item._id}/planerad_omsorg`)}
           sx={{ width: { md: 170 } }}
           variant="contained"
           endIcon={""}
