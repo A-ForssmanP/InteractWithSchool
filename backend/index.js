@@ -106,6 +106,12 @@ app.get('/', (req, res) => {
     }
   })
 
+  app.get("/timeSchedule", async (req,res) => {
+    const userPopulated = await User.findById(userId).populate("students");
+    const students = userPopulated.students;
+    res.json({studentsData:students})
+  })
+
 app.listen(port,()=>{
 console.log(`SERVER IS UP AND RUNNING ON PORT ${port}!`)
 })

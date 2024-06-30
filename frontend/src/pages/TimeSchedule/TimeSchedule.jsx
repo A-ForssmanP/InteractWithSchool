@@ -1,7 +1,15 @@
 import AvatarCarousel from "../../components/avatarCarousel/AvatarCarousel";
 import { Box } from "@mui/material";
+import axios from "axios";
 
 function TimeSchedule() {
+  // get the students data
+  const getStudents = async () => {
+    const res = await axios.get(
+      `${import.meta.env.VITE_EXPRESS_SERVER}/timeSchedule`
+    );
+  };
+
   const avatarItems = [
     {
       id: crypto.randomUUID(),
