@@ -96,11 +96,10 @@ app.get('/', (req, res) => {
     try {
       const {data} = req.body;
     const {id} = req.params
-    const studentSchedule = await Student.findById('6680751b53894313c5a7d013').populate("schedule")
-    studentSchedule.scheduledDays
-    console.log(studentSchedule.caring)
-    // console.log(data)
-    // console.log(id)
+    const populated = await Student.findById(id).populate("schedule")
+    const studentSchema = populated.schedule
+    studentSchema.scheduledDays.push(...data)
+    studentSchema.save()
     res.send("GOT DATA")
     } catch (err) {
       throw new Error(err)

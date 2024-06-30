@@ -176,7 +176,7 @@ const deleteAllCollections = async () => {
   const connection = mongoose.connection;
   try {
    await connection.collection("students").drop()
-   await connection.collection("Schedule").drop()
+   await connection.collection("schedules").drop()
    await connection.collection("inboxmessages").drop()
     await connection.collection("users").drop()
 
