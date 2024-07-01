@@ -36,7 +36,9 @@ function TimeScheduleRegister() {
             Registrera Tid(<b>{student.schedule.caring}</b>) För,
             {student.firstName}
           </Typography>
-          <DayTimePicker registratedDays={student.scheduledDays} />
+          <DayTimePicker
+            isRegistrated={student && student.schedule.scheduledDays}
+          />
         </Box>
       )}
     </Box>

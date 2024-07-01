@@ -8,7 +8,7 @@ import { set, getMinutes, getHours } from "date-fns";
 import zIndex from "@mui/material/styles/zIndex";
 import dayjs from "dayjs";
 
-function DayTimePicker() {
+function DayTimePicker(isRegistrated) {
   const [selected, setSelected] = useState([]);
   const [timeValue, setTimeValue] = useState({
     from: null,
@@ -128,6 +128,7 @@ function DayTimePicker() {
             resetSelected={resetSelected}
             reset={pushToBeExamined}
             toBeExamined={toBeExamined}
+            isRegistrated={isRegistrated}
           />
           <Box>
             <TimePickerResponsive

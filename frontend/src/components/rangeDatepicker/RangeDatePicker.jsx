@@ -23,6 +23,7 @@ function RangeDatePicker({
   resetSelected,
   reset,
   toBeExamined,
+  isRegistrated,
 }) {
   const [startDate, setStartDate] = useState(new Date());
   // const [endDate, setEndDate] = useState(null);
@@ -129,12 +130,14 @@ function RangeDatePicker({
       ),
     },
     {
-      "react-datepicker__day--highlighted-custom-2": [
-        // addDays(new Date(), 1),
-        // addDays(new Date(), 2),
-        // addDays(new Date(), 3),
-        // addDays(new Date(), 4),
-      ],
+      "react-datepicker__day--highlighted-custom-2":
+        isRegistrated.isRegistrated.map((date) => new Date(date.date) - 1),
+      // [
+      //   addDays(new Date(), 1),
+      //   addDays(new Date(), 2),
+      //   addDays(new Date(), 3),
+      //   addDays(new Date(), 4),
+      // ],
     },
   ];
 
