@@ -101,7 +101,7 @@ app.get('/', (req, res) => {
       throw new Error(err)
     }
   })
-  //Continue work here !!
+ 
   app.get("/timeSchedule/:id", async (req,res) => {
     try{
       const {id} = req.params;
@@ -111,7 +111,7 @@ app.get('/', (req, res) => {
        if(!isValidStudentId) {
           return res.status(404).send()
         }
-        
+
         const student = await Student.findById(id).populate("schedule");
         res.json({student:student})
     } catch(err) {

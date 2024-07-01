@@ -1,30 +1,44 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import DayTimePicker from "../../../components/dayTimePicker/DayTimePicker";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import axios from "axios";
 
 function TimeScheduleRegister() {
-  const [schedule, setSchedule] = useState({});
+  const [student, setStudent] = useState(null);
   const params = useParams();
 
-  //Continue work here !!
   //get student schedule
   const getSchedule = async () => {
     try {
       const res = await axios.get(
         `${import.meta.env.VITE_EXPRESS_SERVER}/timeSchedule/${params.id}`
       );
-      console.log(res);
+      const { student } = res.data;
+      setStudent(student);
     } catch (err) {
-      console.log("Scedule not found!");
+      setStudent(false);
       throw new Error(err.message);
     }
   };
-  getSchedule();
+
+  useEffect(() => {
+    getSchedule();
+  }, []);
+
   return (
     <Box>
-      <DayTimePicker />
+      {!student ? (
+        <Typography>Schedule Not Found</Typography>
+      ) : (
+        <Box>
+          <Typography>
+            Registrera Tid(<b>{student.schedule.caring}</b>) För,
+            {student.firstName}
+          </Typography>
+          <DayTimePicker registratedDays={student.scheduledDays} />
+        </Box>
+      )}
     </Box>
   );
 }
