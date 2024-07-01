@@ -12,16 +12,16 @@ function TimeScheduleRegister() {
   //get student schedule
   const getSchedule = async () => {
     try {
-      const res = axios.get(
-        `${import.meta.env.VITE_EXPRESS_SERVER}/timeSchedule/${
-          params.id
-        }/register`
+      const res = await axios.get(
+        `${import.meta.env.VITE_EXPRESS_SERVER}/timeSchedule/${params.id}`
       );
+      console.log(res);
     } catch (err) {
-      throw new Error(err);
+      console.log("Scedule not found!");
+      throw new Error(err.message);
     }
   };
-
+  getSchedule();
   return (
     <Box>
       <DayTimePicker />

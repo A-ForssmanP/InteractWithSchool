@@ -102,10 +102,22 @@ app.get('/', (req, res) => {
     }
   })
   //Continue work here !!
-  app.get("/timeSchedule/:id/register", (req,res) => {
-    const {id} = req.params;
-    console.log(id)
-    res.send("")
+  app.get("/timeSchedule/:id", async (req,res) => {
+    try{
+      const {id} = req.params;
+      const user = await User.findById(userId)
+       const isValidStudentId = user.students.some((s)=>s.toString() === id)
+
+       if(!isValidStudentId) {
+          return res.status(404).send()
+        }
+        
+        const student = await Student.findById(id).populate("schedule");
+        res.json({student:student})
+    } catch(err) {
+      throw new Error(err)
+    }
+  
   })
 
   app.post("/timeSchedule/:id", async (req,res) => {
