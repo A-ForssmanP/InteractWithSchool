@@ -1,3 +1,16 @@
+.react-datepicker__day--highlighted-custom-1 {
+    color: rgb(255,255,255);
+    background-color: rgba(255, 0, 255, 0.59);
+    border-radius: 6px;
+    
+    
+}
+
+.react-datepicker__day--highlighted-custom-1:hover {
+    color:rgb(255, 255, 255);
+    background-color: #80c511d8; 
+}
+
 .react-datepicker__day--highlighted-custom-2 {
     color:rgb(255, 255, 255);
     background-color: #80c511; 

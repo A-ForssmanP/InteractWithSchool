@@ -154,7 +154,6 @@ function DayTimePicker(isRegistrated) {
               >
                 Tid
               </Button>
-              {showSuccessFeedback && <AlertSuccess text={"DATUM TILLAGDA!"} />}
             </Box>
           </Box>
         </Stack>
@@ -164,6 +163,7 @@ function DayTimePicker(isRegistrated) {
         >
           Skicka in
         </Button>
+        {showSuccessFeedback && <AlertSuccess text={"DATUM TILLAGDA!"} />}
       </Box>
       {showPopup && (
         <PopupList

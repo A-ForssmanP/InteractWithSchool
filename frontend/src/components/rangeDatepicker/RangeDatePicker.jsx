@@ -176,11 +176,15 @@ function RangeDatePicker({
           />
           <Box display={"flex"} justifyContent={"space-between"} p="0 .6rem">
             <Box display={"flex"} alignItems={"center"}>
-              <Box bgcolor={"green"} width={11} height={11}></Box>
+              <Box bgcolor={"#80c511"} width={11} height={11}></Box>
               Registrerade Dagar
             </Box>
             <Box display={"flex"} alignItems={"center"}>
-              <Box bgcolor={"magenta"} width={11} height={11}></Box>
+              <Box
+                bgcolor={"rgba(255, 0, 255, 0.59)"}
+                width={11}
+                height={11}
+              ></Box>
               Valda Dagar
             </Box>
           </Box>
