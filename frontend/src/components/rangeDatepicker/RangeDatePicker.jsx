@@ -17,6 +17,7 @@ import { StaticTimePicker } from "@mui/x-date-pickers/StaticTimePicker";
 import dayjs from "dayjs";
 import { month } from "dayjs";
 import TabsBox from "../tabsBox/TabsBox";
+import "./RangeDatePicker.css";
 
 function RangeDatePicker({
   addSelectedDates,
