@@ -157,15 +157,21 @@ function DayTimePicker(isRegistrated) {
             </Box>
           </Box>
         </Stack>
-        <Button
-          sx={{ width: "100%" }}
-          variant="contained"
-          disabled={showPopup || toBeExamined.length < 1}
-          onClick={() => setShowPopup(true)}
+        <Box
+          mt={3}
+          display={"flex"}
+          justifyContent={showSuccessFeedback ? "space-between" : "flex-end"}
         >
-          Klar
-        </Button>
-        {showSuccessFeedback && <AlertSuccess text={"DATUM TILLAGDA!"} />}
+          {showSuccessFeedback && <AlertSuccess text={"DATUM TILLAGDA!"} />}
+          <Button
+            variant="contained"
+            color="success"
+            disabled={showPopup || toBeExamined.length < 1}
+            onClick={() => setShowPopup(true)}
+          >
+            Klar
+          </Button>
+        </Box>
       </Box>
       {showPopup && (
         <PopupList

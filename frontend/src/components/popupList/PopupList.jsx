@@ -53,7 +53,14 @@ function PopupList({ items, closePopup, handleTimeUpdate, handleDelete }) {
           <Typography>Granska valda datum:</Typography>
           <Button onClick={closePopup}>Stäng</Button>
         </Box>
-        <List sx={{ padding: { sm: 3 }, maxHeight: 450, overflow: "scroll" }}>
+        <List
+          sx={{
+            padding: { sm: 3 },
+            minHeight: 255,
+            maxHeight: 450,
+            overflow: "scroll",
+          }}
+        >
           {items.map((item) => {
             return (
               <PopupListItem
@@ -65,7 +72,7 @@ function PopupList({ items, closePopup, handleTimeUpdate, handleDelete }) {
             );
           })}
         </List>
-        <Box component="form" onSubmit={handleSubmit}>
+        <Box component="form" onSubmit={handleSubmit} mt={1.4}>
           <SendButton text="Skicka in" />
         </Box>
       </Card>
