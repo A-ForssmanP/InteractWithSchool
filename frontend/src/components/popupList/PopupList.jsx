@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import PopupListItem from "../popupListItem/PopupListItem";
+import SendButton from "../sendButton/SendButton";
 import { Box, Card, List, Button, Typography } from "@mui/material";
 import axios from "axios";
 
@@ -65,9 +66,7 @@ function PopupList({ items, closePopup, handleTimeUpdate, handleDelete }) {
           })}
         </List>
         <Box component="form" onSubmit={handleSubmit}>
-          <Button variant="contained" type="submit" sx={{ width: "100%" }}>
-            Skicka in
-          </Button>
+          <SendButton text="Skicka in" />
         </Box>
       </Card>
     </Box>

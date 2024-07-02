@@ -158,10 +158,12 @@ function DayTimePicker(isRegistrated) {
           </Box>
         </Stack>
         <Button
+          sx={{ width: "100%" }}
+          variant="contained"
           disabled={showPopup || toBeExamined.length < 1}
           onClick={() => setShowPopup(true)}
         >
-          Skicka in
+          Klar
         </Button>
         {showSuccessFeedback && <AlertSuccess text={"DATUM TILLAGDA!"} />}
       </Box>
