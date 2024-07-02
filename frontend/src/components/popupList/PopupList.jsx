@@ -17,6 +17,9 @@ function PopupList({ items, closePopup, handleTimeUpdate, handleDelete }) {
   // Handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (dataToSubmit.length < 1) {
+      return;
+    }
     sendToServer(dataToSubmit);
   };
 
@@ -73,7 +76,7 @@ function PopupList({ items, closePopup, handleTimeUpdate, handleDelete }) {
           })}
         </List>
         <Box component="form" onSubmit={handleSubmit} mt={1.4}>
-          <SendButton text="Skicka in" />
+          <SendButton text="Skicka in" disabled={dataToSubmit.length < 1} />
         </Box>
       </Card>
     </Box>
