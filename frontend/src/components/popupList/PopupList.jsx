@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import PopupListItem from "../popupListItem/PopupListItem";
 import SendButton from "../sendButton/SendButton";
 import ProgressCircular from "../progressCircular/ProgressCircular";
@@ -14,6 +14,7 @@ function PopupList({ items, closePopup, handleTimeUpdate, handleDelete }) {
   });
   const [showProgress, setShowProgress] = useState(false);
 
+  const navigate = useNavigate();
   const params = useParams();
   const studentId = params.id;
 
@@ -31,9 +32,11 @@ function PopupList({ items, closePopup, handleTimeUpdate, handleDelete }) {
     sendToServer(dataToSubmit);
   };
 
+  // close progress
   const closeProgress = () => {
     setPostStatus({ isPending: true, success: false });
     setShowProgress(false);
+    navigate("../");
   };
 
   // send data to server
