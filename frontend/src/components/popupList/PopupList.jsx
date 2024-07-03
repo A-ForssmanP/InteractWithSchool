@@ -8,10 +8,9 @@ import axios from "axios";
 
 function PopupList({ items, closePopup, handleTimeUpdate, handleDelete }) {
   const [dataToSubmit, setDataToSubmit] = useState(items);
-  const [successSentToServer, setSuccessSentToServer] = useState({
-    pending: true,
-    succes: false,
-    error: false,
+  const [postStatus, setPostStatus] = useState({
+    isPending: true,
+    success: false,
   });
   const [showProgress, setShowProgress] = useState(false);
 
@@ -32,6 +31,11 @@ function PopupList({ items, closePopup, handleTimeUpdate, handleDelete }) {
     sendToServer(dataToSubmit);
   };
 
+  const closeProgress = () => {
+    setPostStatus({ isPending: true, success: false });
+    setShowProgress(false);
+  };
+
   // send data to server
   async function sendToServer(data) {
     try {
@@ -46,9 +50,17 @@ function PopupList({ items, closePopup, handleTimeUpdate, handleDelete }) {
       }
       console.log(res);
       setTimeout(() => {
-        setSuccessSentToServer(true);
+        setPostStatus({ isPending: false, success: true });
       }, 2000);
     } catch (err) {
+      setTimeout(() => {
+        setPostStatus((currStatus) => {
+          return {
+            ...currStatus,
+            isPending: false,
+          };
+        });
+      }, 2000);
       console.log(err);
     }
   }
@@ -70,8 +82,10 @@ function PopupList({ items, closePopup, handleTimeUpdate, handleDelete }) {
             flexDirection={"column"}
             gap={3}
           >
-            <ProgressCircular success={successSentToServer} />
-            {successSentToServer && <Button>Stäng</Button>}
+            <ProgressCircular status={postStatus} />
+            {!postStatus.isPending && (
+              <Button onClick={closeProgress}>Stäng</Button>
+            )}
           </Box>
         ) : (
           <Box>
@@ -105,8 +119,16 @@ function PopupList({ items, closePopup, handleTimeUpdate, handleDelete }) {
           </Box>
         )}
 
-        <Box component="form" onSubmit={handleSubmit} mt={1.4}>
-          <SendButton text="Skicka in" disabled={dataToSubmit.length < 1} />
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          mt={1.4}
+          sx={{ opacity: showProgress && 0 }}
+        >
+          <SendButton
+            text="Skicka in"
+            disabled={dataToSubmit.length < 1 || showProgress}
+          />
         </Box>
       </Card>
     </Box>
