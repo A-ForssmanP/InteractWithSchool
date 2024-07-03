@@ -132,7 +132,7 @@ function RangeDatePicker({
     },
     {
       "react-datepicker__day--highlighted-custom-2":
-        isRegistrated.isRegistrated.map((date) => new Date(date.date) - 1),
+        isRegistrated.isRegistrated.map((date) => new Date(date.date)),
       // [
       //   addDays(new Date(), 1),
       //   addDays(new Date(), 2),

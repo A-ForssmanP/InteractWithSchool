@@ -51,7 +51,6 @@ function PopupList({ items, closePopup, handleTimeUpdate, handleDelete }) {
       if (res.status !== 200) {
         throw new Error(`HTTP Error! Status: ${res.statusText}`);
       }
-      console.log(res);
       setTimeout(() => {
         setPostStatus({ isPending: false, success: true });
       }, 2000);
@@ -64,7 +63,6 @@ function PopupList({ items, closePopup, handleTimeUpdate, handleDelete }) {
           };
         });
       }, 2000);
-      console.log(err);
     }
   }
 
