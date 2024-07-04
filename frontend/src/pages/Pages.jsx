@@ -11,6 +11,7 @@ import AbsenceOverview from "./absence/absenceOverview/AbsenceOverview";
 import TimeScheduleLayout from "./TimeSchedule/TimeScheduleLayout";
 import TimeSchedule from "./TimeSchedule/TimeSchedule";
 import TimeScheduleRegister from "./TimeSchedule/timeScheduleRegister/TimeScheduleRegister";
+import TimeScheduleOverview from "./TimeSchedule/timescheduleOverview/TimeScheduleOverview";
 
 function Pages() {
   return (
@@ -35,6 +36,10 @@ function Pages() {
           <Route
             path=":id/registrera_omsorg"
             element={<TimeScheduleRegister />}
+          />
+          <Route
+            path=":id/planerad_omsorg"
+            element={<TimeScheduleOverview />}
           />
         </Route>
       </Route>
