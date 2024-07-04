@@ -31,10 +31,10 @@ function TimeScheduleRegister() {
       {!student ? (
         <Typography>Schedule Not Found</Typography>
       ) : (
-        <Box>
-          <Typography>
+        <Box mt={8}>
+          <Typography textAlign={"center"} mb={4}>
             Registrera Tid(<b>{student.schedule.caring}</b>) För,
-            {student.firstName}
+            {student.firstName} {student.lastName}
           </Typography>
           <DayTimePicker
             isRegistrated={student && student.schedule.scheduledDays}

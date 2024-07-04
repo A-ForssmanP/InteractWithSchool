@@ -150,7 +150,7 @@ function RangeDatePicker({
         direction={{ xs: "column", sm: "row" }}
         spacing={{ xs: 1, sm: 2, md: 4 }}
         divider={<Divider orientation="vertical" flexItem />}
-        marginTop={10}
+        // marginTop={10}
 
         // width={{ sm: 250 }}
       >
