@@ -7,10 +7,35 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Box, Typography } from "@mui/material";
 import ButtonBack from "../../../components/buttonBack/ButtonBack";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function TimeScheduleOverview() {
-  const [caringData, setCaringData] = useState([]);
+  const [scheduleData, setScheduleData] = useState({});
+
+  useEffect(() => {
+    getScheduleData();
+  }, []);
+
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const fetchUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/timeSchedule/${id}`;
+
+  //get caring data
+  const getScheduleData = async () => {
+    try {
+      const res = await axios.get(fetchUrl);
+      console.log(res);
+      if (!res.status === 200) {
+        return setScheduleData(false);
+      }
+      const { student } = res.data;
+      setScheduleData(student);
+    } catch (err) {
+      throw new Error(err);
+    }
+  };
 
   //navigate back to absences
   const navBack = () => {
@@ -20,7 +45,7 @@ function TimeScheduleOverview() {
   return (
     <Box>
       <Typography pt={2} pb={2} pl={1.5} fontSize={28} variant="h2">
-        Översikt Frånvaro, "firstName"
+        Planerade Dagar, {scheduleData.firstName} {scheduleData.lastName}
       </Typography>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -32,34 +57,32 @@ function TimeScheduleOverview() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {
-              //     absenceData.absence &&
-              //   absenceData.absence.prevAbsences.length &&
-              //   absenceData.absence.prevAbsences.
-              caringData.map((abs) => (
+            {(scheduleData.schedule &&
+              scheduleData.schedule.scheduledDays.length &&
+              scheduleData.schedule.scheduledDays.map((day, indx) => (
                 <TableRow
-                  //   key={abs._id}
+                  key={indx}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {DatumFrån}
+                    {new Date(day.date).toDateString()}
                   </TableCell>
-                  <TableCell>{datumTill}</TableCell>
+                  <TableCell>{day.times.from}</TableCell>
+                  <TableCell>{day.times.to}</TableCell>
                   {/* <TableCell>{abs.reason}</TableCell>
                   <TableCell>{abs.textReason}</TableCell>
                   <TableCell>{abs.status}</TableCell> */}
                 </TableRow>
-              )) || (
-                <TableRow
-                  // key={absenceData._id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    Ingen Frånvaro Registrerad
-                  </TableCell>
-                </TableRow>
-              )
-            }
+              ))) || (
+              <TableRow
+                // key={absenceData._id}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  Inga Datum I Planering
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </TableContainer>
