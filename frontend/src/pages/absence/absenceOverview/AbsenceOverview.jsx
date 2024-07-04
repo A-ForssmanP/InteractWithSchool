@@ -69,7 +69,12 @@ function AbsenceOverview() {
           </TableBody>
         </Table>
       </TableContainer>
-      <Box display="flex" justifyContent="center">
+      <Box
+        display="flex"
+        justifyContent={{ sm: "flex-end" }}
+        pr={{ sm: 0.5 }}
+        mt={1}
+      >
         <ButtonBack handleClick={navBack} />
       </Box>
     </Box>
