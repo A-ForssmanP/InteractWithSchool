@@ -22,4 +22,4 @@ FEATURES
   - TimeSchedule for when the student needs caring.
   - The user first selects the student. If there is several students, select the student from a carousel-slider.
   - The user can both register and see dates that has been registrated.
-  - Dates that allready has been registrated is markt with one color and dates that is under registration is markt with another.
+  - When registrating, dates that allready has been registrated is markt with one color and dates that is under registration is markt with another.
