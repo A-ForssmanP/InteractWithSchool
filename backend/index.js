@@ -104,18 +104,17 @@ app.get('/', (req, res) => {
  
   app.get("/timeSchedule/:id", async (req,res) => {
     try{
-      const {id} = req.params;
-      const user = await User.findById(userId)
-       const isValidStudentId = user.students.some((s)=>s.toString() === id)
+        const {id} = req.params;
+        const user = await User.findById(userId)
+        const isValidStudentId = user.students.some((s)=>s.toString() === id)
 
        if(!isValidStudentId) {
           return res.status(404).send()
         }
-
         const student = await Student.findById(id).populate("schedule");
         res.json({student:student})
     } catch(err) {
-      throw new Error(err)
+      res.status(404).json({error:err})
     }
   
   })
@@ -123,14 +122,20 @@ app.get('/', (req, res) => {
   app.post("/timeSchedule/:id", async (req,res) => {
     try {
       const {data} = req.body;
-    const {id} = req.params
-    const populated = await Student.findById(id).populate("schedule")
-    const studentSchema = populated.schedule
-    studentSchema.scheduledDays.push(...data)
-    studentSchema.save()
-    res.send("GOT DATA")
+      const {id} = req.params
+      const user = await User.findById(userId)
+      const isValidStudentId = user.students.some((s)=>s.toString() === id)
+
+        if(!isValidStudentId) {
+            return res.status(404).send()
+          }
+      const populated = await Student.findById(id).populate("schedule")
+      const studentSchema = populated.schedule
+      studentSchema.scheduledDays.push(...data)
+      studentSchema.save()
+      res.send("GOT DATA")
     } catch (err) {
-      throw new Error(err)
+      res.status(404).json({error:err})
     }
   })
 
