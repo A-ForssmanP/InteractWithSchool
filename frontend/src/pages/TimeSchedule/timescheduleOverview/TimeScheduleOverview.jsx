@@ -26,7 +26,7 @@ function TimeScheduleOverview() {
   const getScheduleData = async () => {
     try {
       const res = await axios.get(fetchUrl);
-      console.log(res);
+      // console.log(res);
       if (!res.status === 200) {
         return setScheduleData(false);
       }
@@ -40,6 +40,36 @@ function TimeScheduleOverview() {
   //navigate back to timeSchedule
   const navBack = () => {
     navigate(`../`);
+  };
+
+  // convert the time from node-timeFormat
+  //CONTINUE HERE!!
+  const convertTime = (day) => {
+    const days = ["Mån", "Tis", "Ons", "Tors", "Fre", "Lör", "Sön"];
+    const month = [
+      "Jan",
+      "Feb",
+      "Mars",
+      "Apr",
+      "Maj",
+      "juni",
+      "Juli",
+      "Aug",
+      "Sep",
+      "Okt",
+      "Nov",
+      "Dec",
+    ];
+    console.log(new Date(day.date));
+    const dayInWeek = days[new Date(day.date).getDay() - 1];
+    console.log(dayInWeek);
+    const converted = new Date(day.date).toDateString().split(" ");
+    console.log(converted);
+    return (
+      <TableCell component="th" scope="row">
+        {new Date(day.date).toDateString()}
+      </TableCell>
+    );
   };
 
   return (
@@ -86,9 +116,7 @@ function TimeScheduleOverview() {
                   key={indx}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <TableCell component="th" scope="row">
-                    {new Date(day.date).toDateString()}
-                  </TableCell>
+                  {convertTime(day)}
                   <TableCell>{day.times.from}</TableCell>
                   <TableCell>{day.times.to}</TableCell>
                   {/* <TableCell>{abs.reason}</TableCell>
