@@ -37,7 +37,7 @@ function TimeScheduleOverview() {
     }
   };
 
-  //navigate back to absences
+  //navigate back to timeSchedule
   const navBack = () => {
     navigate(`../`);
   };
