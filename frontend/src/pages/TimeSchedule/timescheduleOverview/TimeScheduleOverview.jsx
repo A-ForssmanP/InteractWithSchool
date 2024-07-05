@@ -42,11 +42,10 @@ function TimeScheduleOverview() {
     navigate(`../`);
   };
 
-  // convert the time from node-timeFormat
-  //CONTINUE HERE!!
+  // convert day from eng till swe
   const convertTime = (day) => {
     const days = ["Mån", "Tis", "Ons", "Tors", "Fre", "Lör", "Sön"];
-    const month = [
+    const months = [
       "Jan",
       "Feb",
       "Mars",
@@ -60,14 +59,15 @@ function TimeScheduleOverview() {
       "Nov",
       "Dec",
     ];
-    console.log(new Date(day.date));
+
     const dayInWeek = days[new Date(day.date).getDay() - 1];
-    console.log(dayInWeek);
-    const converted = new Date(day.date).toDateString().split(" ");
-    console.log(converted);
+    const isMonth = months[new Date(day.date).getMonth()];
+    const splitedDay = new Date(day.date).toDateString().split(" ");
+    splitedDay.splice(0, 2, dayInWeek, isMonth);
+    const isConverted = splitedDay.join(" ");
     return (
       <TableCell component="th" scope="row">
-        {new Date(day.date).toDateString()}
+        {isConverted}
       </TableCell>
     );
   };
