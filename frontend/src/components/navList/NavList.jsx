@@ -5,7 +5,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import CancelScheduleSendIcon from "@mui/icons-material/CancelScheduleSend";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 
-function NavList() {
+function NavList({ closeMenu }) {
   const listItems = [
     { id: crypto.randomUUID(), text: "Hem", ikon: <HomeIcon />, navPath: "/" },
     {
@@ -31,7 +31,7 @@ function NavList() {
   return (
     <List>
       {listItems.map((item) => {
-        return <NavListItem key={item.id} item={item} />;
+        return <NavListItem key={item.id} item={item} closeMenu={closeMenu} />;
       })}
     </List>
   );

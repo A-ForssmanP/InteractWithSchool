@@ -2,11 +2,12 @@ import ListItem from "@mui/material/ListItem";
 import { ListItemIcon, ListItemText, ListItemButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-function NavListItem({ item }) {
+function NavListItem({ item, closeMenu }) {
   const navigate = useNavigate();
 
   // function for navigate when button is clicked
   const handleClick = () => {
+    closeMenu();
     navigate(item.navPath);
   };
 

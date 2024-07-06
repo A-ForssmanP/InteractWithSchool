@@ -1,11 +1,14 @@
 import Stack from "@mui/material/Stack";
 import Menu from "./components/menu/Menu";
 import PagesWrapper from "./components/pagesWrapper/PagesWrapper";
-import axios from "axios";
 
 function App() {
   return (
-    <Stack direction="row" height="100vh">
+    <Stack
+      direction={{ xs: "column", md: "row" }}
+      height="100vh"
+      sx={{ position: "relative" }}
+    >
       <Menu />
       <PagesWrapper />
     </Stack>
