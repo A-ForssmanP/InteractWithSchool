@@ -1,12 +1,9 @@
-import { useEffect, useState } from "react";
 import RangeDatePicker from "../rangeDatepicker/RangeDatePicker";
 import TimePickerResponsive from "../timePickerResponsive/TimePickerResponsive";
 import AlertSuccess from "../alertSuccess/AlertSuccess";
-import { Box, Button, Stack } from "@mui/material";
 import PopupList from "../popupList/PopupList";
-import { set, getMinutes, getHours } from "date-fns";
-import zIndex from "@mui/material/styles/zIndex";
-import dayjs from "dayjs";
+import { useEffect, useState } from "react";
+import { Box, Button, Stack } from "@mui/material";
 
 function DayTimePicker(isRegistrated) {
   const [selected, setSelected] = useState([]);
@@ -27,10 +24,7 @@ function DayTimePicker(isRegistrated) {
       setPushToBeExamined(false);
     }
   }, [pushToBeExamined]);
-  // console.log(toBeExamined);
-  // console.log(timeValue.to);
-  // Clear the selected and timeValue arrays and
-  // push selected-items to the toBeExamined array
+
   function checoutDates() {
     setToBeExamined((curr) => {
       return [...curr, ...selected];
@@ -41,8 +35,7 @@ function DayTimePicker(isRegistrated) {
   }
 
   const buttonDisabled = timeValue.from && timeValue.to;
-  // console.log(selected);
-  // add the selected days to the selected array
+
   const addSelectedDates = (arr) => {
     setSelected((curr) => {
       return [...curr, ...arr];
@@ -94,7 +87,7 @@ function DayTimePicker(isRegistrated) {
       return curr.filter((d) => d.id !== id);
     });
   };
-  // console.log(toBeExamined);
+
   // update time on date in toBeExamined arr.
   const handleTimeUpdate = (id, newTime) => {
     setToBeExamined((curr) => {

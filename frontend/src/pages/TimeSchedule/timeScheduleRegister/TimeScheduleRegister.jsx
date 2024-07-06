@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import DayTimePicker from "../../../components/dayTimePicker/DayTimePicker";
 import { Box, Typography } from "@mui/material";
-import axios from "axios";
+import DayTimePicker from "../../../components/dayTimePicker/DayTimePicker";
 import ButtonBack from "../../../components/buttonBack/ButtonBack";
+import axios from "axios";
 
 function TimeScheduleRegister() {
   const [student, setStudent] = useState(null);

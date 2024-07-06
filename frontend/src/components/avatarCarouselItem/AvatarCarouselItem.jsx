@@ -7,7 +7,6 @@ import {
   Stack,
   Divider,
 } from "@mui/material";
-import RangeDatePicker from "../rangeDatepicker/RangeDatePicker";
 import { useNavigate } from "react-router-dom";
 
 function AvatarCarouselItem({ item, bgColor }) {
@@ -33,7 +32,6 @@ function AvatarCarouselItem({ item, bgColor }) {
         divider={<Divider orientation="vertical" flexItem />}
         marginTop={10}
         pb={5}
-        // width={{ sm: 250 }}
       >
         <Button
           onClick={() => navigate(`${item._id}/registrera_omsorg`)}
@@ -52,7 +50,6 @@ function AvatarCarouselItem({ item, bgColor }) {
           Planerad tid
         </Button>
       </Stack>
-      {/* <RangeDatePicker /> */}
     </Paper>
   );
 }

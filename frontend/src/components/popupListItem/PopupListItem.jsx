@@ -1,12 +1,10 @@
 import {
-  List,
   ListItem,
   IconButton,
   ListItemText,
   Card,
   Button,
   Box,
-  colors,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import dayjs from "dayjs";
@@ -18,16 +16,7 @@ import { useState } from "react";
 function PopupListItem({ item, handleTimeUpdate, handleDelete }) {
   const [times, setTimes] = useState(item.times);
   const [pickerValues, setPickerValues] = useState(times);
-  // const [fromTimePickerValue,setFromTimePickerValue] = useState(times.from)
   const [changeTime, setChangeTime] = useState(false);
-  // console.log(item);
-  // console.log(item.times.from.split(":")[1]);
-  // console.log(item.times.from);
-  // console.log(from);
-  // const [to, setTo] = useState({
-  //   hour: item.times.to.split(":")[0],
-  //   minute: item.times.to.split(":")[1],
-  // });
 
   const weekdays = ["Mån", "Tis", "Ons", "Tors", "Fre"];
   const months = [
@@ -44,13 +33,9 @@ function PopupListItem({ item, handleTimeUpdate, handleDelete }) {
     "Nov",
     "Dec",
   ];
-  // console.log(times);
-  // console.log(pickerValues);
-  // console.log(item);
   const day = weekdays[dayjs(item.date).day() - 1];
   const date = dayjs(item.date).date();
   const month = months[dayjs(item.date).month()];
-  // const { from, to } = item.times;
 
   // update time
   const updateTime = (id) => {
@@ -73,13 +58,7 @@ function PopupListItem({ item, handleTimeUpdate, handleDelete }) {
 
   return (
     <Card sx={{ mb: 0.4 }}>
-      <ListItem
-      // secondaryAction={
-      //   <IconButton edge="end" aria-label="delete">
-      //     <DeleteIcon />
-      //   </IconButton>
-      // }
-      >
+      <ListItem>
         <ListItemText primary={`${day} ${date} ${month}`} />
         {!changeTime ? (
           <Box

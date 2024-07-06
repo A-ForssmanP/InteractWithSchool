@@ -26,7 +26,6 @@ function TimeScheduleOverview() {
   const getScheduleData = async () => {
     try {
       const res = await axios.get(fetchUrl);
-      // console.log(res);
       if (!res.status === 200) {
         return setScheduleData(false);
       }
@@ -89,14 +88,6 @@ function TimeScheduleOverview() {
           Planerade Dagar, {scheduleData.firstName} {scheduleData.lastName}
         </Typography>
         <ButtonBack handleClick={navBack} />
-        {/* <Box
-          bgcolor={"red"}
-          flexGrow={1}
-          display="flex"
-          justifyContent={{ sm: "flex-end" }}
-          pr={{ sm: 0.5 }}
-          mt={1}
-        ></Box> */}
       </Box>
 
       <TableContainer component={Paper}>
@@ -119,13 +110,9 @@ function TimeScheduleOverview() {
                   {convertTime(day)}
                   <TableCell>{day.times.from}</TableCell>
                   <TableCell>{day.times.to}</TableCell>
-                  {/* <TableCell>{abs.reason}</TableCell>
-                  <TableCell>{abs.textReason}</TableCell>
-                  <TableCell>{abs.status}</TableCell> */}
                 </TableRow>
               ))) || (
               <TableRow
-                // key={absenceData._id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">

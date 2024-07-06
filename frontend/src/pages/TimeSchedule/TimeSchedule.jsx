@@ -1,7 +1,7 @@
 import AvatarCarousel from "../../components/avatarCarousel/AvatarCarousel";
 import { Box } from "@mui/material";
-import axios from "axios";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 function TimeSchedule() {
   const [students, setStudents] = useState([]);
@@ -23,23 +23,6 @@ function TimeSchedule() {
     getStudents();
   }, []);
 
-  // const avatarItems = [
-  //   {
-  //     id: crypto.randomUUID(),
-  //     firstName: "Name#1",
-  //     description: "Probably the most random thing you have ever seen!",
-  //   },
-  //   {
-  //     id: crypto.randomUUID(),
-  //     firstName: "Name#2",
-  //     description: "Hello World!",
-  //   },
-  //   {
-  //     id: crypto.randomUUID(),
-  //     firstName: "Name#3",
-  //     description: "I Love Coffe!",
-  //   },
-  // ];
   return (
     <Box display={"flex"} justifyContent={"center"}>
       <AvatarCarousel avatarItems={students} />

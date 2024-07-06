@@ -3,7 +3,6 @@ import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
-import { getHours, getMinutes } from "date-fns";
 import { useEffect } from "react";
 
 function TimePickerResponsive({
@@ -16,7 +15,7 @@ function TimePickerResponsive({
   const [value, setValue] = useState(dayjs().set("hour", 24).set("minutes", 0));
 
   useEffect(() => {
-    //reset the value
+    //reset the time value
     if (reset) {
       setValue(dayjs().set("hour", 24).set("minutes", 0));
     }
@@ -25,16 +24,12 @@ function TimePickerResponsive({
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <TimePicker
-        // defaultValue={dayjs("")}
         value={value}
         ampm={false}
         label={labelText}
         onChange={(newValue) => {
           const date = new Date(newValue);
           const timeExtracted = date.toLocaleTimeString().slice(0, 5);
-          // const hours = getHours(newValue.$d);
-          // const minutes = getMinutes(newValue.$d);
-          // const updatedValue = hours + ":" + minutes;
           const updatedValue = timeExtracted;
           handleChange(timeKey, updatedValue);
         }}
