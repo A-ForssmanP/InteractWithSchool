@@ -19,16 +19,30 @@ function AbsenceOverview() {
     setAbsenceData(state.student);
   }, [state.student]);
 
-  //navigate back to absences
+  //navigate back to absence
   const navBack = () => {
     navigate(`../`);
   };
 
   return (
     <Box>
-      <Typography pt={2} pb={2} pl={1.5} fontSize={28} variant="h2">
-        Översikt Frånvaro,{absenceData.firstName}
-      </Typography>
+      <Box
+        display={"flex"}
+        alignItems={"center"}
+        justifyContent={"space-between"}
+        flexDirection={{ xs: "column", sm: "row" }}
+        gap={{ xs: 2, sm: 0 }}
+        pt={2}
+        pb={2}
+        pl={1.5}
+        pr={1.5}
+      >
+        <Typography fontSize={28} variant="h2">
+          Översikt Frånvaro,{absenceData.firstName}
+        </Typography>
+        <ButtonBack handleClick={navBack} />
+      </Box>
+
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -69,14 +83,6 @@ function AbsenceOverview() {
           </TableBody>
         </Table>
       </TableContainer>
-      <Box
-        display="flex"
-        justifyContent={{ sm: "flex-end" }}
-        pr={{ sm: 0.5 }}
-        mt={1}
-      >
-        <ButtonBack handleClick={navBack} />
-      </Box>
     </Box>
   );
 }

@@ -1,9 +1,9 @@
-import InboxName from "./inboxName/InboxName";
-import InboxMessages from "./inboxMessages/InboxMessages";
 import { Box } from "@mui/material";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import InboxMessages from "./inboxMessages/InboxMessages";
+import InboxName from "./inboxName/InboxName";
 
 function Inbox() {
   const [inbox, setInbox] = useState([]);

@@ -1,10 +1,11 @@
 import { Container, Box, Typography, Button } from "@mui/material";
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate, useLocation } from "react-router-dom";
 import AbsenceReason from "../absenceReason/AbsenceReason";
 import Callendar from "../../../components/calendar/Callendar";
 import AbsenceSymmaryView from "../absenceSummaryView/AbsenceSymmaryView";
-import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
+import ButtonBack from "../../../components/buttonBack/ButtonBack";
 
 function AbsenceForm() {
   const [absence, setAbsence] = useState({
@@ -95,6 +96,11 @@ function AbsenceForm() {
     }
   };
 
+  //navigate back to absence
+  const navBack = () => {
+    navigate(`../`);
+  };
+
   return (
     <Container
       maxWidth="sm"
@@ -104,9 +110,25 @@ function AbsenceForm() {
         marginTop: { sm: "2.6rem" },
       }}
     >
-      <Typography variant="h1" fontSize={26} textAlign={"center"} mt={2}>
-        Registrera frånvaro för {student.firstName} {student.lastName}
-      </Typography>
+      <Box
+        display={"flex"}
+        alignItems={"center"}
+        justifyContent={"space-between"}
+        flexDirection={{ xs: "column", sm: "row" }}
+        gap={{ xs: 2, sm: 0 }}
+        pt={2}
+        pb={0.2}
+        pl={1.5}
+        pr={1.5}
+      >
+        <Typography variant="h1" fontSize={26}>
+          Registrera frånvaro,
+          <br />
+          {student.firstName} {student.lastName}
+        </Typography>
+        <ButtonBack handleClick={navBack} />
+      </Box>
+
       <Box
         component="form"
         onSubmit={handleSubmit}
