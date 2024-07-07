@@ -7,18 +7,27 @@ import AccountMenu from "../accountMenu/AccountMenu";
 import NavList from "../navList/NavList";
 
 function Menu() {
-  const [isVisible, setIsVisible] = useState(false);
+  const [handleMenu, setHandleMenu] = useState({
+    isVisible: false,
+    isSmoothTrans: true,
+  });
 
   const navigate = useNavigate();
 
   //navigate to home page
   const navigateHome = () => {
+    handleMenu.isVisible && toggleMenu(false);
     navigate("/");
   };
 
-  //close menu
-  const closeMenu = () => {
-    setIsVisible(false);
+  //toogle menu
+  const toggleMenu = (isSmooth) => {
+    setHandleMenu((currToggle) => {
+      return {
+        isVisible: !currToggle.isVisible,
+        isSmoothTrans: isSmooth,
+      };
+    });
   };
 
   return (
@@ -30,7 +39,7 @@ function Menu() {
       >
         <Button
           sx={{ position: "absolute", left: "0" }}
-          onClick={() => setIsVisible(!isVisible)}
+          onClick={() => toggleMenu(true)}
         >
           <MenuIcon />
         </Button>
@@ -46,20 +55,20 @@ function Menu() {
         bgcolor={"green"}
         sx={{
           transform: {
-            xs: isVisible && "translateX(100%)",
-            sm: isVisible && "translateX(125%)",
+            xs: handleMenu.isVisible && "translateX(100%)",
+            sm: handleMenu.isVisible && "translateX(125%)",
             md: "translateX(0%)",
           },
           transition: {
-            xs: isVisible && "600ms ease-in-out",
-            sm: isVisible && "800ms ease-in-out",
+            xs: handleMenu.isSmoothTrans && "600ms ease-in-out",
+            sm: handleMenu.isSmoothTrans && "800ms ease-in-out",
             md: "0ms",
           },
           zIndex: 200,
         }}
       >
         <AccountMenu />
-        <NavList closeMenu={closeMenu} />
+        <NavList toggleMenu={() => toggleMenu(false)} />
       </Box>
     </Box>
   );
