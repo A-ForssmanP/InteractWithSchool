@@ -29,7 +29,7 @@ function NavList({ toggleMenu }) {
   ];
 
   return (
-    <List>
+    <List sx={{ pl: { xs: ".28rem", md: "0" } }}>
       {listItems.map((item) => {
         return (
           <NavListItem key={item.id} item={item} toggleMenu={toggleMenu} />
