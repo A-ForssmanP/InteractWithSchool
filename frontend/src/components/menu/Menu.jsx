@@ -52,7 +52,6 @@ function Menu() {
         position={{ xs: "absolute", md: "static" }}
         left={"-100%"}
         width={{ xs: "100%", sm: "80%", md: "100%" }}
-        bgcolor={"green"}
         sx={{
           transform: {
             xs: handleMenu.isVisible && "translateX(100%)",
