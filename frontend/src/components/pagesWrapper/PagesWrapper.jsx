@@ -3,7 +3,7 @@ import Pages from "../../pages/Pages";
 
 function PagesWrapper() {
   return (
-    <Box component="main" border="1px solid red" minWidth="85%">
+    <Box component="main" minWidth="85%" height={"100%"}>
       <Pages />
     </Box>
   );

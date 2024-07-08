@@ -30,6 +30,8 @@ export default function AccountMenu() {
           textAlign: "center",
           justifyContent: { md: "center" },
           paddingLeft: { xs: ".75rem", md: "0" },
+          mb: 2,
+          mt: { xs: 2, md: 0 },
         }}
       >
         <Tooltip title="Account settings">
@@ -39,8 +41,21 @@ export default function AccountMenu() {
             aria-controls={open ? "account-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
+            sx={{
+              display: "flex",
+              flexDirection: { md: "column" },
+              gap: 1.4,
+              color: "rgb(255,255,255)",
+            }}
           >
-            <Avatar sx={{ width: 32, height: 32 }}></Avatar>
+            <Avatar
+              sx={{
+                width: { xs: 40, md: 46 },
+                height: { xs: 40, md: 46 },
+                bgcolor: "#54B4D3",
+              }}
+            ></Avatar>
+            <p>Mitt Konto</p>
           </IconButton>
         </Tooltip>
       </Box>

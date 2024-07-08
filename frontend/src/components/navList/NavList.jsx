@@ -8,7 +8,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function NavList({ toggleMenu }) {
-  const [selected, setSelected] = useState("Hem");
+  const [isSelected, setIsSelected] = useState("Hem");
   const navigate = useNavigate();
 
   const listItems = [
@@ -35,7 +35,7 @@ function NavList({ toggleMenu }) {
 
   // set selected menu item
   const handleSelected = (text) => {
-    setSelected(text);
+    setIsSelected(text);
   };
 
   // handle item click
@@ -53,6 +53,7 @@ function NavList({ toggleMenu }) {
             key={item.id}
             item={item}
             handleClick={() => handleClick(item)}
+            isSelected={isSelected === item.text}
           />
         );
       })}

@@ -33,17 +33,19 @@ function Menu() {
   return (
     <Box
       component="aside"
-      border="1px solid red"
+      // border="1px solid red"
       minWidth="15%"
-      //continue here!
       sx={{
         bgcolor: "rgba(25,118,210,1)",
-        borderRadius: "100px 100px 100px 100px",
+        borderRadius: { md: "0px 2.5rem 2.5rem 0px" },
       }}
     >
       <Box
         component="nav"
-        sx={{ display: { md: "none" }, position: "relative" }}
+        sx={{
+          display: { md: "none" },
+          position: "relative",
+        }}
         textAlign={"center"}
       >
         <Button
@@ -52,7 +54,7 @@ function Menu() {
         >
           <MenuIcon />
         </Button>
-        <Button onClick={navigateHome}>
+        <Button sx={{ color: "rgb(255,255,255)" }} onClick={navigateHome}>
           <HomeIcon />
         </Button>
       </Box>
@@ -62,6 +64,8 @@ function Menu() {
         left={"-100%"}
         width={{ xs: "100%", sm: "80%", md: "100%" }}
         bgcolor="rgba(25,118,210,1)"
+        marginTop={{ md: 4 }}
+        paddingTop={{ xs: 1.4, md: 0 }}
         sx={{
           transform: {
             xs: handleMenu.isVisible && "translateX(100%)",
@@ -74,6 +78,7 @@ function Menu() {
             md: "0ms",
           },
           zIndex: 200,
+          borderRadius: { sm: "0 2rem 2rem 0", md: "0" },
         }}
       >
         <AccountMenu />
