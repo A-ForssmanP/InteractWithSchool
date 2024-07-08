@@ -2,19 +2,13 @@ import ListItem from "@mui/material/ListItem";
 import { ListItemIcon, ListItemText, ListItemButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-function NavListItem({ item, toggleMenu }) {
-  const navigate = useNavigate();
-
-  // function for navigate when button is clicked
-  const handleClick = () => {
-    toggleMenu();
-    navigate(item.navPath);
-  };
-
+function NavListItem({ item, handleClick }) {
   return (
-    <ListItem disablePadding>
+    <ListItem disablePadding sx={{ color: "white" }}>
       <ListItemButton onClick={handleClick}>
-        <ListItemIcon sx={{ minWidth: "0", marginRight: ".6rem" }}>
+        <ListItemIcon
+          sx={{ minWidth: "0", marginRight: ".6rem", color: "white" }}
+        >
           {item.ikon}
         </ListItemIcon>
         <ListItemText primary={item.text} />

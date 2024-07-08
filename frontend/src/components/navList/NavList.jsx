@@ -4,8 +4,13 @@ import InboxIcon from "@mui/icons-material/Inbox";
 import HomeIcon from "@mui/icons-material/Home";
 import CancelScheduleSendIcon from "@mui/icons-material/CancelScheduleSend";
 import DateRangeIcon from "@mui/icons-material/DateRange";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function NavList({ toggleMenu }) {
+  const [selected, setSelected] = useState("Hem");
+  const navigate = useNavigate();
+
   const listItems = [
     { id: crypto.randomUUID(), text: "Hem", ikon: <HomeIcon />, navPath: "/" },
     {
@@ -28,11 +33,27 @@ function NavList({ toggleMenu }) {
     },
   ];
 
+  // set selected menu item
+  const handleSelected = (text) => {
+    setSelected(text);
+  };
+
+  // handle item click
+  const handleClick = (item) => {
+    toggleMenu();
+    navigate(item.navPath);
+    handleSelected(item.text);
+  };
+
   return (
     <List sx={{ pl: { xs: ".28rem", md: "0" } }}>
       {listItems.map((item) => {
         return (
-          <NavListItem key={item.id} item={item} toggleMenu={toggleMenu} />
+          <NavListItem
+            key={item.id}
+            item={item}
+            handleClick={() => handleClick(item)}
+          />
         );
       })}
     </List>

@@ -31,14 +31,23 @@ function Menu() {
   };
 
   return (
-    <Box component="aside" border="1px solid red" minWidth="15%">
+    <Box
+      component="aside"
+      border="1px solid red"
+      minWidth="15%"
+      //continue here!
+      sx={{
+        bgcolor: "rgba(25,118,210,1)",
+        borderRadius: "100px 100px 100px 100px",
+      }}
+    >
       <Box
         component="nav"
         sx={{ display: { md: "none" }, position: "relative" }}
         textAlign={"center"}
       >
         <Button
-          sx={{ position: "absolute", left: "0" }}
+          sx={{ position: "absolute", left: "0", color: "rgb(255,255,255)" }}
           onClick={() => toggleMenu(true)}
         >
           <MenuIcon />
@@ -52,6 +61,7 @@ function Menu() {
         position={{ xs: "absolute", md: "static" }}
         left={"-100%"}
         width={{ xs: "100%", sm: "80%", md: "100%" }}
+        bgcolor="rgba(25,118,210,1)"
         sx={{
           transform: {
             xs: handleMenu.isVisible && "translateX(100%)",

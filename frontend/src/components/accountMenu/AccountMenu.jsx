@@ -31,7 +31,6 @@ export default function AccountMenu() {
           justifyContent: { md: "center" },
           paddingLeft: { xs: ".75rem", md: "0" },
         }}
-        bgcolor="red"
       >
         <Tooltip title="Account settings">
           <IconButton
