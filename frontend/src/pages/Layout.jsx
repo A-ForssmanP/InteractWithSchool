@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 
 function Layout() {
   return (
-    <div>
+    <div style={{ height: "100%" }}>
       <Outlet />
     </div>
   );

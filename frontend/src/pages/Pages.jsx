@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { Box } from "@mui/material";
 import Layout from "./Layout";
 import InboxLayout from "./inbox/InboxLayout";
 import Inbox from "./inbox/Inbox";
@@ -16,36 +17,38 @@ import HomePage from "./homePage/HomePage";
 
 function Pages() {
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<HomePage />} />
+    <Box height={"100%"}>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
 
-        <Route path="inkorg/:student" element={<InboxLayout />}>
-          <Route index element={<Inbox />} />
-          <Route path=":messageId" element={<ViewMessage />} />
-        </Route>
+          <Route path="inkorg/:student" element={<InboxLayout />}>
+            <Route index element={<Inbox />} />
+            <Route path=":messageId" element={<ViewMessage />} />
+          </Route>
 
-        <Route path="fronvaro" element={<AbsenceLayout />}>
-          <Route index element={<Absence />} />
-          <Route path=":id/registrera" element={<AbsenceForm />} />
-          <Route path=":id/registrera/inskickad" element={<RegisterDone />} />
-          <Route path=":id/oversikt" element={<AbsenceOverview />} />
-        </Route>
+          <Route path="fronvaro" element={<AbsenceLayout />}>
+            <Route index element={<Absence />} />
+            <Route path=":id/registrera" element={<AbsenceForm />} />
+            <Route path=":id/registrera/inskickad" element={<RegisterDone />} />
+            <Route path=":id/oversikt" element={<AbsenceOverview />} />
+          </Route>
 
-        <Route path="tidsschema" element={<TimeScheduleLayout />}>
-          <Route index element={<TimeSchedule />} />
-          <Route
-            path=":id/registrera_omsorg"
-            element={<TimeScheduleRegister />}
-          />
-          <Route
-            path=":id/planerad_omsorg"
-            element={<TimeScheduleOverview />}
-          />
+          <Route path="tidsschema" element={<TimeScheduleLayout />}>
+            <Route index element={<TimeSchedule />} />
+            <Route
+              path=":id/registrera_omsorg"
+              element={<TimeScheduleRegister />}
+            />
+            <Route
+              path=":id/planerad_omsorg"
+              element={<TimeScheduleOverview />}
+            />
+          </Route>
         </Route>
-      </Route>
-      <Route path="*" element={<h1>Page Not Found</h1>} />
-    </Routes>
+        <Route path="*" element={<h1>Page Not Found</h1>} />
+      </Routes>
+    </Box>
   );
 }
 
