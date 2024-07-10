@@ -11,7 +11,7 @@ list på sina barn
 Klass lista med färäldrar
 */
 
-function HomePage() {
+function DashBoard() {
   return (
     <Grid container border={"4px solid green"} height={"100%"}>
       <Grid
@@ -66,4 +66,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default DashBoard;

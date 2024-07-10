@@ -13,14 +13,14 @@ import TimeScheduleLayout from "./TimeSchedule/TimeScheduleLayout";
 import TimeSchedule from "./TimeSchedule/TimeSchedule";
 import TimeScheduleRegister from "./TimeSchedule/timeScheduleRegister/TimeScheduleRegister";
 import TimeScheduleOverview from "./TimeSchedule/timescheduleOverview/TimeScheduleOverview";
-import HomePage from "./homePage/HomePage";
+import DashBoard from "./dashBoard/DashBoard";
 
 function Pages() {
   return (
     <Box height={"100%"}>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
+          <Route index element={<DashBoard />} />
 
           <Route path="inkorg/:student" element={<InboxLayout />}>
             <Route index element={<Inbox />} />
