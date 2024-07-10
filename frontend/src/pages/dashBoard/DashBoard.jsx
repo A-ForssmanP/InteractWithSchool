@@ -16,28 +16,39 @@ function DashBoard() {
     <Grid container border={"4px solid green"} height={"100%"}>
       <Grid
         item
-        xs={10}
-        bgcolor={"yellow"}
+        xs={11}
+        // bgcolor={"yellow"}
         display={"Flex"}
         flexDirection={"column"}
         height={"100%"}
+        border={"3px solid black"}
       >
-        <Box border={"1px solid red"}>
+        <Box border={"3px solid red"}>
           <Box
-          // minHeight={200}
-          // bgcolor={"rgba(230, 76, 255)"}
-          // color={"rgb(255,255,255)"}
-          // maxWidth={600}
+            display={"flex"}
+            width={"fit-content"}
+            gap={2}
+            border={"5px solid magenta"}
+            p={3}
+            borderRadius={5}
           >
-            <Typography variant="p">Hej,NAMN,</Typography>
-            <Typography variant="h2">Välkommen tillbaka!</Typography>
-          </Box>
-          <Box>
-            <Typography>Dagens datum:</Typography>
-            <Typography>1 Jan</Typography>
+            <Box>
+              <Typography fontSize={20}>Hej NAMN,</Typography>
+              <Typography fontSize={28}>Välkommen tillbaka!</Typography>
+            </Box>
+            <Box
+              display={"flex"}
+              flexDirection={"column"}
+              justifyContent={"flex-start"}
+              alignItems={"center"}
+            >
+              <Typography fontSize={16}>Dagens datum:</Typography>
+              <Typography fontSize={26}>1 Jan</Typography>
+            </Box>
           </Box>
         </Box>
-        <Box flexGrow={1} border={"1px solid blue"}>
+
+        <Box flexGrow={1} border={"3px solid blue"}>
           <Grid
             container
             justifyContent="center"
@@ -59,9 +70,7 @@ function DashBoard() {
           </Grid>
         </Box>
       </Grid>
-      <Grid item xs={2}>
-        s
-      </Grid>
+      {/* <Grid item xs={1} bgcolor={"purple"}></Grid> */}
     </Grid>
   );
 }
