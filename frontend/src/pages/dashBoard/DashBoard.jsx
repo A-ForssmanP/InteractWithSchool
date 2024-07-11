@@ -1,5 +1,5 @@
 import { Box, Card, CardContent, Typography, Paper, Grid } from "@mui/material";
-import { orange } from "@mui/material/colors";
+import { lightBlue, orange } from "@mui/material/colors";
 
 /* content:
 welcome message
@@ -10,6 +10,19 @@ anteckningar
 list på sina barn
 Klass lista med färäldrar
 */
+
+// render grid items
+const renderGridItems = () => {
+  for (let i = 0; i < 4; i++) {
+    return (
+      <Grid maxWidth={"100%"} item xs={6} border={"1px solid black"}>
+        <Paper
+          sx={{ bgcolor: "lightblue", height: "100%", width: "100%" }}
+        ></Paper>
+      </Grid>
+    );
+  }
+};
 
 function DashBoard() {
   return (
@@ -48,25 +61,97 @@ function DashBoard() {
           </Box>
         </Box>
 
-        <Box flexGrow={1} border={"3px solid blue"}>
+        <Box
+          display={"flex"}
+          justifyContent={"left"}
+          alignItems={{ sm: "center" }}
+          flexGrow={1}
+          border={"3px solid blue"}
+        >
           <Grid
             container
-            justifyContent="center"
-            alignItems="center"
-            height={"100%"}
+            // justifyContent="center"
+            // alignItems="center"
+            width={1300}
+            maxWidth={"100%"}
+            height={"54%"}
+            // rowSpacing={2}
+            // columnSpacing={1}
+            bgcolor={"orange"}
           >
-            <Grid item xs={6}>
-              <Paper>X</Paper>
+            {Array(4)
+              .fill("")
+              .map((item, indx) => {
+                return (
+                  <Grid
+                    item
+                    key={indx}
+                    xs={6}
+                    border={"1px solid black"}
+                    p={{ xs: 1, sm: 2 }}
+
+                    // padding={{ sm: 2 }}
+                    // paddingRight={2}
+
+                    // display={"flex"}
+                    // justifyContent={"center"}
+                    // alignItems={"center"}
+                  >
+                    <Paper
+                      sx={{
+                        height: "100%",
+                        width: "100%",
+                        bgcolor: "lightBlue",
+                        borderRadius: 5,
+                      }}
+                    ></Paper>
+                  </Grid>
+                );
+              })}
+            {/* {Array(4)
+              .fill(
+                <Grid
+                  item
+                  xs={6}
+                  border={"1px solid black"}
+                  p={2}
+
+                  // display={"flex"}
+                  // justifyContent={"center"}
+                  // alignItems={"center"}
+                >
+                  <Paper
+                    sx={{
+                      height: "100%",
+                      width: "100%",
+                      bgcolor: "lightBlue",
+                    }}
+                  ></Paper>
+                </Grid>
+              )
+              .map((item, indx) => {
+                return item;
+              })} */}
+            {/* <Grid maxWidth={"100%"} item xs={6} border={"1px solid black"}>
+              <Paper
+                sx={{ bgcolor: "lightblue", height: "100%", width: "100%" }}
+              ></Paper>
             </Grid>
             <Grid item xs={6}>
-              <Paper>X</Paper>
+              <Paper
+                sx={{ bgcolor: "lightblue", height: "100%", width: "100%" }}
+              ></Paper>
             </Grid>
             <Grid item xs={6}>
-              <Paper>X</Paper>
+              <Paper
+                sx={{ bgcolor: "lightblue", height: "100%", width: "100%" }}
+              ></Paper>
             </Grid>
             <Grid item xs={6}>
-              <Paper>X</Paper>
-            </Grid>
+              <Paper
+                sx={{ bgcolor: "lightblue", height: "100%", width: "100%" }}
+              ></Paper>
+            </Grid> */}
           </Grid>
         </Box>
       </Grid>
