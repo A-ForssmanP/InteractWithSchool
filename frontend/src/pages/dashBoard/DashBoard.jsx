@@ -1,6 +1,6 @@
 import { Box, Card, CardContent, Typography, Paper, Grid } from "@mui/material";
 import { lightBlue, orange } from "@mui/material/colors";
-
+import ReadOnlyDatePicker from "../../components/readOnlyDatePicker/ReadOnlyDatePicker";
 /* content:
 welcome message
 show day and time
@@ -12,6 +12,7 @@ Klass lista med färäldrar
 */
 
 function DashBoard() {
+  const dashItems = [null, null, <ReadOnlyDatePicker />, null];
   return (
     <Grid
       container
@@ -66,7 +67,59 @@ function DashBoard() {
           // maxWidth={"100%"}
           border={"3px solid blue"}
         >
-          <Grid
+          <Box
+            bgcolor={"yellow"}
+            width={"100%"}
+            display={"flex"}
+            flexDirection={"column"}
+            minHeight={"max-content"}
+          >
+            <Box display={{ sm: "flex" }}>
+              <Paper
+                sx={{
+                  height: "100%",
+                  width: "100%",
+                  bgcolor: "lightBlue",
+                  borderRadius: 5,
+                }}
+              >
+                1
+              </Paper>
+              <Paper
+                sx={{
+                  height: "100%",
+                  width: "100%",
+                  bgcolor: "lightBlue",
+                  borderRadius: 5,
+                }}
+              >
+                {dashItems[2]}
+              </Paper>
+            </Box>
+            <Box display={{ sm: "flex" }}>
+              <Paper
+                sx={{
+                  height: "100%",
+                  width: "100%",
+                  bgcolor: "lightBlue",
+                  borderRadius: 5,
+                }}
+              >
+                3
+              </Paper>
+              <Paper
+                sx={{
+                  height: "100%",
+                  width: "100%",
+                  bgcolor: "lightBlue",
+                  borderRadius: 5,
+                }}
+              >
+                4
+              </Paper>
+            </Box>
+          </Box>
+          {/* <Grid
             container
             columns={2}
             // justifyContent="center"
@@ -77,34 +130,113 @@ function DashBoard() {
             // rowSpacing={4}
             // columnSpacing={2}
             bgcolor={"orange"}
-            minHeight={{ sm: 400 }}
+            // minHeight={{ sm: 400 }}
             // rowGap={1}
             // columnGap={6}
             // gap={2}
           >
-            {Array(4)
-              .fill("")
-              .map((item, indx) => {
-                return (
-                  <Grid
-                    item
-                    key={indx}
-                    xs={1}
-                    border={"1px solid black"}
-                    // p={{ xs: 1, sm: 2 }}
+            <Grid
+              item
+              xs={1}
+              sm={1}
+              border={"1px solid black"}
+
+              // p={{ xs: 1, sm: 2 }}
+            >
+              <Paper
+                sx={{
+                  height: "100%",
+                  width: "100%",
+                  bgcolor: "lightBlue",
+                  borderRadius: 5,
+                }}
+              >
+                1
+              </Paper>
+            </Grid>
+            <Grid
+              item
+              xs={1}
+              sm={2}
+              border={"1px solid black"}
+
+              // p={{ xs: 1, sm: 2 }}
+            >
+              <Paper
+                sx={{
+                  height: "100%",
+                  width: "100%",
+                  bgcolor: "lightBlue",
+                  borderRadius: 5,
+                }}
+              >
+                1
+              </Paper>
+            </Grid>
+            <Grid
+              item
+              xs={2}
+              sm={2}
+              border={"1px solid black"}
+
+              // p={{ xs: 1, sm: 2 }}
+            >
+              <Paper
+                sx={{
+                  height: "100%",
+                  width: "100%",
+                  bgcolor: "lightBlue",
+                  borderRadius: 5,
+                }}
+              >
+                1
+              </Paper>
+            </Grid>
+            <Grid
+              item
+              xs={2}
+              sm={2}
+              border={"1px solid black"}
+
+              // p={{ xs: 1, sm: 2 }}
+            >
+              <Paper
+                sx={{
+                  height: "100%",
+                  width: "100%",
+                  bgcolor: "lightBlue",
+                  borderRadius: 5,
+                }}
+              >
+                1
+              </Paper>
+            </Grid> */}
+
+          {/* {dashItems.map((item, indx) => {
+              return (
+                <Grid
+                  item
+                  key={indx}
+                  xs={2}
+                  sm={2}
+                  border={"1px solid black"}
+
+                  // p={{ xs: 1, sm: 2 }}
+                >
+                  <Paper
+                    sx={{
+                      height: "100%",
+                      width: "100%",
+                      bgcolor: "lightBlue",
+                      borderRadius: 5,
+                    }}
                   >
-                    <Paper
-                      sx={{
-                        height: "100%",
-                        width: "100%",
-                        bgcolor: "lightBlue",
-                        borderRadius: 5,
-                      }}
-                    ></Paper>
-                  </Grid>
-                );
-              })}
-            {/* <Grid item xs={1} flexShrink={1} border={"1px solid black"}>
+                    {item}
+                  </Paper>
+                </Grid>
+              );
+            })} */}
+          {/* <Grid item xs={1} flexShrink={1} border={"1px solid black"}>
               1
             </Grid>
             <Grid item xs={1} border={"1px solid black"}>
@@ -116,7 +248,7 @@ function DashBoard() {
             <Grid item xs={1} border={"1px solid black"}>
               4
             </Grid> */}
-          </Grid>
+          {/* </Grid> */}
         </Box>
       </Grid>
       <Grid item xs bgcolor={"blue"}></Grid>
