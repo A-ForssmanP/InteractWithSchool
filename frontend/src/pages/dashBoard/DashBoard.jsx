@@ -14,121 +14,214 @@ Klass lista med färäldrar
 function DashBoard() {
   return (
     <Grid
+      container
+      width={"100%"}
       height={"100%"}
       direction={{ xs: "column", sm: "row" }}
-      // columns={}
-      container
-      bgcolor={"yellow"}
+      border={"6px solid green"}
     >
-      <Grid item xs={4} sm={4} bgcolor={"red"}>
-        <Card>s</Card>
-      </Grid>
-      <Grid item xs bgcolor={"red"}>
-        <Card>sdsds</Card>
-      </Grid>
-    </Grid>
-  );
-  // <Box height={"100%"} bgcolor={"blue"}>
-  // {
-  /* <Grid
-        container
-        border={"6px solid green"}
-        width={"100%"}
-        height={"100%"}
-        sx={{ flexDirection: { xs: "row", sm: "column" } }}
-        columns={2}
+      <Grid
+        display={"flex"}
+        flexDirection={"column"}
+        item
+        xs={6}
+        sm={11}
+        bgcolor={"red"}
+        pl={{ sm: 2 }}
       >
-        <Grid
-          item
-          xs={6}
-          sm={6}
-          bgcolor={"yellow"}
-          display={"Flex"}
-          flexDirection={"column"}
-          height={"100%"}
-          width={"100%"}
-          border={"6px solid black"}
-        >
-          <Box border={"3px solid red"}>
-            <Box
-              display={"flex"}
-              flexDirection={{ xs: "column", sm: "row" }}
-              // width={"fit-content"}
-              gap={{ xs: 1, sm: 2 }}
-              border={"5px solid magenta"}
-              p={{ xs: 1, sm: 3 }}
-              borderRadius={5}
-              ml={{ sm: 2 }}
-              width={{ xs: "100%", sm: "fit-content" }}
-            >
-              <Box>
-                <Typography fontSize={{ xs: 18, sm: 20 }}>Hej NAMN,</Typography>
-                <Typography fontSize={{ xs: 22, sm: 28 }}>
-                  Välkommen tillbaka!
-                </Typography>
-              </Box>
-              <Box
-                display={"flex"}
-                flexDirection={"column"}
-                justifyContent={"flex-start"}
-                alignItems={"center"}
-              >
-                <Typography fontSize={16}>Dagens datum:</Typography>
-                <Typography fontSize={26}>1 Jan</Typography>
-              </Box>
-            </Box>
-          </Box>
-
+        <Box border={"3px solid yellow"}>
           <Box
             display={"flex"}
-            justifyContent={"left"}
-            alignItems={{ sm: "center" }}
-            flexGrow={1}
-            border={"3px solid blue"}
+            flexDirection={{ xs: "column", sm: "row" }}
+            // width={"fit-content"}
+            gap={{ xs: 1, sm: 2 }}
+            border={"5px solid magenta"}
+            p={{ xs: 1, sm: 3 }}
+            borderRadius={5}
+            // ml={{ sm: 2 }}
+            width={{ xs: "100%", sm: "fit-content" }}
           >
-            <Grid
-              container
-              // justifyContent="center"
-              // alignItems="center"
-              width={1300}
-              maxWidth={"100%"}
-              height={"54%"}
-              // rowSpacing={2}
-              // columnSpacing={1}
-              bgcolor={"orange"}
+            <Box>
+              <Typography fontSize={{ xs: 18, sm: 20 }}>Hej NAMN,</Typography>
+              <Typography fontSize={{ xs: 22, sm: 28 }}>
+                Välkommen tillbaka!
+              </Typography>
+            </Box>
+            <Box
+              display={"flex"}
+              flexDirection={"column"}
+              justifyContent={"flex-start"}
+              alignItems={"center"}
             >
-              {Array(4)
-                .fill("")
-                .map((item, indx) => {
-                  return (
-                    <Grid
-                      item
-                      key={indx}
-                      xs={6}
-                      border={"1px solid black"}
-                      p={{ xs: 1, sm: 2 }}
-                    >
-                      <Paper
-                        sx={{
-                          height: "100%",
-                          width: "100%",
-                          bgcolor: "lightBlue",
-                          borderRadius: 5,
-                        }}
-                      ></Paper>
-                    </Grid>
-                  );
-                })}
-            </Grid>
+              <Typography fontSize={16}>Dagens datum:</Typography>
+              <Typography fontSize={26}>1 Jan</Typography>
+            </Box>
           </Box>
-        </Grid>
-        <Box flexGrow={1}>
-          <Grid item md={1} width={"100%"} height={"100%"} bgcolor={"purple"}>
-            sds
+        </Box>
+        <Box
+          display={"flex"}
+          justifyContent={"flex-start"}
+          alignItems={{ sm: "center" }}
+          flexGrow={1}
+          // maxWidth={"100%"}
+          border={"3px solid blue"}
+        >
+          <Grid
+            container
+            columns={2}
+            // justifyContent="center"
+            // alignItems="center"
+            maxWidth={1300}
+            // maxWidth={"100%"}
+            // height={"54%"}
+            // rowSpacing={4}
+            // columnSpacing={2}
+            bgcolor={"orange"}
+            minHeight={{ sm: 400 }}
+            // rowGap={1}
+            // columnGap={6}
+            // gap={2}
+          >
+            {Array(4)
+              .fill("")
+              .map((item, indx) => {
+                return (
+                  <Grid
+                    item
+                    key={indx}
+                    xs={1}
+                    border={"1px solid black"}
+                    // p={{ xs: 1, sm: 2 }}
+                  >
+                    <Paper
+                      sx={{
+                        height: "100%",
+                        width: "100%",
+                        bgcolor: "lightBlue",
+                        borderRadius: 5,
+                      }}
+                    ></Paper>
+                  </Grid>
+                );
+              })}
+            {/* <Grid item xs={1} flexShrink={1} border={"1px solid black"}>
+              1
+            </Grid>
+            <Grid item xs={1} border={"1px solid black"}>
+              2
+            </Grid>
+            <Grid item xs={1} border={"1px solid black"}>
+              3
+            </Grid>
+            <Grid item xs={1} border={"1px solid black"}>
+              4
+            </Grid> */}
           </Grid>
         </Box>
-      </Grid> */
-  // }
+      </Grid>
+      <Grid item xs bgcolor={"blue"}></Grid>
+    </Grid>
+  );
+
+  /*<Grid
+      container
+      border={"6px solid green"}
+      width={"100%"}
+      height={"100%"}
+      sx={{ flexDirection: { xs: "column", sm: "row" } }}
+      // columns={2}
+    >
+      <Grid
+        item
+        xs={6}
+        sm={11}
+        bgcolor={"yellow"}
+        display={"Flex"}
+        // flexDirection={"column"}
+        // height={"100%"}
+        // width={"100%"}
+        border={"6px solid black"}
+      >
+        <Box border={"3px solid red"}>
+          <Box
+            display={"flex"}
+            flexDirection={{ xs: "column", sm: "row" }}
+            // width={"fit-content"}
+            gap={{ xs: 1, sm: 2 }}
+            border={"5px solid magenta"}
+            p={{ xs: 1, sm: 3 }}
+            borderRadius={5}
+            ml={{ sm: 2 }}
+            width={{ xs: "100%", sm: "fit-content" }}
+          >
+            <Box>
+              <Typography fontSize={{ xs: 18, sm: 20 }}>Hej NAMN,</Typography>
+              <Typography fontSize={{ xs: 22, sm: 28 }}>
+                Välkommen tillbaka!
+              </Typography>
+            </Box>
+            <Box
+              display={"flex"}
+              flexDirection={"column"}
+              justifyContent={"flex-start"}
+              alignItems={"center"}
+            >
+              <Typography fontSize={16}>Dagens datum:</Typography>
+              <Typography fontSize={26}>1 Jan</Typography>
+            </Box>
+          </Box>
+        </Box>
+
+        <Box
+          display={"flex"}
+          justifyContent={"left"}
+          alignItems={{ sm: "center" }}
+          flexGrow={1}
+          border={"3px solid blue"}
+        >
+          <Grid
+            container
+            justifyContent="center"
+            alignItems="center"
+            width={1300}
+            maxWidth={"100%"}
+            height={"54%"}
+            rowSpacing={2}
+            columnSpacing={1}
+            bgcolor={"orange"}
+          >
+            {Array(4)
+              .fill("")
+              .map((item, indx) => {
+                return (
+                  <Grid
+                    item
+                    key={indx}
+                    xs={6}
+                    border={"1px solid black"}
+                    p={{ xs: 1, sm: 2 }}
+                  >
+                    <Paper
+                      sx={{
+                        height: "100%",
+                        width: "100%",
+                        bgcolor: "lightBlue",
+                        borderRadius: 5,
+                      }}
+                    ></Paper>
+                  </Grid>
+                );
+              })}
+          </Grid>
+        </Box>
+      </Grid>
+      {/* <Box flexGrow={1}> */
+  /*<Grid item xs bgcolor={"purple"}>
+        sds
+      </Grid>
+      // {/* </Box> */
+  // </Grid>
+
   // </Box>
   // );
 }
