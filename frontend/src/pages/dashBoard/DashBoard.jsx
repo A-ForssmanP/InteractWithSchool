@@ -86,7 +86,7 @@ function DashBoard() {
                       display: "flex",
                       justifyContent: "center",
                       flex: "1",
-                      bgcolor: "lightblue",
+                      bgcolor: "rgba(173 ,200, 200 ,0.2)",
                       padding: 2,
                       borderRadius: 10,
                     }}
