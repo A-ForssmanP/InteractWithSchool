@@ -1,4 +1,12 @@
-import { Box, Card, CardContent, Typography, Paper, Grid } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  Typography,
+  Paper,
+  Grid,
+  useTheme,
+} from "@mui/material";
 import { lightBlue, orange } from "@mui/material/colors";
 import ReadOnlyDatePicker from "../../components/readOnlyDatePicker/ReadOnlyDatePicker";
 /* content:
@@ -11,8 +19,9 @@ list på sina barn
 Klass lista med färäldrar
 */
 
-function DashBoard() {
+function DashBoard(props) {
   const mainContent = [null, null, <ReadOnlyDatePicker />, null];
+  const theme = useTheme();
 
   return (
     <Grid
