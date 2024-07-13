@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, useTheme } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
@@ -13,6 +13,7 @@ function Menu() {
   });
 
   const navigate = useNavigate();
+  const theme = useTheme();
 
   //navigate to home page
   const navigateHome = () => {
@@ -33,10 +34,9 @@ function Menu() {
   return (
     <Box
       component="aside"
-      // border="1px solid red"
       minWidth="15%"
+      bgcolor={theme.palette.primary.main}
       sx={{
-        bgcolor: "rgba(25,118,210,1)",
         borderRadius: { md: "0px 2.5rem 2.5rem 0px" },
       }}
     >
@@ -63,9 +63,12 @@ function Menu() {
         position={{ xs: "absolute", md: "static" }}
         left={"-100%"}
         width={{ xs: "100%", sm: "80%", md: "100%" }}
-        bgcolor="rgba(25,118,210,1)"
         marginTop={{ md: 4 }}
         paddingTop={{ xs: 1.4, md: 0 }}
+        bgcolor={{
+          xs: theme.palette.primary.light,
+          md: theme.palette.primary.main,
+        }}
         sx={{
           transform: {
             xs: handleMenu.isVisible && "translateX(100%)",
