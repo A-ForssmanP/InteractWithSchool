@@ -19,10 +19,10 @@ list på sina barn
 Klass lista med färäldrar
 */
 
-function DashBoard(props) {
-  const mainContent = [null, null, <ReadOnlyDatePicker />, null];
+function DashBoard() {
   const theme = useTheme();
-
+  const mainContent = [null, null, <ReadOnlyDatePicker />, null];
+  console.log(theme.palette);
   return (
     <Grid
       container
@@ -34,7 +34,7 @@ function DashBoard(props) {
         item
         xs={6}
         sm={10}
-        md={11}
+        // md={10}
         display={"flex"}
         flexDirection={"column"}
         pl={{ sm: 2 }}
@@ -48,7 +48,8 @@ function DashBoard(props) {
             width={{ xs: "100%", sm: "fit-content" }}
             p={{ xs: 1, sm: 3 }}
             borderRadius={5}
-            bgcolor={"purple"}
+            bgcolor={theme.palette.secondary.main}
+            color={theme.palette.grey[50]}
           >
             <Box>
               <Typography fontSize={{ xs: 18, sm: 20 }}>Hej NAMN,</Typography>
@@ -77,10 +78,13 @@ function DashBoard(props) {
           <Box
             display={"grid"}
             gridAutoRows={"1fr"}
-            gap={1}
+            gap={2}
             gridTemplateColumns={{ sm: "repeat(2, 1fr)" }}
             width={"100%"}
             maxWidth={1000}
+            bgcolor={theme.palette.primary.main}
+            p={6}
+            borderRadius={12}
           >
             {mainContent.map((item, indx) => {
               return (
@@ -95,7 +99,7 @@ function DashBoard(props) {
                       display: "flex",
                       justifyContent: "center",
                       flex: "1",
-                      bgcolor: "rgba(173 ,200, 200 ,0.2)",
+
                       padding: 2,
                       borderRadius: 10,
                     }}
@@ -108,7 +112,9 @@ function DashBoard(props) {
           </Box>
         </Box>
       </Grid>
-      <Grid item xs bgcolor={"blue"}></Grid>
+      <Grid item xs bgcolor={theme.palette.primary.dark}>
+        dsdssds
+      </Grid>
     </Grid>
   );
 }
