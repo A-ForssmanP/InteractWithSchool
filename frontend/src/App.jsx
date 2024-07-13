@@ -6,7 +6,7 @@ function App() {
   return (
     <Stack
       direction={{ xs: "column", md: "row" }}
-      height="100vh"
+      minHeight="100vh"
       sx={{ position: "relative" }}
     >
       <Menu />

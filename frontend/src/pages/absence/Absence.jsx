@@ -24,8 +24,11 @@ function Absence() {
   }, []);
 
   return (
-    <Box mt={4.4}>
-      <Container maxWidth="xs" sx={{ padding: { xs: "0", md: "0 24px" } }}>
+    <Box>
+      <Container
+        maxWidth="xs"
+        sx={{ padding: { xs: "3rem 0", md: "3rem 24px" } }}
+      >
         <h2>Registrera Frånvaro</h2>
         <List sx={{ mt: ".6rem" }}>
           {students.map((stnt) => {
