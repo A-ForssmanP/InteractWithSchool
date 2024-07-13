@@ -17,6 +17,7 @@ function DashBoard() {
     <Grid
       container
       width={"100%"}
+      // maxWidth={"100%"}
       height={"100%"}
       direction={{ xs: "column", sm: "row" }}
       border={"6px solid green"}
@@ -29,6 +30,7 @@ function DashBoard() {
         sm={11}
         bgcolor={"red"}
         pl={{ sm: 2 }}
+        width={"100%"}
       >
         <Box border={"3px solid yellow"}>
           <Box
@@ -64,10 +66,41 @@ function DashBoard() {
           justifyContent={"flex-start"}
           alignItems={{ sm: "center" }}
           flexGrow={1}
-          // maxWidth={"100%"}
+          maxWidth={"100%"}
           border={"3px solid blue"}
         >
           <Box
+            bgcolor={"yellow"}
+            width={900}
+            maxWidth={"100%"}
+            display={"grid"}
+            gridAutoRows={"1fr"}
+            gridAutoColumns={"1fr"}
+            gridTemplateColumns={"repeat(2, 1fr)"}
+          >
+            <Box bgcolor={"blue"} border={"1px solid black"}>
+              1
+            </Box>
+            <Box bgcolor={"blue"} border={"1px solid black"}>
+              2
+            </Box>
+            <Box bgcolor={"blue"} border={"1px solid black"}>
+              3 <br />
+              3232 <br />
+              dsdsdsds
+            </Box>
+            <Box
+              bgcolor={"blue"}
+              border={"1px solid black"}
+              display={"flex"}
+              flexDirection={"column"}
+              justifyContent={"center"}
+              alignItems={"center"}
+            >
+              <ReadOnlyDatePicker />
+            </Box>
+          </Box>
+          {/* <Box
             bgcolor={"yellow"}
             width={"100%"}
             display={"flex"}
@@ -99,8 +132,8 @@ function DashBoard() {
             <Box display={{ sm: "flex" }}>
               <Paper
                 sx={{
-                  height: "100%",
-                  width: "100%",
+                  // height: "100%",
+                  // width: "100%",
                   bgcolor: "lightBlue",
                   borderRadius: 5,
                 }}
@@ -109,8 +142,8 @@ function DashBoard() {
               </Paper>
               <Paper
                 sx={{
-                  height: "100%",
-                  width: "100%",
+                  // height: "100%",
+                  // width: "100%",
                   bgcolor: "lightBlue",
                   borderRadius: 5,
                 }}
@@ -118,7 +151,7 @@ function DashBoard() {
                 4
               </Paper>
             </Box>
-          </Box>
+          </Box> */}
           {/* <Grid
             container
             columns={2}
