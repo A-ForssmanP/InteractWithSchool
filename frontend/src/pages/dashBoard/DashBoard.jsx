@@ -102,7 +102,7 @@ function DashBoard() {
                       flex: "1",
                       bgcolor: "rgba(255,255,255,0.5)",
                       padding: 2,
-                      borderRadius: { xs: 3, sm: 10 },
+                      borderRadius: { sm: 10 },
                     }}
                   >
                     {item}
