@@ -34,7 +34,6 @@ function DashBoard() {
         item
         xs={6}
         sm={10}
-        // md={10}
         display={"flex"}
         flexDirection={"column"}
         pl={{ sm: 2 }}
@@ -83,8 +82,10 @@ function DashBoard() {
             width={"100%"}
             maxWidth={1000}
             bgcolor={theme.palette.primary.main}
-            p={6}
-            borderRadius={12}
+            p={{ sm: 3, md: 6 }}
+            pt={{ xs: 2, sm: 3 }}
+            pb={{ xs: 2, sm: 3 }}
+            borderRadius={{ xs: 1, sm: 12 }}
           >
             {mainContent.map((item, indx) => {
               return (
@@ -99,9 +100,9 @@ function DashBoard() {
                       display: "flex",
                       justifyContent: "center",
                       flex: "1",
-
+                      bgcolor: "rgba(255,255,255,0.5)",
                       padding: 2,
-                      borderRadius: 10,
+                      borderRadius: { xs: 3, sm: 10 },
                     }}
                   >
                     {item}
@@ -112,9 +113,7 @@ function DashBoard() {
           </Box>
         </Box>
       </Grid>
-      <Grid item xs bgcolor={theme.palette.primary.dark}>
-        dsdssds
-      </Grid>
+      <Grid item xs bgcolor={theme.palette.secondary.main}></Grid>
     </Grid>
   );
 }
