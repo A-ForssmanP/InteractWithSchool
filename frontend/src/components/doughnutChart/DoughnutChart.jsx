@@ -2,15 +2,14 @@ import Chart from "chart.js/auto";
 import { Colors } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 
-function DoughnutChart() {
-  //178 skoldagar
+function DoughnutChart({ chartData }) {
   return (
     <Doughnut
       data={{
-        labels: ["Dagar kvar", "Gjorda"],
+        labels: chartData.labels.map((label) => label),
         datasets: [
           {
-            data: [40, 220],
+            data: chartData.data.map((data) => data),
             backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
           },
         ],

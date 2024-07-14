@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { lightBlue, orange } from "@mui/material/colors";
 import ReadOnlyDatePicker from "../../components/readOnlyDatePicker/ReadOnlyDatePicker";
-import DoughnutChart from "../../components/doughnutChart/DoughnutChart";
+import ChartYearProg from "../../components/chartYearProg/ChartYearProg";
 /* content:
 welcome message
 show day and time
@@ -22,7 +22,7 @@ Klass lista med färäldrar
 
 function DashBoard() {
   const theme = useTheme();
-  const mainContent = [null, null, <ReadOnlyDatePicker />, null];
+  const mainContent = [<ChartYearProg />, null, <ReadOnlyDatePicker />, null];
   console.log(theme.palette);
   return (
     <Grid
@@ -100,6 +100,7 @@ function DashBoard() {
                     sx={{
                       display: "flex",
                       justifyContent: "center",
+                      alignItems: "center",
                       flex: "1",
                       bgcolor: "rgba(255,255,255,0.5)",
                       padding: 2,
