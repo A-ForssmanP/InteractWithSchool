@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { lightBlue, orange } from "@mui/material/colors";
 import ReadOnlyDatePicker from "../../components/readOnlyDatePicker/ReadOnlyDatePicker";
+import DoughnutChart from "../../components/doughnutChart/DoughnutChart";
 /* content:
 welcome message
 show day and time
