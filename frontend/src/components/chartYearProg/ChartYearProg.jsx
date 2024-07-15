@@ -8,7 +8,8 @@ function ChartYearProg() {
   //178 skoldagar
   const [chartData, setChartData] = useState({
     labels: ["Dagar kvar", "Dagar Gjorda"],
-    data: [40, 220],
+    isSchoolData: [],
+    isSummerBreakData: [],
   });
 
   useEffect(() => {
@@ -19,8 +20,8 @@ function ChartYearProg() {
   const schoolYearProgress = () => {
     //get the intervall from start to end of days in school period
     const schoolDaysInterval = eachDayOfInterval({
-      start: new Date("2024,7,14"),
-      end: new Date("2024,7,18"),
+      start: new Date("2024,7,10"),
+      end: new Date("2024,7,15"),
     });
     //check if current day is a school day
     const currentDay = new Date();
@@ -31,28 +32,60 @@ function ChartYearProg() {
     if (isSchoolDay) {
       progressSchool(currentDay, schoolDaysInterval);
     } else {
-      // progressSummerBreak()
+      progressSummerBreak(currentDay);
     }
   };
 
   // get progress of school period
-  const progressSchool = (currDay, intervall) => {
-    const intervallToString = intervall.map((day) => day.toDateString());
+  const progressSchool = (currDay, interval) => {
+    const intervalToString = interval.map((day) => day.toDateString());
     const dayToString = currDay.toDateString();
 
     //get progress of days done
-    const dayInIntervall = intervallToString.indexOf(dayToString) + 1;
+    const dayInInterval = intervalToString.indexOf(dayToString) + 1;
 
     //get days remaining
-    const daysRemaining = intervall.length - dayInIntervall;
+    const daysRemaining = interval.length - dayInInterval;
 
-    setChartData((currData) => {
+    setChartData(() => {
       return {
-        ...currData,
-        data: [daysRemaining, dayInIntervall],
+        labels: ["Dagar kvar", "Dagar Gjorda"],
+        isSchoolData: [daysRemaining, dayInInterval],
+        isSummerBreakData: [],
       };
     });
-    console.log(dayInIntervall);
+    console.log(dayInInterval);
+    console.log(daysRemaining);
+  };
+
+  // get progress of summer break
+  const progressSummerBreak = (currDay) => {
+    //get the intervall from start to end of days in summer break
+    const summerBreakInterval = eachDayOfInterval({
+      start: new Date("2024,7,15"),
+      end: new Date("2024,7,22"),
+    });
+
+    const toStringSummerBreakInterval = summerBreakInterval.map((day) =>
+      day.toDateString()
+    );
+    const toStringDay = currDay.toDateString();
+
+    // get progress of days done
+    const dayInInterval = toStringSummerBreakInterval.indexOf(toStringDay) + 1;
+
+    //get days remaining
+    const daysRemaining = summerBreakInterval.length - dayInInterval;
+
+    setChartData(() => {
+      return {
+        labels: ["Dagar kvar", "Dagar Gjorda", "Kvar av läsåret"],
+        isSchoolData: [0, 1],
+        isSummerBreakData: [daysRemaining, dayInInterval],
+      };
+    });
+
+    console.log(dayInInterval);
     console.log(daysRemaining);
   };
 
@@ -80,7 +113,7 @@ function ChartYearProg() {
   return (
     <Box>
       <Typography variant="h4" fontSize={23} textAlign={"center"}>
-        Läsåret
+        {chartData.isSummerBreakData.length === 2 ? "Sommarlov" : "Läsåret"}
       </Typography>
       <Box>
         <DoughnutChart chartData={chartData} />
