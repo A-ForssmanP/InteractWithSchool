@@ -35,6 +35,11 @@ function DoughnutChart({ chartData }) {
   };
 
   const data = handleData();
+  const options = {
+    legend: {
+      display: false,
+    },
+  };
   // {
   //   labels: chartData.labels.map((label) => label),
   //   datasets: [
@@ -45,7 +50,7 @@ function DoughnutChart({ chartData }) {
   //   ],
   // };
 
-  return <Doughnut data={data} />;
+  return <Doughnut data={data} options={options} />;
 }
 
 export default DoughnutChart;
