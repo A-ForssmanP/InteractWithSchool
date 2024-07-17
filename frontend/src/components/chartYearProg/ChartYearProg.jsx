@@ -20,8 +20,8 @@ function ChartYearProg() {
   const schoolYearProgress = () => {
     //get the intervall from start to end of days in school period
     const schoolDaysInterval = eachDayOfInterval({
-      start: new Date("2024,7,10"),
-      end: new Date("2024,7,15"),
+      start: new Date("2024,7,11"),
+      end: new Date("2024,7,13"),
     });
     //check if current day is a school day
     const currentDay = new Date();
@@ -32,7 +32,7 @@ function ChartYearProg() {
     if (isSchoolDay) {
       progressSchool(currentDay, schoolDaysInterval);
     } else {
-      progressSummerBreak(currentDay);
+      progressSummerBreak(currentDay, schoolDaysInterval.length);
     }
   };
 
@@ -59,10 +59,10 @@ function ChartYearProg() {
   };
 
   // get progress of summer break
-  const progressSummerBreak = (currDay) => {
+  const progressSummerBreak = (currDay, sumSchoolDays) => {
     //get the intervall from start to end of days in summer break
     const summerBreakInterval = eachDayOfInterval({
-      start: new Date("2024,7,15"),
+      start: new Date("2024,7,16"),
       end: new Date("2024,7,22"),
     });
 
@@ -79,9 +79,9 @@ function ChartYearProg() {
 
     setChartData(() => {
       return {
-        labels: ["Dagar kvar", "Dagar Gjorda", "Kvar av läsåret"],
-        isSchoolData: [0, 1],
-        isSummerBreakData: [daysRemaining, dayInInterval],
+        labels: ["Dagar kvar", "Dagar Gjorda", "Antal skoldagar"],
+        isSchoolData: [null, null, sumSchoolDays],
+        isSummerBreakData: [daysRemaining, dayInInterval, null],
       };
     });
 
@@ -113,7 +113,7 @@ function ChartYearProg() {
   return (
     <Box>
       <Typography variant="h4" fontSize={23} textAlign={"center"}>
-        {chartData.isSummerBreakData.length === 2 ? "Sommarlov" : "Läsåret"}
+        {chartData.isSummerBreakData.length ? "Sommarlov!" : "Läsårets dagar"}
       </Typography>
       <Box>
         <DoughnutChart chartData={chartData} />
