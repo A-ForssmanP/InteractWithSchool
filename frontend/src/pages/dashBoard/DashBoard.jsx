@@ -23,7 +23,7 @@ Klass lista med färäldrar
 function DashBoard() {
   const theme = useTheme();
   const mainContent = [<ChartYearProg />, null, <ReadOnlyDatePicker />, null];
-  console.log(theme.palette);
+
   return (
     <Grid
       container
