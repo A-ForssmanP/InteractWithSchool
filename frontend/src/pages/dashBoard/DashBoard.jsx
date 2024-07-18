@@ -1,6 +1,7 @@
 import { Box, Typography, Paper, Grid, useTheme } from "@mui/material";
 import ReadOnlyDatePicker from "../../components/readOnlyDatePicker/ReadOnlyDatePicker";
 import ChartYearProg from "../../components/chartYearProg/ChartYearProg";
+import DashBoardNotes from "../../components/dashBoardNotes/DashBoardNotes";
 /* content:
 welcome message
 show day and time
@@ -13,7 +14,12 @@ Klass lista med färäldrar
 
 function DashBoard() {
   const theme = useTheme();
-  const mainContent = [<ChartYearProg />, null, <ReadOnlyDatePicker />, null];
+  const mainContent = [
+    <ChartYearProg />,
+    <DashBoardNotes />,
+    <ReadOnlyDatePicker />,
+    null,
+  ];
 
   return (
     <Grid
