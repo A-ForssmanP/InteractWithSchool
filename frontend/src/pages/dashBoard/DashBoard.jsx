@@ -1,13 +1,4 @@
-import {
-  Box,
-  Card,
-  CardContent,
-  Typography,
-  Paper,
-  Grid,
-  useTheme,
-} from "@mui/material";
-import { lightBlue, orange } from "@mui/material/colors";
+import { Box, Typography, Paper, Grid, useTheme } from "@mui/material";
 import ReadOnlyDatePicker from "../../components/readOnlyDatePicker/ReadOnlyDatePicker";
 import ChartYearProg from "../../components/chartYearProg/ChartYearProg";
 /* content:
