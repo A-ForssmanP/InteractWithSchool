@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 
 function DashBoardNotes() {
   const paperData = [
@@ -6,14 +6,10 @@ function DashBoardNotes() {
       rows: 5,
       rowStyle: { height: "3px", backgroundColor: "rgba(40,160,255)" },
       paperStyles: {
-        cursor: "pointer",
         zIndex: 100,
         backgroundColor: "lightblue",
         transform: `rotate(0deg)`,
         borderRadius: "6px",
-        "&:hover": {
-          border: "2px solid rgba(40,160,255,0.4)",
-        },
       },
     },
     {
@@ -76,12 +72,15 @@ function DashBoardNotes() {
   };
 
   return (
-    <Box flex={1}>
+    <Box flex={1} display={"flex"} flexDirection={"column"}>
+      <Typography variant="h4" fontSize={24} textAlign={"center"}>
+        Anteckningar
+      </Typography>
       <Box
         position={"relative"}
-        height={"15rem"}
+        height={"12rem"}
         width={"13rem"}
-        margin={"0 auto"}
+        margin={"2.1rem auto"}
         display={"flex"}
         borderRadius={"6px"}
       >
@@ -89,6 +88,9 @@ function DashBoardNotes() {
           createNotePaper(index, item.rows, item.rowStyle, item.paperStyles)
         )}
       </Box>
+      <Button variant="outlined" sx={{ bgcolor: "rgba(255,255,255,0.6)" }}>
+        Öppna
+      </Button>
     </Box>
   );
 }
