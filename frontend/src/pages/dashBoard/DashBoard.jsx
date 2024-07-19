@@ -2,6 +2,8 @@ import { Box, Typography, Paper, Grid, useTheme } from "@mui/material";
 import ReadOnlyDatePicker from "../../components/readOnlyDatePicker/ReadOnlyDatePicker";
 import ChartYearProg from "../../components/chartYearProg/ChartYearProg";
 import DashBoardNotes from "../../components/dashBoardNotes/DashBoardNotes";
+import { useState } from "react";
+import { dayCalendarClasses } from "@mui/x-date-pickers/DateCalendar/dayCalendarClasses";
 /* content:
 welcome message
 show day and time
@@ -13,12 +15,28 @@ Klass lista med färäldrar
 */
 
 function DashBoard() {
+  const [date, setDate] = useState(new Date());
   const theme = useTheme();
+
   const mainContent = [
     <ChartYearProg />,
     <DashBoardNotes />,
     <ReadOnlyDatePicker />,
     null,
+  ];
+  const months = [
+    "Jan",
+    "Feb",
+    "Mars",
+    "April",
+    "Maj",
+    "Juni",
+    "Juli",
+    "Aug",
+    "Sep",
+    "Okt",
+    "Nov",
+    "Dec",
   ];
 
   return (
@@ -61,7 +79,9 @@ function DashBoard() {
               alignItems={"center"}
             >
               <Typography fontSize={16}>Dagens datum:</Typography>
-              <Typography fontSize={26}>1 Jan</Typography>
+              <Typography fontSize={26}>{`${date.getDate()} ${
+                months[date.getMonth()]
+              }`}</Typography>
             </Box>
           </Box>
         </Box>
