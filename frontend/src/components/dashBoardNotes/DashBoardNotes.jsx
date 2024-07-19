@@ -1,5 +1,4 @@
 import { Box } from "@mui/material";
-import zIndex from "@mui/material/styles/zIndex";
 
 function DashBoardNotes() {
   const paperData = [
@@ -45,19 +44,17 @@ function DashBoardNotes() {
     },
   ];
 
+  // function for create the papers
   const createNotePaper = (indx, rows = 0, rowStyle, paperStyles) => {
     const innerRows = Array(rows).fill(null);
     return (
       <Box
         key={indx}
-        // bgcolor={bgColor}
         display={"flex"}
         flexDirection={"column"}
-        // gap={4}
         justifyContent={"space-between"}
         flex={1}
         padding={"2rem 1.2rem"}
-        // sx={{ transform: `rotate(${rotate})`, padding: "2rem 1.2rem" }}
         sx={paperStyles}
       >
         {innerRows.map((row, indx) => (
@@ -67,7 +64,7 @@ function DashBoardNotes() {
     );
   };
 
-  // get with of row
+  // get width of row
   const getRowWidth = (index) => {
     if (index === 0) {
       return "50%";
@@ -82,7 +79,6 @@ function DashBoardNotes() {
     <Box flex={1}>
       <Box
         position={"relative"}
-        // border={"5px solid red"}
         height={"15rem"}
         width={"13rem"}
         margin={"0 auto"}
