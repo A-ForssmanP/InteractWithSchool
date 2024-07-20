@@ -1,0 +1,31 @@
+/* .datePickerWrapper {
+    border: 10px solid yellow;
+    flex: 1 1 0px;
+    /* height: 100%; */
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    /* justify-content: center; */
+    /* align-items: center;
+    position: relative; */
+    height: 10rem;
+}
+
+.myDatePicker {
+    width: 100%;
+    background: red;
+} */
+
+
+/* .react-datepicker__input-container {
+    width: inherit;
+  }
+  
+  .react-datepicker-wrapper {
+    width: 100%;
+  }
+
+  .react-datepicker__input-container input {
+    display: block;
+    width: 100% !important;
+} */
