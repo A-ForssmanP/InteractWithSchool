@@ -50,7 +50,7 @@ function DashBoardNotes() {
         flexDirection={"column"}
         justifyContent={"space-between"}
         flex={1}
-        padding={"2rem 1.2rem"}
+        padding={".7rem 1rem"}
         sx={paperStyles}
       >
         {innerRows.map((row, indx) => (
@@ -78,9 +78,9 @@ function DashBoardNotes() {
       </Typography>
       <Box
         position={"relative"}
-        height={"12rem"}
-        width={"13rem"}
-        margin={"2.1rem auto"}
+        height={"6rem"}
+        width={"6rem"}
+        margin={"5% auto"}
         display={"flex"}
         borderRadius={"6px"}
       >

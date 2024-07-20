@@ -83,11 +83,17 @@ function ChartYearProg() {
   };
 
   return (
-    <Box>
-      <Typography variant="h4" fontSize={23} textAlign={"center"}>
+    <Box
+      // flex={1}
+      display={"flex"}
+      flexDirection={"column"}
+      justifyContent={"space-between"}
+      alignItems={"center"}
+    >
+      <Typography variant="h4" fontSize={23}>
         {chartData.isSummerBreakData.length ? "Sommarlov!" : "Läsåret"}
       </Typography>
-      <Box>
+      <Box maxHeight={{ xs: 270, sm: 170 }}>
         <DoughnutChart chartData={chartData} />
       </Box>
     </Box>

@@ -18,12 +18,17 @@ function DashBoard() {
   const [date, setDate] = useState(new Date());
   const theme = useTheme();
 
-  const mainContent = [
-    <ChartYearProg />,
-    <DashBoardNotes />,
-    <ReadOnlyDatePicker />,
-    null,
-  ];
+  // const mainContent = [
+  //   <ChartYearProg />,
+  //   <DashBoardNotes />,
+  //   <ReadOnlyDatePicker />,
+  //   null,
+  // ];
+  const mainContent = [Array(4).fill(null)];
+  mainContent[2] = <DashBoardNotes />;
+  mainContent[3] = <DashBoardNotes />;
+  mainContent[1] = <ChartYearProg />;
+  mainContent[0] = <ReadOnlyDatePicker />;
   const months = [
     "Jan",
     "Feb",
@@ -97,8 +102,10 @@ function DashBoard() {
             gridAutoRows={"1fr"}
             gap={2}
             gridTemplateColumns={{ sm: "repeat(2, 1fr)" }}
+            // gridTemplateRows={"1fr 1fr"}
             width={"100%"}
             maxWidth={1000}
+            height={{ sm: 500, md: 560 }}
             bgcolor={theme.palette.primary.main}
             p={{ sm: 3, md: 6 }}
             pt={{ xs: 2, sm: 3 }}
@@ -112,6 +119,9 @@ function DashBoard() {
                   display={"flex"}
                   justifyContent={"center"}
                   alignItems={"stretch"}
+                  // border={"1px solid red"}
+                  // width={"100%"}
+                  // height={"100%"}
                 >
                   <Paper
                     sx={{
@@ -122,6 +132,8 @@ function DashBoard() {
                       bgcolor: "rgba(255,255,255,0.5)",
                       padding: 2,
                       borderRadius: { sm: 10 },
+                      // width: "100%",
+                      // height: "100%",
                     }}
                   >
                     {item}
