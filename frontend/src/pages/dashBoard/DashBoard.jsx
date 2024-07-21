@@ -96,6 +96,7 @@ function DashBoard() {
           flexGrow={1}
           justifyContent={{ xs: "center", md: "left" }}
           // alignItems={{ sm: "center" }}
+
           maxWidth={"100%"}
           // border={"5px solid green"}
         >
@@ -108,7 +109,8 @@ function DashBoard() {
             gridTemplateColumns={{ sm: "repeat(2, 1fr)" }}
             // gridTemplateRows={"1fr 1fr"}
             // width={"100%"}
-            maxWidth={{ lg: 1200 }}
+            maxWidth={{ lg: 1200, xl: 1300 }}
+            maxHeight={{ xl: 900 }}
             // height={{ sm: 500, md: 560 }}
             bgcolor={theme.palette.primary.main}
             p={{ sm: 3, md: 6 }}
