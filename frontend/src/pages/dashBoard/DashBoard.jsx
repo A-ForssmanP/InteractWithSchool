@@ -24,6 +24,8 @@ function DashBoard() {
     <ReadOnlyDatePicker />,
     null,
   ];
+
+  // const mainContent = Array(4).fill(null);
   const months = [
     "Jan",
     "Feb",
@@ -54,6 +56,7 @@ function DashBoard() {
         flexDirection={"column"}
         pl={{ sm: 2 }}
         pr={{ sm: 2 }}
+        border={"5px solid yellow"}
       >
         <Box>
           <Box
@@ -88,22 +91,25 @@ function DashBoard() {
         <Box
           display={"flex"}
           flexGrow={1}
-          justifyContent={{ xs: "center", md: "left" }}
-          alignItems={{ sm: "center" }}
-          maxWidth={"100%"}
+          // justifyContent={{ xs: "center", md: "left" }}
+          // alignItems={{ sm: "center" }}
+          width={"100%"}
+          border={"5px solid green"}
         >
           <Box
+            flex={1}
             display={"grid"}
             gridAutoRows={"1fr"}
             gap={2}
             gridTemplateColumns={{ sm: "repeat(2, 1fr)" }}
             width={"100%"}
-            maxWidth={1000}
+            maxWidth={{ xl: 1200 }}
             bgcolor={theme.palette.primary.main}
             p={{ sm: 3, md: 6 }}
             pt={{ xs: 2, sm: 3 }}
             pb={{ xs: 2, sm: 3 }}
             borderRadius={{ xs: 1, sm: 12 }}
+            border={"5px solid red"}
           >
             {mainContent.map((item, indx) => {
               return (
