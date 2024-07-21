@@ -1,31 +1,22 @@
-/* .datePickerWrapper {
-    border: 10px solid yellow;
-    flex: 1 1 0px;
-    /* height: 100%; */
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    /* justify-content: center; */
-    /* align-items: center;
-    position: relative; */
-    height: 10rem;
+
+.datePickerWrapper  {
+  /* position: absolute;
+  transform: scale(.9); */
+  /* border: 10px solid red; */
 }
 
-.myDatePicker {
-    width: 100%;
-    background: red;
-} */
-
-
-/* .react-datepicker__input-container {
-    width: inherit;
+@media (min-width:768px) {
+  .datePickerWrapper  {
+    position: absolute;
+    transform: scale(.8);
+    /* border: 10px solid red; */
   }
-  
-  .react-datepicker-wrapper {
-    width: 100%;
+}
+@media (min-width:1440px) {
+  .datePickerWrapper  {
+    /* position: absolute; */
+    transform: scale(1);
+    top:.2rem;
+    /* border: 10px solid red; */
   }
-
-  .react-datepicker__input-container input {
-    display: block;
-    width: 100% !important;
-} */
+}

@@ -9,7 +9,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <Stack
         direction={{ xs: "column", md: "row" }}
-        minHeight="100vh"
+        height={{ sm: "100dvh" }}
         sx={{ position: "relative" }}
       >
         <Menu />

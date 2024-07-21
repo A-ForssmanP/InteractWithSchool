@@ -10,7 +10,7 @@ function ReadOnlyDatePicker() {
   const [startDate, setStartDate] = useState(null);
   return (
     <Box className="datePickerWrapper">
-      {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePicker
           fixedHeight
           selected={startDate}
@@ -21,7 +21,7 @@ function ReadOnlyDatePicker() {
           calendarStartDay={1}
           showWeekNumbers
         />
-      </LocalizationProvider> */}
+      </LocalizationProvider>
     </Box>
   );
 }

@@ -18,17 +18,17 @@ function DashBoard() {
   const [date, setDate] = useState(new Date());
   const theme = useTheme();
 
-  // const mainContent = [
-  //   <ChartYearProg />,
-  //   <DashBoardNotes />,
-  //   <ReadOnlyDatePicker />,
-  //   null,
-  // ];
-  const mainContent = [Array(4).fill(null)];
-  mainContent[2] = <DashBoardNotes />;
-  mainContent[3] = <DashBoardNotes />;
-  mainContent[1] = <ChartYearProg />;
-  mainContent[0] = <ReadOnlyDatePicker />;
+  const mainContent = [
+    <ChartYearProg />,
+    <DashBoardNotes />,
+    <ReadOnlyDatePicker />,
+    null,
+  ];
+  // const mainContent = [Array(4).fill(null)];
+  // mainContent[2] = <DashBoardNotes />;
+  // mainContent[3] = <DashBoardNotes />;
+  // mainContent[1] = <ChartYearProg />;
+  // mainContent[0] = <ReadOnlyDatePicker />;
   const months = [
     "Jan",
     "Feb",
@@ -59,6 +59,7 @@ function DashBoard() {
         flexDirection={"column"}
         pl={{ sm: 2 }}
         pr={{ sm: 2 }}
+        // border={"5px solid yellow"}
       >
         <Box>
           <Box
@@ -94,18 +95,21 @@ function DashBoard() {
           display={"flex"}
           flexGrow={1}
           justifyContent={{ xs: "center", md: "left" }}
-          alignItems={{ sm: "center" }}
+          // alignItems={{ sm: "center" }}
           maxWidth={"100%"}
+          // border={"5px solid green"}
         >
           <Box
+            flex={1}
+            border={"5px solid red"}
             display={"grid"}
             gridAutoRows={"1fr"}
             gap={2}
             gridTemplateColumns={{ sm: "repeat(2, 1fr)" }}
             // gridTemplateRows={"1fr 1fr"}
-            width={"100%"}
-            maxWidth={1000}
-            height={{ sm: 500, md: 560 }}
+            // width={"100%"}
+            maxWidth={{ lg: 1200 }}
+            // height={{ sm: 500, md: 560 }}
             bgcolor={theme.palette.primary.main}
             p={{ sm: 3, md: 6 }}
             pt={{ xs: 2, sm: 3 }}
@@ -129,6 +133,7 @@ function DashBoard() {
                       justifyContent: "center",
                       alignItems: "center",
                       flex: "1",
+                      position: "relative",
                       bgcolor: "rgba(255,255,255,0.5)",
                       padding: 2,
                       borderRadius: { sm: 10 },
