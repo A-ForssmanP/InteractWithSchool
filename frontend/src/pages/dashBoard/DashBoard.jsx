@@ -101,7 +101,7 @@ function DashBoard() {
         >
           <Box
             flex={1}
-            border={"5px solid red"}
+            // border={"5px solid red"}
             display={"grid"}
             gridAutoRows={"1fr"}
             gap={2}

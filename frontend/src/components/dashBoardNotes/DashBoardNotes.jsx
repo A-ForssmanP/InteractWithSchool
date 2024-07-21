@@ -88,7 +88,15 @@ function DashBoardNotes() {
           createNotePaper(index, item.rows, item.rowStyle, item.paperStyles)
         )}
       </Box>
-      <Button variant="outlined" sx={{ bgcolor: "rgba(255,255,255,0.6)" }}>
+      <Button
+        variant="outlined"
+        sx={{
+          width: "100%",
+          maxWidth: { sm: "70%", md: "40%" },
+          margin: "0 auto",
+          bgcolor: "rgba(255,255,255,0.6)",
+        }}
+      >
         Öppna
       </Button>
     </Box>
