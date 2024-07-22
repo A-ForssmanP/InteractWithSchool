@@ -1,6 +1,9 @@
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button, TextField, Card } from "@mui/material";
+import { useState } from "react";
+import DashBoardNotesTextField from "../dashBoardNotesTextField/DashBoardNotesTextField";
 
 function DashBoardNotes() {
+  const [textFieldOpen, setTextFieldOpen] = useState(false);
   const paperData = [
     {
       rows: 5,
@@ -72,7 +75,12 @@ function DashBoardNotes() {
   };
 
   return (
-    <Box flex={1} display={"flex"} flexDirection={"column"}>
+    <Box
+      flex={1}
+      display={"flex"}
+      flexDirection={"column"}
+      position={"relative"}
+    >
       <Typography variant="h4" fontSize={24} textAlign={"center"}>
         Anteckningar
       </Typography>
@@ -88,8 +96,13 @@ function DashBoardNotes() {
           createNotePaper(index, item.rows, item.rowStyle, item.paperStyles)
         )}
       </Box>
+      {textFieldOpen && (
+        <DashBoardNotesTextField handleClose={() => setTextFieldOpen(false)} />
+      )}
+
       <Button
         variant="outlined"
+        onClick={() => setTextFieldOpen(true)}
         sx={{
           width: "100%",
           maxWidth: { sm: "70%", md: "40%" },
