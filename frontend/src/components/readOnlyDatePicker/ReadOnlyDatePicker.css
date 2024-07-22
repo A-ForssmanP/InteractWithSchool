@@ -12,7 +12,7 @@
     /* border: 10px solid red; */
   }
 }
-@media (min-width:1440px) {
+@media (min-width:2560px) {
   .datePickerWrapper  {
     /* position: absolute; */
     transform: scale(1);
