@@ -7,10 +7,10 @@ function DashBoardNotesTextField({ handleClose }) {
         border: "1px solid red",
         // opacity: 0.3,
         position: "absolute",
-        top: "-4.5em",
+        top: { xs: "-4.5em", sm: "-10.5em", md: "-12em" },
         // bottom: "-3.5em",
-        left: "-0.9em",
-        right: "-0.9em",
+        left: { xs: "-0.9em", sm: "6em", md: "4em" },
+        right: { xs: "-0.9em", sm: "-11em", md: "-13.3em", lg: "-16em" },
         zIndex: 100,
         paddingTop: 1,
       }}
