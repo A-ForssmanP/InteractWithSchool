@@ -1,9 +1,11 @@
 import { Card, TextField, Button, Box } from "@mui/material";
 import { useTheme } from "@emotion/react";
+import { useState } from "react";
 
 function DashBoardNotesTextField({ handleClose }) {
+  const [text, setText] = useState("");
   const theme = useTheme();
-  console.log(theme);
+
   return (
     <Card
       sx={{
@@ -23,9 +25,11 @@ function DashBoardNotesTextField({ handleClose }) {
           multiline
           name="notes-textField"
           // defaultValue="Default Values"
+          value={text}
           label="Mina Anteckningar"
           id="Mina Anteckningar"
           rows={12}
+          onChange={(e) => setText(e.target.value)}
           sx={{
             width: "100%",
             marginTop: 1,
