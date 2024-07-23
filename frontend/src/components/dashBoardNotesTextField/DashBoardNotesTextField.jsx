@@ -10,10 +10,10 @@ function DashBoardNotesTextField({ handleClose }) {
         // border: "1px solid red",
         // opacity: 0.3,
         position: "absolute",
-        top: { xs: "-4.5em", sm: "-10.5em", md: "-11.5em" },
+        top: { xs: "-4.5em", sm: "-10.5em", md: "-11.5em", xl: "-12em" },
         // bottom: "-3.5em",
-        left: { xs: "-0.9em", sm: "6em", md: "4em" },
-        right: { xs: "-0.9em", sm: "-11em", md: "-13.3em", lg: "-16em" },
+        left: { xs: "-0.9em", sm: "6em", md: "4em", lg: "-6em" },
+        right: { xs: "-0.9em", sm: "-11em", md: "-13.3em", lg: "-5em" },
         zIndex: 100,
         backgroundColor: theme.palette.grey[50],
       }}
