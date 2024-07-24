@@ -1,10 +1,20 @@
 import { Card, TextField, Button, Box } from "@mui/material";
 import { useTheme } from "@emotion/react";
 import { useState } from "react";
+import axios from "axios";
 
 function DashBoardNotesTextField({ handleClose }) {
   const [text, setText] = useState("");
   const theme = useTheme();
+
+  const fetchUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/notes`;
+
+  // get notes data
+  const getNotes = async () => {
+    const res = await axios.get(fetchUrl);
+    console.log(res);
+  };
+  getNotes();
 
   return (
     <Card

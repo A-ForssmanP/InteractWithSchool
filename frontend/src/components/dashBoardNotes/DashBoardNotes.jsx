@@ -4,6 +4,7 @@ import DashBoardNotesTextField from "../dashBoardNotesTextField/DashBoardNotesTe
 
 function DashBoardNotes() {
   const [textFieldOpen, setTextFieldOpen] = useState(false);
+  // const [text, setText] = useState("fdfd");
   const paperData = [
     {
       rows: 5,
@@ -97,7 +98,10 @@ function DashBoardNotes() {
         )}
       </Box>
       {textFieldOpen && (
-        <DashBoardNotesTextField handleClose={() => setTextFieldOpen(false)} />
+        <DashBoardNotesTextField
+          handleClose={() => setTextFieldOpen(false)}
+          // text={text}
+        />
       )}
 
       <Button

@@ -3,11 +3,12 @@ const {model,Schema} = mongoose
 
 const notesSchema = new Schema({
     authorId: {
-        type: Schema.Types.ObjectId(),
+        type: Schema.Types.ObjectId,
         ref: "User"
-    }
+    },
+    text: String,
 })
 
-const Notes = model("Notes",notesSchema)
+const Note = model("Note",notesSchema)
 
-module.exports = Notes
+module.exports = Note

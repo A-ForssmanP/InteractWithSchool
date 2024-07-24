@@ -7,6 +7,7 @@ const User = require("./models/user")
 const Student = require("./models/student")
 const InboxMessage = require("./models/inboxMessage")
 const Schedule = require("./models/schedule")
+const Note = require("./models/note")
 
 
 mongoose.connect('mongodb://127.0.0.1:27017/interactWithSchool').then(()=>{
@@ -139,7 +140,16 @@ app.get('/', (req, res) => {
     }
   })
 
-  
+  app.get("/notes", async (req,res) => {
+    console.log(req.header)
+    try {
+      const note = await Note.find({authorId: userId})
+      console.log(note)
+      res.status(200).send(note.text)
+    }catch(err) {
+      res.status(404).json({error:err})
+    }
+  })
 
 app.listen(port,()=>{
 console.log(`SERVER IS UP AND RUNNING ON PORT ${port}!`)
