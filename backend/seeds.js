@@ -3,6 +3,7 @@ const User = require("./models/user")
 const Student = require("./models/student");
 const InboxMessage = require("./models/inboxMessage")
 const Schedule = require("./models/schedule")
+const Note = require("./models/note")
 
 mongoose.connect('mongodb://127.0.0.1:27017/interactWithSchool').then(()=>{
   console.log("CONNECTED TO DB!")
@@ -149,6 +150,18 @@ const insertSchedule = async () => {
  
 }
 
+// create and insert note-document to db
+const insertNote = async () => {
+  try {
+    const user = await User.findById("665341b1b835c5660d42c0fb")
+    const note = new Note({authorId:user,text:""})
+    note.save()
+  } catch(err) {
+    throw new Error(err.message)
+  }
+ 
+}
+
 
 
 // Insert data to dB
@@ -156,8 +169,12 @@ const insertSchedule = async () => {
   await insertNewUserandStudent()
   await insertInboxMessages()
   await insertSchedule()
+  await insertNote()
   console.log("Data inserted to DB!")
  }
+
+ //insert Data to db
+  insertData()
 
 // delete absences
 const deleteAbsences = async () => {
@@ -168,16 +185,14 @@ const deleteAbsences = async () => {
   })
 }
 
-
-
 // deleteAbsences()
 
 const deleteAllCollections = async () => {
   const connection = mongoose.connection;
   try {
-   await connection.collection("students").drop()
-   await connection.collection("schedules").drop()
-   await connection.collection("inboxmessages").drop()
+    await connection.collection("students").drop()
+    await connection.collection("schedules").drop()
+    await connection.collection("inboxmessages").drop()
     await connection.collection("users").drop()
 
     console.log("ALL COLLECTIONS DELETED!")
@@ -187,8 +202,7 @@ const deleteAllCollections = async () => {
   }
 }
 
-//insert Data to db
-insertData()
+
 
 // drop all collections 
 // deleteAllCollections()

@@ -13,7 +13,7 @@ function DashBoardNotesTextField({ handleClose }) {
   const getNotes = async () => {
     try {
       const res = await axios.get(fetchUrl);
-      console.log("res", res);
+      setText(res.data);
     } catch (err) {
       console.log(err);
     }
