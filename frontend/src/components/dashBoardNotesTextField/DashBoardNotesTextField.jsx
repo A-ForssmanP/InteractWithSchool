@@ -11,8 +11,12 @@ function DashBoardNotesTextField({ handleClose }) {
 
   // get notes data
   const getNotes = async () => {
-    const res = await axios.get(fetchUrl);
-    console.log(res);
+    try {
+      const res = await axios.get(fetchUrl);
+      console.log("res", res);
+    } catch (err) {
+      console.log(err);
+    }
   };
   getNotes();
 
