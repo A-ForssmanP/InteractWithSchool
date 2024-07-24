@@ -2,10 +2,12 @@ import { Card, TextField, Button, Box } from "@mui/material";
 import { useTheme } from "@emotion/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import AlertSuccess from "../alertSuccess/AlertSuccess";
 
 function DashBoardNotesTextField({ handleClose }) {
   const [text, setText] = useState("");
   const [saveBtnDisabled, setSaveBtnDisabled] = useState(true);
+  const [showSuccess, setShowSuccess] = useState(false);
   const theme = useTheme();
 
   const fetchUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/notes`;
@@ -26,7 +28,17 @@ function DashBoardNotesTextField({ handleClose }) {
 
   // send note to server
   const sendNote = async () => {
-    await axios.put(fetchUrl, { updatedText: text });
+    try {
+      const res = await axios.put(fetchUrl, { updatedText: text });
+      if (res.status === 200) {
+        setShowSuccess(true);
+        setTimeout(() => {
+          setShowSuccess(false);
+        }, 2000);
+      }
+    } catch (err) {
+      throw new Error(err.message);
+    }
   };
 
   // handle text input change
@@ -91,6 +103,11 @@ function DashBoardNotesTextField({ handleClose }) {
           </Button>
         </Box>
       </Box>
+      {showSuccess && (
+        <div>
+          <AlertSuccess text={"Sparad!"} />
+        </div>
+      )}
     </Card>
   );
 }
