@@ -3,11 +3,13 @@ import { useTheme } from "@emotion/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import AlertSuccess from "../alertSuccess/AlertSuccess";
+import AlertError from "../alertError/AlertError";
 
 function DashBoardNotesTextField({ handleClose }) {
   const [text, setText] = useState("");
   const [saveBtnDisabled, setSaveBtnDisabled] = useState(true);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showError, setShowError] = useState(false);
   const theme = useTheme();
 
   const fetchUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/notes`;
@@ -34,9 +36,13 @@ function DashBoardNotesTextField({ handleClose }) {
         setShowSuccess(true);
         setTimeout(() => {
           setShowSuccess(false);
-        }, 2000);
+        }, 2500);
       }
     } catch (err) {
+      setShowError(true);
+      setTimeout(() => {
+        setShowError(false);
+      }, 3000);
       throw new Error(err.message);
     }
   };
@@ -106,6 +112,11 @@ function DashBoardNotesTextField({ handleClose }) {
       {showSuccess && (
         <div>
           <AlertSuccess text={"Sparad!"} />
+        </div>
+      )}
+      {showError && (
+        <div>
+          <AlertError text={"Ops!..Något gick fel.Försök igen!"} />
         </div>
       )}
     </Card>
