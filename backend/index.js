@@ -141,13 +141,14 @@ app.get('/', (req, res) => {
   })
 
   app.get("/notes", async (req,res) => {
-    console.log(req.header)
     try {
       const note = await Note.find({authorId: userId})
-      console.log(note)
+      if(!note.text) {
+        return res.status(404).json({error:"No notes fund!"})
+      }
       res.status(200).send(note.text)
     }catch(err) {
-      res.status(404).json({error:err})
+      res.status(404).json(err.message)
     }
   })
 
