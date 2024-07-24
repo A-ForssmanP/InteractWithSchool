@@ -37,8 +37,8 @@ function DashBoardNotesTextField({ handleClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await sendNote();
     setSaveBtnDisabled(true);
+    await sendNote();
   };
 
   return (
