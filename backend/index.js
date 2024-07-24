@@ -142,9 +142,21 @@ app.get('/', (req, res) => {
 
   app.get("/notes", async (req,res) => {
     try {
-      const note = await Note.find({authorId: userI})
+      const note = await Note.findOne({authorId: userId})
       res.status(200).send(note.text)
     }catch(err) {
+      res.status(404).json(err.message)
+    }
+  })
+
+  app.put("/notes", async (req,res) => {
+    const {updatedText} = req.body
+    try {
+      const note = await Note.findOne({authorId: userId})
+      note.text = updatedText
+      note.save()
+      res.status(200).send()
+    } catch(err){
       res.status(404).json(err.message)
     }
   })

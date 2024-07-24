@@ -1,13 +1,18 @@
 import { Card, TextField, Button, Box } from "@mui/material";
 import { useTheme } from "@emotion/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 function DashBoardNotesTextField({ handleClose }) {
   const [text, setText] = useState("");
+  const [saveBtnDisabled, setSaveBtnDisabled] = useState(true);
   const theme = useTheme();
 
   const fetchUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/notes`;
+
+  useEffect(() => {
+    getNotes();
+  }, []);
 
   // get notes data
   const getNotes = async () => {
@@ -15,10 +20,26 @@ function DashBoardNotesTextField({ handleClose }) {
       const res = await axios.get(fetchUrl);
       setText(res.data);
     } catch (err) {
-      console.log(err);
+      setText(err.message);
     }
   };
-  getNotes();
+
+  // send note to server
+  const sendNote = async () => {
+    await axios.put(fetchUrl, { updatedText: text });
+  };
+
+  // handle text input change
+  const handleTextChange = (e) => {
+    setText(e.target.value);
+    setSaveBtnDisabled(false);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await sendNote();
+    setSaveBtnDisabled(true);
+  };
 
   return (
     <Card
@@ -34,7 +55,7 @@ function DashBoardNotesTextField({ handleClose }) {
         backgroundColor: theme.palette.grey[50],
       }}
     >
-      <Box component={"form"}>
+      <Box component={"form"} onSubmit={handleSubmit}>
         <TextField
           multiline
           name="notes-textField"
@@ -43,7 +64,7 @@ function DashBoardNotesTextField({ handleClose }) {
           label="Mina Anteckningar"
           id="Mina Anteckningar"
           rows={12}
-          onChange={(e) => setText(e.target.value)}
+          onChange={handleTextChange}
           sx={{
             width: "100%",
             marginTop: 1,
@@ -53,7 +74,12 @@ function DashBoardNotesTextField({ handleClose }) {
           // inputProps={{ style: { "&:focus": "{ border: red }" } }}
         />
         <Box display={"flex"} gap={1} bgcolor={theme.palette.primary.light}>
-          <Button variant="contained" type="submit" sx={{ color: "white" }}>
+          <Button
+            variant="contained"
+            type="submit"
+            disabled={saveBtnDisabled}
+            sx={{ color: "white" }}
+          >
             Spara
           </Button>
           <Button
