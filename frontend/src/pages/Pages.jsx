@@ -1,4 +1,5 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { Box } from "@mui/material";
 import Layout from "./Layout";
 import InboxLayout from "./inbox/InboxLayout";
@@ -16,6 +17,11 @@ import TimeScheduleOverview from "./TimeSchedule/timescheduleOverview/TimeSchedu
 import DashBoard from "./dashBoard/DashBoard";
 
 function Pages() {
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //   navigate("/loggaIn");
+  // }, []);
+
   return (
     <Box height={"100%"}>
       <Routes>
@@ -45,6 +51,7 @@ function Pages() {
               element={<TimeScheduleOverview />}
             />
           </Route>
+          <Route path="/loggaIn" element={"Logga in"} />
         </Route>
         <Route path="*" element={<h1>Page Not Found</h1>} />
       </Routes>
