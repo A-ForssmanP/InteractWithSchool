@@ -1,18 +1,8 @@
+import { useState } from "react";
 import { Box, Typography, Paper, Grid, useTheme } from "@mui/material";
 import ReadOnlyDatePicker from "../../components/readOnlyDatePicker/ReadOnlyDatePicker";
 import ChartYearProg from "../../components/chartYearProg/ChartYearProg";
 import DashBoardNotes from "../../components/dashBoardNotes/DashBoardNotes";
-import { useState } from "react";
-import { dayCalendarClasses } from "@mui/x-date-pickers/DateCalendar/dayCalendarClasses";
-/* content:
-welcome message
-show day and time
-weather?
-show progress of scool year
-anteckningar
-list på sina barn
-Klass lista med färäldrar
-*/
 
 function DashBoard() {
   const [date, setDate] = useState(new Date());
@@ -24,11 +14,6 @@ function DashBoard() {
     <ReadOnlyDatePicker />,
     null,
   ];
-  // const mainContent = [Array(4).fill(null)];
-  // mainContent[2] = <DashBoardNotes />;
-  // mainContent[3] = <DashBoardNotes />;
-  // mainContent[1] = <ChartYearProg />;
-  // mainContent[0] = <ReadOnlyDatePicker />;
   const months = [
     "Jan",
     "Feb",
@@ -59,7 +44,6 @@ function DashBoard() {
         flexDirection={"column"}
         pl={{ sm: 2 }}
         pr={{ sm: 2 }}
-        // border={"5px solid yellow"}
       >
         <Box pt={{ sm: 1, md: 0.5, lg: 1 }}>
           <Box
@@ -98,23 +82,16 @@ function DashBoard() {
           justifyContent={{ xs: "center", md: "left" }}
           pt={{ sm: 0.5 }}
           pb={{ sm: 0.5 }}
-          // alignItems={{ sm: "center" }}
-
           maxWidth={"100%"}
-          // border={"5px solid green"}
         >
           <Box
             flex={1}
-            // border={"5px solid red"}
             display={"grid"}
             gridAutoRows={"1fr"}
             gap={2}
             gridTemplateColumns={{ sm: "repeat(2, 1fr)" }}
-            // gridTemplateRows={"1fr 1fr"}
-            // width={"100%"}
             maxWidth={{ lg: 1200, xl: 1300 }}
             maxHeight={{ xl: 900 }}
-            // height={{ sm: 500, md: 560 }}
             bgcolor={theme.palette.primary.main}
             p={{ sm: 3, md: 5, lg: 6 }}
             pt={{ xs: 2, sm: 3 }}
@@ -129,9 +106,6 @@ function DashBoard() {
                   display={"flex"}
                   justifyContent={"center"}
                   alignItems={"stretch"}
-                  // border={"1px solid red"}
-                  // width={"100%"}
-                  // height={"100%"}
                 >
                   <Paper
                     sx={{
@@ -143,8 +117,6 @@ function DashBoard() {
                       bgcolor: "rgba(255,255,255,0.5)",
                       padding: 2,
                       borderRadius: { sm: 10 },
-                      // width: "100%",
-                      // height: "100%",
                     }}
                   >
                     {item}
