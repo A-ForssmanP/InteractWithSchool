@@ -61,14 +61,14 @@ function DashBoard() {
         pr={{ sm: 2 }}
         // border={"5px solid yellow"}
       >
-        <Box>
+        <Box pt={{ sm: 1 }}>
           <Box
             display={"flex"}
             flexDirection={{ xs: "column", sm: "row" }}
             gap={{ xs: 1, sm: 2 }}
             width={{ xs: "100%", sm: "fit-content" }}
             p={{ xs: 1, sm: 3 }}
-            borderRadius={5}
+            borderRadius={{ sm: 5 }}
             bgcolor={theme.palette.secondary.main}
             color={theme.palette.grey[50]}
           >
@@ -95,6 +95,8 @@ function DashBoard() {
           display={"flex"}
           flexGrow={1}
           justifyContent={{ xs: "center", md: "left" }}
+          pt={{ sm: 0.5 }}
+          pb={{ sm: 0.5 }}
           // alignItems={{ sm: "center" }}
 
           maxWidth={"100%"}
@@ -113,7 +115,7 @@ function DashBoard() {
             maxHeight={{ xl: 900 }}
             // height={{ sm: 500, md: 560 }}
             bgcolor={theme.palette.primary.main}
-            p={{ sm: 3, md: 6 }}
+            p={{ sm: 3, md: 5, lg: 6 }}
             pt={{ xs: 2, sm: 3 }}
             pb={{ xs: 2, sm: 3 }}
             borderRadius={{ xs: 1, sm: 12 }}
