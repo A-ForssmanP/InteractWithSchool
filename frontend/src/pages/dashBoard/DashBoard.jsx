@@ -61,13 +61,14 @@ function DashBoard() {
         pr={{ sm: 2 }}
         // border={"5px solid yellow"}
       >
-        <Box pt={{ sm: 1 }}>
+        <Box pt={{ sm: 1, md: 0.5, lg: 1 }}>
           <Box
             display={"flex"}
             flexDirection={{ xs: "column", sm: "row" }}
             gap={{ xs: 1, sm: 2 }}
             width={{ xs: "100%", sm: "fit-content" }}
             p={{ xs: 1, sm: 3 }}
+            mt={{ xl: 1 }}
             borderRadius={{ sm: 5 }}
             bgcolor={theme.palette.secondary.main}
             color={theme.palette.grey[50]}
@@ -119,6 +120,7 @@ function DashBoard() {
             pt={{ xs: 2, sm: 3 }}
             pb={{ xs: 2, sm: 3 }}
             borderRadius={{ xs: 1, sm: 12 }}
+            mt={{ xl: 1 }}
           >
             {mainContent.map((item, indx) => {
               return (
