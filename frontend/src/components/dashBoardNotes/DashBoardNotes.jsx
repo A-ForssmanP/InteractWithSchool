@@ -1,10 +1,9 @@
-import { Box, Typography, Button, TextField, Card } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 import { useState } from "react";
 import DashBoardNotesTextField from "../dashBoardNotesTextField/DashBoardNotesTextField";
 
 function DashBoardNotes() {
   const [textFieldOpen, setTextFieldOpen] = useState(false);
-  // const [text, setText] = useState("fdfd");
   const paperData = [
     {
       rows: 5,
@@ -98,10 +97,7 @@ function DashBoardNotes() {
         )}
       </Box>
       {textFieldOpen && (
-        <DashBoardNotesTextField
-          handleClose={() => setTextFieldOpen(false)}
-          // text={text}
-        />
+        <DashBoardNotesTextField handleClose={() => setTextFieldOpen(false)} />
       )}
 
       <Button

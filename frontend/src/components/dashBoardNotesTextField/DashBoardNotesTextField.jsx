@@ -62,11 +62,8 @@ function DashBoardNotesTextField({ handleClose }) {
   return (
     <Card
       sx={{
-        // border: "1px solid red",
-        // opacity: 0.3,
         position: "absolute",
         top: { xs: "-4.5em", sm: "-10.5em", md: "-11.5em", xl: "-12em" },
-        // bottom: "-3.5em",
         left: { xs: "-0.9em", sm: "6em", md: "4em", lg: "-6em" },
         right: { xs: "-0.9em", sm: "-11em", md: "-13.3em", lg: "-5em" },
         zIndex: 100,
@@ -77,7 +74,6 @@ function DashBoardNotesTextField({ handleClose }) {
         <TextField
           multiline
           name="notes-textField"
-          // defaultValue="Default Values"
           value={text}
           label="Mina Anteckningar"
           id="Mina Anteckningar"
@@ -86,10 +82,7 @@ function DashBoardNotesTextField({ handleClose }) {
           sx={{
             width: "100%",
             marginTop: 1,
-            // backgroundColor: "#ffe0b2",
-            // "&focus": "{ backgroundColor: red }",
           }}
-          // inputProps={{ style: { "&:focus": "{ border: red }" } }}
         />
         <Box display={"flex"} gap={1} bgcolor={theme.palette.primary.light}>
           <Button
