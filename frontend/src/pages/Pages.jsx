@@ -15,6 +15,7 @@ import TimeSchedule from "./TimeSchedule/TimeSchedule";
 import TimeScheduleRegister from "./TimeSchedule/timeScheduleRegister/TimeScheduleRegister";
 import TimeScheduleOverview from "./TimeSchedule/timescheduleOverview/TimeScheduleOverview";
 import DashBoard from "./dashBoard/DashBoard";
+import Login from "./login/Login";
 
 function Pages() {
   // const navigate = useNavigate();
@@ -51,7 +52,7 @@ function Pages() {
               element={<TimeScheduleOverview />}
             />
           </Route>
-          <Route path="/loggaIn" element={"Logga in"} />
+          <Route path="/loggaIn" element={<Login />} />
         </Route>
         <Route path="*" element={<h1>Page Not Found</h1>} />
       </Routes>
