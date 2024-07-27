@@ -1,4 +1,5 @@
 import { Box, Paper, Typography, Button, TextField } from "@mui/material";
+import PersonIcon from "@mui/icons-material/Person";
 
 function LoginForm() {
   return (
@@ -7,10 +8,10 @@ function LoginForm() {
         <Typography>Logga in</Typography>
         <Box>
           <Typography variant="h4" fontSize={14}>
-            Som demo användare:
+            Demo användare:
           </Typography>
-          <Button>Användare #1</Button>
-          <Button>Användare #2</Button>
+          <Button startIcon={<PersonIcon />}>Användare #1</Button>
+          <Button startIcon={<PersonIcon />}>Användare #2</Button>
         </Box>
         <Typography>Eller</Typography>
         <Box component={"form"}>
