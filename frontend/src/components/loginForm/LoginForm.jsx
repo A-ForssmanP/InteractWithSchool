@@ -29,7 +29,7 @@ function LoginForm() {
     e.preventDefault();
     try {
       const res = await axios.post(postUrl, inputValues);
-      console.log("fdfd");
+      console.log(res);
     } catch (err) {
       console.log(err.request.response);
     }
