@@ -64,7 +64,7 @@ const insertNewUserandStudent = async () => {
   }
 
   try {
-    const u = new User({_id: "665341b1b835c5660d42c0fb" ,firstName:"Demo", lastName:"User",password:"Kaffe"})
+    const u = new User({_id: "665341b1b835c5660d42c0fb" ,firstName:"Demo", lastName:"User",username:"Demo123",password:"Kaffe"})
     await Student.insertMany(students)
     const stnts = await Student.find({})
  stnts[0].absence.prevAbsences = absenceSeeds.firstStud
