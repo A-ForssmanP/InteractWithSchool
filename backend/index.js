@@ -28,6 +28,21 @@ app.get('/', (req, res) => {
     res.send('Welcome to server!!')
   })
 
+  app.post("/login", async (req,res) => {
+    console.log(req.body)
+    //get data from body
+    const {username,password} = req.body
+    //data in body is complete?
+    if(!(username && password)) {
+     return res.status(400).send("Username or password is missing" )
+    }
+    //check if user exists
+    // const user = await User.find()
+    //validate password
+    //create token
+    //send back token
+  })
+
   app.get("/inbox", async (req,res) => {
     try {
     const user = await User.findById(userId).populate("students","firstName")

@@ -29,8 +29,9 @@ function LoginForm() {
     e.preventDefault();
     try {
       const res = await axios.post(postUrl, inputValues);
+      console.log("fdfd");
     } catch (err) {
-      console.log(err.message);
+      console.log(err.request.response);
     }
   };
 
