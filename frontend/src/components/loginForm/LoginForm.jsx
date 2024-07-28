@@ -1,9 +1,39 @@
 import { Box, Paper, Typography, Button, TextField } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import { useTheme } from "@emotion/react";
+import { useState } from "react";
+import axios from "axios";
 
 function LoginForm() {
+  const [inputValues, setInputValues] = useState({
+    username: "",
+    password: "",
+  });
   const theme = useTheme();
+  const postUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/login`;
+
+  //update input values
+  const handleInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setInputValues((curr) => {
+      return {
+        ...curr,
+        [name]: value,
+      };
+    });
+  };
+
+  // handle submitting the form
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(postUrl, inputValues);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
   return (
     <Box display={"flex"} justifyContent={"center"} width={"100%"}>
       <Paper
@@ -38,12 +68,17 @@ function LoginForm() {
           mb={15}
           width={"100%"}
           maxWidth={"20rem"}
+          onSubmit={handleSubmit}
         >
           <Box display={"flex"} flexDirection={"column"} gap={2} mb={2}>
             <TextField
               id="username-input"
               label="Användarnamn"
               type="text"
+              value={inputValues["username"]}
+              name="username"
+              onChange={handleInput}
+              required
               InputProps={{
                 style: {
                   borderRadius: "1.6rem",
@@ -54,6 +89,10 @@ function LoginForm() {
               id="password-input"
               label="Lösenord"
               type="password"
+              value={inputValues["password"]}
+              name="password"
+              onChange={handleInput}
+              required
               InputProps={{
                 style: {
                   borderRadius: "1.6rem",
