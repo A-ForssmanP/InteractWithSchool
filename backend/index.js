@@ -36,9 +36,12 @@ app.get('/', (req, res) => {
     if(!(username && password)) {
      return res.status(400).send("Username or password is missing" )
     }
-    //check if user exists
-    // const user = await User.find()
-    //validate password
+    //check if user exists and validate password
+    const user = await User.findOne({username:username})
+    if(!user || password !== user.password) {
+      return res.status(404).send("Invalid Username or password")
+    } 
+   
     //create token
     //send back token
   })
