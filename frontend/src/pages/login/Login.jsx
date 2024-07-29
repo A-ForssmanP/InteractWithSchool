@@ -2,7 +2,7 @@ import { useTheme } from "@emotion/react";
 import LoginForm from "../../components/loginForm/LoginForm";
 import { Box } from "@mui/material";
 
-function Login() {
+function Login({ isAuthenticated }) {
   const theme = useTheme();
   return (
     <Box
@@ -21,7 +21,7 @@ function Login() {
         },
       }}
     >
-      <LoginForm />
+      <LoginForm isAuthenticated={isAuthenticated} />
     </Box>
   );
 }

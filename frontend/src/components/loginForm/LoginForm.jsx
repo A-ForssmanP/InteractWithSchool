@@ -4,7 +4,7 @@ import { useTheme } from "@emotion/react";
 import { useState } from "react";
 import axios from "axios";
 
-function LoginForm() {
+function LoginForm({ isAuthenticated }) {
   const [inputValues, setInputValues] = useState({
     username: "",
     password: "",
@@ -32,6 +32,10 @@ function LoginForm() {
       const res = await axios.post(postUrl, inputValues, {
         withCredentials: true,
       });
+      if (loginError) {
+        setLoginError(null);
+      }
+      isAuthenticated();
     } catch (err) {
       setLoginError(err.request.response);
     }
