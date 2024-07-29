@@ -31,7 +31,6 @@ function LoginForm() {
       const res = await axios.post(postUrl, inputValues, {
         withCredentials: true,
       });
-      console.log(res);
     } catch (err) {
       console.log(err.request.response);
     }
