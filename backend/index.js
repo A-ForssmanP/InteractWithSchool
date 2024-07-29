@@ -46,13 +46,12 @@ app.get('/', (req, res) => {
     //create token
     const token = jwt.sign({userId: user._id},process.env.JWT_SECRET, { expiresIn: '30m'})
      //send back token
-     res.cookie("token","token!!!")
+     res.cookie("token",token,{httpOnly:true})
      res.send("Cookie send!")
     }
     } catch(err) {
       console.log(err)
     }
-  
   })
 
   app.get("/inbox", async (req,res) => {
