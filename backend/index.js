@@ -19,7 +19,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/interactWithSchool').then(()=>{
 })
 
 const port = process.env.SERVER_PORT
-const corsOptions = {origin: process.env.VITE_SERVER, optionsSuccessStatus: 200}
+const corsOptions = {origin: process.env.VITE_SERVER, optionsSuccessStatus: 200,credentials:true}
 const userId  = process.env.USER_ID
 
 app.use(express.json())
@@ -46,8 +46,8 @@ app.get('/', (req, res) => {
     //create token
     const token = jwt.sign({userId: user._id},process.env.JWT_SECRET, { expiresIn: '30m'})
      //send back token
-     res.cookie("token","token")
-     res.send()
+     res.cookie("token","token!!!")
+     res.send("Cookie send!")
     }
     } catch(err) {
       console.log(err)
