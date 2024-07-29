@@ -21,13 +21,26 @@ function Pages() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
   console.log(isAuthenticated);
+
   useEffect(() => {
+    handleRoutes();
+  }, [isAuthenticated]);
+
+  // check isAuthenticated cookie
+  const checkIsAuthenticated = () => {
+    // get all cookies
+    //split every cookie in the cookies string
+    //find isAuthenticated cookie and chech the value
+  };
+
+  //handle routes to render if the user is authenticated or not
+  const handleRoutes = () => {
     if (!isAuthenticated) {
       return navigate("/logga_in");
     } else {
       navigate("/");
     }
-  }, [isAuthenticated]);
+  };
 
   // update state of isAuthenticated
   const handleIsAuthenticated = (isAuth) => {
