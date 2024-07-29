@@ -50,7 +50,7 @@ app.get('/', (req, res) => {
      res.send("Cookie send!")
     }
     } catch(err) {
-      console.log(err)
+      return res.status(404).send("Something went wrong, please try again")
     }
   })
 

@@ -9,6 +9,7 @@ function LoginForm() {
     username: "",
     password: "",
   });
+  const [loginError, setLoginError] = useState(null);
   const theme = useTheme();
   const postUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/login`;
 
@@ -32,7 +33,7 @@ function LoginForm() {
         withCredentials: true,
       });
     } catch (err) {
-      console.log(err.request.response);
+      setLoginError(err.request.response);
     }
   };
 
@@ -64,6 +65,11 @@ function LoginForm() {
           <Button startIcon={<PersonIcon />}>Användare #2</Button>
         </Box>
         <Typography>Eller</Typography>
+        {loginError && (
+          <Typography color={theme.palette.secondary.light}>
+            {loginError}
+          </Typography>
+        )}
         <Box
           component={"form"}
           mt={1.4}
