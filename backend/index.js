@@ -56,6 +56,10 @@ app.get('/', (req, res) => {
     }
   })
 
+  app.delete("/logout", (req,res) => {
+
+  })
+
   app.get("/inbox", async (req,res) => {
     try {
     const user = await User.findById(userId).populate("students","firstName")
