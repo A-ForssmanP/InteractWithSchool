@@ -2,6 +2,7 @@ import { Box, Paper, Typography, Button, TextField } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import { useTheme } from "@emotion/react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function LoginForm({ isAuthenticated }) {
@@ -10,6 +11,7 @@ function LoginForm({ isAuthenticated }) {
     password: "",
   });
   const [loginError, setLoginError] = useState(null);
+  const navigate = useNavigate();
   const theme = useTheme();
   const postUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/login`;
 
@@ -36,6 +38,7 @@ function LoginForm({ isAuthenticated }) {
         setLoginError(null);
       }
       isAuthenticated();
+      navigate("/");
     } catch (err) {
       setLoginError(err.request.response);
     }

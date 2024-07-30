@@ -19,14 +19,21 @@ import Login from "./login/Login";
 
 function Pages() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [navigateToLogin, setNavigateToLogin] = useState(false);
   const navigate = useNavigate();
-  console.log(isAuthenticated);
+
   useEffect(() => {
+    redirectToLogin();
+  }, [navigateToLogin === true]);
+
+  useEffect(() => {
+    setNavigateToLogin(false);
     const value = checkIsAuthCookie();
-    console.log(value);
-    setIsAuthenticated(value);
-    handleRoutes();
-  }, [isAuthenticated]);
+    if (isAuthenticated !== value) {
+      setIsAuthenticated(value);
+    }
+    !value && setNavigateToLogin(true);
+  });
 
   // check isAuthenticated cookie
   const checkIsAuthCookie = () => {
@@ -47,16 +54,13 @@ function Pages() {
         }
       });
     }
-    console.log(cookieValue);
     return cookieValue;
   };
 
-  //handle routes to render if the user is authenticated or not
-  const handleRoutes = () => {
-    if (!isAuthenticated) {
-      return navigate("/logga_in");
-    } else {
-      navigate("/");
+  //redirectToLogin when user is not authenticated
+  const redirectToLogin = () => {
+    if (navigateToLogin) {
+      navigate("/logga_in");
     }
   };
 
