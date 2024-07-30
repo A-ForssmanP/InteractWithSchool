@@ -21,16 +21,34 @@ function Pages() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
   console.log(isAuthenticated);
-
   useEffect(() => {
+    const value = checkIsAuthCookie();
+    console.log(value);
+    setIsAuthenticated(value);
     handleRoutes();
   }, [isAuthenticated]);
 
   // check isAuthenticated cookie
-  const checkIsAuthenticated = () => {
+  const checkIsAuthCookie = () => {
+    let cookieValue = false;
     // get all cookies
-    //split every cookie in the cookies string
-    //find isAuthenticated cookie and chech the value
+    const allCookies = document.cookie;
+    if (allCookies.length > 0) {
+      //split every cookie key-value pair into an array
+      const cookieArr = allCookies.split("; ");
+      //check if isAuthenticated cookie exists and if so, chech the value
+      cookieArr.forEach((c) => {
+        if (c.indexOf("isAuthenticated") === 0) {
+          const splittKeyValue = c.split("=");
+          const value = splittKeyValue[1];
+          const stringToBoolean = value === "true";
+          // set cookieValue to stringToBoolean value
+          cookieValue = stringToBoolean;
+        }
+      });
+    }
+    console.log(cookieValue);
+    return cookieValue;
   };
 
   //handle routes to render if the user is authenticated or not
