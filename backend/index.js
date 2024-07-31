@@ -80,7 +80,7 @@ app.get('/', (req, res) => {
       return res.status(400).send("Fält saknas")
     }
     //check if userName allready exists
-    const userExists = await User.findOne({"username":username})
+    const userExists = await User.findOne({username:username})
     if(userExists) {
        throw new Error("Användarnamnet är upptaget")
     }
