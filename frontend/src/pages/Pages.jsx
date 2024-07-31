@@ -112,7 +112,14 @@ function Pages() {
                 <Login isAuthenticated={() => handleIsAuthenticated(true)} />
               }
             />
-            <Route path="skapa_konto" element={<CreateAccount />} />
+            <Route
+              path="skapa_konto"
+              element={
+                <CreateAccount
+                  isAuthenticated={() => handleIsAuthenticated(true)}
+                />
+              }
+            />
           </Route>
         )}
 
