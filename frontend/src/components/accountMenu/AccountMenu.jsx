@@ -14,7 +14,7 @@ import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import axios from "axios";
 
-export default function AccountMenu() {
+export default function AccountMenu({ closeMenu }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
@@ -31,15 +31,15 @@ export default function AccountMenu() {
     try {
       const res = await axios.delete(deleteUrl, { withCredentials: true });
       if (res.status === 200) {
+        closeMenu();
         navigate("/logga_in");
       }
-      console.log(res);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     handleClose();
     logoutReq();
   };

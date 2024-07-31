@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken")
 
-
 const cookieJwtAuth = (req,res,next) => {
     try{
         //get token cookie out of req

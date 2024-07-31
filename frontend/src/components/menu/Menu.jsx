@@ -84,7 +84,7 @@ function Menu() {
           borderRadius: { sm: "0 2rem 2rem 0", md: "0" },
         }}
       >
-        <AccountMenu />
+        <AccountMenu closeMenu={() => toggleMenu(false)} />
         <NavList toggleMenu={() => toggleMenu(false)} />
       </Box>
     </Box>
