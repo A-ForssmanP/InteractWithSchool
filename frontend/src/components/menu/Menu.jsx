@@ -85,7 +85,7 @@ function Menu() {
         }}
       >
         <AccountMenu closeMenu={() => toggleMenu(false)} />
-        <NavList toggleMenu={() => toggleMenu(false)} />
+        <NavList closeMenu={() => toggleMenu(false)} />
       </Box>
     </Box>
   );

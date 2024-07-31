@@ -7,7 +7,7 @@ import DateRangeIcon from "@mui/icons-material/DateRange";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function NavList({ toggleMenu }) {
+function NavList({ closeMenu }) {
   const [isSelected, setIsSelected] = useState("Hem");
   const navigate = useNavigate();
 
@@ -40,7 +40,7 @@ function NavList({ toggleMenu }) {
 
   // handle item click
   const handleClick = (item) => {
-    toggleMenu();
+    closeMenu();
     navigate(item.navPath);
     handleSelected(item.text);
   };
