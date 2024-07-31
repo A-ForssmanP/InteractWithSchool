@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
@@ -16,6 +17,8 @@ import axios from "axios";
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const navigate = useNavigate();
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -27,6 +30,9 @@ export default function AccountMenu() {
     const deleteUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/logout`;
     try {
       const res = await axios.delete(deleteUrl, { withCredentials: true });
+      if (res.status === 200) {
+        navigate("/logga_in");
+      }
       console.log(res);
     } catch (err) {
       console.log(err);

@@ -61,7 +61,14 @@ app.get('/', (req, res) => {
   })
 
   app.delete("/logout",cookieJwtAuth, (req,res) => {
-
+    try {
+      //delete cookies
+      res.clearCookie("token")
+      res.clearCookie("isAuthenticated")
+      res.status(200).send()
+    } catch(err) {
+      res.status(404).send()
+    }
   })
 
   app.get("/inbox", async (req,res) => {
