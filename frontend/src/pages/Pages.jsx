@@ -16,6 +16,7 @@ import TimeScheduleRegister from "./TimeSchedule/timeScheduleRegister/TimeSchedu
 import TimeScheduleOverview from "./TimeSchedule/timescheduleOverview/TimeScheduleOverview";
 import DashBoard from "./dashBoard/DashBoard";
 import Login from "./login/Login";
+import CreateAccount from "./createAccount/CreateAccount";
 
 function Pages() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -104,15 +105,18 @@ function Pages() {
             </Route>
           </Route>
         ) : (
-          <Route
-            path="/logga_in"
-            element={
-              <Login isAuthenticated={() => handleIsAuthenticated(true)} />
-            }
-          />
+          <Route path="/" element={<Layout />}>
+            <Route
+              path="logga_in"
+              element={
+                <Login isAuthenticated={() => handleIsAuthenticated(true)} />
+              }
+            />
+            <Route path="skapa_konto" element={<CreateAccount />} />
+          </Route>
         )}
 
-        <Route path="*" element={<h1>Page Not Found</h1>} />
+        <Route path="*" element={<h1>Sidan kan inte hittas</h1>} />
       </Routes>
     </Box>
   );

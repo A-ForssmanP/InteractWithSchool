@@ -132,7 +132,9 @@ function LoginForm({ isAuthenticated }) {
             </Button>
           </Box>
         </Box>
-        <Button>Skapa användare</Button>
+        <Button onClick={() => navigate("/skapa_konto")}>
+          Skapa användare
+        </Button>
       </Paper>
     </Box>
   );
