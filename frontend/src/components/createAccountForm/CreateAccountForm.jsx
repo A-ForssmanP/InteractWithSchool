@@ -1,5 +1,4 @@
 import { Box, Paper, Typography, Button, TextField } from "@mui/material";
-import PersonIcon from "@mui/icons-material/Person";
 import { useTheme } from "@emotion/react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -37,6 +36,7 @@ function CreateAccountForm({ isAuthenticated }) {
       const res = await axios.post(postUrl, inputValues, {
         withCredentials: true,
       });
+      console.log(res);
       if (createError) {
         setCreateError(null);
       }
@@ -71,7 +71,8 @@ function CreateAccountForm({ isAuthenticated }) {
         <Box
           component={"form"}
           mt={1.4}
-          mb={15}
+          //   mb={15}
+          mb={10}
           width={"100%"}
           maxWidth={"20rem"}
           onSubmit={handleSubmit}

@@ -71,6 +71,28 @@ app.get('/', (req, res) => {
     }
   })
 
+  app.post("/create_account",async (req,res) => {
+    try{
+    // get data out of body
+    const { firstName, lastName, username, password } = req.body
+    //check all data exists
+    if(!(firstName && lastName && username && password)){
+      return res.status(400).send("Fält saknas")
+    }
+    //check if userName allready exists
+    const userExists = await User.findOne({"username":username})
+    if(userExists) {
+       throw new Error("Användarnamnet är upptaget")
+    }
+    // create a hashed password
+    //create a new user and save it to db
+    console.log(userExists)
+    } catch(err){
+      console.log(err.message)
+      res.status(404).send(err.message)
+    }
+  })
+
   app.get("/inbox", async (req,res) => {
     try {
     const user = await User.findById(userId).populate("students","firstName")
