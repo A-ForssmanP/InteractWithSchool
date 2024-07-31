@@ -11,6 +11,7 @@ import Tooltip from "@mui/material/Tooltip";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
+import axios from "axios";
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -21,6 +22,22 @@ export default function AccountMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const logoutReq = async () => {
+    const deleteUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/logout`;
+    try {
+      const res = await axios.delete(deleteUrl, { withCredentials: true });
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleLogout = () => {
+    handleClose();
+    logoutReq();
+  };
+
   return (
     <React.Fragment>
       <Box
@@ -113,11 +130,11 @@ export default function AccountMenu() {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
-          Logout
+          Logga ut
         </MenuItem>
       </Menu>
     </React.Fragment>

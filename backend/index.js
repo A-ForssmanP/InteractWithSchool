@@ -4,12 +4,15 @@ const cors = require("cors")
 const app = express()
 const jwt = require("jsonwebtoken")
 const mongoose = require('mongoose');
+const cookieParser = require("cookie-parser")
 
 const User = require("./models/user")
 const Student = require("./models/student")
 const InboxMessage = require("./models/inboxMessage")
 const Schedule = require("./models/schedule")
 const Note = require("./models/note")
+
+const cookieJwtAuth = require("./middleware/cookieJwtAuth")
 
 
 mongoose.connect('mongodb://127.0.0.1:27017/interactWithSchool').then(()=>{
@@ -25,6 +28,7 @@ const userId  = process.env.USER_ID
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(cors(corsOptions))
+app.use(cookieParser())
 
 app.get('/', (req, res) => {
     res.send('Welcome to server!!')
@@ -56,7 +60,7 @@ app.get('/', (req, res) => {
     }
   })
 
-  app.delete("/logout", (req,res) => {
+  app.delete("/logout",cookieJwtAuth, (req,res) => {
 
   })
 
