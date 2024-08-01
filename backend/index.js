@@ -5,6 +5,7 @@ const app = express()
 const jwt = require("jsonwebtoken")
 const mongoose = require('mongoose');
 const cookieParser = require("cookie-parser")
+const bcrypt = require("bcryptjs")
 
 const User = require("./models/user")
 const Student = require("./models/student")
@@ -84,7 +85,9 @@ app.get('/', (req, res) => {
     if(userExists) {
        throw new Error("Användarnamnet är upptaget")
     }
-    // create a hashed password
+    // hash the password
+    const salt = await bcrypt.genSalt(10)
+    const hash = await bcrypt.hash(password,salt)
     //create a new user and save it to db
     console.log(userExists)
     } catch(err){
