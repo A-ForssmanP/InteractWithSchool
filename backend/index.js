@@ -87,9 +87,17 @@ app.get('/', (req, res) => {
     }
     // hash the password
     const salt = await bcrypt.genSalt(10)
-    const hash = await bcrypt.hash(password,salt)
-    //create a new user and save it to db
-    console.log(userExists)
+    const hashedPassword = await bcrypt.hash(password,salt)
+    //create a new user
+    const newUser = new User({firstName,lastName,username,password:hashedPassword})
+    //create a new note and point user to it 
+    const newNote = new Note({authorId:newUser})
+    //create schedule
+    //create student and point schedule to that student
+    //create inbox message and point student to it
+     //save user,note to db
+     newUser.save()
+     newNote.save()
     } catch(err){
       console.log(err.message)
       res.status(404).send(err.message)
