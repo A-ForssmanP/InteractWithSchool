@@ -14,6 +14,7 @@ const Schedule = require("./models/schedule")
 const Note = require("./models/note")
 
 const cookieJwtAuth = require("./middleware/cookieJwtAuth")
+const generateRandomName = require("./utils/generateRandomName")
 
 
 mongoose.connect('mongodb://127.0.0.1:27017/interactWithSchool').then(()=>{
@@ -99,6 +100,8 @@ app.get('/', (req, res) => {
     const newSchedule = new Schedule({caring:caring})
     newSchedule.save()
     //create student and add schedule to that student
+      const names = generateRandomName()
+      console.log(names)
     //create inbox message and point student to it
      //save user,note to db
      newUser.save()

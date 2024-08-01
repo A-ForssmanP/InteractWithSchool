@@ -9,14 +9,22 @@ function generateRandomName(maxQty=3) {
     const namesArray = [];
     //generate a name 
     for(let i = 0; i < qty; i++) {
-        const randomIndexNumber = Math.floor(Math.random() * names.length)
-        const name = names[randomIndexNumber]
-        namesArray.push(name)
+        let nameExists = true
+        // generate a name and check if it allready exist, if so, generate a new name
+        while(nameExists) {
+            nameExists = false
+            const randomIndexNumber = Math.floor(Math.random() * names.length)
+            const name = names[randomIndexNumber]
+            //check if name already exist in namesArray
+            const exists = namesArray.some((n)=>n === name)
+            if(exists) {
+                nameExists = true
+            } else {
+                namesArray.push(name)
+            }
+        }
     }
     return namesArray
 }
-
-const names = generateRandomName()
-console.log(names)
 
 module.exports = generateRandomName
