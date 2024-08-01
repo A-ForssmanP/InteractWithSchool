@@ -98,7 +98,7 @@ app.get('/', (req, res) => {
     const caring = caringTypes[randomNumber]
     const newSchedule = new Schedule({caring:caring})
     newSchedule.save()
-    //create student and point schedule to that student
+    //create student and add schedule to that student
     //create inbox message and point student to it
      //save user,note to db
      newUser.save()
