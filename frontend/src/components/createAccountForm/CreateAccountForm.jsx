@@ -36,7 +36,6 @@ function CreateAccountForm({ isAuthenticated }) {
       const res = await axios.post(postUrl, inputValues, {
         withCredentials: true,
       });
-      console.log(res);
       if (createError) {
         setCreateError(null);
       }

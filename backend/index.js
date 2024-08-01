@@ -46,7 +46,8 @@ app.get('/', (req, res) => {
     }
     //check if user exists and validate password
     const user = await User.findOne({username:username})
-    if(!user || password !== user.password) {
+    const hashedPassword = await bcrypt.compare(password,user.password)
+    if(!user || !hashedPassword) {
       return res.status(404).send("Invalid Username or password")
     } else {
     //create token
@@ -93,19 +94,30 @@ app.get('/', (req, res) => {
     const newUser = new User({firstName,lastName,username,password:hashedPassword})
     //create a new note and point user to it 
     const newNote = new Note({authorId:newUser})
-    //create schedule and save it to db
-    const caringTypes = ["Fritids", "Förskola"]
-    const randomNumber = Math.floor(Math.random()*2)
-    const caring = caringTypes[randomNumber]
-    const newSchedule = new Schedule({caring:caring})
-    newSchedule.save()
-    //create student and add schedule to that student
-      const names = generateRandomName()
-      console.log(names)
-    //create inbox message and point student to it
-     //save user,note to db
-     newUser.save()
-     newNote.save()
+    //create student and schedule and save to db
+    const names = generateRandomName()
+    names.forEach((name)=> {
+        //create schedule
+        const caringTypes = ["Fritids", "Förskola"]
+        const randomNumber = Math.floor(Math.random()*2)
+        const caring = caringTypes[randomNumber]
+        const newSchedule = new Schedule({caring:caring})
+        newSchedule.save()
+        //create student
+        const newStudent = new Student({firstName:name,lastName:newUser.lastName,schedule:newSchedule})
+        newStudent.save()
+        newUser.students.push(newStudent)
+      })
+     //save user and note to db
+    newUser.save()
+    newNote.save()
+      //create token
+    const token = jwt.sign({userId: newUser._id},process.env.JWT_SECRET, { expiresIn: '30m'})
+    //create token cookie
+    res.cookie("token",token,{httpOnly:true})
+    // create cookie that tells a user is authenticated
+    res.cookie("isAuthenticated","true")
+    res.status(200).send()
     } catch(err){
       console.log(err.message)
       res.status(404).send(err.message)
