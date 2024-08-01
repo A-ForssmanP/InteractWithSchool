@@ -92,7 +92,12 @@ app.get('/', (req, res) => {
     const newUser = new User({firstName,lastName,username,password:hashedPassword})
     //create a new note and point user to it 
     const newNote = new Note({authorId:newUser})
-    //create schedule
+    //create schedule and save it to db
+    const caringTypes = ["Fritids", "Förskola"]
+    const randomNumber = Math.floor(Math.random()*2)
+    const caring = caringTypes[randomNumber]
+    const newSchedule = new Schedule({caring:caring})
+    newSchedule.save()
     //create student and point schedule to that student
     //create inbox message and point student to it
      //save user,note to db
