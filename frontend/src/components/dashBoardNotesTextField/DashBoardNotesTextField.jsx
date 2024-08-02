@@ -21,7 +21,7 @@ function DashBoardNotesTextField({ handleClose }) {
   // get notes data
   const getNotes = async () => {
     try {
-      const res = await axios.get(fetchUrl);
+      const res = await axios.get(fetchUrl, { withCredentials: true });
       setText(res.data);
     } catch (err) {
       setText(err.message);
@@ -31,7 +31,11 @@ function DashBoardNotesTextField({ handleClose }) {
   // send note to server
   const sendNote = async () => {
     try {
-      const res = await axios.put(fetchUrl, { updatedText: text });
+      const res = await axios.put(
+        fetchUrl,
+        { updatedText: text },
+        { withCredentials: true }
+      );
       if (res.status === 200) {
         setShowSuccess(true);
         setTimeout(() => {

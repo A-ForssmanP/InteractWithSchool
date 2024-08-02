@@ -86,7 +86,8 @@ function AbsenceForm() {
         `${import.meta.env.VITE_EXPRESS_SERVER}/absence/${
           student._id
         }/register`,
-        { data: absence }
+        { data: absence },
+        { withCredentials: true }
       );
       if (res) {
         navigate(`/fronvaro/${student._id}/registrera/inskickad`);

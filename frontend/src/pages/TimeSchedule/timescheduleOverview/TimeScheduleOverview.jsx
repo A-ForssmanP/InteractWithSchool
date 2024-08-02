@@ -25,7 +25,7 @@ function TimeScheduleOverview() {
   //get caring data
   const getScheduleData = async () => {
     try {
-      const res = await axios.get(fetchUrl);
+      const res = await axios.get(fetchUrl, { withCredentials: true });
       if (!res.status === 200) {
         return setScheduleData(false);
       }

@@ -167,7 +167,7 @@ app.get('/', (req, res) => {
 
   })
 
-  app.get("/absence", async(req,res) => {
+  app.get("/absence",isAuthenticated, async(req,res) => {
     try {
       const user = await User.findById(userId).populate("students");
       res.send(user.students)
@@ -176,7 +176,7 @@ app.get('/', (req, res) => {
     }
   })
 
-  app.put("/absence/:id/register", async (req,res) => {
+  app.put("/absence/:id/register",isAuthenticated, async (req,res) => {
     try {
       const {data} = req.body
       const {id} = req.params
@@ -193,7 +193,7 @@ app.get('/', (req, res) => {
     }
   })
 
-  app.get("/timeSchedule", async (req,res) => {
+  app.get("/timeSchedule",isAuthenticated, async (req,res) => {
     try {
       const userPopulated = await User.findById(userId).populate("students");
     const students = userPopulated.students;
@@ -203,7 +203,7 @@ app.get('/', (req, res) => {
     }
   })
  
-  app.get("/timeSchedule/:id", async (req,res) => {
+  app.get("/timeSchedule/:id",isAuthenticated, async (req,res) => {
     try{
         const {id} = req.params;
         const user = await User.findById(userId)
@@ -220,7 +220,7 @@ app.get('/', (req, res) => {
   
   })
 
-  app.post("/timeSchedule/:id", async (req,res) => {
+  app.post("/timeSchedule/:id",isAuthenticated, async (req,res) => {
     try {
       const {data} = req.body;
       const {id} = req.params
@@ -240,7 +240,7 @@ app.get('/', (req, res) => {
     }
   })
 
-  app.get("/notes", async (req,res) => {
+  app.get("/notes",isAuthenticated, async (req,res) => {
     try {
       const note = await Note.findOne({authorId: userId})
       res.status(200).send(note.text)
@@ -249,7 +249,7 @@ app.get('/', (req, res) => {
     }
   })
 
-  app.put("/notes", async (req,res) => {
+  app.put("/notes",isAuthenticated, async (req,res) => {
     const {updatedText} = req.body
     try {
       const note = await Note.findOne({authorId: userId})

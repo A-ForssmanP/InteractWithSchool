@@ -14,7 +14,8 @@ function TimeScheduleRegister() {
   const getSchedule = async () => {
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_EXPRESS_SERVER}/timeSchedule/${params.id}`
+        `${import.meta.env.VITE_EXPRESS_SERVER}/timeSchedule/${params.id}`,
+        { withCredentials: true }
       );
       const { student } = res.data;
       setStudent(student);

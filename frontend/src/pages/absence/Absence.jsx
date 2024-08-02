@@ -12,7 +12,12 @@ function Absence() {
   // get data for the student(s)
   const getStudentData = async () => {
     try {
-      const res = await axios(`${import.meta.env.VITE_EXPRESS_SERVER}/absence`);
+      const res = await axios(
+        `${import.meta.env.VITE_EXPRESS_SERVER}/absence`,
+        {
+          withCredentials: true,
+        }
+      );
       setStudents(res.data);
     } catch (err) {
       throw new Error(err);

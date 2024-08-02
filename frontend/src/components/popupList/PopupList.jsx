@@ -46,7 +46,8 @@ function PopupList({ items, closePopup, handleTimeUpdate, handleDelete }) {
         `${import.meta.env.VITE_EXPRESS_SERVER}/timeSchedule/${studentId}`,
         {
           data: data,
-        }
+        },
+        { withCredentials: true }
       );
       if (res.status !== 200) {
         throw new Error(`HTTP Error! Status: ${res.statusText}`);

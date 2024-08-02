@@ -10,7 +10,8 @@ function TimeSchedule() {
   const getStudents = async () => {
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_EXPRESS_SERVER}/timeSchedule`
+        `${import.meta.env.VITE_EXPRESS_SERVER}/timeSchedule`,
+        { withCredentials: true }
       );
       const { studentsData } = res.data;
       setStudents(studentsData);
