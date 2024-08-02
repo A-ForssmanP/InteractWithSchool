@@ -46,9 +46,12 @@ app.get('/', (req, res) => {
     }
     //check if user exists and validate password
     const user = await User.findOne({username:username})
+    if(!user) {
+      throw new Error("Ogiltigt användarnamn och/eller lösenord")
+   }
     const hashedPassword = await bcrypt.compare(password,user.password)
     if(!user || !hashedPassword) {
-      return res.status(404).send("Ogiltigt användarnamn och/eller lösenord")
+       throw new Error("Ogiltigt användarnamn och/eller lösenord")
     } else {
     //create token
     const token = jwt.sign({userId: user._id},process.env.JWT_SECRET, { expiresIn: '30m'})
