@@ -25,7 +25,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/interactWithSchool').then(()=>{
 
 const port = process.env.SERVER_PORT
 const corsOptions = {origin: process.env.VITE_SERVER, optionsSuccessStatus: 200,credentials:true}
-const userId  = process.env.USER_ID
+// const userId  = process.env.USER_ID
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
@@ -130,6 +130,7 @@ app.get('/', (req, res) => {
 
   app.get("/inbox",isAuthenticated, async (req,res) => {
     try {
+    const userId = req.userId
     const user = await User.findById(userId).populate("students","firstName")
     const inbox = []
     for(let student of user.students) {
@@ -169,6 +170,7 @@ app.get('/', (req, res) => {
 
   app.get("/absence",isAuthenticated, async(req,res) => {
     try {
+      const userId = req.userId;
       const user = await User.findById(userId).populate("students");
       res.send(user.students)
     } catch(err) {
@@ -195,9 +197,10 @@ app.get('/', (req, res) => {
 
   app.get("/timeSchedule",isAuthenticated, async (req,res) => {
     try {
+      const userId = req.userId
       const userPopulated = await User.findById(userId).populate("students");
-    const students = userPopulated.students;
-    res.json({studentsData:students})
+      const students = userPopulated.students;
+      res.json({studentsData:students})
     } catch(err) {
       throw new Error(err)
     }
@@ -205,6 +208,7 @@ app.get('/', (req, res) => {
  
   app.get("/timeSchedule/:id",isAuthenticated, async (req,res) => {
     try{
+        const userId = req.userId;
         const {id} = req.params;
         const user = await User.findById(userId)
         const isValidStudentId = user.students.some((s)=>s.toString() === id)
@@ -222,6 +226,7 @@ app.get('/', (req, res) => {
 
   app.post("/timeSchedule/:id",isAuthenticated, async (req,res) => {
     try {
+      const userId = req.userId;
       const {data} = req.body;
       const {id} = req.params
       const user = await User.findById(userId)
@@ -242,6 +247,7 @@ app.get('/', (req, res) => {
 
   app.get("/notes",isAuthenticated, async (req,res) => {
     try {
+      const userId = req.userId;
       const note = await Note.findOne({authorId: userId})
       res.status(200).send(note.text)
     }catch(err) {
@@ -252,6 +258,7 @@ app.get('/', (req, res) => {
   app.put("/notes",isAuthenticated, async (req,res) => {
     const {updatedText} = req.body
     try {
+      const userId = req.userId;
       const note = await Note.findOne({authorId: userId})
       note.text = updatedText
       note.save()

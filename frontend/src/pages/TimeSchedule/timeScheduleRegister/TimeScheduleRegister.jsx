@@ -50,7 +50,7 @@ function TimeScheduleRegister() {
           >
             <Typography textAlign={"center"}>
               Registrera Tid(<b>{student.schedule.caring}</b>) För,
-              {student.firstName} {student.lastName}
+              {student.firstName}
             </Typography>
             <ButtonBack handleClick={navBack} />
           </Box>
