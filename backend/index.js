@@ -98,7 +98,7 @@ app.get('/', (req, res) => {
     const newUser = new User({firstName,lastName,username,password:hashedPassword})
     //create a new note and point user to it 
     const newNote = new Note({authorId:newUser})
-    //create student and schedule and save to db
+    //create student,schedule and welcome-message and save to db
     const names = generateRandomName()
     names.forEach((name)=> {
         //create schedule
@@ -111,6 +111,15 @@ app.get('/', (req, res) => {
         const newStudent = new Student({firstName:name,lastName:newUser.lastName,schedule:newSchedule})
         newStudent.save()
         newUser.students.push(newStudent)
+        //create welcome message
+        const newMessage = new InboxMessage({
+          studentId:newStudent,
+          from:"Admin",
+          title:"Välkommen!",
+          text:`Välkommen,${newStudent.firstName}!`,
+          opened:false,
+        })
+        newMessage.save()
       })
      //save user and note to db
     newUser.save()
