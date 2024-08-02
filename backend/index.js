@@ -42,13 +42,13 @@ app.get('/', (req, res) => {
     const {username,password} = req.body
     //data in body is complete?
     if(!(username && password)) {
-     return res.status(400).send("Username or password is missing" )
+     return res.status(400).send("Användarnamn och/eller lösenord saknas" )
     }
     //check if user exists and validate password
     const user = await User.findOne({username:username})
     const hashedPassword = await bcrypt.compare(password,user.password)
     if(!user || !hashedPassword) {
-      return res.status(404).send("Invalid Username or password")
+      return res.status(404).send("Ogiltigt användarnamn och/eller lösenord")
     } else {
     //create token
     const token = jwt.sign({userId: user._id},process.env.JWT_SECRET, { expiresIn: '30m'})
@@ -59,7 +59,8 @@ app.get('/', (req, res) => {
      res.send("Token and isAuthenticated cookies send!")
     }
     } catch(err) {
-      return res.status(404).send("Something went wrong, please try again")
+      return res.status(404).send(err.message)
+      // return res.status(404).send("Något gick fel, vänligen försök igen")
     }
   })
 
