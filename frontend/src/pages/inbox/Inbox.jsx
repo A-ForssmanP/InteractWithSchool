@@ -13,7 +13,10 @@ function Inbox() {
   const getData = async () => {
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_EXPRESS_SERVER}/inbox`
+        `${import.meta.env.VITE_EXPRESS_SERVER}/inbox`,
+        {
+          withCredentials: true,
+        }
       );
 
       setInbox(res.data);
@@ -31,7 +34,9 @@ function Inbox() {
     if (!isOpened) {
       try {
         await axios.put(
-          `${import.meta.env.VITE_EXPRESS_SERVER}/inbox/${id}/update`
+          `${import.meta.env.VITE_EXPRESS_SERVER}/inbox/${id}/update`,
+          {},
+          { withCredentials: true }
         );
       } catch (err) {
         throw new Error(err);
@@ -42,7 +47,8 @@ function Inbox() {
   //Delete a message
   const deleteMessage = async (id, index) => {
     const res = await axios.delete(
-      `${import.meta.env.VITE_EXPRESS_SERVER}/inbox/${id}/delete`
+      `${import.meta.env.VITE_EXPRESS_SERVER}/inbox/${id}/delete`,
+      { withCredentials: true }
     );
     setInbox((currInbox) => {
       return currInbox.map((msg, indx) => {

@@ -128,7 +128,7 @@ app.get('/', (req, res) => {
     }
   })
 
-  app.get("/inbox", async (req,res) => {
+  app.get("/inbox",isAuthenticated, async (req,res) => {
     try {
     const user = await User.findById(userId).populate("students","firstName")
     const inbox = []
@@ -142,7 +142,7 @@ app.get('/', (req, res) => {
   }
   })
 
-  app.delete("/inbox/:id/delete",async (req,res) => {
+  app.delete("/inbox/:id/delete",isAuthenticated,async (req,res) => {
     try {
     const {id} = req.params
     const deletedMessage = await InboxMessage.findByIdAndDelete(id)
@@ -154,13 +154,13 @@ app.get('/', (req, res) => {
     }
   })
 
-  app.put("/inbox/:id/update",async (req,res) => {
+  app.put("/inbox/:id/update",isAuthenticated,async (req,res) => {
     try {
-          const {id} = req.params
-   const updatedMessage = await InboxMessage.findByIdAndUpdate(id,{opened:true})
-   const student = updatedMessage.studentId.toString()
-    const messages = await InboxMessage.find({studentId: student})
-    res.send(messages)
+        const {id} = req.params
+        const updatedMessage = await InboxMessage.findByIdAndUpdate(id,{opened:true})
+        const student = updatedMessage.studentId.toString()
+        const messages = await InboxMessage.find({studentId: student})
+        res.send(messages)
     } catch(err) {
       throw new Error(err)
     }

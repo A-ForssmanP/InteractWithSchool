@@ -6,8 +6,8 @@ const isAuthenticated = (req,res,next) => {
         const {token,isAuthenticated} = req.cookies
         //chech the validation of token
         const decodedToken = jwt.verify(token,process.env.JWT_SECRET)
-        //set userId from token to req.user property
-        req.userId= decodedToken.userId
+        //set userId from token to req.userId property
+        req.userId = decodedToken.userId
         next()
     } catch(err) {
             //delete unvalid token and isAuthenticated cookies
