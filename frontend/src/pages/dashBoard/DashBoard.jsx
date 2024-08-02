@@ -1,12 +1,31 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Box, Typography, Paper, Grid, useTheme } from "@mui/material";
 import ReadOnlyDatePicker from "../../components/readOnlyDatePicker/ReadOnlyDatePicker";
 import ChartYearProg from "../../components/chartYearProg/ChartYearProg";
 import DashBoardNotes from "../../components/dashBoardNotes/DashBoardNotes";
+import axios from "axios";
 
 function DashBoard() {
   const [date, setDate] = useState(new Date());
+  const [userName, setUserName] = useState("");
   const theme = useTheme();
+
+  const fetchUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/user`;
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  // get user data
+  const getUser = async () => {
+    try {
+      const res = await axios(fetchUrl, { withCredentials: true });
+      const { user } = res.data;
+      setUserName(user.firstName);
+    } catch (err) {
+      setUserName(err.message);
+    }
+  };
 
   const mainContent = [
     <ChartYearProg />,
@@ -58,7 +77,9 @@ function DashBoard() {
             color={theme.palette.grey[50]}
           >
             <Box>
-              <Typography fontSize={{ xs: 18, sm: 20 }}>Hej NAMN,</Typography>
+              <Typography fontSize={{ xs: 18, sm: 20 }}>
+                Hej {userName.toUpperCase()},
+              </Typography>
               <Typography fontSize={{ xs: 22, sm: 28 }}>
                 Välkommen tillbaka!
               </Typography>

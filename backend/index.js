@@ -128,6 +128,19 @@ app.get('/', (req, res) => {
     }
   })
 
+  app.get("/user",isAuthenticated, async (req,res) => {
+    try{
+      const {userId} = req
+      const user = await User.findById(userId) 
+      if(!user) {
+        throw new Error("Namn")
+      }
+      res.status(200).json({"user":user})
+    } catch(err) {
+      res.status(404).send(err.message)
+    }
+  })
+
   app.get("/inbox",isAuthenticated, async (req,res) => {
     try {
     const userId = req.userId
