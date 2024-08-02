@@ -13,7 +13,7 @@ const InboxMessage = require("./models/inboxMessage")
 const Schedule = require("./models/schedule")
 const Note = require("./models/note")
 
-const cookieJwtAuth = require("./middleware/cookieJwtAuth")
+const isAuthenticated = require("./middleware/isAuthenticated")
 const generateRandomName = require("./utils/generateRandomName")
 
 
@@ -67,7 +67,7 @@ app.get('/', (req, res) => {
     }
   })
 
-  app.delete("/logout",cookieJwtAuth, (req,res) => {
+  app.delete("/logout",isAuthenticated, (req,res) => {
     try {
       //delete cookies
       res.clearCookie("token")

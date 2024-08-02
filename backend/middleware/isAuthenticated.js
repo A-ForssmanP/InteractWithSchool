@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken")
 
-const cookieJwtAuth = (req,res,next) => {
+const isAuthenticated = (req,res,next) => {
     try{
         //get token cookie out of req
         const {token,isAuthenticated} = req.cookies
@@ -18,4 +18,4 @@ const cookieJwtAuth = (req,res,next) => {
     }
 }
 
-module.exports = cookieJwtAuth
+module.exports = isAuthenticated
