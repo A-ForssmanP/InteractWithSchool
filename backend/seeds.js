@@ -17,12 +17,12 @@ mongoose.connect('mongodb://127.0.0.1:27017/interactWithSchool').then(()=>{
 // create school class document
 const createSchoolClass = async (className) => {
   //get random name for teacher
-  const teacherName = generateRandomName(1)
+  const teacherName = generateRandomName(1,1)
   const teacher = {firstName:teacherName[0]}
   //create SchoolClass document
   const schoolClass = new SchoolClass({className:className,teacher:teacher})
   // create mock parents 
-  const parentNames = generateRandomName(10)
+  const parentNames = generateRandomName(6,10)
   const mockParents = parentNames.map((name)=>{
     return {
       firstName:name

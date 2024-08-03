@@ -1,13 +1,15 @@
-function generateRandomName(maxQty=3) {
+function generateRandomName(minQty=0,maxQty=3) {
     const names = ["Oliver","William","Matteo","Noah","Liam","Todd", 
         "Billy","Ralf","Birk","Tage","Folke","Sven","Nils","Bill","Ted","Otis",
         "Agnes","Maja","Alma","Vera","Selma","Alba","Hedda","Elsa","Ebba",
         "Fatima","Nadia","Miriam","Hedvig","Idun","Astrid","Ingrid"
     ]
     //get random quantity number
-    const qty = Math.floor(Math.random()*maxQty+1)
+    let qty = Math.floor(Math.random()*maxQty+1)
     // if minQty is > qty, then qty = minQty
-
+    if(minQty > qty) {
+        qty = minQty
+    }
     const namesArray = [];
     //generate a name 
     for(let i = 0; i < qty; i++) {
@@ -28,5 +30,4 @@ function generateRandomName(maxQty=3) {
     }
     return namesArray
 }
-
 module.exports = generateRandomName
