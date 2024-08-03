@@ -223,12 +223,12 @@ const connectUserToClass = async () => {
 // Insert data to dB
  const insertData = async () => {
   insertSchoolClasses()
-  await insertNewUserandStudent()
-  await insertInboxMessages()
-  await insertSchedule()
-  await insertNote()
-  await putStudentInAClass()
-  await connectUserToClass()
+  // await insertNewUserandStudent()
+  // await insertInboxMessages()
+  // await insertSchedule()
+  // await insertNote()
+  // await putStudentInAClass()
+  // await connectUserToClass()
   console.log("Data inserted to DB!")
  }
 

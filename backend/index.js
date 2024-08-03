@@ -15,6 +15,7 @@ const Note = require("./models/note")
 
 const isAuthenticated = require("./middleware/isAuthenticated")
 const generateRandomName = require("./utils/generateRandomName")
+const SchoolClass = require('./models/schoolClass')
 
 
 mongoose.connect('mongodb://127.0.0.1:27017/interactWithSchool').then(()=>{
@@ -98,8 +99,9 @@ app.get('/', (req, res) => {
     const newUser = new User({firstName,lastName,username,password:hashedPassword})
     //create a new note and point user to it 
     const newNote = new Note({authorId:newUser})
-    //create student,schedule and welcome-message and save to db
+    //create student,schedule,welcome-message and connect student and user to class and save to db
     const names = generateRandomName()
+    let classes = await SchoolClass.find()
     names.forEach((name)=> {
         //create schedule
         const caringTypes = ["Fritids", "Förskola"]
@@ -109,6 +111,15 @@ app.get('/', (req, res) => {
         newSchedule.save()
         //create student
         const newStudent = new Student({firstName:name,lastName:newUser.lastName,schedule:newSchedule})
+        //put student in a class
+        const randomNum = Math.floor(Math.random()*classes.length);
+        newStudent.schoolClass = classes[randomNum].id
+        
+        // connect user to parents field in the class
+        classes[randomNum].parents.push({firstName:newUser.firstName})
+        classes[randomNum].save()
+        // remove selected school class from classes array to prevent duplication
+        classes = classes.filter(sclass => sclass !== classes[randomNum])
         newStudent.save()
         newUser.students.push(newStudent)
         //create welcome message
