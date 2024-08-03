@@ -28,7 +28,6 @@ const createSchoolClass = async (className) => {
       firstName:name
     }
   })
-  // console.log(mockParents)
   schoolClass.parents.push(...mockParents)
   schoolClass.save()
 }
@@ -95,13 +94,16 @@ const insertNewUserandStudent = async () => {
     const u = new User({_id: "665341b1b835c5660d42c0fb" ,firstName:"Demo", lastName:"User",username:"Demo123",password:"Kaffe"})
     await Student.insertMany(students)
     const stnts = await Student.find({})
+    stnts[0].absence.prevAbsences = absenceSeeds.firstStud
+    stnts[1].absence.prevAbsences = absenceSeeds.secondStud
+
  stnts[0].absence.prevAbsences = absenceSeeds.firstStud
  stnts[0].save()
  stnts[1].absence.prevAbsences = absenceSeeds.secondStud
  stnts[1].save()
     u.students.push(...stnts)
     
-        await u.save()
+      await u.save()
     } catch (err) {
         console.log(err)
     }
@@ -187,9 +189,36 @@ const insertNote = async () => {
   } catch(err) {
     throw new Error(err.message)
   }
- 
 }
 
+const putStudentInAClass = async () => {
+      //find all school classes
+      let classes = await SchoolClass.find();
+      //find all students 
+      const students = await Student.find()
+      // put student in a class by random
+      students.forEach((student)=>{
+        const randomNum = Math.floor(Math.random()*classes.length);
+        student.schoolClass = classes[randomNum].id
+        student.save()
+        // remove selected school class from classes array to prevent duplication
+        classes = classes.filter(sclass => sclass !== classes[randomNum] )
+      })
+}
+
+// connect user to its childrens classes
+const connectUserToClass = async () => {
+  //find user and populate "students"
+  const user = await User.findOne().populate("students")
+  // for each students, push user to parents field in the students school class 
+    user.students.forEach(async (student) => {
+      //find student class
+      const studentClass = await SchoolClass.findOne({_id:student.schoolClass})
+      //push users firstName to parents array
+      studentClass.parents.push({firstName:user.firstName})
+      studentClass.save()
+    })
+}
 
 // Insert data to dB
  const insertData = async () => {
@@ -198,6 +227,8 @@ const insertNote = async () => {
   await insertInboxMessages()
   await insertSchedule()
   await insertNote()
+  await putStudentInAClass()
+  await connectUserToClass()
   console.log("Data inserted to DB!")
  }
 

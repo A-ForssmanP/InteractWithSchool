@@ -6,6 +6,8 @@ function generateRandomName(maxQty=3) {
     ]
     //get random quantity number
     const qty = Math.floor(Math.random()*maxQty+1)
+    // if minQty is > qty, then qty = minQty
+
     const namesArray = [];
     //generate a name 
     for(let i = 0; i < qty; i++) {
