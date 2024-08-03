@@ -7,12 +7,16 @@ const schoolClassSchema = new Schema({
         required: true,
     },
     teacher: {
-        type: String,
-        required: true,
+        firstName : {
+            type: String,
+            required: true,
+        }
     },
     parents: [{
-        type:Schema.Types.ObjectId,
-        ref: "user"
+        firstName: {
+            type:String,
+            required:true
+        }
         }]
 })
 

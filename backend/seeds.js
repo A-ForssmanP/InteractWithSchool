@@ -4,6 +4,8 @@ const Student = require("./models/student");
 const InboxMessage = require("./models/inboxMessage")
 const Schedule = require("./models/schedule")
 const Note = require("./models/note")
+const SchoolClass = require("./models/schoolClass")
+const generateRandomName = require("./utils/generateRandomName")
 
 mongoose.connect('mongodb://127.0.0.1:27017/interactWithSchool').then(()=>{
   console.log("CONNECTED TO DB!")
@@ -11,6 +13,22 @@ mongoose.connect('mongodb://127.0.0.1:27017/interactWithSchool').then(()=>{
   throw new Error(err)
 })
 
+
+// create school class document
+const createSchoolClass = async (className) => {
+  //get random name for teacher
+  const teacherName = generateRandomName(1)
+  const teacher = {firstName:teacherName[0]}
+  //create SchoolClass document
+  const schoolClass = new SchoolClass({className:className,teacher:teacher})
+  schoolClass.save()
+}
+
+//insert school classes
+const insertSchoolClasses = () => {
+  createSchoolClass("1A")
+  createSchoolClass("2C")
+}
 
 // create and insert user and student document
 const insertNewUserandStudent = async () => {
@@ -163,9 +181,9 @@ const insertNote = async () => {
 }
 
 
-
 // Insert data to dB
  const insertData = async () => {
+  insertSchoolClasses()
   await insertNewUserandStudent()
   await insertInboxMessages()
   await insertSchedule()
@@ -177,30 +195,30 @@ const insertNote = async () => {
   insertData()
 
 // delete absences
-const deleteAbsences = async () => {
-  const students = await Student.find({})
-  students.forEach(s => {
-    s.absence.prevAbsences = []
-    s.save()
-  })
-}
+// const deleteAbsences = async () => {
+//   const students = await Student.find({})
+//   students.forEach(s => {
+//     s.absence.prevAbsences = []
+//     s.save()
+//   })
+// }
 
 // deleteAbsences()
 
-const deleteAllCollections = async () => {
-  const connection = mongoose.connection;
-  try {
-    await connection.collection("students").drop()
-    await connection.collection("schedules").drop()
-    await connection.collection("inboxmessages").drop()
-    await connection.collection("users").drop()
+// const deleteAllCollections = async () => {
+//   const connection = mongoose.connection;
+//   try {
+//     await connection.collection("students").drop()
+//     await connection.collection("schedules").drop()
+//     await connection.collection("inboxmessages").drop()
+//     await connection.collection("users").drop()
 
-    console.log("ALL COLLECTIONS DELETED!")
+//     console.log("ALL COLLECTIONS DELETED!")
 
-  } catch(err) {
-    throw new Error(err)
-  }
-}
+//   } catch(err) {
+//     throw new Error(err)
+//   }
+// }
 
 
 
