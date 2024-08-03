@@ -21,6 +21,7 @@ const createSchoolClass = async (className) => {
   const teacher = {firstName:teacherName[0]}
   //create SchoolClass document
   const schoolClass = new SchoolClass({className:className,teacher:teacher})
+  // create mock parents 
   schoolClass.save()
 }
 
