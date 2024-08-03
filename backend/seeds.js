@@ -22,6 +22,14 @@ const createSchoolClass = async (className) => {
   //create SchoolClass document
   const schoolClass = new SchoolClass({className:className,teacher:teacher})
   // create mock parents 
+  const parentNames = generateRandomName(10)
+  const mockParents = parentNames.map((name)=>{
+    return {
+      firstName:name
+    }
+  })
+  // console.log(mockParents)
+  schoolClass.parents.push(...mockParents)
   schoolClass.save()
 }
 
@@ -29,6 +37,7 @@ const createSchoolClass = async (className) => {
 const insertSchoolClasses = () => {
   createSchoolClass("1A")
   createSchoolClass("2C")
+  createSchoolClass("5B")
 }
 
 // create and insert user and student document
