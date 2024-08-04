@@ -9,19 +9,13 @@ import axios from "axios";
 function DashBoard() {
   const [date, setDate] = useState(new Date());
   const [userFirstName, setUserFirstName] = useState("");
-  const [schoolClass, setSchoolClass] = useState([]);
+  const [schoolClassId, setSchoolClassId] = useState([]);
   const theme = useTheme();
 
   const fetchUserUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/user`;
-  const fetchSchoolClassUrl = `${
-    import.meta.env.VITE_EXPRESS_SERVER
-  }/schoolClass/all`;
 
   useEffect(() => {
-    const handleDashData = async () => {
-      const classIds = await getUserData();
-    };
-    handleDashData();
+    getUserData();
   }, []);
 
   // get user data
@@ -32,18 +26,15 @@ function DashBoard() {
       const { user } = res.data;
       console.log(user);
       setUserFirstName(user.firstName);
-      //array with student school class ids
-      const classIds = user.students.map((student) => {
+      //array with student school class id
+      const classIdArray = user.students.map((student) => {
         return student.schoolClass;
       });
-      return classIds;
+      setSchoolClassId(classIdArray);
     } catch (err) {
       setUserName(err.message);
     }
   };
-
-  // get school class data for each student
-  const getSchoolClass = async () => {};
 
   const mainContent = [
     <ChartYearProg />,
@@ -167,7 +158,7 @@ function DashBoard() {
         </Box>
       </Grid>
       <Grid item xs bgcolor={theme.palette.secondary.main}>
-        <DashboardClassList />
+        <DashboardClassList idArray={schoolClassId} />
       </Grid>
     </Grid>
   );

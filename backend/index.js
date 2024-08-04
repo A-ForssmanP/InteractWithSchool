@@ -161,6 +161,61 @@ app.get('/', (req, res) => {
     }
   })
 
+  app.get("/class_list/all",isAuthenticated, async (req,res) => {
+    try {
+      // const classList = []
+      // get userId out of req
+      const {userId} = req
+      //get user data
+      const user = await User.findById(userId).populate("students");
+
+      const getClassData = async (studentList) => {
+        
+        const structureData = async () => {
+          const data = []
+          studentList.forEach(async(student)=>{
+            const document = await SchoolClass.findById(student.schoolClass)
+            data.push(33)
+            // console.log(data)
+            // console.log(document)
+            
+          }.then(()=>data))
+          
+        }
+       const res = await structureData()
+        // console.log(data)
+        return res
+      }
+
+      const data = await getClassData(user.students)
+      console.log(data)
+      //get list of all the documents ids
+      // const idList = user.students.map((student) => {
+      //   return student.schoolClass
+      // })
+      // //get all documents from db
+      // const documents = await SchoolClass.find({
+      //   _id: { $in: idList}
+      // })
+      // console.log(documents)
+      // console.log(user.students)
+      // //list containing objects for each student with students first name and school class document
+      // const classList = user.students.map((student)=>{
+      //  const document = documents.filter(doc=>doc._id === student.schoolClass)
+      //  return {
+      //   student: student.firstName,
+      //   classDoc: document[0]
+      //  }
+      // })
+      
+      //send classList back
+      // console.log(user.students)
+    } catch(err) {
+      console.log(err.message)
+      res.status(400).json({"err": err.message})
+    }
+  })
+
   app.get("/inbox",isAuthenticated, async (req,res) => {
     try {
     const userId = req.userId
