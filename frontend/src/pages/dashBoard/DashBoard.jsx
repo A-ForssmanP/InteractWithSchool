@@ -3,29 +3,47 @@ import { Box, Typography, Paper, Grid, useTheme } from "@mui/material";
 import ReadOnlyDatePicker from "../../components/readOnlyDatePicker/ReadOnlyDatePicker";
 import ChartYearProg from "../../components/chartYearProg/ChartYearProg";
 import DashBoardNotes from "../../components/dashBoardNotes/DashBoardNotes";
+import DashboardClassList from "../../components/dashboardClassList/DashboardClassList";
 import axios from "axios";
 
 function DashBoard() {
   const [date, setDate] = useState(new Date());
-  const [userName, setUserName] = useState("");
+  const [userFirstName, setUserFirstName] = useState("");
+  const [schoolClass, setSchoolClass] = useState([]);
   const theme = useTheme();
 
-  const fetchUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/user`;
+  const fetchUserUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/user`;
+  const fetchSchoolClassUrl = `${
+    import.meta.env.VITE_EXPRESS_SERVER
+  }/schoolClass/all`;
 
   useEffect(() => {
-    getUser();
+    const handleDashData = async () => {
+      const classIds = await getUserData();
+    };
+    handleDashData();
   }, []);
 
   // get user data
-  const getUser = async () => {
+  const getUserData = async () => {
     try {
-      const res = await axios(fetchUrl, { withCredentials: true });
+      // get and set users firstName
+      const res = await axios(fetchUserUrl, { withCredentials: true });
       const { user } = res.data;
-      setUserName(user.firstName);
+      console.log(user);
+      setUserFirstName(user.firstName);
+      //array with student school class ids
+      const classIds = user.students.map((student) => {
+        return student.schoolClass;
+      });
+      return classIds;
     } catch (err) {
       setUserName(err.message);
     }
   };
+
+  // get school class data for each student
+  const getSchoolClass = async () => {};
 
   const mainContent = [
     <ChartYearProg />,
@@ -78,7 +96,7 @@ function DashBoard() {
           >
             <Box>
               <Typography fontSize={{ xs: 18, sm: 20 }}>
-                Hej {userName.toUpperCase()},
+                Hej {userFirstName.toUpperCase()},
               </Typography>
               <Typography fontSize={{ xs: 22, sm: 28 }}>
                 Välkommen tillbaka!
@@ -148,7 +166,9 @@ function DashBoard() {
           </Box>
         </Box>
       </Grid>
-      <Grid item xs bgcolor={theme.palette.secondary.main}></Grid>
+      <Grid item xs bgcolor={theme.palette.secondary.main}>
+        <DashboardClassList />
+      </Grid>
     </Grid>
   );
 }

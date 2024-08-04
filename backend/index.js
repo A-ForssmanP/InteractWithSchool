@@ -151,7 +151,7 @@ app.get('/', (req, res) => {
   app.get("/user",isAuthenticated, async (req,res) => {
     try{
       const {userId} = req
-      const user = await User.findById(userId) 
+      const user = await User.findById(userId).populate("students") 
       if(!user) {
         throw new Error("Namn")
       }
