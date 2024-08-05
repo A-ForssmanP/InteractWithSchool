@@ -27,10 +27,18 @@ function DashboardClassList({ idArray }) {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        height: "100%",
+        border: "5px solid blue",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <Carousel
         navButtonsAlwaysVisible="true"
         autoPlay={false}
+        sx={{ flex: 1 }}
         // animation={"slide"}
       >
         {classList.map((list) => {
