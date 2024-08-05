@@ -30,16 +30,24 @@ function DashboardClassList({ idArray }) {
     <div
       style={{
         height: "100%",
-        border: "5px solid blue",
-        display: "flex",
-        flexDirection: "column",
       }}
     >
       <Carousel
-        navButtonsAlwaysVisible="true"
+        navButtonsAlwaysVisible={true}
         autoPlay={false}
-        sx={{ flex: 1 }}
-        // animation={"slide"}
+        swipe={false}
+        indicators={false}
+        navButtonsWrapperProps={{
+          style: {
+            height: "fit-content",
+          },
+        }}
+        navButtonsProps={{
+          style: {
+            background: "none",
+          },
+        }}
+        sx={{ height: "100%" }}
       >
         {classList.map((list) => {
           return <DashboardClassListItem key={list.class._id} list={list} />;

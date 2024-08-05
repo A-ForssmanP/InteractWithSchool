@@ -4,19 +4,9 @@ function DashboardClassListItem({ list }) {
   // list && console.log(list);
 
   return (
-    <div
-      style={
-        {
-          // border: "4px solid blue",
-          // display: "flex",
-          // alignItems: "center",
-          // flexDirection: "column",
-        }
-      }
-    >
+    <div>
       <div
         style={{
-          // border: "2px solid yellow",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -28,7 +18,6 @@ function DashboardClassListItem({ list }) {
       <div>
         <div
           style={{
-            // border: "2px solid yellow",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -39,7 +28,6 @@ function DashboardClassListItem({ list }) {
         </div>
         <List
           sx={{
-            // border: "2px solid purple",
             display: "flex",
             flexDirection: { sm: "column" },
             overflowX: { xs: "scroll", sm: "visible" },
@@ -50,7 +38,6 @@ function DashboardClassListItem({ list }) {
               <ListItem
                 key={parent._id}
                 sx={{
-                  border: "1px solid yellow",
                   display: "flex",
                   justifyContent: "center",
                 }}
