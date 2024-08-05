@@ -3,6 +3,7 @@ import axios from "axios";
 import Carousel from "react-material-ui-carousel";
 
 function DashboardClassList({ idArray }) {
+  //REMOVE IDARRAY????
   const [classList, setClassList] = useState([]);
 
   const fetchSchoolListUrl = `${
@@ -12,25 +13,17 @@ function DashboardClassList({ idArray }) {
   useEffect(() => {
     if (!classList.length) {
       getClassList();
-      console.log("fdfd");
     }
   }, []);
 
   // get class list data for each student
   const getClassList = async () => {
-    const res = await axios(fetchSchoolListUrl, { withCredentials: true });
-    console.log(res);
+    try {
+      const res = await axios(fetchSchoolListUrl, { withCredentials: true });
+      const { data } = res;
+      setClassList(data);
+    } catch (err) {}
   };
-  // get class list data for each student
-  // const getClassList = async (idArr) => {
-  //   const res = await axios.post(
-  //     fetchSchoolListUrl,
-  //     { id: idArr },
-  //     {
-  //       withCredentials: true,
-  //     }
-  //   );
-  // };
 
   return (
     <div>

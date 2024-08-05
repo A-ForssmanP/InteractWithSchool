@@ -24,13 +24,12 @@ function DashBoard() {
       // get and set users firstName
       const res = await axios(fetchUserUrl, { withCredentials: true });
       const { user } = res.data;
-      console.log(user);
       setUserFirstName(user.firstName);
       //array with student school class id
-      const classIdArray = user.students.map((student) => {
-        return student.schoolClass;
-      });
-      setSchoolClassId(classIdArray);
+      // const classIdArray = user.students.map((student) => {
+      //   return student.schoolClass;
+      // });
+      // setSchoolClassId(classIdArray);
     } catch (err) {
       setUserName(err.message);
     }
