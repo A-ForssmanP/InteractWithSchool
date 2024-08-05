@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Carousel from "react-material-ui-carousel";
+import DashboardClassListItem from "../dashboardClassListItem/DashboardClassListItem";
 
 function DashboardClassList({ idArray }) {
   //REMOVE IDARRAY????
@@ -31,7 +32,11 @@ function DashboardClassList({ idArray }) {
         navButtonsAlwaysVisible="true"
         autoPlay={false}
         // animation={"slide"}
-      ></Carousel>
+      >
+        {classList.map((list) => {
+          return <DashboardClassListItem key={list.class._id} list={list} />;
+        })}
+      </Carousel>
     </div>
   );
 }
