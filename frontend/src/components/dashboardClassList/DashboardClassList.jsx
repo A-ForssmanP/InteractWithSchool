@@ -30,6 +30,7 @@ function DashboardClassList({ idArray }) {
     <div
       style={{
         height: "100%",
+        borderLeft: "1px solid lightgrey",
       }}
     >
       <Carousel

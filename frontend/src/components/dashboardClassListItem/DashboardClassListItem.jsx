@@ -1,4 +1,4 @@
-import { List, ListItem, Typography } from "@mui/material";
+import { List, ListItem, Typography, Divider } from "@mui/material";
 
 function DashboardClassListItem({ list }) {
   // list && console.log(list);
@@ -31,8 +31,12 @@ function DashboardClassListItem({ list }) {
             display: "flex",
             flexDirection: { sm: "column" },
             overflowX: { xs: "scroll", sm: "visible" },
+            overflowY: { sm: "auto" },
           }}
         >
+          <Typography borderBottom={"1px solid lightgrey"} textAlign={"center"}>
+            Föräldrar:
+          </Typography>
           {list.class.parents.map((parent) => {
             return (
               <ListItem
@@ -40,6 +44,7 @@ function DashboardClassListItem({ list }) {
                 sx={{
                   display: "flex",
                   justifyContent: "center",
+                  borderBottom: "1px solid lightgrey",
                 }}
               >
                 {parent.firstName}
