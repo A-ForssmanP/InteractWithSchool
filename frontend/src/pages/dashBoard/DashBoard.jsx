@@ -9,7 +9,6 @@ import axios from "axios";
 function DashBoard() {
   const [date, setDate] = useState(new Date());
   const [userFirstName, setUserFirstName] = useState("");
-  const [schoolClassId, setSchoolClassId] = useState([]);
   const theme = useTheme();
 
   const fetchUserUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/user`;
@@ -25,11 +24,6 @@ function DashBoard() {
       const res = await axios(fetchUserUrl, { withCredentials: true });
       const { user } = res.data;
       setUserFirstName(user.firstName);
-      //array with student school class id
-      // const classIdArray = user.students.map((student) => {
-      //   return student.schoolClass;
-      // });
-      // setSchoolClassId(classIdArray);
     } catch (err) {
       setUserFirstName(err.message);
     }
@@ -157,7 +151,7 @@ function DashBoard() {
         </Box>
       </Grid>
       <Grid item xs pt={{ sm: 1, md: 0.5, lg: 1 }}>
-        <DashboardClassList idArray={schoolClassId} />
+        <DashboardClassList />
       </Grid>
     </Grid>
   );

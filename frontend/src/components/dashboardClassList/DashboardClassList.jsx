@@ -4,8 +4,7 @@ import Carousel from "react-material-ui-carousel";
 import DashboardClassListItem from "../dashboardClassListItem/DashboardClassListItem";
 import { useTheme } from "@emotion/react";
 
-function DashboardClassList({ idArray }) {
-  //REMOVE IDARRAY????
+function DashboardClassList() {
   const [classList, setClassList] = useState([]);
   const theme = useTheme();
 
@@ -32,7 +31,6 @@ function DashboardClassList({ idArray }) {
     <div
       style={{
         height: "100%",
-        // borderLeft: "1px solid lightgrey",
       }}
     >
       <Carousel
