@@ -7,6 +7,8 @@ const Note = require("./models/note")
 const SchoolClass = require("./models/schoolClass")
 const generateRandomName = require("./utils/generateRandomName")
 
+const bcrypt = require("bcryptjs")
+
 mongoose.connect('mongodb://127.0.0.1:27017/interactWithSchool').then(()=>{
   console.log("CONNECTED TO DB!")
 }).catch((err)=>{
@@ -42,11 +44,18 @@ const insertSchoolClasses = () => {
 
 // create and insert user and student document
 const insertNewUserandStudent = async () => {
-  const students = [
-    {firstName:"First",lastName:"Student"},
-    {firstName:"Second",lastName:"Student"},
-    {firstName:"Third",lastName:"Student"}
-  ]
+  const names = generateRandomName(3)
+  const students = names.map((name)=>{
+    return {
+      firstName: name,
+      lastName:"Student"
+    }
+  })
+  // const students = [
+  //   {firstName:"First",lastName:"Student"},
+  //   {firstName:"Second",lastName:"Student"},
+  //   {firstName:"Third",lastName:"Student"}
+  // ]
 
   const absenceSeeds = {
     firstStud: [{
@@ -92,7 +101,10 @@ const insertNewUserandStudent = async () => {
   }
 
   try {
-    const u = new User({_id: "665341b1b835c5660d42c0fb" ,firstName:"Demo", lastName:"User",username:"Demo123",password:"Kaffe"})
+     // hash the password
+     const salt = await bcrypt.genSalt(10)
+     const hashedPassword = await bcrypt.hash("demo1",salt)
+    const u = new User({_id: "665341b1b835c5660d42c0fb" ,firstName:"Demo1", lastName:"User",username:"Demo1",password:hashedPassword})
     await Student.insertMany(students)
     const stnts = await Student.find({})
     stnts[0].absence.prevAbsences = absenceSeeds.firstStud
