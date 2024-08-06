@@ -97,7 +97,12 @@ function LoginForm({ isAuthenticated }) {
           >
             Användare #1
           </Button>
-          <Button startIcon={<PersonIcon />}>Användare #2</Button>
+          <Button
+            onClick={() => loginDemoUser("Demo2", "demo2")}
+            startIcon={<PersonIcon />}
+          >
+            Användare #2
+          </Button>
         </Box>
         <Typography>Eller</Typography>
         {loginError && (

@@ -44,7 +44,8 @@ const insertSchoolClasses = () => {
 
 // create and insert user and student document
 const insertNewUserandStudent = async () => {
-  const names = generateRandomName(3)
+  // generate names for students by random
+  const names = generateRandomName(3,3)
   const students = names.map((name)=>{
     return {
       firstName: name,
