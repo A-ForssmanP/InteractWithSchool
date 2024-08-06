@@ -155,13 +155,18 @@ const insertInboxMessages = async () => {
   ]
 
 try {
-    const firstStudent = await Student.findOne({firstName:"First"})
-  const secondStudent = await Student.findOne({firstName:"Second"})
-  const thirdStudent = await Student.findOne({firstName:"Third"})
+  const students = await Student.find()
+  createMessage(inboxFirstStudent,students[0])
+  createMessage(inboxSecondStudent,students[1])
+  createMessage(inboxThirdStudent,students[2])
 
-  createMessage(inboxFirstStudent,firstStudent)
-  createMessage(inboxSecondStudent,secondStudent)
-  createMessage(inboxThirdStudent,thirdStudent)
+  //   const firstStudent = await Student.findOne({firstName:"First"})
+  // const secondStudent = await Student.findOne({firstName:"Second"})
+  // const thirdStudent = await Student.findOne({firstName:"Third"})
+
+  // createMessage(inboxFirstStudent,firstStudent)
+  // createMessage(inboxSecondStudent,secondStudent)
+  // createMessage(inboxThirdStudent,thirdStudent)
 } catch(err) {
   throw new Error(err)
 }
