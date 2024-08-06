@@ -116,7 +116,7 @@ app.get('/', (req, res) => {
         newStudent.schoolClass = classes[randomNum].id
         
         // connect user to parents field in the class
-        classes[randomNum].parents.push({firstName:newUser.firstName})
+        classes[randomNum].parents.push({firstName:newUser.firstName,lastName:newUser.lastName})
         classes[randomNum].save()
         // remove selected school class from classes array to prevent duplication
         classes = classes.filter(sclass => sclass !== classes[randomNum])

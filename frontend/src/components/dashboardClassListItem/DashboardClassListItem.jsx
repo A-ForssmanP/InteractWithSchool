@@ -97,7 +97,9 @@ function DashboardClassListItem({ list }) {
                   </IconButton>
                 }
               >
-                <ListItemText primary={parent.firstName} />
+                <ListItemText
+                  primary={`${parent.firstName} ${parent.firstName[0]}`}
+                />
               </ListItem>
             );
           })}
