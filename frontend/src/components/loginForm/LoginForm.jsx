@@ -44,6 +44,29 @@ function LoginForm({ isAuthenticated }) {
     }
   };
 
+  //login with demo user
+  const loginDemoUser = async (userName, password) => {
+    try {
+      const res = await axios.post(
+        postUrl,
+        {
+          username: userName,
+          password: password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      if (loginError) {
+        setLoginError(null);
+      }
+      isAuthenticated();
+      navigate("/");
+    } catch (err) {
+      setLoginError(err.request.response);
+    }
+  };
+
   return (
     <Box display={"flex"} justifyContent={"center"} width={"100%"}>
       <Paper
@@ -68,7 +91,12 @@ function LoginForm({ isAuthenticated }) {
           <Typography textAlign={"center"} variant="h4" fontSize={15}>
             Demo användare:
           </Typography>
-          <Button startIcon={<PersonIcon />}>Användare #1</Button>
+          <Button
+            onClick={() => loginDemoUser("Demo1", "demo1")}
+            startIcon={<PersonIcon />}
+          >
+            Användare #1
+          </Button>
           <Button startIcon={<PersonIcon />}>Användare #2</Button>
         </Box>
         <Typography>Eller</Typography>
