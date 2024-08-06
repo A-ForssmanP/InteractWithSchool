@@ -156,7 +156,7 @@ function DashBoard() {
           </Box>
         </Box>
       </Grid>
-      <Grid item xs bgcolor={theme.palette.secondary.main}>
+      <Grid item xs pt={{ sm: 1, md: 0.5, lg: 1 }}>
         <DashboardClassList idArray={schoolClassId} />
       </Grid>
     </Grid>

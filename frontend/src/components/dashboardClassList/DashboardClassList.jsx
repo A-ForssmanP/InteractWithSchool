@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Carousel from "react-material-ui-carousel";
 import DashboardClassListItem from "../dashboardClassListItem/DashboardClassListItem";
+import { useTheme } from "@emotion/react";
 
 function DashboardClassList({ idArray }) {
   //REMOVE IDARRAY????
   const [classList, setClassList] = useState([]);
+  const theme = useTheme();
 
   const fetchSchoolListUrl = `${
     import.meta.env.VITE_EXPRESS_SERVER
@@ -30,7 +32,7 @@ function DashboardClassList({ idArray }) {
     <div
       style={{
         height: "100%",
-        borderLeft: "1px solid lightgrey",
+        // borderLeft: "1px solid lightgrey",
       }}
     >
       <Carousel
@@ -46,6 +48,7 @@ function DashboardClassList({ idArray }) {
         navButtonsProps={{
           style: {
             background: "none",
+            color: theme.palette.secondary.main,
           },
         }}
         sx={{ height: "100%" }}
