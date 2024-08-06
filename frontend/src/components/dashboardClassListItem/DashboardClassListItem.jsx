@@ -98,7 +98,7 @@ function DashboardClassListItem({ list }) {
                 }
               >
                 <ListItemText
-                  primary={`${parent.firstName} ${parent.lastName[0]}`}
+                  primary={`${parent.firstName}.${parent.lastName[0]}`}
                 />
               </ListItem>
             );
