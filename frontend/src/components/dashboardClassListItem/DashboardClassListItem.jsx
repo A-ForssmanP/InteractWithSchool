@@ -6,7 +6,7 @@ import {
   useTheme,
   ListItemText,
   IconButton,
-  colors,
+  Button,
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
@@ -32,12 +32,21 @@ function DashboardClassListItem({ list }) {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            marginTop: 5,
-            marginBottom: 5,
+            marginTop: 10,
+            marginBottom: 10,
           }}
         >
           <Typography>Lärare:</Typography>
+
           <Typography>{list.class.teacher.firstName}</Typography>
+          <Button sx={{ p: "0" }}>
+            <AddCircleIcon
+              sx={{
+                background: "white",
+                color: "green",
+              }}
+            />
+          </Button>
         </div>
         <Typography
           borderBottom={`1px solid ${theme.palette.grey[400]}`}
