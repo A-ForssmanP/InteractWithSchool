@@ -25,7 +25,8 @@ const createSchoolClass = async (className) => {
   const parentNames = generateRandomName(6,10)
   const mockParents = parentNames.map((name)=>{
     return {
-      firstName:name
+      firstName:name,
+      lastName:"MockParent"
     }
   })
   schoolClass.parents.push(...mockParents)
@@ -215,7 +216,7 @@ const connectUserToClass = async () => {
       //find student class
       const studentClass = await SchoolClass.findOne({_id:student.schoolClass})
       //push users firstName to parents array
-      studentClass.parents.push({firstName:user.firstName})
+      studentClass.parents.push({firstName:user.firstName,lastName:user.lastName})
       studentClass.save()
     })
 }
@@ -223,12 +224,12 @@ const connectUserToClass = async () => {
 // Insert data to dB
  const insertData = async () => {
   insertSchoolClasses()
-  // await insertNewUserandStudent()
-  // await insertInboxMessages()
-  // await insertSchedule()
-  // await insertNote()
-  // await putStudentInAClass()
-  // await connectUserToClass()
+  await insertNewUserandStudent()
+  await insertInboxMessages()
+  await insertSchedule()
+  await insertNote()
+  await putStudentInAClass()
+  await connectUserToClass()
   console.log("Data inserted to DB!")
  }
 

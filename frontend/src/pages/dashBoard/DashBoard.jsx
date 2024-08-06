@@ -31,7 +31,7 @@ function DashBoard() {
       // });
       // setSchoolClassId(classIdArray);
     } catch (err) {
-      setUserName(err.message);
+      setUserFirstName(err.message);
     }
   };
 
