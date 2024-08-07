@@ -45,7 +45,7 @@ const insertSchoolClasses = () => {
 // create and insert user and student document
 const insertNewUserandStudent = async () => {
   // generate names for students by random
-  const names = generateRandomName(3,3)
+  const names = generateRandomName(6,6)
   const students = names.map((name)=>{
     return {
       firstName: name,
@@ -98,26 +98,49 @@ const insertNewUserandStudent = async () => {
     status: 'Godkänd',
     _id: new mongoose.Types.ObjectId()
   }]
-
   }
-
   try {
      // hash the password
-     const salt = await bcrypt.genSalt(10)
-     const hashedPassword = await bcrypt.hash("demo1",salt)
-    const u = new User({_id: "665341b1b835c5660d42c0fb" ,firstName:"Demo1", lastName:"User",username:"Demo1",password:hashedPassword})
+    const salt1 = await bcrypt.genSalt(10)
+    const hashedPassword1 = await bcrypt.hash("demo1",salt1)
+    const u1 = new User({_id: "665341b1b835c5660d42c0fb" ,firstName:"Demo1", lastName:"User",username:"Demo1",password:hashedPassword1})
+     
+    const salt2 = await bcrypt.genSalt(10)
+    const hashedPassword2 = await bcrypt.hash("demo2",salt2)
+    const u2 = new User({_id: "665341b1b835c5660d42c0ff" ,firstName:"Demo2", lastName:"User",username:"Demo2",password:hashedPassword2})
+   
     await Student.insertMany(students)
     const stnts = await Student.find({})
-    stnts[0].absence.prevAbsences = absenceSeeds.firstStud
-    stnts[1].absence.prevAbsences = absenceSeeds.secondStud
 
- stnts[0].absence.prevAbsences = absenceSeeds.firstStud
- stnts[0].save()
- stnts[1].absence.prevAbsences = absenceSeeds.secondStud
- stnts[1].save()
-    u.students.push(...stnts)
+    // seed student with absence and push to the right parent 
+    stnts.forEach((stud,indx)=>{
+      if(indx === 0 || indx === 3) {
+        stud.absence.prevAbsences = absenceSeeds.firstStud
+        stud.save()
+        indx === 0 && u1.students.push(stud)
+        indx === 3 && u2.students.push(stud)
+      } else if( indx === 1 || indx === 4) {
+        stud.absence.prevAbsences = absenceSeeds.secondStud
+        stud.save()
+        indx === 1 && u1.students.push(stud)
+        indx === 4 && u2.students.push(stud)
+      } else {
+        indx === 2 && u1.students.push(stud)
+        indx === 5 && u2.students.push(stud)
+      }
+    })
+
+//     stnts[0].absence.prevAbsences = absenceSeeds.firstStud
+//     stnts[1].absence.prevAbsences = absenceSeeds.secondStud
+
+//  stnts[0].absence.prevAbsences = absenceSeeds.firstStud
+//  stnts[0].save()
+//  stnts[1].absence.prevAbsences = absenceSeeds.secondStud
+//  stnts[1].save()
+    // u1.students.push(...stnts)
     
-      await u.save()
+      u1.save()
+      u2.save()
     } catch (err) {
         console.log(err)
     }
