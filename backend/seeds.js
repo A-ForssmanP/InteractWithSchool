@@ -52,11 +52,6 @@ const insertNewUserandStudent = async () => {
       lastName:"Student"
     }
   })
-  // const students = [
-  //   {firstName:"First",lastName:"Student"},
-  //   {firstName:"Second",lastName:"Student"},
-  //   {firstName:"Third",lastName:"Student"}
-  // ]
 
   const absenceSeeds = {
     firstStud: [{
@@ -129,16 +124,6 @@ const insertNewUserandStudent = async () => {
         indx === 5 && u2.students.push(stud)
       }
     })
-
-//     stnts[0].absence.prevAbsences = absenceSeeds.firstStud
-//     stnts[1].absence.prevAbsences = absenceSeeds.secondStud
-
-//  stnts[0].absence.prevAbsences = absenceSeeds.firstStud
-//  stnts[0].save()
-//  stnts[1].absence.prevAbsences = absenceSeeds.secondStud
-//  stnts[1].save()
-    // u1.students.push(...stnts)
-    
       u1.save()
       u2.save()
     } catch (err) {
@@ -190,17 +175,6 @@ try {
       createMessage(inboxThird,student)
     }
   })
-  // createMessage(inboxFirstStudent,students[0])
-  // createMessage(inboxSecondStudent,students[1])
-  // createMessage(inboxThirdStudent,students[2])
-
-  //   const firstStudent = await Student.findOne({firstName:"First"})
-  // const secondStudent = await Student.findOne({firstName:"Second"})
-  // const thirdStudent = await Student.findOne({firstName:"Third"})
-
-  // createMessage(inboxFirstStudent,firstStudent)
-  // createMessage(inboxSecondStudent,secondStudent)
-  // createMessage(inboxThirdStudent,thirdStudent)
 } catch(err) {
   throw new Error(err)
 }
@@ -229,44 +203,60 @@ const insertSchedule = async () => {
 }
 
 // create and insert note-document to db
-  //FORTSÄTT HÄR!!
 const insertNote = async () => {
   try {
-    const user = await User.findById("665341b1b835c5660d42c0fb")
-    const note = new Note({authorId:user,text:""})
-    note.save()
+    //find all users
+    const users = await User.find()
+    //for every user, create a note doc and point user to it
+    users.forEach((user) => {
+      const note = new Note({authorId:user,text:""})
+      note.save()
+    })
   } catch(err) {
     throw new Error(err.message)
   }
 }
 
 const putStudentInAClass = async () => {
-      //find all school classes
+  try {
+    //find all school classes
       let classes = await SchoolClass.find();
+      //class array to pick class from
+      let pickClasses = classes
       //find all students 
       const students = await Student.find()
       // put student in a class by random
-      students.forEach((student)=>{
-        const randomNum = Math.floor(Math.random()*classes.length);
-        student.schoolClass = classes[randomNum].id
-        student.save()
+      for(let student of students){
+        const randomNum = Math.floor(Math.random()*pickClasses.length);
+        student.schoolClass = pickClasses[randomNum].id
+        await student.save()
         // remove selected school class from classes array to prevent duplication
-        classes = classes.filter(sclass => sclass !== classes[randomNum] )
-      })
+        pickClasses = pickClasses.filter(sclass => sclass !== pickClasses[randomNum])
+        //check if pickClasses array is empty, if so, refresh array to be classes array again
+        if(!pickClasses.length) {
+          pickClasses = classes
+        }
+      }
+  } catch(err) {
+    console.log(err.message)
+  }
 }
 
 // connect user to its childrens classes
 const connectUserToClass = async () => {
-  //find user and populate "students"
-  const user = await User.findOne().populate("students")
-  // for each students, push user to parents field in the students school class 
-    user.students.forEach(async (student) => {
+  //find users and populate "students"
+  const users = await User.find()
+  for(let user of users) {
+    const populatedStudents = await User.findById(user).populate("students")
+  //for each students, push user to parents field in the students school class 
+    for(let student of populatedStudents.students){
       //find student class
-      const studentClass = await SchoolClass.findOne({_id:student.schoolClass})
+      const studentClass = await SchoolClass.findById(student.schoolClass)
       //push users firstName to parents array
-      studentClass.parents.push({firstName:user.firstName,lastName:user.lastName})
-      studentClass.save()
-    })
+      studentClass["parents"].push({firstName:user.firstName,lastName:user.lastName})
+      await studentClass.save()
+    }
+  }
 }
 
 // Insert data to dB
