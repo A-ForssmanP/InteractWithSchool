@@ -207,19 +207,17 @@ try {
 
 }
 
-
+// create schedule for every student
 const insertSchedule = async () => {
   try {
     const students = await Student.find()
-  students.forEach((student) => {
-
+    students.forEach((student) => {
     //get caring type by random
     const getCaringType = () => {
       const caringEnum = ["Fritids", "Förskola"]
       const randomIndex = Math.floor(Math.random()*2)
       return caringEnum[randomIndex]
     }
-
     const caringType = getCaringType()
     const schedule = new Schedule({caring:caringType})
     student.schedule = schedule;
@@ -228,11 +226,10 @@ const insertSchedule = async () => {
   })} catch(err) {
     throw new Error(err)
   }
-  
- 
 }
 
 // create and insert note-document to db
+  //FORTSÄTT HÄR!!
 const insertNote = async () => {
   try {
     const user = await User.findById("665341b1b835c5660d42c0fb")
