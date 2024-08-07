@@ -164,25 +164,35 @@ const createMessage = async (inbox, studentId) => {
 
 //insert inboxMessages to dB
 const insertInboxMessages = async () => {
-  const inboxFirstStudent = [
+  const inboxFirst = [
  {from: "skolan",title:"Veckobrev", text:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?", opened:true},
  {from: "skolan",title:"Veckobrev", text:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?", opened:true},
  {from: "Förskolan",title:"Info", text:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?", opened:false},
  {from: "Rektor",title:"Insamling", text:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?", opened:false}
   ]
-  const inboxSecondStudent = [
+  const inboxSecond = [
  {from: "Fritids",title:"Info", text:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?", opened:false},
  {from: "Fritids",title:"Förtydligande tidigare utskick", text:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?", opened:false},
   ]
-  const inboxThirdStudent = [
+  const inboxThird = [
  {from: "Rektor",title:"Kallelse", text:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil deleniti nostrum doloremque, ipsum eum, dolores quaerat quasi ea modi sunt voluptatum, est consectetur nisi placeat! Perspiciatis, veniam excepturi. Nemo, vitae?", opened:false}
   ]
 
 try {
   const students = await Student.find()
-  createMessage(inboxFirstStudent,students[0])
-  createMessage(inboxSecondStudent,students[1])
-  createMessage(inboxThirdStudent,students[2])
+
+  students.forEach((student,indx) => {
+    if(indx === 0 || indx === 3) {
+      createMessage(inboxFirst,student)
+    } else if( indx === 1 || indx === 4) {
+      createMessage(inboxSecond,student)
+    } else if(indx === 2 || indx === 5) {
+      createMessage(inboxThird,student)
+    }
+  })
+  // createMessage(inboxFirstStudent,students[0])
+  // createMessage(inboxSecondStudent,students[1])
+  // createMessage(inboxThirdStudent,students[2])
 
   //   const firstStudent = await Student.findOne({firstName:"First"})
   // const secondStudent = await Student.findOne({firstName:"Second"})
