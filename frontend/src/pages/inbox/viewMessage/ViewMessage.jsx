@@ -20,7 +20,8 @@ function ViewMessage() {
     <Card
       sx={{
         maxWidth: { xl: "76em" },
-        margin: { md: "4em auto 0 auto" },
+        margin: { md: "0 auto 0 auto" },
+        pt: { md: "3em" },
       }}
     >
       <CardContent>
