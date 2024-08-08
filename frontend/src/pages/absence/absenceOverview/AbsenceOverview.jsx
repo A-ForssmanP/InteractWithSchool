@@ -38,7 +38,7 @@ function AbsenceOverview() {
         pr={1.5}
       >
         <Typography fontSize={28} variant="h2">
-          Översikt Frånvaro,{absenceData.firstName}
+          Översikt frånvaro,{absenceData.firstName}
         </Typography>
         <ButtonBack handleClick={navBack} />
       </Box>

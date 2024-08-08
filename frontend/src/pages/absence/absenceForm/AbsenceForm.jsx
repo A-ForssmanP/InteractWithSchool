@@ -125,7 +125,7 @@ function AbsenceForm() {
         <Typography variant="h1" fontSize={26}>
           Registrera frånvaro,
           <br />
-          {student.firstName} {student.lastName}
+          {student.firstName}
         </Typography>
         <ButtonBack handleClick={navBack} />
       </Box>

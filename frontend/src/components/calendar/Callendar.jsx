@@ -26,7 +26,14 @@ function Callendar({
 
   return (
     <div>
-      <Box display="flex" justifyContent={"space-between"}>
+      <Box
+        display="flex"
+        justifyContent={"space-between"}
+        alignItems="center"
+        flexDirection={{ xs: "column", sm: "row" }}
+        gap={{ xs: 1, sm: 0 }}
+        pt={{ xs: 1, sm: 0 }}
+      >
         <DatePicker
           selected={startDate}
           onChange={(date) => setStartDate(date)}
