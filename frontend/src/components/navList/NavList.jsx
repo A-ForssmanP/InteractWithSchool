@@ -2,6 +2,7 @@ import List from "@mui/material/List";
 import NavListItem from "../navListItem/NavListItem";
 import InboxIcon from "@mui/icons-material/Inbox";
 import HomeIcon from "@mui/icons-material/Home";
+import { Badge } from "@mui/material";
 import CancelScheduleSendIcon from "@mui/icons-material/CancelScheduleSend";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import { useState } from "react";
@@ -16,7 +17,11 @@ function NavList({ closeMenu }) {
     {
       id: crypto.randomUUID(),
       text: "Inkorg",
-      ikon: <InboxIcon />,
+      ikon: (
+        <Badge badgeContent={4} color="error">
+          <InboxIcon />
+        </Badge>
+      ),
       navPath: "inkorg/0",
     },
     {
