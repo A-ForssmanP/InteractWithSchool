@@ -10,7 +10,6 @@ function DashBoard() {
   const [date, setDate] = useState(new Date());
   const [userFirstName, setUserFirstName] = useState("");
   const theme = useTheme();
-  console.log(theme);
   const fetchUserUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/user`;
 
   useEffect(() => {
@@ -95,7 +94,7 @@ function DashBoard() {
               <Typography fontSize={{ xs: 16, xxl: 24 }}>
                 Dagens datum:
               </Typography>
-              <Typography fontSize={{ xs: 26, xxl: 30 }}>{`${date.getDate()} ${
+              <Typography fontSize={{ xs: 26, xxl: 34 }}>{`${date.getDate()} ${
                 months[date.getMonth()]
               }`}</Typography>
             </Box>
@@ -152,7 +151,12 @@ function DashBoard() {
           </Box>
         </Box>
       </Grid>
-      <Grid item xs pt={{ sm: 1, md: 0.5, lg: 1, xxl: 2 }}>
+      <Grid
+        item
+        xs
+        pt={{ sm: 1, md: 0.5, lg: 1, xxl: 2 }}
+        bgcolor={theme.palette.grey[50]}
+      >
         <DashboardClassList />
       </Grid>
     </Grid>
