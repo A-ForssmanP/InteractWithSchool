@@ -12,8 +12,6 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 function DashboardClassListItem({ list }) {
   const theme = useTheme();
-  // list && console.log(list);
-  console.log(theme);
   return (
     <div>
       <div
@@ -60,6 +58,7 @@ function DashboardClassListItem({ list }) {
             flexDirection: { sm: "column" },
             overflowX: { xs: "scroll", sm: "visible" },
             overflowY: { sm: "auto" },
+            maxHeight: { sm: "70dvh", lg: "80dvh" },
           }}
         >
           {list.class.parents.map((parent) => {
