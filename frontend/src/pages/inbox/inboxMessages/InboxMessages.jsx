@@ -91,8 +91,7 @@ function InboxMessages({
                         }}
                         sx={{
                           marginLeft: "5px",
-                          backgroundColor: theme.palette.secondary.main,
-                          color: theme.palette.grey[200],
+                          color: theme.palette.primary.light,
                           borderRadius: "50%",
                           "&:hover": {
                             color: "red",
