@@ -136,11 +136,15 @@ function RangeDatePicker({
         </Box>
 
         {!done ? (
-          <Button onClick={daysIsDone} variant={"contained"}>
+          <Button onClick={daysIsDone} variant={"contained"} color="success">
             Dagar
           </Button>
         ) : (
-          <Button onClick={resetSelectedDates} variant={"contained"}>
+          <Button
+            onClick={resetSelectedDates}
+            variant={"contained"}
+            color="secondary"
+          >
             Återställ
           </Button>
         )}

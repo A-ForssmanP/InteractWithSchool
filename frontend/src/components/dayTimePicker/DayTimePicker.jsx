@@ -124,25 +124,33 @@ function DayTimePicker(isRegistrated) {
             isRegistrated={isRegistrated}
           />
           <Box>
-            <TimePickerResponsive
-              labelText={"FRÅN"}
-              handleChange={timeValueChange}
-              timeKey="from"
-              reset={pushToBeExamined}
-              isDisabled={selected.length < 1}
-            />
-            <TimePickerResponsive
-              labelText={"TILL"}
-              handleChange={timeValueChange}
-              timeKey="to"
-              reset={pushToBeExamined}
-              isDisabled={selected.length < 1}
-            />
+            <Box
+              display="flex"
+              flexDirection={{ xs: "column", sm: "row" }}
+              gap={{ xs: 2, sm: 0 }}
+            >
+              <TimePickerResponsive
+                labelText={"FRÅN"}
+                handleChange={timeValueChange}
+                timeKey="from"
+                reset={pushToBeExamined}
+                isDisabled={selected.length < 1}
+              />
+              <TimePickerResponsive
+                labelText={"TILL"}
+                handleChange={timeValueChange}
+                timeKey="to"
+                reset={pushToBeExamined}
+                isDisabled={selected.length < 1}
+              />
+            </Box>
+
             <Box mt={0.6}>
               <Button
                 variant="contained"
                 disabled={!buttonDisabled}
                 onClick={addTime}
+                color="success"
                 fullWidth
               >
                 Tid

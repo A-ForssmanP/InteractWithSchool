@@ -39,7 +39,7 @@ function TimeScheduleRegister() {
       {!student ? (
         <Typography>Schedule Not Found</Typography>
       ) : (
-        <Box mt={8}>
+        <Box pt={{ xs: 1, sm: 6, md: 8 }}>
           <Box
             display={"flex"}
             justifyContent={"center"}

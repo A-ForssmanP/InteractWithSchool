@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import PopupListItem from "../popupListItem/PopupListItem";
 import SendButton from "../sendButton/SendButton";
 import ProgressCircular from "../progressCircular/ProgressCircular";
-import { Box, Card, List, Button, Typography } from "@mui/material";
+import { Box, Card, List, Button, Typography, useTheme } from "@mui/material";
 import axios from "axios";
 
 function PopupList({ items, closePopup, handleTimeUpdate, handleDelete }) {
@@ -17,6 +17,7 @@ function PopupList({ items, closePopup, handleTimeUpdate, handleDelete }) {
   const navigate = useNavigate();
   const params = useParams();
   const studentId = params.id;
+  const theme = useTheme();
 
   useEffect(() => {
     setDataToSubmit(items);
@@ -74,7 +75,7 @@ function PopupList({ items, closePopup, handleTimeUpdate, handleDelete }) {
   };
   return (
     <Box style={styles} width={580} maxWidth={"100%"} zIndex={100}>
-      <Card>
+      <Card sx={{ bgcolor: theme.palette.grey[50] }}>
         {showProgress ? (
           <Box
             sx={{ height: 300 }}
