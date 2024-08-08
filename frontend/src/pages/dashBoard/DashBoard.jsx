@@ -66,7 +66,7 @@ function DashBoard() {
         pl={{ sm: 2 }}
         pr={{ sm: 2 }}
       >
-        <Box pt={{ sm: 1, md: 0.5, lg: 1 }}>
+        <Box pt={{ sm: 1, md: 0.5, lg: 1, xxl: 5 }}>
           <Box
             display={"flex"}
             flexDirection={{ xs: "column", sm: "row" }}
@@ -79,10 +79,10 @@ function DashBoard() {
             color={theme.palette.grey[50]}
           >
             <Box>
-              <Typography fontSize={{ xs: 18, sm: 20 }}>
+              <Typography fontSize={{ xs: 18, sm: 20, xxl: 34 }}>
                 Hej {userFirstName.toUpperCase()},
               </Typography>
-              <Typography fontSize={{ xs: 22, sm: 28 }}>
+              <Typography fontSize={{ xs: 22, sm: 28, xxl: 42 }}>
                 Välkommen tillbaka!
               </Typography>
             </Box>
@@ -92,8 +92,10 @@ function DashBoard() {
               justifyContent={"flex-start"}
               alignItems={"center"}
             >
-              <Typography fontSize={16}>Dagens datum:</Typography>
-              <Typography fontSize={26}>{`${date.getDate()} ${
+              <Typography fontSize={{ xs: 16, xxl: 24 }}>
+                Dagens datum:
+              </Typography>
+              <Typography fontSize={{ xs: 26, xxl: 30 }}>{`${date.getDate()} ${
                 months[date.getMonth()]
               }`}</Typography>
             </Box>
@@ -113,14 +115,14 @@ function DashBoard() {
             gridAutoRows={"1fr"}
             gap={2}
             gridTemplateColumns={{ sm: "repeat(2, 1fr)" }}
-            maxWidth={{ lg: 1200, xl: 1300 }}
+            maxWidth={{ lg: 1200, xl: 1300, xxl: 1500 }}
             maxHeight={{ xl: 900 }}
             bgcolor={theme.palette.primary.main}
             p={{ sm: 3, md: 5, lg: 6 }}
             pt={{ xs: 2, sm: 3 }}
             pb={{ xs: 2, sm: 3 }}
             borderRadius={{ xs: 1, sm: 12 }}
-            mt={{ xl: 1, xxl: 20 }}
+            mt={{ xl: 1, xxl: 10 }}
           >
             {mainContent.map((item, indx) => {
               return (
@@ -150,7 +152,7 @@ function DashBoard() {
           </Box>
         </Box>
       </Grid>
-      <Grid item xs pt={{ sm: 1, md: 0.5, lg: 1 }}>
+      <Grid item xs pt={{ sm: 1, md: 0.5, lg: 1, xxl: 2 }}>
         <DashboardClassList />
       </Grid>
     </Grid>
