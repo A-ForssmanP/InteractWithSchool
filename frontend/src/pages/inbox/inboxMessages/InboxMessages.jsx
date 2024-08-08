@@ -26,7 +26,14 @@ function InboxMessages({
   };
 
   return (
-    <List sx={{ maxWidth: "100%", overflowY: "scroll" }}>
+    <List
+      sx={{
+        maxWidth: "100%",
+        height: "80dvh",
+        marginTop: 1,
+        overflowY: "auto",
+      }}
+    >
       {selectedInbox &&
         selectedInbox.messages.map((msg) => {
           return (
@@ -84,8 +91,9 @@ function InboxMessages({
                         }}
                         sx={{
                           marginLeft: "5px",
-                          color: theme.palette.secondary.light,
-
+                          backgroundColor: theme.palette.secondary.main,
+                          color: theme.palette.grey[200],
+                          borderRadius: "50%",
                           "&:hover": {
                             color: "red",
                             bgcolor: "lightGrey",
@@ -96,7 +104,7 @@ function InboxMessages({
                     </Box>
                   </Box>
 
-                  <Box maxWidth="40rem" whiteSpace={"nowrap"}>
+                  <Box maxWidth="50em" whiteSpace={"nowrap"}>
                     <Typography overflow="hidden" textOverflow="ellipsis">
                       {msg.text}
                     </Typography>
