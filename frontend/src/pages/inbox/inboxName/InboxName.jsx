@@ -61,7 +61,7 @@ function InboxName({ inbox, studentIndx }) {
                 borderBottom: c.isSelected
                   ? "none"
                   : `1px solid ${theme.palette.primary.dark}`,
-                fontSize: 25,
+                fontSize: { xs: 18, xxl: 25 },
                 color: c.isSelected && "rgb(40,10,40)",
               }}
             >

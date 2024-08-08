@@ -39,7 +39,7 @@ function InboxMessages({
               >
                 <CardContent sx={{ display: "flex" }}>
                   <Box
-                    width="11rem"
+                    // width="11rem"
                     overflow="hidden"
                     textOverflow="ellipsis"
                     whiteSpace="nowrap"
