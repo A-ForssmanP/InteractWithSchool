@@ -48,7 +48,10 @@ function TimeScheduleRegister() {
             flexDirection={{ xs: "column", sm: "row" }}
             mb={4}
           >
-            <Typography textAlign={"center"}>
+            <Typography
+              textAlign={"center"}
+              fontSize={{ xs: 18, sm: 20, lg: 24 }}
+            >
               Registrera Tid(<b>{student.schedule.caring}</b>) För,
               {student.firstName}
             </Typography>

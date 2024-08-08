@@ -97,7 +97,9 @@ function PopupList({ items, closePopup, handleTimeUpdate, handleDelete }) {
               justifyContent={"space-between"}
               margin={"20px 34px 0 34px"}
             >
-              <Typography>Granska valda datum:</Typography>
+              <Typography fontSize={{ xs: 18, sm: 20, lg: 24 }}>
+                Granska valda datum:
+              </Typography>
               <Button onClick={closePopup}>Stäng</Button>
             </Box>
             <List
