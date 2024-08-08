@@ -1,4 +1,4 @@
-import { List, ListItem, Box } from "@mui/material";
+import { List, ListItem, Box, useTheme } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -13,6 +13,7 @@ function InboxMessages({
   messageOpened,
 }) {
   const navigate = useNavigate();
+  const theme = useTheme();
 
   // navigate to see full message
   const handleClick = (msg) => {
@@ -25,7 +26,7 @@ function InboxMessages({
   };
 
   return (
-    <List>
+    <List sx={{ maxWidth: "100%", overflowY: "scroll" }}>
       {selectedInbox &&
         selectedInbox.messages.map((msg) => {
           return (
@@ -37,32 +38,37 @@ function InboxMessages({
                   "&:hover": { background: "rgba(0, 0, 0, 0.04)" },
                 }}
               >
-                <CardContent sx={{ display: "flex" }}>
-                  <Box
-                    // width="11rem"
-                    overflow="hidden"
-                    textOverflow="ellipsis"
-                    whiteSpace="nowrap"
-                  >
-                    <Typography sx={{ fontSize: 15 }} color="text.secondary">
-                      {msg.from}
-                    </Typography>
-                    <Typography
-                      variant="h3"
-                      maxWidth="16ch"
+                <CardContent
+                  sx={
+                    {
+                      // display: "flex"
+                    }
+                  }
+                >
+                  <Box display={"flex"} justifyContent={"space-between"}>
+                    <Box
+                      // width="11rem"
                       overflow="hidden"
                       textOverflow="ellipsis"
                       whiteSpace="nowrap"
-                      sx={{ fontSize: 22 }}
                     >
-                      {msg.title}
-                    </Typography>
-                  </Box>
-
-                  <Box maxWidth="28rem" whiteSpace={"nowrap"}>
+                      <Typography sx={{ fontSize: 15 }} color="text.secondary">
+                        {msg.from}
+                      </Typography>
+                      <Typography
+                        variant="h3"
+                        // maxWidth="16ch"
+                        overflow="hidden"
+                        textOverflow="ellipsis"
+                        whiteSpace="nowrap"
+                        sx={{ fontSize: 22 }}
+                      >
+                        {msg.title}
+                      </Typography>
+                    </Box>
                     <Box display={"flex"} justifyContent={"right"}>
                       {!msg.opened ? (
-                        <Typography>Nytt</Typography>
+                        <Typography color="green">Nytt</Typography>
                       ) : (
                         <CheckCircleOutlineOutlinedIcon
                           sx={{
@@ -78,6 +84,7 @@ function InboxMessages({
                         }}
                         sx={{
                           marginLeft: "5px",
+                          color: theme.palette.secondary.light,
 
                           "&:hover": {
                             color: "red",
@@ -87,6 +94,9 @@ function InboxMessages({
                         }}
                       />
                     </Box>
+                  </Box>
+
+                  <Box maxWidth="40rem" whiteSpace={"nowrap"}>
                     <Typography overflow="hidden" textOverflow="ellipsis">
                       {msg.text}
                     </Typography>
