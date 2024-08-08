@@ -24,7 +24,7 @@ function Inbox() {
       throw new Error(err);
     }
   };
-
+  console.log(inbox);
   useState(() => {
     getData();
   }, []);
