@@ -1,7 +1,7 @@
 import Stack from "@mui/material/Stack";
 import Menu from "./components/menu/Menu";
 import PagesWrapper from "./components/pagesWrapper/PagesWrapper";
-import theme from "../colorPalette";
+import theme from "..//themeCustom";
 import { ThemeProvider } from "@emotion/react";
 
 function App() {

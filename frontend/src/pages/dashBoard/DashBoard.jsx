@@ -10,7 +10,7 @@ function DashBoard() {
   const [date, setDate] = useState(new Date());
   const [userFirstName, setUserFirstName] = useState("");
   const theme = useTheme();
-
+  console.log(theme);
   const fetchUserUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/user`;
 
   useEffect(() => {
@@ -120,7 +120,7 @@ function DashBoard() {
             pt={{ xs: 2, sm: 3 }}
             pb={{ xs: 2, sm: 3 }}
             borderRadius={{ xs: 1, sm: 12 }}
-            mt={{ xl: 1 }}
+            mt={{ xl: 1, xxl: 20 }}
           >
             {mainContent.map((item, indx) => {
               return (
