@@ -65,14 +65,16 @@ function Inbox() {
   };
 
   return (
-    <Box>
+    <Box pl={{ sm: 1 }}>
       <InboxName inbox={inbox} studentIndx={studentIndx} />
-      <InboxMessages
-        selectedInbox={inbox[studentIndx]}
-        deleteMessage={deleteMessage}
-        studentIndx={studentIndx}
-        messageOpened={messageOpened}
-      />
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <InboxMessages
+          selectedInbox={inbox[studentIndx]}
+          deleteMessage={deleteMessage}
+          studentIndx={studentIndx}
+          messageOpened={messageOpened}
+        />
+      </div>
     </Box>
   );
 }

@@ -1,10 +1,11 @@
-import { List, ListItem, ListItemButton } from "@mui/material";
+import { List, ListItem, ListItemButton, useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function InboxName({ inbox, studentIndx }) {
   const [names, setNames] = useState([]);
   const navigate = useNavigate();
+  const theme = useTheme();
 
   useEffect(() => {
     handleNames();
@@ -51,8 +52,17 @@ function InboxName({ inbox, studentIndx }) {
               sx={{
                 display: "flex",
                 justifyContent: "center",
-                border: "1px solid black",
-                borderBottom: c.isSelected && "none",
+                border:
+                  c.isSelected && `1px solid ${theme.palette.primary.dark}`,
+                // borderBottom: c.isSelected && "none",
+                background: c.isSelected
+                  ? theme.palette.primary.light
+                  : theme.palette.primary.main,
+                borderBottom: c.isSelected
+                  ? "none"
+                  : `1px solid ${theme.palette.primary.dark}`,
+                fontSize: 25,
+                color: c.isSelected && "rgb(40,10,40)",
               }}
             >
               {c.name}

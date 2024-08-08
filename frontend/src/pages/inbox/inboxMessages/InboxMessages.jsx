@@ -58,6 +58,7 @@ function InboxMessages({
                       {msg.title}
                     </Typography>
                   </Box>
+
                   <Box maxWidth="28rem" whiteSpace={"nowrap"}>
                     <Box display={"flex"} justifyContent={"right"}>
                       {!msg.opened ? (
