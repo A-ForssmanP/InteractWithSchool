@@ -17,19 +17,26 @@ function ViewMessage() {
   };
 
   return (
-    <Card>
+    <Card
+      sx={{
+        maxWidth: { xl: "76em" },
+        margin: { md: "4em auto 0 auto" },
+      }}
+    >
       <CardContent>
-        <Box>
-          <Typography sx={{ fontSize: 15 }} color="text.secondary">
-            {msg.from}
-          </Typography>
-          <Typography sx={{ fontSize: 22 }}>{msg.title}</Typography>
-        </Box>
-
-        <Typography variant="p">{msg.text}</Typography>
-        <Box marginTop={3} display={"flex"} justifyContent={"flex-end"}>
+        <Box marginBottom={3} display={"flex"} justifyContent={"flex-end"}>
           <ButtonBack handleClick={navBack} />
         </Box>
+        <Box>
+          <Typography sx={{ fontSize: 18 }} color="text.secondary">
+            {msg.from}
+          </Typography>
+          <Typography sx={{ fontSize: 27 }}>{msg.title}</Typography>
+        </Box>
+
+        <Typography variant="p" fontSize={{ xs: 17, sm: 20 }}>
+          {msg.text}
+        </Typography>
       </CardContent>
     </Card>
   );

@@ -59,7 +59,7 @@ function InboxMessages({
                       textOverflow="ellipsis"
                       whiteSpace="nowrap"
                     >
-                      <Typography sx={{ fontSize: 15 }} color="text.secondary">
+                      <Typography sx={{ fontSize: 18 }} color="text.secondary">
                         {msg.from}
                       </Typography>
                       <Typography
@@ -68,7 +68,7 @@ function InboxMessages({
                         overflow="hidden"
                         textOverflow="ellipsis"
                         whiteSpace="nowrap"
-                        sx={{ fontSize: 22 }}
+                        sx={{ fontSize: 27 }}
                       >
                         {msg.title}
                       </Typography>
@@ -105,7 +105,11 @@ function InboxMessages({
                   </Box>
 
                   <Box maxWidth="50em" whiteSpace={"nowrap"}>
-                    <Typography overflow="hidden" textOverflow="ellipsis">
+                    <Typography
+                      fontSize={{ xs: 16, sm: 20 }}
+                      overflow="hidden"
+                      textOverflow="ellipsis"
+                    >
                       {msg.text}
                     </Typography>
                   </Box>
