@@ -155,7 +155,13 @@ app.get('/', (req, res) => {
       if(!user) {
         throw new Error("Namn")
       }
-      res.status(200).json({"user":user})
+      // get number of new inbox messages
+      let newMessages = 0
+      for(let student of user.students) {
+        const newInboxMessage = await InboxMessage.find({studentId:student,opened:false})
+        newMessages += newInboxMessage.length
+      }
+      res.status(200).json({"user":user,"newMessages":newMessages})
     } catch(err) {
       res.status(404).send(err.message)
     }

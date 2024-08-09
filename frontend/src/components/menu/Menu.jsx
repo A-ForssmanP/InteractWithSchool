@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import AccountMenu from "../accountMenu/AccountMenu";
 import NavList from "../navList/NavList";
 
-function Menu() {
+function Menu({ isAuthenticated }) {
   const [handleMenu, setHandleMenu] = useState({
     isVisible: false,
     isSmoothTrans: true,
@@ -84,8 +84,14 @@ function Menu() {
           borderRadius: { sm: "0 2rem 2rem 0", md: "0" },
         }}
       >
-        <AccountMenu closeMenu={() => toggleMenu(false)} />
-        <NavList closeMenu={() => toggleMenu(false)} />
+        <AccountMenu
+          closeMenu={() => toggleMenu(false)}
+          isAuthenticated={isAuthenticated}
+        />
+        <NavList
+          closeMenu={() => toggleMenu(false)}
+          isAuthenticated={isAuthenticated}
+        />
       </Box>
     </Box>
   );

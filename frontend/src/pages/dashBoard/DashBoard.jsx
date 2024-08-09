@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Box, Typography, Paper, Grid, useTheme } from "@mui/material";
 import ReadOnlyDatePicker from "../../components/readOnlyDatePicker/ReadOnlyDatePicker";
 import ChartYearProg from "../../components/chartYearProg/ChartYearProg";
 import DashBoardNotes from "../../components/dashBoardNotes/DashBoardNotes";
 import DashboardClassList from "../../components/dashboardClassList/DashboardClassList";
+import { NewInboxCount } from "../../context";
 import axios from "axios";
 
 function DashBoard() {
@@ -11,6 +12,7 @@ function DashBoard() {
   const [userFirstName, setUserFirstName] = useState("");
   const theme = useTheme();
   const fetchUserUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/user`;
+  const newMessage = useContext(NewInboxCount);
 
   useEffect(() => {
     getUserData();
@@ -21,8 +23,9 @@ function DashBoard() {
     try {
       // get and set users firstName
       const res = await axios(fetchUserUrl, { withCredentials: true });
-      const { user } = res.data;
+      const { user, newMessages } = res.data;
       setUserFirstName(user.firstName);
+      newMessage.setNewInboxMessage(newMessages);
     } catch (err) {
       setUserFirstName(err.message);
     }

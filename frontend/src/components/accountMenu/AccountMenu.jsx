@@ -14,13 +14,13 @@ import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import axios from "axios";
 
-export default function AccountMenu({ closeMenu }) {
+export default function AccountMenu({ closeMenu, isAuthenticated }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
 
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+    isAuthenticated && setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);

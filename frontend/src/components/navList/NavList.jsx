@@ -6,10 +6,10 @@ import { Badge } from "@mui/material";
 import CancelScheduleSendIcon from "@mui/icons-material/CancelScheduleSend";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import { NewInboxCount } from "../../context";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-function NavList({ closeMenu }) {
+function NavList({ closeMenu, isAuthenticated }) {
   const [isSelected, setIsSelected] = useState("Hem");
   const navigate = useNavigate();
   const newMessage = useContext(NewInboxCount);
@@ -20,7 +20,10 @@ function NavList({ closeMenu }) {
       id: crypto.randomUUID(),
       text: "Inkorg",
       ikon: (
-        <Badge badgeContent={newMessage.newInboxMessage} color="error">
+        <Badge
+          badgeContent={isAuthenticated ? newMessage.newInboxMessage : 0}
+          color="error"
+        >
           <InboxIcon />
         </Badge>
       ),
@@ -40,6 +43,12 @@ function NavList({ closeMenu }) {
     },
   ];
 
+  useEffect(() => {
+    if (!isAuthenticated) {
+      setIsSelected("Hem");
+    }
+  }, [isAuthenticated]);
+
   // set selected menu item
   const handleSelected = (text) => {
     setIsSelected(text);
@@ -47,6 +56,9 @@ function NavList({ closeMenu }) {
 
   // handle item click
   const handleClick = (item) => {
+    if (!isAuthenticated) {
+      return;
+    }
     closeMenu();
     navigate(item.navPath);
     handleSelected(item.text);
