@@ -44,7 +44,7 @@ function Inbox() {
   useState(() => {
     const handleInboxData = async () => {
       const data = await getData();
-      countNewMessages(data);
+      // countNewMessages(data);
     };
     handleInboxData();
   }, []);
@@ -58,6 +58,7 @@ function Inbox() {
           {},
           { withCredentials: true }
         );
+        newMessage.setNewInboxMessage((curr) => (curr -= 1));
       } catch (err) {
         throw new Error(err);
       }

@@ -155,13 +155,7 @@ app.get('/', (req, res) => {
       if(!user) {
         throw new Error("Namn")
       }
-      // get number of new inbox messages
-      let newMessages = 0
-      for(let student of user.students) {
-        const newInboxMessage = await InboxMessage.find({studentId:student,opened:false})
-        newMessages += newInboxMessage.length
-      }
-      res.status(200).json({"user":user,"newMessages":newMessages})
+      res.status(200).json({"user":user})
     } catch(err) {
       res.status(404).send(err.message)
     }
@@ -210,6 +204,26 @@ app.get('/', (req, res) => {
   }
   })
 
+  app.get("/inbox/new_messages", isAuthenticated,async (req,res) => {
+    try {
+    const {userId} = req 
+    const user = await User.findById(userId).populate("students") 
+    if(!user) {
+      throw new Error()
+    }
+    // get number of new inbox messages for each student
+    let newMessages = 0
+    for(let student of user.students) {
+      const newInboxMessage = await InboxMessage.find({studentId:student,opened:false})
+      newMessages += newInboxMessage.length
+    }
+    res.status(200).json({newMessages})
+    } catch(err) {
+      res.status(404).send()
+    }
+
+  })
+
   app.delete("/inbox/:id/delete",isAuthenticated,async (req,res) => {
     try {
     const {id} = req.params
@@ -232,7 +246,6 @@ app.get('/', (req, res) => {
     } catch(err) {
       throw new Error(err)
     }
-
   })
 
   app.get("/absence",isAuthenticated, async(req,res) => {
