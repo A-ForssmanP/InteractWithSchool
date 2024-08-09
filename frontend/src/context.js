@@ -1,5 +1,5 @@
 import { createContext } from "react";
 
-const newInboxCount = createContext(null)
+const NewInboxCount = createContext(null)
 
-export {newInboxCount}
+export {NewInboxCount}

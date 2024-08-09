@@ -1,15 +1,15 @@
 import Stack from "@mui/material/Stack";
 import theme from "..//themeCustom";
 import { ThemeProvider } from "@emotion/react";
-import { newInboxCount } from "./context";
+import { NewInboxCount } from "./context";
 import Menu from "./components/menu/Menu";
 import PagesWrapper from "./components/pagesWrapper/PagesWrapper";
 import { useState } from "react";
 
 function App() {
-  const [newInboxMCount, setNewInboxMCount] = useState(0);
+  const [NewInboxMessage, setNewInboxMessage] = useState(1);
   return (
-    <newInboxCount.Provider value={{ newInboxCount, setNewInboxMCount }}>
+    <NewInboxCount.Provider value={{ NewInboxMessage, setNewInboxMessage }}>
       <ThemeProvider theme={theme}>
         <Stack
           direction={{ xs: "column", md: "row" }}
@@ -20,7 +20,7 @@ function App() {
           <PagesWrapper />
         </Stack>
       </ThemeProvider>
-    </newInboxCount.Provider>
+    </NewInboxCount.Provider>
   );
 }
 
