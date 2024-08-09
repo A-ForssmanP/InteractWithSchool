@@ -8,6 +8,7 @@ import { useState } from "react";
 
 function App() {
   const [newInboxMessage, setNewInboxMessage] = useState(0);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   return (
     <NewInboxCount.Provider value={{ newInboxMessage, setNewInboxMessage }}>
       <ThemeProvider theme={theme}>
@@ -17,7 +18,10 @@ function App() {
           sx={{ position: "relative" }}
         >
           <Menu />
-          <PagesWrapper />
+          <PagesWrapper
+            isAuthenticated={isAuthenticated}
+            setIsAuthenticated={setIsAuthenticated}
+          />
         </Stack>
       </ThemeProvider>
     </NewInboxCount.Provider>

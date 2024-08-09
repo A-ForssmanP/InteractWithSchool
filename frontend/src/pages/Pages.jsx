@@ -18,8 +18,7 @@ import DashBoard from "./dashBoard/DashBoard";
 import Login from "./login/Login";
 import CreateAccount from "./createAccount/CreateAccount";
 
-function Pages() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+function Pages({ isAuthenticated, setIsAuthenticated }) {
   const [navigateToLogin, setNavigateToLogin] = useState(false);
   const navigate = useNavigate();
 
