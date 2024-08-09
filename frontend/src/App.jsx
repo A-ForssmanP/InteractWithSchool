@@ -7,9 +7,9 @@ import PagesWrapper from "./components/pagesWrapper/PagesWrapper";
 import { useState } from "react";
 
 function App() {
-  const [NewInboxMessage, setNewInboxMessage] = useState(1);
+  const [newInboxMessage, setNewInboxMessage] = useState(0);
   return (
-    <NewInboxCount.Provider value={{ NewInboxMessage, setNewInboxMessage }}>
+    <NewInboxCount.Provider value={{ newInboxMessage, setNewInboxMessage }}>
       <ThemeProvider theme={theme}>
         <Stack
           direction={{ xs: "column", md: "row" }}

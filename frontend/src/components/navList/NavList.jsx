@@ -5,12 +5,14 @@ import HomeIcon from "@mui/icons-material/Home";
 import { Badge } from "@mui/material";
 import CancelScheduleSendIcon from "@mui/icons-material/CancelScheduleSend";
 import DateRangeIcon from "@mui/icons-material/DateRange";
-import { useState } from "react";
+import { NewInboxCount } from "../../context";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 function NavList({ closeMenu }) {
   const [isSelected, setIsSelected] = useState("Hem");
   const navigate = useNavigate();
+  const newMessage = useContext(NewInboxCount);
 
   const listItems = [
     { id: crypto.randomUUID(), text: "Hem", ikon: <HomeIcon />, navPath: "/" },
@@ -18,7 +20,7 @@ function NavList({ closeMenu }) {
       id: crypto.randomUUID(),
       text: "Inkorg",
       ikon: (
-        <Badge badgeContent={4} color="error">
+        <Badge badgeContent={newMessage.newInboxMessage} color="error">
           <InboxIcon />
         </Badge>
       ),

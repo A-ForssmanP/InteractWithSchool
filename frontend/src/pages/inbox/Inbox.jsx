@@ -1,13 +1,15 @@
 import { Box } from "@mui/material";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import InboxMessages from "./inboxMessages/InboxMessages";
 import InboxName from "./inboxName/InboxName";
+import { NewInboxCount } from "../../context";
 
 function Inbox() {
   const [inbox, setInbox] = useState([]);
   const studentIndx = useParams().student;
+  const newMessage = useContext(NewInboxCount);
 
   // get data and set it to the inbox
   const getData = async () => {
@@ -18,15 +20,33 @@ function Inbox() {
           withCredentials: true,
         }
       );
-
       setInbox(res.data);
+      return res.data;
     } catch (err) {
       throw new Error(err);
     }
   };
-  console.log(inbox);
+
+  //count new messages and update newMessage-context value
+  const countNewMessages = (inboxArray) => {
+    let newCount = 0;
+    inboxArray.forEach((inbox) => {
+      // for every unopened message,increment newCount
+      inbox.messages.forEach((message) => {
+        if (!message.opened) {
+          newCount++;
+        }
+      });
+    });
+    newMessage.setNewInboxMessage(newCount);
+  };
+
   useState(() => {
-    getData();
+    const handleInboxData = async () => {
+      const data = await getData();
+      countNewMessages(data);
+    };
+    handleInboxData();
   }, []);
 
   //set the message status to be opened
