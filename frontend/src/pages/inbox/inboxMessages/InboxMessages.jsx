@@ -45,16 +45,9 @@ function InboxMessages({
                   "&:hover": { background: "rgba(0, 0, 0, 0.04)" },
                 }}
               >
-                <CardContent
-                  sx={
-                    {
-                      // display: "flex"
-                    }
-                  }
-                >
+                <CardContent>
                   <Box display={"flex"} justifyContent={"space-between"}>
                     <Box
-                      // width="11rem"
                       overflow="hidden"
                       textOverflow="ellipsis"
                       whiteSpace="nowrap"
@@ -64,7 +57,6 @@ function InboxMessages({
                       </Typography>
                       <Typography
                         variant="h3"
-                        // maxWidth="16ch"
                         overflow="hidden"
                         textOverflow="ellipsis"
                         whiteSpace="nowrap"
