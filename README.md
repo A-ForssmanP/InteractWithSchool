@@ -4,6 +4,37 @@ A plattform for easy and effective interaction between students,parents and teac
 
 FEATURES
 
+The app uses bcrypt and JWT for authentication
+
+- Menu:
+
+  FRONTEND:
+  The user can navigate the app from the menu. When the app is loaded, it fetches the number of new messages from the users students inboxes and render the number on the "inbox"-icon. When a message is opened or deleted, the number decreases.
+  When a user are not signed in, the menu is disabled.
+  For small devices a "hamburger"-menu is used.On larger, the menu is stuck on the left side.
+
+- Sign up:
+
+  FRONTEND:
+  A user can create a account,using the signup form, on the sign up page. If anything goes wrong, an error message is shown to the user.
+
+  BACKEND:
+  When server gets the user data, the data-base creates the user document and all the other documents that is needed for that user. The server then sends back two cookies, one with the user token and one that tells the user is authenticated,as a string. The client will then get acces to different pages,depending if the two cookies are valid or not.
+
+  -Sign in:
+  FRONTEND:
+  A user can sign in, eather through one of the two test accounts available, or throught the sign in form, on the sign in page.
+  If anything goes wrong, an error message is shown to the user.
+
+  BACKEND:
+  Server validates the user input and if valid,sends back the two cookies with the user token and the authenticated string.
+
+-DashBoard:
+
+FRONTEND:
+The dashboard is the home page and shows username, progress of the school year,user notes and a class list for every child of the user.
+The chart of the school year progress is build with chartJs and react-chartJs.
+
 - Inbox for reciving messages:
 
   FRONTEND:
