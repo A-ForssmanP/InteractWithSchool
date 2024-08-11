@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const mongoose = require("mongoose");
 const User = require("./models/user")
 const Student = require("./models/student");
@@ -9,12 +11,19 @@ const generateRandomName = require("./utils/generateRandomName")
 
 const bcrypt = require("bcryptjs")
 
-mongoose.connect('mongodb://127.0.0.1:27017/interactWithSchool').then(()=>{
-  console.log("CONNECTED TO DB!")
+//mongodb+srv://afpdev91:<password>@cluster0.tnv2l.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+mongoose.connect(`mongodb+srv://afpdev91:${process.env.ATLAS_PASSWORD}@cluster0.tnv2l.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`).then(()=>{
+  console.log("CONNECTED TO ATLAS-DB!")
 }).catch((err)=>{
-  throw new Error(err)
+  throw new Error(err.message)
 })
 
+// mongoose.connect('mongodb://127.0.0.1:27017/interactWithSchool').then(()=>{
+//   console.log("CONNECTED TO DB!")
+// }).catch((err)=>{
+//   throw new Error(err)
+// })
 
 // create school class document
 const createSchoolClass = async (className) => {
