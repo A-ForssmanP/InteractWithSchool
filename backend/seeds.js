@@ -13,7 +13,7 @@ const bcrypt = require("bcryptjs")
 
 //mongodb+srv://afpdev91:<password>@cluster0.tnv2l.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 
-mongoose.connect(`mongodb+srv://afpdev91:${process.env.ATLAS_PASSWORD}@cluster0.tnv2l.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`).then(()=>{
+mongoose.connect(`mongodb+srv://afpdev91:${process.env.ATLAS_PASSWORD}@cluster0.tnv2l.mongodb.net/interactWithSchool?retryWrites=true&w=majority&appName=Cluster0`).then(()=>{
   console.log("CONNECTED TO ATLAS-DB!")
 }).catch((err)=>{
   throw new Error(err.message)
