@@ -17,6 +17,8 @@ const isAuthenticated = require("./middleware/isAuthenticated")
 const generateRandomName = require("./utils/generateRandomName")
 const SchoolClass = require('./models/schoolClass')
 
+//mongodb+srv://afpdev91:<password>@cluster0.tnv2l.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
 
 mongoose.connect('mongodb://127.0.0.1:27017/interactWithSchool').then(()=>{
   console.log("CONNECTED TO DB!")
