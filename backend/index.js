@@ -35,7 +35,7 @@ if(process.env.NODE_ENV === "Production") {
 
 
 
-const port = process.env.SERVER_PORT
+const port =process.env.PORT || process.env.SERVER_PORT
 const corsOptions = {origin: process.env.VITE_SERVER, optionsSuccessStatus: 200,credentials:true}
 // const userId  = process.env.USER_ID
 
