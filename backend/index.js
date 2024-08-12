@@ -1,4 +1,6 @@
-require('dotenv').config()
+if(process.env.NODE_ENV !== "Production") {
+  require('dotenv').config()
+}
 const express = require("express")
 const cors = require("cors")
 const app = express()
@@ -18,7 +20,7 @@ const generateRandomName = require("./utils/generateRandomName")
 const SchoolClass = require('./models/schoolClass')
 
 //mongodb+srv://afpdev91:<password>@cluster0.tnv2l.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-
+console.log(process.env.NODE_ENV)
 if(process.env.NODE_ENV === "Production") {
   mongoose.connect(`mongodb+srv://afpdev91:${process.env.ATLAS_PASSWORD}@cluster0.tnv2l.mongodb.net/interactWithSchool?retryWrites=true&w=majority&appName=Cluster0`).then(()=>{
     console.log("CONNECTED TO ATLAS-DB!")
