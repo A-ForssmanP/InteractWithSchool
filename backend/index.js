@@ -38,7 +38,7 @@ if(process.env.NODE_ENV === "production") {
 
 
 const port =process.env.PORT || process.env.SERVER_PORT
-const corsOptions = {origin: [process.env.VITE_SERVER,"http://localhost:5173" ], optionsSuccessStatus: 200,credentials:true}
+const corsOptions = {origin: [process.env.VITE_SERVER,"localhost:5173" ], optionsSuccessStatus: 200,credentials:true}
 // const userId  = process.env.USER_ID
 
 app.use(express.json())
