@@ -19,12 +19,21 @@ const SchoolClass = require('./models/schoolClass')
 
 //mongodb+srv://afpdev91:<password>@cluster0.tnv2l.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 
-
-mongoose.connect('mongodb://127.0.0.1:27017/interactWithSchool').then(()=>{
+if(process.env.NODE_ENV === "Production") {
+  mongoose.connect(`mongodb+srv://afpdev91:${process.env.ATLAS_PASSWORD}@cluster0.tnv2l.mongodb.net/interactWithSchool?retryWrites=true&w=majority&appName=Cluster0`).then(()=>{
+    console.log("CONNECTED TO ATLAS-DB!")
+  }).catch((err)=>{
+    throw new Error(err.message)
+  })
+} else {
+  mongoose.connect('mongodb://127.0.0.1:27017/interactWithSchool').then(()=>{
   console.log("CONNECTED TO DB!")
 }).catch((err)=>{
   throw new Error(err)
 })
+}
+
+
 
 const port = process.env.SERVER_PORT
 const corsOptions = {origin: process.env.VITE_SERVER, optionsSuccessStatus: 200,credentials:true}
