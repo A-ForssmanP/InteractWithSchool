@@ -1,4 +1,4 @@
-if(process.env.NODE_ENV !== "roduction") {
+if(process.env.NODE_ENV !== "production") {
   require('dotenv').config()
 }
 const express = require("express")
@@ -21,7 +21,7 @@ const SchoolClass = require('./models/schoolClass')
 
 //mongodb+srv://afpdev91:<password>@cluster0.tnv2l.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 console.log(process.env.NODE_ENV)
-if(process.env.NODE_ENV === "roduction") {
+if(process.env.NODE_ENV === "production") {
   mongoose.connect(`mongodb+srv://afpdev91:${process.env.ATLAS_PASSWORD}@cluster0.tnv2l.mongodb.net/interactWithSchool?retryWrites=true&w=majority&appName=Cluster0`).then(()=>{
     console.log("CONNECTED TO ATLAS-DB!")
   }).catch((err)=>{
