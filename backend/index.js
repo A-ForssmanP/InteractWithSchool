@@ -20,7 +20,7 @@ const generateRandomName = require("./utils/generateRandomName")
 const SchoolClass = require('./models/schoolClass')
 
 //mongodb+srv://afpdev91:<password>@cluster0.tnv2l.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-console.log(process.env.NODE_ENV)
+
 if(process.env.NODE_ENV === "production") {
   mongoose.connect(`mongodb+srv://afpdev91:${process.env.ATLAS_PASSWORD}@cluster0.tnv2l.mongodb.net/interactWithSchool?retryWrites=true&w=majority&appName=Cluster0`).then(()=>{
     console.log("CONNECTED TO ATLAS-DB!")
@@ -73,7 +73,7 @@ app.get('/', (req, res) => {
      //send back token
      res.cookie("token",token,{httpOnly:true,sameSite:"none",secure:true})
      // send back cookie that tells a user is authenticated
-     res.cookie("isAuthenticated","true",{sameSite:"none"})
+     res.cookie("isAuthenticated","true",{sameSite:"none",secure:true})
      res.send("Token and isAuthenticated cookies send!")
     }
     } catch(err) {
