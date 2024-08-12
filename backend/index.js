@@ -70,9 +70,9 @@ app.get('/', (req, res) => {
     //create token
     const token = jwt.sign({userId: user._id},process.env.JWT_SECRET, { expiresIn: '30m'})
      //send back token
-     res.cookie("token",token,{httpOnly:true})
+     res.cookie("token",token,{httpOnly:true,sameSite:"none"})
      // send back cookie that tells a user is authenticated
-     res.cookie("isAuthenticated","true")
+     res.cookie("isAuthenticated","true",{sameSite:"none"})
      res.send("Token and isAuthenticated cookies send!")
     }
     } catch(err) {
