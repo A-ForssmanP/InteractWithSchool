@@ -57,6 +57,7 @@ function LoginForm({ isAuthenticated }) {
           withCredentials: true,
         }
       );
+      console.log(document.cookie);
       if (loginError) {
         setLoginError(null);
       }
