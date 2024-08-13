@@ -33,6 +33,10 @@ function LoginForm({ isAuthenticated }) {
     try {
       const res = await axios.post(postUrl, inputValues, {
         withCredentials: true,
+        headers: {
+          "Acces-Controll-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
       });
       if (loginError) {
         setLoginError(null);
