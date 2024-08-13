@@ -44,9 +44,9 @@ const corsOptions = {origin: "http://localhost:5173/", optionsSuccessStatus: 200
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static("dist"))
-app.use(cors(corsOptions))
+// app.use(cors(corsOptions))
 app.use(cookieParser())
-app.set("trust-proxy",1)
+// app.set("trust-proxy",1)
 
 // app.get('/', (req, res) => {
 //     // res.send('Welcome to server!!')
