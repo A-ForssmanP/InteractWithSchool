@@ -43,7 +43,9 @@ const corsOptions = {origin: process.env.VITE_SERVER, optionsSuccessStatus: 200,
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-app.use(express.static("dist"))
+if(process.env.NODE_ENV === "production") {
+  app.use(express.static("dist"))
+}
 // app.use(cors(corsOptions))
 app.use(cookieParser())
 if(process.env.NODE_ENV !== "production") {
@@ -51,10 +53,12 @@ if(process.env.NODE_ENV !== "production") {
 }
 // app.set("trust-proxy",1)
 
-// app.get('/', (req, res) => {
-//     // res.send('Welcome to server!!')
-   
-//   })
+if(process.env.NODE_ENV !== "production") {
+  app.get('/', (req, res) => {
+    res.send('Welcome to server!!')
+  })
+}
+
 
   app.post("/login", async (req,res) => {
     try {
