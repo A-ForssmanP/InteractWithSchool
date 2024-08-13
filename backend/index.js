@@ -38,7 +38,7 @@ if(process.env.NODE_ENV === "production") {
 
 
 const port =process.env.PORT || process.env.SERVER_PORT
-const corsOptions = {origin: "http://localhost:5173", optionsSuccessStatus: 200,credentials:true}
+const corsOptions = {origin: "localhost:5173", optionsSuccessStatus: 200,credentials:true}
 // const userId  = process.env.USER_ID
 
 app.use(express.json())
@@ -71,9 +71,9 @@ app.get('/', (req, res) => {
     //create token
     const token = jwt.sign({userId: user._id},process.env.JWT_SECRET, { expiresIn: '30m'})
      //send back token
-     res.cookie("token",token,{httpOnly:true,sameSite:"none",secure:true})
+     res.cookie("token",token,{httpOnly:true})
      // send back cookie that tells a user is authenticated
-     res.cookie("isAuthenticated","true",{domain:process.env.VITE_SERVER})
+     res.cookie("isAuthenticated","true")
      res.send("Token and isAuthenticated cookies send!")
     }
     } catch(err) {
