@@ -147,7 +147,7 @@ function CreateAccountForm({ isAuthenticated }) {
                 background: theme.palette.secondary.main,
               }}
             >
-              Skapa koto
+              Skapa konto
             </Button>
           </Box>
         </Box>
