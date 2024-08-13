@@ -36,6 +36,7 @@ function LoginForm({ isAuthenticated }) {
         headers: {
           "Acces-Controll-Allow-Origin": "*",
           "Content-Type": "application/json",
+          origin: "http://localhost:5173/",
         },
       });
       if (loginError) {
