@@ -13,7 +13,7 @@ function LoginForm({ isAuthenticated }) {
   const [loginError, setLoginError] = useState(null);
   const navigate = useNavigate();
   const theme = useTheme();
-  const postUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/login`;
+  const postUrl = `/login`;
 
   //update input values
   const handleInput = (e) => {
