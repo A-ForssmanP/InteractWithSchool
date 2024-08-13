@@ -14,7 +14,7 @@ function LoginForm({ isAuthenticated }) {
   const navigate = useNavigate();
   const theme = useTheme();
   const postUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/login`;
-  console.log(postUrl);
+
   //update input values
   const handleInput = (e) => {
     const name = e.target.name;
@@ -33,11 +33,11 @@ function LoginForm({ isAuthenticated }) {
     try {
       const res = await axios.post(postUrl, inputValues, {
         withCredentials: true,
-        headers: {
-          "Acces-Controll-Allow-Origin": "*",
-          "Content-Type": "application/json",
-          origin: "http://localhost:5173/",
-        },
+        // headers: {
+        //   "Acces-Controll-Allow-Origin": "*",
+        //   "Content-Type": "application/json",
+        //   origin: "http://localhost:5173/",
+        // },
       });
       if (loginError) {
         setLoginError(null);
@@ -62,7 +62,6 @@ function LoginForm({ isAuthenticated }) {
           withCredentials: true,
         }
       );
-      console.log(document.cookie);
       if (loginError) {
         setLoginError(null);
       }

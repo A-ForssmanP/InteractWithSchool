@@ -38,7 +38,7 @@ if(process.env.NODE_ENV === "production") {
 
 
 const port =process.env.PORT || process.env.SERVER_PORT
-const corsOptions = {origin: "http://localhost:5173/", optionsSuccessStatus: 200,credentials:true}
+const corsOptions = {origin: process.env.VITE_SERVER, optionsSuccessStatus: 200,credentials:true}
 // const userId  = process.env.USER_ID
 
 app.use(express.json())
@@ -46,6 +46,9 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.static("dist"))
 // app.use(cors(corsOptions))
 app.use(cookieParser())
+if(process.env.NODE_ENV !== "production") {
+  app.use(cors(corsOptions))
+}
 // app.set("trust-proxy",1)
 
 // app.get('/', (req, res) => {
