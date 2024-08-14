@@ -94,9 +94,12 @@ function DashBoard() {
               <Typography fontSize={{ xs: 16, xxl: 24 }}>
                 Dagens datum:
               </Typography>
-              <Typography fontSize={{ xs: 26, xxl: 34 }}>{`${date.getDate()} ${
+              {/* <Typography fontSize={{ xs: 26, xxl: 34 }}>{`${date.getDate()} ${
                 months[date.getMonth()]
-              }`}</Typography>
+              }`}</Typography> */}
+              <Typography fontSize={{ xs: 26, xxl: 34 }}>{`${date.getDate()}/${
+                date.getMonth() + 1
+              }-${date.getFullYear()}`}</Typography>
             </Box>
           </Box>
         </Box>
