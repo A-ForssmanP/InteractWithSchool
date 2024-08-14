@@ -371,6 +371,10 @@ if(process.env.NODE_ENV !== "production") {
     }
   })
 
+  app.get("/*", (req,res) => {
+    res.redirect("/")
+  })
+
 app.listen(port,()=>{
 console.log(`SERVER IS UP AND RUNNING ON PORT ${port}!`)
 })
