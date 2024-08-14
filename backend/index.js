@@ -372,8 +372,6 @@ if(process.env.NODE_ENV !== "production") {
   })
 
   app.get("/*", (req,res) => {
-    const params = req.params
-    console.log(params)
     res.redirect("/")
   })
 

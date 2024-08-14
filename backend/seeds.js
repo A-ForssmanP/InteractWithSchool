@@ -217,10 +217,13 @@ const insertNote = async () => {
     //find all users
     const users = await User.find()
     //for every user, create a note doc and point user to it
-    users.forEach((user) => {
+    for(let user of users) {
       const note = new Note({authorId:user,text:""})
       note.save()
-    })
+    }
+    // users.forEach((user) => {
+      
+    // })
   } catch(err) {
     throw new Error(err.message)
   }
