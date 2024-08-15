@@ -50,13 +50,13 @@ function Menu({ isAuthenticated }) {
       >
         <Button
           sx={{ position: "absolute", left: "0", color: "rgb(255,255,255)" }}
-          onClick={() => isAuthenticated && toggleMenu(true)}
+          onClick={() => (isAuthenticated ? toggleMenu(true) : undefined)}
         >
           <MenuIcon />
         </Button>
         <Button
           sx={{ color: "rgb(255,255,255)" }}
-          onClick={isAuthenticated && navigateHome}
+          onClick={isAuthenticated ? navigateHome : undefined}
         >
           <HomeIcon />
         </Button>

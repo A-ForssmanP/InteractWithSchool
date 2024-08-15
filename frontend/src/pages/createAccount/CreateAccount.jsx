@@ -9,7 +9,7 @@ function CreateAccount({ isAuthenticated }) {
       display={"flex"}
       flexDirection={"column"}
       justifyContent={"center"}
-      height={"100%"}
+      height={{ xs: "calc(100dvh - 36px)", md: "100%" }}
       sx={{
         background: {
           xs: `linear-gradient(to top left,${theme.palette.primary.main} 0%, ${theme.palette.primary.main} 
