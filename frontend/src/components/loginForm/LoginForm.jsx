@@ -30,6 +30,9 @@ function LoginForm({ isAuthenticated }) {
   // handle submitting the form
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!inputValues.username.length || !inputValues.password.length) {
+      return setLoginError("Användarnamn och/eller lösenord saknas");
+    }
     try {
       const res = await axios.post(postUrl, inputValues, {
         withCredentials: true,
@@ -126,7 +129,7 @@ function LoginForm({ isAuthenticated }) {
               value={inputValues["username"]}
               name="username"
               onChange={handleInput}
-              required
+              // required
               InputProps={{
                 style: {
                   borderRadius: "1.6rem",
@@ -140,7 +143,7 @@ function LoginForm({ isAuthenticated }) {
               value={inputValues["password"]}
               name="password"
               onChange={handleInput}
-              required
+              // required
               InputProps={{
                 style: {
                   borderRadius: "1.6rem",

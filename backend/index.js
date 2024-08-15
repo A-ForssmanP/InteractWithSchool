@@ -81,7 +81,7 @@ if(process.env.NODE_ENV !== "production") {
      res.send("Token and isAuthenticated cookies send!")
     }
     } catch(err) {
-      return res.status(404).send("dsds",err.message)
+      return res.status(404).send(err.message)
     }
   })
 
