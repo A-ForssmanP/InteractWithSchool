@@ -368,6 +368,11 @@ if(process.env.NODE_ENV !== "production") {
     }
   })
 
+  // for render to health checks
+  app.get("//healthz", (req,res) => {
+    res.status(200).send()
+  })
+
   app.get("/*", (req,res) => {
     res.redirect("/")
   })
