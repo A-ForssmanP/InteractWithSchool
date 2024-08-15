@@ -44,9 +44,6 @@ const corsOptions = {origin: process.env.VITE_SERVER, optionsSuccessStatus: 200,
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static("dist"))
-
-
-// app.use(cors(corsOptions))
 app.use(cookieParser())
 if(process.env.NODE_ENV !== "production") {
   app.use(cors(corsOptions))
