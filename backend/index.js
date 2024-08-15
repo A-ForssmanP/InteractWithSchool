@@ -43,22 +43,20 @@ const corsOptions = {origin: process.env.VITE_SERVER, optionsSuccessStatus: 200,
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-if(process.env.NODE_ENV === "production") {
-  app.use(express.static("dist"))
-}
+app.use(express.static("dist"))
+
+
 // app.use(cors(corsOptions))
 app.use(cookieParser())
 if(process.env.NODE_ENV !== "production") {
   app.use(cors(corsOptions))
 }
-// app.set("trust-proxy",1)
 
-if(process.env.NODE_ENV !== "production") {
+
+
   app.get('/', (req, res) => {
-    res.send('Welcome to server!!')
+    res.status(200).send('Welcome to server!')
   })
-}
-
 
   app.post("/login", async (req,res) => {
     try {
@@ -87,7 +85,6 @@ if(process.env.NODE_ENV !== "production") {
     }
     } catch(err) {
       return res.status(404).send("dsds",err.message)
-      // return res.status(404).send("Något gick fel, vänligen försök igen")
     }
   })
 
