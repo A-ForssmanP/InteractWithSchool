@@ -32,6 +32,18 @@ function CreateAccountForm({ isAuthenticated }) {
   // handle submitting the form
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!inputValues.firstName.length) {
+      return setCreateError("Förnamn saknas");
+    }
+    if (!inputValues.lastName.length) {
+      return setCreateError("Efternamn saknas");
+    }
+    if (!inputValues.username.length) {
+      return setCreateError("Användarnamn saknas");
+    }
+    if (inputValues.password.length < 6) {
+      return setCreateError("Lösenord måste vara minst 6 tecken");
+    }
     try {
       const res = await axios.post(postUrl, inputValues, {
         withCredentials: true,
@@ -84,7 +96,9 @@ function CreateAccountForm({ isAuthenticated }) {
               value={inputValues["firstName"]}
               name="firstName"
               onChange={handleInput}
-              required
+              // focused={inputValues.firstName.length}
+              color={inputValues.firstName.length ? "success" : null}
+              // required
               InputProps={{
                 style: {
                   borderRadius: "1.6rem",
@@ -98,7 +112,9 @@ function CreateAccountForm({ isAuthenticated }) {
               value={inputValues["lastName"]}
               name="lastName"
               onChange={handleInput}
-              required
+              // focused={inputValues.lastName.length}
+              color={inputValues.lastName.length ? "success" : null}
+              // required
               InputProps={{
                 style: {
                   borderRadius: "1.6rem",
@@ -112,7 +128,9 @@ function CreateAccountForm({ isAuthenticated }) {
               value={inputValues["username"]}
               name="username"
               onChange={handleInput}
-              required
+              // focused={inputValues.username.length}
+              color={inputValues.username.length ? "success" : null}
+              // required
               InputProps={{
                 style: {
                   borderRadius: "1.6rem",
@@ -126,7 +144,7 @@ function CreateAccountForm({ isAuthenticated }) {
               value={inputValues["password"]}
               name="password"
               onChange={handleInput}
-              required
+              // required
               InputProps={{
                 style: {
                   borderRadius: "1.6rem",
