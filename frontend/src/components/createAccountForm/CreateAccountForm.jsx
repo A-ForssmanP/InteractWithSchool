@@ -98,12 +98,11 @@ function CreateAccountForm({ isAuthenticated }) {
           <Box display={"flex"} flexDirection={"column"} gap={2} mb={2}>
             <TextField
               id="firstName-input"
-              label="Förnamn"
+              label="Förnamn *"
               type="text"
               value={inputValues["firstName"]}
               name="firstName"
               onChange={handleInput}
-              required
               InputProps={{
                 style: {
                   borderRadius: "1.6rem",
@@ -119,12 +118,11 @@ function CreateAccountForm({ isAuthenticated }) {
             />
             <TextField
               id="lastName-input"
-              label="Efternamn"
+              label="Efternamn *"
               type="text"
               value={inputValues["lastName"]}
               name="lastName"
               onChange={handleInput}
-              required
               InputProps={{
                 style: {
                   borderRadius: "1.6rem",
@@ -140,12 +138,11 @@ function CreateAccountForm({ isAuthenticated }) {
             />
             <TextField
               id="username-input"
-              label="Användarnamn"
+              label="Användarnamn *"
               type="text"
               value={inputValues["username"]}
               name="username"
               onChange={handleInput}
-              required
               InputProps={{
                 style: {
                   borderRadius: "1.6rem",
@@ -161,12 +158,11 @@ function CreateAccountForm({ isAuthenticated }) {
             />
             <TextField
               id="password-input"
-              label="Lösenord,minst 6 tecken"
+              label="Lösenord,minst 6 tecken *"
               type="password"
               value={inputValues["password"]}
               name="password"
               onChange={handleInput}
-              required
               InputProps={{
                 style: {
                   borderRadius: "1.6rem",
