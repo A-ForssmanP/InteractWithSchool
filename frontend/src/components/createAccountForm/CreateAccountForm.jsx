@@ -103,6 +103,7 @@ function CreateAccountForm({ isAuthenticated }) {
               value={inputValues["firstName"]}
               name="firstName"
               onChange={handleInput}
+              required
               InputProps={{
                 style: {
                   borderRadius: "1.6rem",
@@ -123,6 +124,7 @@ function CreateAccountForm({ isAuthenticated }) {
               value={inputValues["lastName"]}
               name="lastName"
               onChange={handleInput}
+              required
               InputProps={{
                 style: {
                   borderRadius: "1.6rem",
@@ -143,6 +145,7 @@ function CreateAccountForm({ isAuthenticated }) {
               value={inputValues["username"]}
               name="username"
               onChange={handleInput}
+              required
               InputProps={{
                 style: {
                   borderRadius: "1.6rem",
@@ -163,6 +166,7 @@ function CreateAccountForm({ isAuthenticated }) {
               value={inputValues["password"]}
               name="password"
               onChange={handleInput}
+              required
               InputProps={{
                 style: {
                   borderRadius: "1.6rem",
