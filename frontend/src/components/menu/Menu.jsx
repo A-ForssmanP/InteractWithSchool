@@ -37,7 +37,11 @@ function Menu({ isAuthenticated }) {
       minWidth="15%"
       bgcolor={theme.palette.primary.main}
       sx={{
+        position: { xs: "fixed", md: "static" },
+        left: { xs: 0, md: null },
+        right: { xs: 0, md: null },
         borderRadius: { md: "0px 2.5rem 2.5rem 0px" },
+        zIndex: { xs: 1000, md: null },
       }}
     >
       <Box
