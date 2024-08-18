@@ -1,4 +1,12 @@
-import { Box, Paper, Typography, Button, TextField } from "@mui/material";
+import {
+  Box,
+  Paper,
+  Typography,
+  Button,
+  TextField,
+  InputAdornment,
+} from "@mui/material";
+import DoneIcon from "@mui/icons-material/Done";
 import { useTheme } from "@emotion/react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -82,7 +90,6 @@ function CreateAccountForm({ isAuthenticated }) {
         <Box
           component={"form"}
           mt={1.4}
-          //   mb={15}
           mb={10}
           width={"100%"}
           maxWidth={"20rem"}
@@ -96,13 +103,17 @@ function CreateAccountForm({ isAuthenticated }) {
               value={inputValues["firstName"]}
               name="firstName"
               onChange={handleInput}
-              // focused={inputValues.firstName.length}
-              color={inputValues.firstName.length ? "success" : null}
-              // required
               InputProps={{
                 style: {
                   borderRadius: "1.6rem",
                 },
+                endAdornment: (
+                  <InputAdornment position="start">
+                    {inputValues.firstName.length ? (
+                      <DoneIcon color="success" />
+                    ) : null}
+                  </InputAdornment>
+                ),
               }}
             />
             <TextField
@@ -112,13 +123,17 @@ function CreateAccountForm({ isAuthenticated }) {
               value={inputValues["lastName"]}
               name="lastName"
               onChange={handleInput}
-              // focused={inputValues.lastName.length}
-              color={inputValues.lastName.length ? "success" : null}
-              // required
               InputProps={{
                 style: {
                   borderRadius: "1.6rem",
                 },
+                endAdornment: (
+                  <InputAdornment position="start">
+                    {inputValues.lastName.length ? (
+                      <DoneIcon color="success" />
+                    ) : null}
+                  </InputAdornment>
+                ),
               }}
             />
             <TextField
@@ -128,27 +143,37 @@ function CreateAccountForm({ isAuthenticated }) {
               value={inputValues["username"]}
               name="username"
               onChange={handleInput}
-              // focused={inputValues.username.length}
-              color={inputValues.username.length ? "success" : null}
-              // required
               InputProps={{
                 style: {
                   borderRadius: "1.6rem",
                 },
+                endAdornment: (
+                  <InputAdornment position="start">
+                    {inputValues.username.length ? (
+                      <DoneIcon color="success" />
+                    ) : null}
+                  </InputAdornment>
+                ),
               }}
             />
             <TextField
               id="password-input"
-              label="Lösenord"
+              label="Lösenord,minst 6 tecken"
               type="password"
               value={inputValues["password"]}
               name="password"
               onChange={handleInput}
-              // required
               InputProps={{
                 style: {
                   borderRadius: "1.6rem",
                 },
+                endAdornment: (
+                  <InputAdornment position="start">
+                    {inputValues.password.length >= 6 ? (
+                      <DoneIcon color="success" />
+                    ) : null}
+                  </InputAdornment>
+                ),
               }}
             />
           </Box>
