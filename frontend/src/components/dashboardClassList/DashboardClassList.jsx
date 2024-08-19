@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Carousel from "react-material-ui-carousel";
 import DashboardClassListItem from "../dashboardClassListItem/DashboardClassListItem";
+import DashboardClassListPopup from "../DashboardClassListPopup/DashboardClassListPopup";
 import { useTheme } from "@emotion/react";
-import { Card, Button } from "@mui/material";
 
 function DashboardClassList() {
   const [classList, setClassList] = useState([]);
+  const [popup, setPopup] = useState({ isVisible: false, content: {} });
   const theme = useTheme();
 
   const fetchSchoolListUrl = `${
@@ -28,6 +29,33 @@ function DashboardClassList() {
     } catch (err) {}
   };
 
+  //show popup
+  const showPopup = (person) => {
+    setPopup((curr) => {
+      if (!curr.isVisible) {
+        return {
+          isVisible: true,
+          content: person,
+        };
+      } else {
+        return {
+          ...curr,
+          content: person,
+        };
+      }
+    });
+  };
+
+  //close popup
+  const closePopup = () => {
+    setPopup((curr) => {
+      return {
+        isVisible: false,
+        content: null,
+      };
+    });
+  };
+
   return (
     <div
       style={{
@@ -35,36 +63,12 @@ function DashboardClassList() {
         position: "relative",
       }}
     >
-      <Card
-        sx={{
-          position: "absolute",
-          top: { xs: "-9em", sm: "-.4em" },
-          left: { sm: "-20em" },
-          width: { xs: "100%", sm: "20rem" },
-          padding: 1,
-        }}
-      >
-        <div style={{ border: "1px solid red" }}>
-          <div
-            style={{ position: "relative", paddingTop: 16, marginBottom: 40 }}
-          >
-            <p style={{ textAlign: "center" }}>namn</p>
-            <Button sx={{ position: "absolute", right: 2, top: 0 }}>X</Button>
-          </div>
-
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-evenly",
-              alignItems: "baseline",
-              paddingBottom: 16,
-            }}
-          >
-            <Button>Chatt</Button>
-            <p>mail</p>
-          </div>
-        </div>
-      </Card>
+      {popup.isVisible && (
+        <DashboardClassListPopup
+          closePopup={closePopup}
+          content={popup.content}
+        />
+      )}
       <Carousel
         navButtonsAlwaysVisible={true}
         autoPlay={false}
@@ -84,7 +88,13 @@ function DashboardClassList() {
         sx={{ height: "100%" }}
       >
         {classList.map((list) => {
-          return <DashboardClassListItem key={list.class._id} list={list} />;
+          return (
+            <DashboardClassListItem
+              key={list.class._id}
+              list={list}
+              showPopup={showPopup}
+            />
+          );
         })}
       </Carousel>
     </div>

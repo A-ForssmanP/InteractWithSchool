@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
-function DashboardClassListItem({ list }) {
+function DashboardClassListItem({ list, showPopup }) {
   console.log(list);
   const theme = useTheme();
   return (
@@ -39,7 +39,7 @@ function DashboardClassListItem({ list }) {
           <Typography>Lärare:</Typography>
 
           <Typography>{list.class.teacher.firstName}</Typography>
-          <Button sx={{ p: "0" }}>
+          <Button onClick={() => showPopup(list.class.teacher)} sx={{ p: "0" }}>
             <AddCircleIcon
               sx={{
                 background: "white",
@@ -88,7 +88,11 @@ function DashboardClassListItem({ list }) {
                   },
                 }}
                 secondaryAction={
-                  <IconButton edge="end" aria-label="öppna">
+                  <IconButton
+                    onClick={() => showPopup(parent)}
+                    edge="end"
+                    aria-label="öppna"
+                  >
                     <AddCircleIcon
                       sx={{
                         background: "white",
