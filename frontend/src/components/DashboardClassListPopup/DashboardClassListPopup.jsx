@@ -1,13 +1,15 @@
 import { Card, Button } from "@mui/material";
+import MessageIcon from "@mui/icons-material/Message";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
 
 function DashboardClassListPopup({ closePopup, content }) {
   return (
     <Card
       sx={{
         position: "absolute",
-        top: { xs: "-9em", sm: "-.4em" },
-        left: { sm: "-20em" },
-        width: { xs: "100%", sm: "20rem" },
+        top: { xs: "-10.1em", sm: "-.4em" },
+        left: { sm: "-24em" },
+        width: { xs: "100%", sm: "24rem" },
         padding: 1,
       }}
     >
@@ -27,12 +29,28 @@ function DashboardClassListPopup({ closePopup, content }) {
           style={{
             display: "flex",
             justifyContent: "space-evenly",
-            alignItems: "baseline",
+            alignItems: "stretch",
             paddingBottom: 16,
           }}
         >
-          <Button>Chatt</Button>
-          <p>mail</p>
+          <div>
+            <Button>
+              <MessageIcon />
+            </Button>
+            <p style={{ textAlign: "center" }}>Chatta</p>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              flexDirection: "column",
+              justifyContent: "flex-end",
+              gap: 8,
+            }}
+          >
+            <p>mockmail@mail.com</p>
+            <p style={{ textAlign: "center" }}>Mail</p>
+          </div>
         </div>
       </div>
     </Card>
