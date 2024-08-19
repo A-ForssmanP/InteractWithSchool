@@ -7,13 +7,15 @@ import {
   ListItemText,
   IconButton,
   Button,
+  Card,
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 function DashboardClassListItem({ list }) {
+  console.log(list);
   const theme = useTheme();
   return (
-    <div>
+    <div style={{ position: "relative" }}>
       <div
         style={{
           display: "flex",
