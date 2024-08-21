@@ -1,6 +1,5 @@
 import { Card, Button } from "@mui/material";
 import MessageIcon from "@mui/icons-material/Message";
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
 
 function DashboardClassListPopup({ closePopup, content }) {
   return (
@@ -22,7 +21,7 @@ function DashboardClassListPopup({ closePopup, content }) {
             onClick={closePopup}
             sx={{ position: "absolute", right: 2, top: 0 }}
           >
-            X
+            Stäng
           </Button>
         </div>
         <div
