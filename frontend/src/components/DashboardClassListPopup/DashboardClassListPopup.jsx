@@ -48,7 +48,7 @@ function DashboardClassListPopup({ closePopup, content }) {
               gap: 8,
             }}
           >
-            <p>mockmail@mail.com</p>
+            <p>{content.mail ? content.mail : "mail saknas"}</p>
             <p style={{ textAlign: "center" }}>Mail</p>
           </div>
         </div>

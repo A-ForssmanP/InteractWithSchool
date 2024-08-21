@@ -29,7 +29,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/interactWithSchool').then(()=>{
 const createSchoolClass = async (className) => {
   //get random name for teacher
   const teacherName = generateRandomName(1,1)
-  const teacher = {firstName:teacherName[0]}
+  // create mock teacher
+  const teacher = {firstName:teacherName[0],mail:`${teacherName}.mockteacher@mail.com`}
   //create SchoolClass document
   const schoolClass = new SchoolClass({className:className,teacher:teacher})
   // create mock parents 
@@ -37,7 +38,8 @@ const createSchoolClass = async (className) => {
   const mockParents = parentNames.map((name)=>{
     return {
       firstName:name,
-      lastName:"MockParent"
+      lastName:"Mockparent",
+      mail: `${name.toLowerCase()}.mockparent@mail.com`,
     }
   })
   schoolClass.parents.push(...mockParents)

@@ -10,7 +10,8 @@ const schoolClassSchema = new Schema({
         firstName : {
             type: String,
             required: true,
-        }
+        },
+        mail: String
     },
     parents: [{
         firstName: {
@@ -20,7 +21,8 @@ const schoolClassSchema = new Schema({
         lastName: {
             type: String,
             required: true,
-        }
+        },
+        mail: String
         }]
 })
 
