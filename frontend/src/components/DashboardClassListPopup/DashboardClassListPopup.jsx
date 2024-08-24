@@ -1,12 +1,26 @@
 import { Card, Button } from "@mui/material";
 import MessageIcon from "@mui/icons-material/Message";
+import AlertInfo from "../alertInfo/AlertInfo";
+import { useState } from "react";
 
 function DashboardClassListPopup({ closePopup, content }) {
+  const [showAlertInfo, setShowAlertInfo] = useState(false);
+
+  // handle render alert-info
+  const handleAlertInfo = () => {
+    if (!showAlertInfo) {
+      setShowAlertInfo(true);
+      setTimeout(() => {
+        setShowAlertInfo(false);
+      }, 4000);
+    }
+  };
+
   return (
     <Card
       sx={{
         position: "absolute",
-        top: { xs: "-10.1em", sm: "-.4em" },
+        top: { xs: !showAlertInfo ? "-10.1em" : "-13.1em", sm: "-.4em" },
         left: { sm: "-24em" },
         width: { xs: "100%", sm: "24rem" },
         padding: 1,
@@ -33,7 +47,7 @@ function DashboardClassListPopup({ closePopup, content }) {
           }}
         >
           <div>
-            <Button>
+            <Button onClick={handleAlertInfo}>
               <MessageIcon />
             </Button>
             <p style={{ textAlign: "center" }}>Chatta</p>
@@ -51,6 +65,9 @@ function DashboardClassListPopup({ closePopup, content }) {
             <p style={{ textAlign: "center" }}>Mail</p>
           </div>
         </div>
+        {showAlertInfo && (
+          <AlertInfo text={"Chatt-function är under utveckling!"} />
+        )}
       </div>
     </Card>
   );
