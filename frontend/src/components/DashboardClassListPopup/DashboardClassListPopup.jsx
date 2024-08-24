@@ -6,7 +6,7 @@ import { useState } from "react";
 function DashboardClassListPopup({ closePopup, content }) {
   const [showAlertInfo, setShowAlertInfo] = useState(false);
 
-  // handle render alert-info
+  // handle show/hide alert-info
   const handleAlertInfo = () => {
     if (!showAlertInfo) {
       setShowAlertInfo(true);
