@@ -17,6 +17,8 @@ import TimeScheduleOverview from "./TimeSchedule/timescheduleOverview/TimeSchedu
 import DashBoard from "./dashBoard/DashBoard";
 import Login from "./login/Login";
 import CreateAccount from "./createAccount/CreateAccount";
+import ChatLayout from "./chat/ChatLayout";
+import ChatRooms from "./chat/ChatRooms";
 
 function Pages({ isAuthenticated, setIsAuthenticated }) {
   const [navigateToLogin, setNavigateToLogin] = useState(false);
@@ -79,6 +81,10 @@ function Pages({ isAuthenticated, setIsAuthenticated }) {
             <Route path="inkorg/:student" element={<InboxLayout />}>
               <Route index element={<Inbox />} />
               <Route path=":messageId" element={<ViewMessage />} />
+            </Route>
+
+            <Route path="chatt" element={<ChatLayout />}>
+              <Route index element={<ChatRooms />} />
             </Route>
 
             <Route path="fronvaro" element={<AbsenceLayout />}>

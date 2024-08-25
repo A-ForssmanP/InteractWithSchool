@@ -2,9 +2,10 @@ import List from "@mui/material/List";
 import NavListItem from "../navListItem/NavListItem";
 import InboxIcon from "@mui/icons-material/Inbox";
 import HomeIcon from "@mui/icons-material/Home";
-import { Badge } from "@mui/material";
 import CancelScheduleSendIcon from "@mui/icons-material/CancelScheduleSend";
 import DateRangeIcon from "@mui/icons-material/DateRange";
+import MessageIcon from "@mui/icons-material/Message";
+import { Badge } from "@mui/material";
 import { NewInboxCount } from "../../context";
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -28,6 +29,12 @@ function NavList({ closeMenu, isAuthenticated }) {
         </Badge>
       ),
       navPath: "inkorg/0",
+    },
+    {
+      id: crypto.randomUUID(),
+      text: "Chatt",
+      ikon: <MessageIcon />,
+      navPath: "chatt",
     },
     {
       id: crypto.randomUUID(),
