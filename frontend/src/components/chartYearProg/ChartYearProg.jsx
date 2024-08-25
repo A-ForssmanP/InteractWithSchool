@@ -18,8 +18,8 @@ function ChartYearProg() {
   const schoolYearProgress = () => {
     //get the intervall from start to end of days of school-period
     const schoolDaysInterval = eachDayOfInterval({
-      start: new Date("2023,8,21"),
-      end: new Date("2024,6,14"),
+      start: new Date("2024,8,21"),
+      end: new Date("2025,6,14"),
     });
     //check if current day is a school day
     const currentDay = new Date();
