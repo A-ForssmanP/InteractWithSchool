@@ -26,11 +26,17 @@ function DashboardClassListPopup({ closePopup, content }) {
         padding: 1,
       }}
     >
-      <div style={{ border: "1px solid red" }}>
+      <div>
         <div style={{ position: "relative", paddingTop: 16, marginBottom: 40 }}>
-          <p style={{ textAlign: "center" }}>
+          <h4
+            style={{
+              textAlign: "center",
+              fontSize: 20,
+              fontFamily: "helvetica",
+            }}
+          >
             {content.firstName} {content.lastName && content.lastName}
-          </p>
+          </h4>
           <Button
             onClick={closePopup}
             sx={{ position: "absolute", right: 2, top: 0 }}
