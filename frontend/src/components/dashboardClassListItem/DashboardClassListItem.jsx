@@ -12,8 +12,8 @@ import {
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 function DashboardClassListItem({ list, showPopup }) {
-  console.log(list);
   const theme = useTheme();
+
   return (
     <div style={{ position: "relative" }}>
       <div
