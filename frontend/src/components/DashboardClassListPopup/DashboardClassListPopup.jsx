@@ -20,7 +20,7 @@ function DashboardClassListPopup({ closePopup, content }) {
     <Card
       sx={{
         position: "absolute",
-        top: { xs: !showAlertInfo ? "-10.3em" : "-13.3em", sm: "-.4em" },
+        top: { xs: !showAlertInfo ? "-10.4em" : "-13.4em", sm: "-.4em" },
         left: { sm: "-24em" },
         width: { xs: "100%", sm: "24rem" },
         padding: 1,
