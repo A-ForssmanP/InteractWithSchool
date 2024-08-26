@@ -49,7 +49,8 @@ function DashboardClassListItem({ list, showPopup }) {
           </Button>
         </div>
         <Typography
-          borderBottom={`1px solid ${theme.palette.grey[400]}`}
+          borderTop={`1px solid ${theme.palette.grey[400]}`}
+          pt={1}
           textAlign={"center"}
         >
           Föräldrar:
