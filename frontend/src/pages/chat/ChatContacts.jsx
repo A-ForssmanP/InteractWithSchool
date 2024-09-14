@@ -10,7 +10,7 @@ function ChatContacts() {
       display="flex"
       flexDirection="column"
     >
-      <div style={{ padding: 14, display: "flex", justifyContent: "center" }}>
+      <div style={{ padding: 20, display: "flex", justifyContent: "center" }}>
         <TextField
           id="outlined-basic"
           // label="sök kontakt"
@@ -20,7 +20,14 @@ function ChatContacts() {
           sx={{ maxWidth: { sm: 540 } }}
         />
       </div>
-      <div style={{ border: "1px solid green", flex: "1", overflowY: "auto" }}>
+      <div
+        style={{
+          border: "1px solid green",
+          flex: "1",
+
+          overflowY: "auto",
+        }}
+      >
         <ChatContactsList />
       </div>
     </Box>

@@ -8,7 +8,7 @@ import {
   useTheme,
 } from "@mui/material";
 
-function ChatContactsListItem({ contact, index }) {
+function ChatContactsListItem({ contact }) {
   const theme = useTheme();
   return (
     <>
@@ -17,7 +17,14 @@ function ChatContactsListItem({ contact, index }) {
           <ListItemAvatar>
             <Avatar sx={{ bgcolor: theme.palette.secondary.light }}></Avatar>
           </ListItemAvatar>
-          <ListItemText primary={contact.firstName + " " + contact.lastName} />
+          <ListItemText
+            primary={contact.firstName + " " + contact.lastName}
+            secondary={contact.lastText}
+            secondaryTypographyProps={{
+              overflow: "hidden",
+              noWrap: true,
+            }}
+          />
         </ListItemButton>
       </ListItem>
       <Divider />
