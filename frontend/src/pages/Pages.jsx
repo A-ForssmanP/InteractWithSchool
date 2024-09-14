@@ -85,6 +85,7 @@ function Pages({ isAuthenticated, setIsAuthenticated }) {
 
             <Route path="chatt" element={<ChatLayout />}>
               <Route index element={<ChatContacts />} />
+              <Route path=":id" element={<h1>Chatt</h1>} />
             </Route>
 
             <Route path="fronvaro" element={<AbsenceLayout />}>

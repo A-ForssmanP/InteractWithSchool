@@ -18,7 +18,9 @@ function ChatContactsList() {
       }}
     >
       {contacts.map((contact, indx) => {
-        return <ChatContactsListItem key={indx} contact={contact} />;
+        return (
+          <ChatContactsListItem key={indx} contact={{ ...contact, id: indx }} />
+        );
       })}
     </List>
   );

@@ -7,13 +7,18 @@ import {
   Avatar,
   useTheme,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function ChatContactsListItem({ contact }) {
   const theme = useTheme();
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`./${contact.id}`);
+  };
   return (
     <>
       <ListItem disablePadding>
-        <ListItemButton>
+        <ListItemButton onClick={handleClick}>
           <ListItemAvatar>
             <Avatar sx={{ bgcolor: theme.palette.secondary.light }}></Avatar>
           </ListItemAvatar>

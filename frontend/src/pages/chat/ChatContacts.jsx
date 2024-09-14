@@ -10,7 +10,13 @@ function ChatContacts() {
       display="flex"
       flexDirection="column"
     >
-      <div style={{ padding: 20, display: "flex", justifyContent: "center" }}>
+      <Box
+        sx={{
+          padding: { sm: 2 },
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
         <TextField
           id="outlined-basic"
           // label="sök kontakt"
@@ -19,7 +25,7 @@ function ChatContacts() {
           fullWidth
           sx={{ maxWidth: { sm: 540 } }}
         />
-      </div>
+      </Box>
       <div
         style={{
           border: "1px solid green",
