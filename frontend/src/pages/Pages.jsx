@@ -18,7 +18,7 @@ import DashBoard from "./dashBoard/DashBoard";
 import Login from "./login/Login";
 import CreateAccount from "./createAccount/CreateAccount";
 import ChatLayout from "./chat/ChatLayout";
-import ChatRooms from "./chat/ChatRooms";
+import ChatContacts from "./chat/ChatContacts";
 
 function Pages({ isAuthenticated, setIsAuthenticated }) {
   const [navigateToLogin, setNavigateToLogin] = useState(false);
@@ -84,7 +84,7 @@ function Pages({ isAuthenticated, setIsAuthenticated }) {
             </Route>
 
             <Route path="chatt" element={<ChatLayout />}>
-              <Route index element={<ChatRooms />} />
+              <Route index element={<ChatContacts />} />
             </Route>
 
             <Route path="fronvaro" element={<AbsenceLayout />}>

@@ -1,6 +1,6 @@
 import AlertInfo from "../../components/alertInfo/AlertInfo";
 
-function ChatRooms() {
+function ChatContacts() {
   return (
     <div>
       <AlertInfo
@@ -10,4 +10,4 @@ function ChatRooms() {
   );
 }
 
-export default ChatRooms;
+export default ChatContacts;
