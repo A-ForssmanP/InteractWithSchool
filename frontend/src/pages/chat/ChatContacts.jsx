@@ -20,7 +20,7 @@ function ChatContacts() {
           sx={{ maxWidth: { sm: 540 } }}
         />
       </div>
-      <div style={{ border: "1px solid green", flex: "1" }}>
+      <div style={{ border: "1px solid green", flex: "1", overflowY: "auto" }}>
         <ChatContactsList />
       </div>
     </Box>
