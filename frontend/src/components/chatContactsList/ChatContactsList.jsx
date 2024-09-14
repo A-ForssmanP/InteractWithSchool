@@ -1,24 +1,10 @@
-import {
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemAvatar,
-  ListItemText,
-  Divider,
-  Avatar,
-} from "@mui/material";
+import ChatContactsListItem from "../chatContactsListItem/ChatContactsListItem";
+import { List } from "@mui/material";
 
 function ChatContactsList() {
   return (
-    <List>
-      <ListItem disablePadding>
-        <ListItemButton>
-          <ListItemAvatar>
-            <Avatar></Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="Namn" />
-        </ListItemButton>
-      </ListItem>
+    <List sx={{ border: "1px solid blue", height: "100%", overflowY: "auto" }}>
+      <ChatContactsListItem />
     </List>
   );
 }
