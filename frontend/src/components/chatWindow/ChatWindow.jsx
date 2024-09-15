@@ -12,6 +12,7 @@ import SendIcon from "@mui/icons-material/Send";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ButtonBack from "../buttonBack/ButtonBack";
+import ChatWindowMessage from "../chatWindowMessage/ChatWindowMessage";
 
 function ChatWindow() {
   const theme = useTheme();
@@ -53,7 +54,7 @@ function ChatWindow() {
         <div style={{ flex: 1, border: "1px solid blue" }}>
           <List>
             {messages.map((msg) => {
-              return <ListItem key={msg.id}>{msg.text}</ListItem>;
+              return <ChatWindowMessage key={msg.id} message={msg} />;
             })}
           </List>
         </div>
