@@ -1,9 +1,9 @@
-import { ListItem, Paper, useTheme, Typography } from "@mui/material";
+import { ListItem, Paper, useTheme, Typography, Box } from "@mui/material";
 
 function ChatWindowMessage({ message }) {
   const theme = useTheme();
   return (
-    <ListItem>
+    <ListItem sx={{ display: "flex", alignItems: "end" }}>
       <Paper
         sx={{
           width: "fit-content",
@@ -22,6 +22,11 @@ function ChatWindowMessage({ message }) {
           {message.text}
         </Typography>
       </Paper>
+      <Box>
+        <Typography pl={1} fontSize={13}>
+          {message.sendTime}
+        </Typography>
+      </Box>
     </ListItem>
   );
 }
