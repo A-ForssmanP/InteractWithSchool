@@ -19,8 +19,13 @@ function ChatWindow() {
   const navigate = useNavigate();
 
   const [messages, setMessages] = useState([
-    { id: crypto.randomUUID(), author: "user", text: "Kaffe är gott!" },
+    {
+      id: crypto.randomUUID(),
+      author: "user",
+      text: "Kaffe är gott!",
+    },
     { id: crypto.randomUUID(), author: "user", text: "Det är klart!" },
+    { id: crypto.randomUUID(), author: "contact", text: "Fika!" },
   ]);
 
   return (
@@ -30,19 +35,26 @@ function ChatWindow() {
       display="flex"
       flexDirection="column"
     >
-      <div
-        style={{
+      <Box
+        sx={{
           border: "1px solid red",
           display: "flex",
-          justifyContent: "space-between",
+          flexDirection: { xs: "column-reverse", sm: "row" },
+          justifyContent: { sm: "space-between" },
         }}
       >
-        <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "baseline",
+            gap: 6,
+          }}
+        >
           <Avatar sx={{ bgcolor: theme.palette.secondary.light }} />
           <Typography>Namn</Typography>
         </div>
         <ButtonBack handleClick={() => navigate("..")} />
-      </div>
+      </Box>
       <div
         style={{
           border: "1px solid red",
@@ -51,7 +63,7 @@ function ChatWindow() {
           flexDirection: "column",
         }}
       >
-        <div style={{ flex: 1, border: "1px solid blue" }}>
+        <div style={{ flex: 1, overflowY: "auto", border: "1px solid blue" }}>
           <List>
             {messages.map((msg) => {
               return <ChatWindowMessage key={msg.id} message={msg} />;
