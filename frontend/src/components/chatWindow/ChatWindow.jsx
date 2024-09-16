@@ -6,7 +6,6 @@ import {
   Button,
   TextField,
   List,
-  ListItem,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useState, useRef, useEffect } from "react";
@@ -19,7 +18,6 @@ function ChatWindow() {
   const navigate = useNavigate();
   const lastMessageRef = useRef(null);
   const [newText, setNewText] = useState("");
-  console.log(lastMessageRef);
   const [messages, setMessages] = useState([
     {
       id: crypto.randomUUID(),
@@ -91,9 +89,13 @@ function ChatWindow() {
   //handle send message
   const handleSend = (msg) => {
     const date = new Date();
-    const currMin = date.getMinutes();
-    const currentTime = `${date.getHours()}.${date.getMinutes()}`;
-    console.log(currMin.length);
+    //check if minutes is a one digit number,if so add a 0 to the start of currentTime-variable for minutes
+    const minutesIstwoDigit = date.getMinutes().toString().length > 1;
+    //check if hours is a one digit number,if so add a 0 to the start of currentTime-variable for hours
+    const hoursIstwoDigit = date.getHours().toString().length > 1;
+    const currentTime = `${!hoursIstwoDigit ? 0 : ""}${date.getHours()}.${
+      !minutesIstwoDigit ? 0 : ""
+    }${date.getMinutes()}`;
     setMessages((curr) => {
       return [
         ...curr,
@@ -120,6 +122,7 @@ function ChatWindow() {
       height={{ xs: "calc(100dvh - 36px)", md: "100dvh" }}
       display="flex"
       flexDirection="column"
+      sx={{ maxWidth: { md: 900 }, maxHeight: 900, margin: "0 auto" }}
     >
       <Box
         sx={{
@@ -141,11 +144,11 @@ function ChatWindow() {
         </div>
         <ButtonBack handleClick={() => navigate("..")} />
       </Box>
-      <div
-        style={{
+      <Box
+        sx={{
           border: "3px solid green",
           flex: 1,
-          maxHeight: "calc(100% - 43px)",
+          maxHeight: { xs: "calc(100% - 72px)", sm: "calc(100% - 43px)" },
           display: "flex",
           flexDirection: "column",
         }}
@@ -196,7 +199,7 @@ function ChatWindow() {
             <SendIcon />
           </Button>
         </form>
-      </div>
+      </Box>
     </Box>
   );
 }
