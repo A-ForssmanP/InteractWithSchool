@@ -9,7 +9,7 @@ function ChatWindowMessage({ message }) {
           width: "fit-content",
           maxWidth: "70%",
           padding: 1.2,
-          marginBottom: 1,
+          // marginBottom: 1,
           bgcolor:
             message.author === "user"
               ? theme.palette.primary.main

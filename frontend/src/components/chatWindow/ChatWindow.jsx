@@ -9,7 +9,7 @@ import {
   ListItem,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import ButtonBack from "../buttonBack/ButtonBack";
 import ChatWindowMessage from "../chatWindowMessage/ChatWindowMessage";
@@ -17,8 +17,9 @@ import ChatWindowMessage from "../chatWindowMessage/ChatWindowMessage";
 function ChatWindow() {
   const theme = useTheme();
   const navigate = useNavigate();
+  const lastMessageRef = useRef < HTMLElement > true;
   const [newText, setNewText] = useState("");
-
+  console.log(lastMessageRef);
   const [messages, setMessages] = useState([
     {
       id: crypto.randomUUID(),
@@ -31,6 +32,48 @@ function ChatWindow() {
       author: "user",
       text: "Det är klart!",
       sendTime: "21.00",
+    },
+    {
+      id: crypto.randomUUID(),
+      author: "contact",
+      text: "Fika!",
+      sendTime: 21.05,
+    },
+    {
+      id: crypto.randomUUID(),
+      author: "contact",
+      text: "Fika!",
+      sendTime: 21.05,
+    },
+    {
+      id: crypto.randomUUID(),
+      author: "contact",
+      text: "Fika!",
+      sendTime: 21.05,
+    },
+    {
+      id: crypto.randomUUID(),
+      author: "contact",
+      text: "Fika!",
+      sendTime: 21.05,
+    },
+    {
+      id: crypto.randomUUID(),
+      author: "contact",
+      text: "Fika!",
+      sendTime: 21.05,
+    },
+    {
+      id: crypto.randomUUID(),
+      author: "contact",
+      text: "Fika!",
+      sendTime: 21.05,
+    },
+    {
+      id: crypto.randomUUID(),
+      author: "contact",
+      text: "Fika!",
+      sendTime: 21.05,
     },
     {
       id: crypto.randomUUID(),
@@ -95,6 +138,7 @@ function ChatWindow() {
         style={{
           border: "3px solid green",
           flex: 1,
+          maxHeight: "calc(100% - 43px)",
           display: "flex",
           flexDirection: "column",
         }}
@@ -103,15 +147,26 @@ function ChatWindow() {
           style={{
             flex: 1,
             border: "4px solid blue",
+            height: "calc(100% - 56px)",
           }}
         >
           <List
             sx={{
               border: "3px solid red",
+              height: "100%",
+              flexShrink: 1,
+              maxHeight: "100%",
+              overflow: "auto",
             }}
           >
             {messages.map((msg) => {
-              return <ChatWindowMessage key={msg.id} message={msg} />;
+              return (
+                <ChatWindowMessage
+                  ref={lastMessageRef}
+                  key={msg.id}
+                  message={msg}
+                />
+              );
             })}
           </List>
         </div>
