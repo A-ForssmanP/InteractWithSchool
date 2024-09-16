@@ -9,7 +9,7 @@ import {
   ListItem,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ButtonBack from "../buttonBack/ButtonBack";
 import ChatWindowMessage from "../chatWindowMessage/ChatWindowMessage";
@@ -17,7 +17,7 @@ import ChatWindowMessage from "../chatWindowMessage/ChatWindowMessage";
 function ChatWindow() {
   const theme = useTheme();
   const navigate = useNavigate();
-  const lastMessageRef = useRef < HTMLElement > true;
+  const lastMessageRef = useRef(null);
   const [newText, setNewText] = useState("");
   console.log(lastMessageRef);
   const [messages, setMessages] = useState([
@@ -83,10 +83,17 @@ function ChatWindow() {
     },
   ]);
 
+  useEffect(() => {
+    //scroll down to last message
+    lastMessageRef.current && lastMessageRef.current.scrollIntoView();
+  }, [messages]);
+
   //handle send message
   const handleSend = (msg) => {
     const date = new Date();
+    const currMin = date.getMinutes();
     const currentTime = `${date.getHours()}.${date.getMinutes()}`;
+    console.log(currMin.length);
     setMessages((curr) => {
       return [
         ...curr,
@@ -160,14 +167,9 @@ function ChatWindow() {
             }}
           >
             {messages.map((msg) => {
-              return (
-                <ChatWindowMessage
-                  ref={lastMessageRef}
-                  key={msg.id}
-                  message={msg}
-                />
-              );
+              return <ChatWindowMessage key={msg.id} message={msg} />;
             })}
+            <div ref={lastMessageRef}></div>
           </List>
         </div>
         <form
