@@ -3,7 +3,7 @@ const {model,Schema} = mongoose;
 
 const chatSchema = new Schema({
     participant: [{
-        type: mongoose.Types.ObjectId,
+        type: mongoose.Types.ObjectId || String,
         ref:"User"
     }],
     messages: [],

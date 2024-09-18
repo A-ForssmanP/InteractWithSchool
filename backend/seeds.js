@@ -7,9 +7,12 @@ const InboxMessage = require("./models/inboxMessage")
 const Schedule = require("./models/schedule")
 const Note = require("./models/note")
 const SchoolClass = require("./models/schoolClass")
+const ChatList = require("./models/chatList")
+const Chat = require("./models/chat")
 const generateRandomName = require("./utils/generateRandomName")
 
 const bcrypt = require("bcryptjs")
+const crypto = require("crypto"); 
 
 //mongodb+srv://afpdev91:<password>@cluster0.tnv2l.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 
@@ -40,6 +43,7 @@ const createSchoolClass = async (className) => {
       firstName:name,
       lastName:"Mockparent",
       mail: `${name.toLowerCase()}.mockparent@mail.com`,
+      id:crypto.randomUUID()
     }
   })
   schoolClass.parents.push(...mockParents)
@@ -266,11 +270,43 @@ const connectUserToClass = async () => {
     for(let student of populatedStudents.students){
       //find student class
       const studentClass = await SchoolClass.findById(student.schoolClass)
-      //push users firstName to parents array
+      //push users firstName and lastName to parents array
       studentClass["parents"].push({firstName:user.firstName,lastName:user.lastName})
       await studentClass.save()
     }
   }
+}
+
+// establish chat between user and parents in classes the user is connected to
+const chatEstablish = async () => {
+  try{ 
+    // get all users
+    const users = await User.find().populate("students")
+    for(let user of users) {
+      // chatlist for every user
+      const newChatList = new ChatList({userId:user})
+      // get id of every schollclass
+      const ids = user.students.map((student) => {
+        return student.schoolClass
+      })
+      //between user and every parent in classes the user is connected to, setup a chat 
+      for(let id of ids) {
+        const schoolClass = await SchoolClass.findById(id)
+        for(let parent of schoolClass.parents) {
+          const chat = new Chat({participant: [user,parent]})
+          newChatList.chats.push(chat)
+          chat.save()
+          
+        }
+      }
+      newChatList.save()
+    }
+    
+    // find the schollclasses that the user is connected to and for every parents in the class, create a chat between user and that parent
+  } catch(err) {
+    console.log(err.message)
+  }
+  
 }
 
 // Insert data to dB
@@ -282,6 +318,7 @@ const connectUserToClass = async () => {
   await insertNote()
   await putStudentInAClass()
   await connectUserToClass()
+  await chatEstablish()
   console.log("Data inserted to DB!")
  }
 
