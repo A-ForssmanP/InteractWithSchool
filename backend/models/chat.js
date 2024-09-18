@@ -9,3 +9,7 @@ const chatSchema = new Schema({
     messages: [],
     lastMessage: {}
 })
+
+const Chat = model("Chat",chatSchema)
+
+module.exports = Chat

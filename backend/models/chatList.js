@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 const {Schema,model} = mongoose
 
-const userChatListSchema = new Schema({
+const chatListSchema = new Schema({
     userId: {type:mongoose.Types.ObjectId,
         ref:"User",
         required:true},
@@ -10,6 +10,6 @@ const userChatListSchema = new Schema({
     }]
 })
 
-const UserChatList = model("UserChatList",userChatListSchema)
+const ChatList = model("ChatList",chatListSchema)
 
-module.exports = UserChatList
+module.exports = ChatList
