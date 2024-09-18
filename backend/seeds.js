@@ -284,7 +284,7 @@ const chatEstablish = async () => {
     const users = await User.find().populate("students")
     for(let user of users) {
       // chatlist for every user
-      const newChatList = new ChatList({userId:user})
+      const chatList = new ChatList({userId:user})
       // get id of every schollclass
       const ids = user.students.map((student) => {
         return student.schoolClass
@@ -294,12 +294,12 @@ const chatEstablish = async () => {
         const schoolClass = await SchoolClass.findById(id)
         for(let parent of schoolClass.parents) {
           const chat = new Chat({participant: [user,parent]})
-          newChatList.chats.push(chat)
+          chatList.chats.push(chat)
           chat.save()
           
         }
       }
-      newChatList.save()
+      chatList.save()
     }
     
     // find the schollclasses that the user is connected to and for every parents in the class, create a chat between user and that parent
