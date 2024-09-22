@@ -293,10 +293,12 @@ const chatEstablish = async () => {
       for(let id of ids) {
         const schoolClass = await SchoolClass.findById(id)
         for(let parent of schoolClass.parents) {
-          const chat = new Chat({participant: [user,parent]})
+          const ownUser = {firstName:user.firstName,lastName:user.lastName,userId:user}
+          const parentUser = {firstName:parent.firstName,lastName:parent.lastName,userId:parent}
+          const chat = new Chat({participants: [ownUser,parentUser]})
+          // const chat = new Chat({participants: [user,parent]})
           chatList.chats.push(chat)
           chat.save()
-          
         }
       }
       chatList.save()
