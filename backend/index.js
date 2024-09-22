@@ -14,10 +14,14 @@ const Student = require("./models/student")
 const InboxMessage = require("./models/inboxMessage")
 const Schedule = require("./models/schedule")
 const Note = require("./models/note")
+const SchoolClass = require('./models/schoolClass')
+const ChatList = require("./models/chatList")
+const Chat = require("./models/chat")
 
 const isAuthenticated = require("./middleware/isAuthenticated")
 const generateRandomName = require("./utils/generateRandomName")
-const SchoolClass = require('./models/schoolClass')
+
+
 
 //mongodb+srv://afpdev91:<password>@cluster0.tnv2l.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 
@@ -262,6 +266,20 @@ if(process.env.NODE_ENV !== "production") {
         res.send(messages)
     } catch(err) {
       throw new Error(err)
+    }
+  })
+
+  app.get("/chat/contact/all",isAuthenticated, async (req,res) => {
+    try {
+      const userId = req.userId
+      const  chatList = await ChatList.findOne({userId: userId}).populate("chats")
+      // for(let chat of chatList.chats) {
+      //  console.log(await chat.populate("participant")) 
+      // }
+      res.status(200).json({"chatList":chatList})
+    } catch(err) {
+      console.log(err.message)
+      res.status(404).json({"error":err})
     }
   })
 
