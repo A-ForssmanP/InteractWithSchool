@@ -6,25 +6,31 @@ import axios from "axios";
 
 function ChatContacts() {
   const [contacts, setContacts] = useState(
-    new Array(24).fill({
-      firstName: "Foo",
-      lastName: "Bar",
-      lastText:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident natus impedit fugiat necessitatibus! Blanditiis nemo pariatur incidunt porro fugit, doloremque a aliquam aspernatur ipsa, perferendis rerum accusamus voluptate sapiente soluta?",
-    })
+    {}
+    // new Array(24).fill({
+    //   firstName: "Foo",
+    //   lastName: "Bar",
+    //   lastText:
+    //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident natus impedit fugiat necessitatibus! Blanditiis nemo pariatur incidunt porro fugit, doloremque a aliquam aspernatur ipsa, perferendis rerum accusamus voluptate sapiente soluta?",
+    // })
   );
 
   useEffect(() => {
     getChatContacts();
-  });
+    console.log(contacts);
+  }, []);
 
   const getUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/chat/contact/all`;
 
   //get  chat-contacts from db
   const getChatContacts = async () => {
-    const res = await axios(getUrl, { withCredentials: true });
-    const { chatList } = res.data;
-    console.log(chatList);
+    try {
+      const res = await axios(getUrl, { withCredentials: true });
+      const { chatList } = res.data;
+      setContacts(chatList);
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   return (
@@ -59,7 +65,10 @@ function ChatContacts() {
           overflowY: "auto",
         }}
       >
-        <ChatContactsList contacts={contacts} />
+        <ChatContactsList
+          list={contacts.chats && contacts.chats}
+          userId={contacts.userId && contacts.userId}
+        />
       </div>
     </Box>
   );
