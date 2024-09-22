@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import ChatContactsListItem from "../chatContactsListItem/ChatContactsListItem";
 import { List } from "@mui/material";
 
-function ChatContactsList({ list, userId }) {
-  const [chatList, setChatList] = useState([]);
+function ChatContactsList({ chatData }) {
+  const [chatListData, setChatListData] = useState([]);
 
   useEffect(() => {
-    list && setChatList(list);
-  }, [list]);
+    chatData.chats && setChatListData(chatData.chats);
+    console.log(chatData);
+  }, [chatData]);
 
   return (
     <List
@@ -17,10 +18,14 @@ function ChatContactsList({ list, userId }) {
         margin: "0 auto",
       }}
     >
-      {chatList.map((chat) => {
+      {chatListData.map((chat) => {
         // console.log(chat);
         return (
-          <ChatContactsListItem key={chat._id} chat={chat} userId={userId} />
+          <ChatContactsListItem
+            key={chat._id}
+            chat={chat}
+            userData={chatData.userData}
+          />
         );
       })}
     </List>

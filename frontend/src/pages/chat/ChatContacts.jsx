@@ -17,9 +17,8 @@ function ChatContacts() {
 
   useEffect(() => {
     getChatContacts();
-    console.log(contacts);
   }, []);
-
+  console.log("C", contacts);
   const getUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/chat/contact/all`;
 
   //get  chat-contacts from db
@@ -65,10 +64,7 @@ function ChatContacts() {
           overflowY: "auto",
         }}
       >
-        <ChatContactsList
-          list={contacts.chats && contacts.chats}
-          userId={contacts.userId && contacts.userId}
-        />
+        <ChatContactsList chatData={contacts} />
       </div>
     </Box>
   );

@@ -1,7 +1,9 @@
 import { ListItem, Paper, useTheme, Typography, Box } from "@mui/material";
 
-function ChatWindowMessage({ message }) {
+function ChatWindowMessage({ message, userData }) {
   const theme = useTheme();
+  console.log(userData);
+  console.log(message);
   return (
     <ListItem sx={{ display: "flex", alignItems: "end" }}>
       <Paper
@@ -11,11 +13,12 @@ function ChatWindowMessage({ message }) {
           padding: 1.2,
           // marginBottom: 1,
           bgcolor:
-            message.author === "user"
+            message.author._id === userData._id
               ? theme.palette.primary.main
               : theme.palette.grey[100],
-          color: message.author === "user" && theme.palette.common.white,
-          marginLeft: message.author !== "user" && "auto",
+          color:
+            message.author._id === userData._id && theme.palette.common.white,
+          marginLeft: message.author._id !== userData._id && "auto",
         }}
       >
         <Typography display="flex" flexWrap="wrap">

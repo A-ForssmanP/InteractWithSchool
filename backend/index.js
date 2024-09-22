@@ -272,11 +272,9 @@ if(process.env.NODE_ENV !== "production") {
   app.get("/chat/contact/all",isAuthenticated, async (req,res) => {
     try {
       const userId = req.userId
-      const  chatList = await ChatList.findOne({userId: userId}).populate("chats")
-      // for(let chat of chatList.chats) {
-      //  console.log(await chat.populate("participant")) 
-      // }
-      res.status(200).json({"chatList":chatList})
+      const  chatList = await ChatList.findOne({userId: userId}).populate("chats").populate("userId",["_id","firstName"])
+      const chatListData = {chats:chatList.chats,userData:chatList.userId}
+      res.status(200).json({"chatList":chatListData})
     } catch(err) {
       console.log(err.message)
       res.status(404).json({"error":err})

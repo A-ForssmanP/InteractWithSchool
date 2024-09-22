@@ -9,73 +9,77 @@ import {
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import ButtonBack from "../buttonBack/ButtonBack";
 import ChatWindowMessage from "../chatWindowMessage/ChatWindowMessage";
 
 function ChatWindow() {
   const theme = useTheme();
+  const { state } = useLocation();
+  console.log(state);
   const navigate = useNavigate();
   const lastMessageRef = useRef(null);
   const [newText, setNewText] = useState("");
+  console.log(state);
   const [messages, setMessages] = useState([
+    // ...state.messages,
     {
       id: crypto.randomUUID(),
-      author: "user",
+      author: state.userData,
       text: "Kaffe är gott!",
       sendTime: "20.43",
     },
     {
       id: crypto.randomUUID(),
-      author: "user",
+      author: state.userData,
       text: "Det är klart!",
       sendTime: "21.00",
     },
     {
       id: crypto.randomUUID(),
-      author: "contact",
+      author: state.contact,
       text: "Fika!",
       sendTime: 21.05,
     },
     {
       id: crypto.randomUUID(),
-      author: "contact",
+      author: state.contact,
       text: "Fika!",
       sendTime: 21.05,
     },
     {
       id: crypto.randomUUID(),
-      author: "contact",
+      author: state.contact,
       text: "Fika!",
       sendTime: 21.05,
     },
     {
       id: crypto.randomUUID(),
-      author: "contact",
+      author: state.contact,
       text: "Fika!",
       sendTime: 21.05,
     },
     {
       id: crypto.randomUUID(),
-      author: "contact",
+      author: state.contact,
       text: "Fika!",
       sendTime: 21.05,
     },
     {
       id: crypto.randomUUID(),
-      author: "contact",
+      author: state.contact,
       text: "Fika!",
       sendTime: 21.05,
     },
     {
       id: crypto.randomUUID(),
-      author: "contact",
+      author: state.contact,
       text: "Fika!",
       sendTime: 21.05,
     },
     {
       id: crypto.randomUUID(),
-      author: "contact",
+      author: state.contact,
       text: "Fika!",
       sendTime: 21.05,
     },
@@ -101,7 +105,7 @@ function ChatWindow() {
         ...curr,
         {
           id: crypto.randomUUID(),
-          author: "user",
+          author: state.userData,
           text: msg,
           sendTime: currentTime,
         },
@@ -140,7 +144,9 @@ function ChatWindow() {
           }}
         >
           <Avatar sx={{ bgcolor: theme.palette.secondary.light }} />
-          <Typography>Namn</Typography>
+          <Typography>
+            {state.contact.firstName + " " + state.contact.lastName}
+          </Typography>
         </div>
         <ButtonBack handleClick={() => navigate("..")} />
       </Box>
@@ -170,7 +176,13 @@ function ChatWindow() {
             }}
           >
             {messages.map((msg) => {
-              return <ChatWindowMessage key={msg.id} message={msg} />;
+              return (
+                <ChatWindowMessage
+                  key={msg.id}
+                  message={msg}
+                  userData={state.userData}
+                />
+              );
             })}
             <div ref={lastMessageRef}></div>
           </List>
