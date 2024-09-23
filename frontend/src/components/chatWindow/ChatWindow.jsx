@@ -17,6 +17,7 @@ import ChatWindowMessage from "../chatWindowMessage/ChatWindowMessage";
 function ChatWindow() {
   const theme = useTheme();
   const { state } = useLocation();
+  console.log(state);
   const navigate = useNavigate();
   const lastMessageRef = useRef(null);
   const [newText, setNewText] = useState("");
@@ -104,6 +105,7 @@ function ChatWindow() {
       author: state.userData,
       text: msg,
       sendTime: currentTime,
+      chatListId: state.chatListId,
     };
     setMessages((curr) => {
       return [...curr, newMessage];

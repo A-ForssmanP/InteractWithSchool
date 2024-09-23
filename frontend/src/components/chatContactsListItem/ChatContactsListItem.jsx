@@ -10,7 +10,7 @@ import {
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function ChatContactsListItem({ chat, userData }) {
+function ChatContactsListItem({ chat, userData, chatListId }) {
   const [contact, setContact] = useState({
     firstName: "undefined",
     lastName: "undefined",
@@ -19,7 +19,12 @@ function ChatContactsListItem({ chat, userData }) {
   const navigate = useNavigate();
   const handleClick = () => {
     navigate(`./${chat._id}`, {
-      state: { ...chat, contact: contact, userData: userData },
+      state: {
+        ...chat,
+        contact: contact,
+        userData: userData,
+        chatListId: chatListId,
+      },
     });
   };
 

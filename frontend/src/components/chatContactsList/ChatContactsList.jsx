@@ -24,6 +24,7 @@ function ChatContactsList({ chatData }) {
             key={chat._id}
             chat={chat}
             userData={chatData.userData}
+            chatListId={chatData.chatListId}
           />
         );
       })}

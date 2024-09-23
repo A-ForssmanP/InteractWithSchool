@@ -273,7 +273,7 @@ if(process.env.NODE_ENV !== "production") {
     try {
       const userId = req.userId
       const  chatList = await ChatList.findOne({userId: userId}).populate("chats").populate("userId",["_id","firstName"])
-      const chatListData = {chats:chatList.chats,userData:chatList.userId}
+      const chatListData = {chats:chatList.chats,userData:chatList.userId,chatListId:chatList._id}
       res.status(200).json({"chatList":chatListData})
     } catch(err) {
       console.log(err.message)
@@ -285,6 +285,7 @@ if(process.env.NODE_ENV !== "production") {
     const {chatId} = req.params
     const messageData = req.body
     const userId = req.userId
+    // console.log(messageData)
     try {
     // get chat document
     const chat = await Chat.findById(chatId)
@@ -297,6 +298,10 @@ if(process.env.NODE_ENV !== "production") {
     chat.messages.push(messageData)
     chat.save()
     // put updated chat to be first in chats array of the chatList document
+    const chatList = await ChatList.findById(messageData.chatListId)
+    chatList.chats.remove(chat._id)
+    chatList.chats.unshift(chat)
+    chatList.save()
     //send back respons
     res.status(200).send()
     } catch(err) {
