@@ -46,7 +46,7 @@ function ChatContactsListItem({ chat, userData }) {
             primary={contact.firstName + " " + contact.lastName}
             secondary={
               chat.messages.length
-                ? chat.messages[chat.messages.length - 1]
+                ? chat.messages[chat.messages.length - 1].text
                 : "Ny chatt!"
             }
             secondaryTypographyProps={{

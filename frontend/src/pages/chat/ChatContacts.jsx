@@ -1,5 +1,4 @@
 import { Box, TextField } from "@mui/material";
-import Axios from "axios";
 import { useEffect, useState } from "react";
 import ChatContactsList from "../../components/chatContactsList/ChatContactsList";
 import axios from "axios";

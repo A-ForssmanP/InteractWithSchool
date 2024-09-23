@@ -20,69 +20,69 @@ function ChatWindow() {
   const navigate = useNavigate();
   const lastMessageRef = useRef(null);
   const [newText, setNewText] = useState("");
-  const [messages, setMessages] = useState([
-    // ...state.messages,
-    {
-      id: crypto.randomUUID(),
-      author: state.userData,
-      text: "Kaffe är gott!",
-      sendTime: "20.43",
-    },
-    {
-      id: crypto.randomUUID(),
-      author: state.userData,
-      text: "Det är klart!",
-      sendTime: "21.00",
-    },
-    {
-      id: crypto.randomUUID(),
-      author: state.contact,
-      text: "Fika!",
-      sendTime: 21.05,
-    },
-    {
-      id: crypto.randomUUID(),
-      author: state.contact,
-      text: "Fika!",
-      sendTime: 21.05,
-    },
-    {
-      id: crypto.randomUUID(),
-      author: state.contact,
-      text: "Fika!",
-      sendTime: 21.05,
-    },
-    {
-      id: crypto.randomUUID(),
-      author: state.contact,
-      text: "Fika!",
-      sendTime: 21.05,
-    },
-    {
-      id: crypto.randomUUID(),
-      author: state.contact,
-      text: "Fika!",
-      sendTime: 21.05,
-    },
-    {
-      id: crypto.randomUUID(),
-      author: state.contact,
-      text: "Fika!",
-      sendTime: 21.05,
-    },
-    {
-      id: crypto.randomUUID(),
-      author: state.contact,
-      text: "Fika!",
-      sendTime: 21.05,
-    },
-    {
-      id: crypto.randomUUID(),
-      author: state.contact,
-      text: "Fika!",
-      sendTime: 21.05,
-    },
-  ]);
+  const [messages, setMessages] = useState(state.messages);
+  // const [messages, setMessages] = useState([
+  //   {
+  //     id: crypto.randomUUID(),
+  //     author: state.userData,
+  //     text: "Kaffe är gott!",
+  //     sendTime: "20.43",
+  //   },
+  //   {
+  //     id: crypto.randomUUID(),
+  //     author: state.userData,
+  //     text: "Det är klart!",
+  //     sendTime: "21.00",
+  //   },
+  //   {
+  //     id: crypto.randomUUID(),
+  //     author: state.contact,
+  //     text: "Fika!",
+  //     sendTime: 21.05,
+  //   },
+  //   {
+  //     id: crypto.randomUUID(),
+  //     author: state.contact,
+  //     text: "Fika!",
+  //     sendTime: 21.05,
+  //   },
+  //   {
+  //     id: crypto.randomUUID(),
+  //     author: state.contact,
+  //     text: "Fika!",
+  //     sendTime: 21.05,
+  //   },
+  //   {
+  //     id: crypto.randomUUID(),
+  //     author: state.contact,
+  //     text: "Fika!",
+  //     sendTime: 21.05,
+  //   },
+  //   {
+  //     id: crypto.randomUUID(),
+  //     author: state.contact,
+  //     text: "Fika!",
+  //     sendTime: 21.05,
+  //   },
+  //   {
+  //     id: crypto.randomUUID(),
+  //     author: state.contact,
+  //     text: "Fika!",
+  //     sendTime: 21.05,
+  //   },
+  //   {
+  //     id: crypto.randomUUID(),
+  //     author: state.contact,
+  //     text: "Fika!",
+  //     sendTime: 21.05,
+  //   },
+  //   {
+  //     id: crypto.randomUUID(),
+  //     author: state.contact,
+  //     text: "Fika!",
+  //     sendTime: 21.05,
+  //   },
+  // ]);
 
   useEffect(() => {
     //scroll down to last message
@@ -109,13 +109,12 @@ function ChatWindow() {
       return [...curr, newMessage];
     });
     setNewText("");
-    //send text to server
+    //save message to db
     const putUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/chat/${state._id}`;
     try {
       const res = await axios.put(putUrl, newMessage, {
         withCredentials: true,
       });
-      console.log(res);
     } catch (err) {
       console.log(err.message);
     }

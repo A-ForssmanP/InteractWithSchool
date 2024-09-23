@@ -284,14 +284,24 @@ if(process.env.NODE_ENV !== "production") {
   app.put("/chat/:chatId",isAuthenticated, async (req,res) => {
     const {chatId} = req.params
     const messageData = req.body
+    const userId = req.userId
     try {
     // get chat document
+    const chat = await Chat.findById(chatId)
     //check if userId is one of the partipicipants
+    const isParticipantUser = chat.participants.some(user => user.userId.toString() === userId)
+    if(!isParticipantUser) {
+      throw new Error("Invalid user")
+    }
     //update message field on the chat document
+    chat.messages.push(messageData)
+    chat.save()
+    // put updated chat to be first in chats array of the chatList document
     //send back respons
+    res.status(200).send()
     } catch(err) {
-      console.log(err.message)
       //send back error status code
+      res.status(404).json({"error":err.message})
     }
   })
 
