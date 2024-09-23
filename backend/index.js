@@ -281,6 +281,10 @@ if(process.env.NODE_ENV !== "production") {
     }
   })
 
+  app.put("/chat/:chatId",isAuthenticated, async (req,res) => {
+
+  })
+
   app.get("/absence",isAuthenticated, async(req,res) => {
     try {
       const userId = req.userId;

@@ -10,6 +10,7 @@ import {
 import SendIcon from "@mui/icons-material/Send";
 import { useState, useRef, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 import ButtonBack from "../buttonBack/ButtonBack";
 import ChatWindowMessage from "../chatWindowMessage/ChatWindowMessage";
 
@@ -20,7 +21,6 @@ function ChatWindow() {
   const navigate = useNavigate();
   const lastMessageRef = useRef(null);
   const [newText, setNewText] = useState("");
-  console.log(state);
   const [messages, setMessages] = useState([
     // ...state.messages,
     {
@@ -100,16 +100,14 @@ function ChatWindow() {
     const currentTime = `${!hoursIstwoDigit ? 0 : ""}${date.getHours()}.${
       !minutesIstwoDigit ? 0 : ""
     }${date.getMinutes()}`;
+    const newMessage = {
+      id: crypto.randomUUID(),
+      author: state.userData,
+      text: msg,
+      sendTime: currentTime,
+    };
     setMessages((curr) => {
-      return [
-        ...curr,
-        {
-          id: crypto.randomUUID(),
-          author: state.userData,
-          text: msg,
-          sendTime: currentTime,
-        },
-      ];
+      return [...curr, newMessage];
     });
     setNewText("");
   };

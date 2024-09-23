@@ -7,7 +7,6 @@ function ChatContactsList({ chatData }) {
 
   useEffect(() => {
     chatData.chats && setChatListData(chatData.chats);
-    console.log(chatData);
   }, [chatData]);
 
   return (

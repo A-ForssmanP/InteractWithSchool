@@ -18,7 +18,6 @@ function ChatContacts() {
   useEffect(() => {
     getChatContacts();
   }, []);
-  console.log("C", contacts);
   const getUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/chat/contact/all`;
 
   //get  chat-contacts from db

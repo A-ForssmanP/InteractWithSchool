@@ -2,8 +2,6 @@ import { ListItem, Paper, useTheme, Typography, Box } from "@mui/material";
 
 function ChatWindowMessage({ message, userData }) {
   const theme = useTheme();
-  console.log(userData);
-  console.log(message);
   return (
     <ListItem sx={{ display: "flex", alignItems: "end" }}>
       <Paper
