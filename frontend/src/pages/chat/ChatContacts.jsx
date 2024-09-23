@@ -4,15 +4,7 @@ import ChatContactsList from "../../components/chatContactsList/ChatContactsList
 import axios from "axios";
 
 function ChatContacts() {
-  const [contacts, setContacts] = useState(
-    {}
-    // new Array(24).fill({
-    //   firstName: "Foo",
-    //   lastName: "Bar",
-    //   lastText:
-    //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident natus impedit fugiat necessitatibus! Blanditiis nemo pariatur incidunt porro fugit, doloremque a aliquam aspernatur ipsa, perferendis rerum accusamus voluptate sapiente soluta?",
-    // })
-  );
+  const [contacts, setContacts] = useState({});
 
   useEffect(() => {
     getChatContacts();
@@ -47,7 +39,6 @@ function ChatContacts() {
       >
         <TextField
           id="outlined-basic"
-          // label="sök kontakt"
           placeholder="Sök kontakt"
           variant="outlined"
           fullWidth
@@ -58,7 +49,6 @@ function ChatContacts() {
         style={{
           border: "1px solid green",
           flex: "1",
-
           overflowY: "auto",
         }}
       >

@@ -285,7 +285,6 @@ if(process.env.NODE_ENV !== "production") {
     const {chatId} = req.params
     const messageData = req.body
     const userId = req.userId
-    // console.log(messageData)
     try {
     // get chat document
     const chat = await Chat.findById(chatId)

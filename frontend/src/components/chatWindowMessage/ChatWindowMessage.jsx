@@ -9,7 +9,6 @@ function ChatWindowMessage({ message, userData }) {
           width: "fit-content",
           maxWidth: "70%",
           padding: 1.2,
-          // marginBottom: 1,
           bgcolor:
             message.author._id === userData._id
               ? theme.palette.primary.main

@@ -18,7 +18,6 @@ function ChatContactsList({ chatData }) {
       }}
     >
       {chatListData.map((chat) => {
-        // console.log(chat);
         return (
           <ChatContactsListItem
             key={chat._id}

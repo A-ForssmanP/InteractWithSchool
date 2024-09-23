@@ -17,7 +17,6 @@ import ChatWindowMessage from "../chatWindowMessage/ChatWindowMessage";
 function ChatWindow() {
   const theme = useTheme();
   const { state } = useLocation();
-  console.log(state);
   const navigate = useNavigate();
   const lastMessageRef = useRef(null);
   const [newText, setNewText] = useState("");
@@ -207,7 +206,6 @@ function ChatWindow() {
             id="outlined-textarea"
             value={newText}
             onChange={(e) => setNewText(e.target.value)}
-            // label="Multiline Placeholder"
             placeholder="Skriv ett meddelande"
             multiline
             fullWidth
