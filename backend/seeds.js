@@ -271,7 +271,7 @@ const connectUserToClass = async () => {
       //find student class
       const studentClass = await SchoolClass.findById(student.schoolClass)
       //push users firstName and lastName to parents array
-      studentClass["parents"].push({firstName:user.firstName,lastName:user.lastName})
+      studentClass["parents"].push({firstName:user.firstName,lastName:user.lastName,_id:user})
       await studentClass.save()
     }
   }
@@ -293,18 +293,19 @@ const chatEstablish = async () => {
       for(let id of ids) {
         const schoolClass = await SchoolClass.findById(id)
         for(let parent of schoolClass.parents) {
-          const ownUser = {firstName:user.firstName,lastName:user.lastName,userId:user}
-          const parentUser = {firstName:parent.firstName,lastName:parent.lastName,userId:parent}
-          const chat = new Chat({participants: [ownUser,parentUser]})
+          //create chat if user id and parent id is not the same
+          if(parent._id.toString() !== user._id.toString()) {
+            const ownUser = {firstName:user.firstName,lastName:user.lastName,userId:user}
+            const parentUser = {firstName:parent.firstName,lastName:parent.lastName,userId:parent}
+            const chat = new Chat({participants: [ownUser,parentUser]})
           // const chat = new Chat({participants: [user,parent]})
-          chatList.chats.push(chat)
-          chat.save()
+            chatList.chats.push(chat)
+            chat.save()
+          }
         }
       }
       chatList.save()
     }
-    
-    // find the schollclasses that the user is connected to and for every parents in the class, create a chat between user and that parent
   } catch(err) {
     console.log(err.message)
   }
