@@ -17,7 +17,6 @@ import ChatWindowMessage from "../chatWindowMessage/ChatWindowMessage";
 function ChatWindow() {
   const theme = useTheme();
   const { state } = useLocation();
-  console.log(state);
   const navigate = useNavigate();
   const lastMessageRef = useRef(null);
   const [newText, setNewText] = useState("");
@@ -91,7 +90,7 @@ function ChatWindow() {
   }, [messages]);
 
   //handle send message
-  const handleSend = (msg) => {
+  const handleSend = async (msg) => {
     const date = new Date();
     //check if minutes is a one digit number,if so add a 0 to the start of currentTime-variable for minutes
     const minutesIstwoDigit = date.getMinutes().toString().length > 1;
@@ -110,6 +109,16 @@ function ChatWindow() {
       return [...curr, newMessage];
     });
     setNewText("");
+    //send text to server
+    const putUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/chat/${state._id}`;
+    try {
+      const res = await axios.put(putUrl, newMessage, {
+        withCredentials: true,
+      });
+      console.log(res);
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   //handle submiting a message

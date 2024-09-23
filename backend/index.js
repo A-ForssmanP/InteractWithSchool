@@ -282,7 +282,17 @@ if(process.env.NODE_ENV !== "production") {
   })
 
   app.put("/chat/:chatId",isAuthenticated, async (req,res) => {
-
+    const {chatId} = req.params
+    const messageData = req.body
+    try {
+    // get chat document
+    //check if userId is one of the partipicipants
+    //update message field on the chat document
+    //send back respons
+    } catch(err) {
+      console.log(err.message)
+      //send back error status code
+    }
   })
 
   app.get("/absence",isAuthenticated, async(req,res) => {
