@@ -295,38 +295,42 @@ const chatEstablish = async () => {
         const firstUser = {userId:users[i],firstName:users[i].firstName,lastName:users[i].lastName}
         const secondUser = {userId:users[j],firstName:users[j].firstName,lastName:users[j].lastName}
         const chat = new Chat({participants:[firstUser,secondUser]})
-        chat.save()
+        await chat.save()
+        console.log(firstChatList)
         firstChatList.chats.push(chat)
         secondChatList.chats.push(chat)
-        secondChatList.save()
-        firstChatList.save()
+        await secondChatList.save()
+        await firstChatList.save()
       }
     }
-   
-    // for(let user of users) {
-    //   // get id of every schollclass
-    //   const ids = user.students.map((student) => {
-    //     return student.schoolClass
-    //   })
-    //   //between user and every parent in classes the user is connected to, setup a chat 
-    //   for(let id of ids) {
-    //     const schoolClass = await SchoolClass.findById(id)
-    //     for(let parent of schoolClass.parents) {
-    //       //create chat if user id and parent id is not the same
-    //       if(parent._id.toString() !== user._id.toString()) {
-    //         const ownUser = {firstName:user.firstName,lastName:user.lastName,userId:user}
-    //         const parentUser = {firstName:parent.firstName,lastName:parent.lastName,userId:parent}
-    //         const chat = new Chat({participants: [ownUser,parentUser]})
-    //       // const chat = new Chat({participants: [user,parent]})
-    //         chatList.chats.push(chat)
-    //         chat.save()
-    //       }
-    //     }
-    //   }
-    //   chatList.save()
-    // }
+    //chat between user and parents in same school-class
+    
+    for(let user of users) {
+      const chatList = await ChatList.findOne({userId:user._id})
+      const users = await User.find()
+      // get id of every schollclass
+      const ids = user.students.map((student) => {
+        return student.schoolClass
+      })
+      //between user and every parent in classes the user is connected to, setup a chat 
+      for(let id of ids) {
+        const schoolClass = await SchoolClass.findById(id)
+        for(let parent of schoolClass.parents) {
+          //create chat if user id and parent id is not the same
+          if(parent._id.toString() !== user._id.toString() && !users.some(user => user._id.toString() === parent._id.toString())) {
+            const ownUser = {firstName:user.firstName,lastName:user.lastName,userId:user}
+            const parentUser = {firstName:parent.firstName,lastName:parent.lastName,userId:parent}
+            const chat = new Chat({participants: [ownUser,parentUser]})
+          // const chat = new Chat({participants: [user,parent]})
+            await chat.save()
+            chatList.chats.push(chat)
+          }
+        }
+      }
+      await chatList.save()
+    }
   } catch(err) {
-    console.log(err.message)
+    console.log(err)
   }
   
 }
