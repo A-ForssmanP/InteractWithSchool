@@ -157,6 +157,8 @@ if(process.env.NODE_ENV !== "production") {
     newUser.save()
     newNote.save()
     // chat list for user
+    const chatList = new ChatList({userId:newUser})
+    await chatList.save()
       //create token
     const token = jwt.sign({userId: newUser._id},process.env.JWT_SECRET, { expiresIn: '30m'})
     //create token cookie
