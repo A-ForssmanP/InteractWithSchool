@@ -285,18 +285,17 @@ const chatEstablish = async () => {
     // chatlist for every user
     for(let user of users) {
       const chatList = new ChatList({userId:user})
-      chatList.save()
+     await chatList.save()
     }
     // chat between every user
     for(let i=0; i<users.length-1;i++) {
       for(let j=i+1; j<users.length;j++) {
-        const firstChatList = await ChatList.findOne({userId:users[i]._id})
-        const secondChatList = await ChatList.findOne({userId:users[j]._id})
+        const firstChatList = await ChatList.findOne({userId:users[i]})
+        const secondChatList = await ChatList.findOne({userId:users[j]})
         const firstUser = {userId:users[i],firstName:users[i].firstName,lastName:users[i].lastName}
         const secondUser = {userId:users[j],firstName:users[j].firstName,lastName:users[j].lastName}
         const chat = new Chat({participants:[firstUser,secondUser]})
         await chat.save()
-        console.log(firstChatList)
         firstChatList.chats.push(chat)
         secondChatList.chats.push(chat)
         await secondChatList.save()
@@ -304,7 +303,6 @@ const chatEstablish = async () => {
       }
     }
     //chat between user and parents in same school-class
-    
     for(let user of users) {
       const chatList = await ChatList.findOne({userId:user._id})
       const users = await User.find()
@@ -312,11 +310,10 @@ const chatEstablish = async () => {
       const ids = user.students.map((student) => {
         return student.schoolClass
       })
-      //between user and every parent in classes the user is connected to, setup a chat 
       for(let id of ids) {
         const schoolClass = await SchoolClass.findById(id)
         for(let parent of schoolClass.parents) {
-          //create chat if user id and parent id is not the same
+          //check if user id and parent id are not the same
           if(parent._id.toString() !== user._id.toString() && !users.some(user => user._id.toString() === parent._id.toString())) {
             const ownUser = {firstName:user.firstName,lastName:user.lastName,userId:user}
             const parentUser = {firstName:parent.firstName,lastName:parent.lastName,userId:parent}
@@ -332,7 +329,6 @@ const chatEstablish = async () => {
   } catch(err) {
     console.log(err)
   }
-  
 }
 
 // Insert data to dB
