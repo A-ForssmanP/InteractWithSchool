@@ -180,7 +180,6 @@ if(process.env.NODE_ENV !== "production") {
      const schoolClassIds = user.students.map(studen => studen.schoolClass)
      for(let classId of schoolClassIds) {
       const schoolClass = await SchoolClass.findById(classId)
-      const users = await User.find()
       for(let parent of schoolClass.parents) {
         if(parent._id.toString() !== user._id.toString() && !users.some(u => u._id.toString() === parent._id.toString())) {
           const ownUser = {firstName:user.firstName,lastName:user.lastName,userId:user}
