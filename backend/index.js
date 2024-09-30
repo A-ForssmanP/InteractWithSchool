@@ -161,7 +161,6 @@ if(process.env.NODE_ENV !== "production") {
     await chatList.save()
     //chat between user and all other created users
     const users = await User.find()
-    console.log(users)
     for(let user of users) {
       if(user._id.toString() !== newUser._id.toString()) {
         const ownUser = {userId:newUser,firstName:newUser.firstName,lastName:newUser.lastName}
