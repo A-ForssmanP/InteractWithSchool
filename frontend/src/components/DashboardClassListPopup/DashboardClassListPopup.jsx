@@ -2,9 +2,15 @@ import { Card, Button } from "@mui/material";
 import MessageIcon from "@mui/icons-material/Message";
 import AlertInfo from "../alertInfo/AlertInfo";
 import { useState } from "react";
+import axios from "axios";
 
 function DashboardClassListPopup({ closePopup, content }) {
   const [showAlertInfo, setShowAlertInfo] = useState(false);
+  console.log(content._id);
+
+  const getChatIdUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/chat/contact/${
+    content._id
+  }`;
 
   // handle show/hide alert-info
   const handleAlertInfo = () => {
@@ -14,6 +20,22 @@ function DashboardClassListPopup({ closePopup, content }) {
         setShowAlertInfo(false);
       }, 4000);
     }
+  };
+
+  // get id of chat between user and parent
+  const getChatId = async () => {
+    try {
+      const res = await axios.get(getChatIdUrl, { withCredentials: true });
+      console.log(res.data);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  // handle click of chat-icon button
+  const handleChatButtonClick = async () => {
+    handleAlertInfo();
+    const chatId = await getChatId();
   };
 
   return (
@@ -53,7 +75,7 @@ function DashboardClassListPopup({ closePopup, content }) {
           }}
         >
           <div>
-            <Button onClick={handleAlertInfo}>
+            <Button onClick={handleChatButtonClick}>
               <MessageIcon />
             </Button>
             <p style={{ textAlign: "center" }}>Chatta</p>
