@@ -159,6 +159,23 @@ if(process.env.NODE_ENV !== "production") {
     // chat list for user
     const chatList = new ChatList({userId:newUser})
     await chatList.save()
+    //chat between user and all other created users
+    const users = await User.find()
+    console.log(users)
+    for(let user of users) {
+      if(user._id.toString() !== newUser._id.toString()) {
+        const ownUser = {userId:newUser,firstName:newUser.firstName,lastName:newUser.lastName}
+        const secondUser = {userId:user,firstName:user.firstName,lastName:user.lastName}
+        const chat = new Chat({participants:[ownUser,secondUser]})
+        await chat.save()
+        const ownUserChatList = await ChatList.findOne({userId:newUser})
+        const secondUserChatList = await ChatList.findOne({userId:user})
+        ownUserChatList.chats.push(chat)
+        await ownUserChatList.save()
+        secondUserChatList.chats.push(chat)
+        await secondUserChatList.save()
+      }
+    }
       //create token
     const token = jwt.sign({userId: newUser._id},process.env.JWT_SECRET, { expiresIn: '30m'})
     //create token cookie

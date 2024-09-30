@@ -313,7 +313,7 @@ const chatEstablish = async () => {
       for(let id of ids) {
         const schoolClass = await SchoolClass.findById(id)
         for(let parent of schoolClass.parents) {
-          //check if user id and parent id are not the same
+          //check if user id and parent id are not the same and parent isent a user that allready have chat established
           if(parent._id.toString() !== user._id.toString() && !users.some(user => user._id.toString() === parent._id.toString())) {
             const ownUser = {firstName:user.firstName,lastName:user.lastName,userId:user}
             const parentUser = {firstName:parent.firstName,lastName:parent.lastName,userId:parent}
