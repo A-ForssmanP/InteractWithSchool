@@ -137,7 +137,7 @@ if(process.env.NODE_ENV !== "production") {
         newStudent.schoolClass = classes[randomNum].id
         
         // connect user to parents field in the class
-        classes[randomNum].parents.push({firstName:newUser.firstName,lastName:newUser.lastName})
+        classes[randomNum].parents.push({firstName:newUser.firstName,lastName:newUser.lastName,_id:newUser})
         classes[randomNum].save()
         // remove selected school class from classes array to prevent duplication
         classes = classes.filter(sclass => sclass !== classes[randomNum])
@@ -175,6 +175,24 @@ if(process.env.NODE_ENV !== "production") {
         await secondUserChatList.save()
       }
     }
+    // chat between user and all mock parents in the same school-class
+     const user = await User.findById(newUser).populate("students","schoolClass")
+     const schoolClassIds = user.students.map(studen => studen.schoolClass)
+     for(let classId of schoolClassIds) {
+      const schoolClass = await SchoolClass.findById(classId)
+      const users = await User.find()
+      for(let parent of schoolClass.parents) {
+        if(parent._id.toString() !== user._id.toString() && !users.some(u => u._id.toString() === parent._id.toString())) {
+          const ownUser = {firstName:user.firstName,lastName:user.lastName,userId:user}
+          const parentUser = {firstName:parent.firstName,lastName:parent.lastName,userId:parent}
+          const chat = new Chat({participants: [ownUser,parentUser]})
+          await chat.save()
+          const userChatList = await ChatList.findOne({userId:user})
+          userChatList.chats.push(chat)
+          await userChatList.save()
+        }
+      }
+     }
       //create token
     const token = jwt.sign({userId: newUser._id},process.env.JWT_SECRET, { expiresIn: '30m'})
     //create token cookie
