@@ -58,7 +58,7 @@ function App() {
   };
 
   return (
-    <ChatContext.Provider value={chatData}>
+    <ChatContext.Provider value={{ chatData, findChatId }}>
       <NewInboxCount.Provider value={{ newInboxMessage, setNewInboxMessage }}>
         <ThemeProvider theme={theme}>
           <Stack

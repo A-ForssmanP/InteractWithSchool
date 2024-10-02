@@ -9,7 +9,7 @@ function ChatContacts() {
   const chatContext = useContext(ChatContext);
 
   useEffect(() => {
-    setContacts(chatContext);
+    setContacts(chatContext.chatData);
   }, [chatContext]);
 
   // useEffect(() => {
