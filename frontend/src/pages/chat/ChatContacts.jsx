@@ -1,26 +1,32 @@
 import { Box, TextField } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import ChatContactsList from "../../components/chatContactsList/ChatContactsList";
+import { ChatContext } from "../../context";
 import axios from "axios";
 
 function ChatContacts() {
   const [contacts, setContacts] = useState({});
+  const chatContext = useContext(ChatContext);
 
   useEffect(() => {
-    getChatContacts();
-  }, []);
-  const getUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/chat/contact/all`;
+    setContacts(chatContext);
+  }, [chatContext]);
 
-  //get  chat-contacts from db
-  const getChatContacts = async () => {
-    try {
-      const res = await axios(getUrl, { withCredentials: true });
-      const { chatList } = res.data;
-      setContacts(chatList);
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
+  // useEffect(() => {
+  //   getChatContacts();
+  // }, []);
+  // const getUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/chat/contact/all`;
+
+  // //get  chat-contacts from db
+  // const getChatContacts = async () => {
+  //   try {
+  //     const res = await axios(getUrl, { withCredentials: true });
+  //     const { chatList } = res.data;
+  //     setContacts(chatList);
+  //   } catch (err) {
+  //     console.log(err.message);
+  //   }
+  // };
 
   return (
     <Box
