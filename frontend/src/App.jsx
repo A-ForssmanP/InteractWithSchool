@@ -45,6 +45,18 @@ function App() {
     }
   };
 
+  // find chat between user and selected-parent
+  const findChatId = (parentId) => {
+    if (chatData.chats) {
+      const chat = chatData.chats.filter((chat) => {
+        return chat.participants.some(
+          (participan) => participan.userId === parentId
+        );
+      });
+      return chat[0]._id;
+    }
+  };
+
   return (
     <ChatContext.Provider value={chatData}>
       <NewInboxCount.Provider value={{ newInboxMessage, setNewInboxMessage }}>
