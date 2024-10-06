@@ -317,28 +317,6 @@ if(process.env.NODE_ENV !== "production") {
     }
   })
 
-  app.get("/chat/contact/:id",isAuthenticated, async (req,res) => {
-    try {
-         // get data out of params
-    const {id} = req.params
-    const userId = req.userId
-    //find chat that user and parent are both in
-    const userChats = await Chat.find({"participants.userId":userId})
-    // console.log(userChats)
-    // find chat including both user and parent
-    const parentChat = userChats.filter((chat) => chat.participants.some((p)=>p.userId.toString() === id))
-    console.log(parentChat)
-    if(!parentChat.length) {
-      throw new Error("No chat found")
-    }
-    res.status(200).json({"chatId":parentChat[0]._id})
-    //send back chat id
-    } catch (err) {
-      res.status(400).send({"error":err})
-    }
- 
-  })
-
   app.put("/chat/:chatId",isAuthenticated, async (req,res) => {
     const {chatId} = req.params
     const messageData = req.body
