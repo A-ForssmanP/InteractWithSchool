@@ -6,6 +6,7 @@ import {
   Divider,
   Avatar,
   useTheme,
+  Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +16,7 @@ function ChatContactsListItem({ chat, userData, chatListId }) {
     firstName: "undefined",
     lastName: "undefined",
   });
+  const [newChatEvent, setNewChatEvent] = useState(false);
   const theme = useTheme();
   const navigate = useNavigate();
   const handleClick = () => {
@@ -27,7 +29,7 @@ function ChatContactsListItem({ chat, userData, chatListId }) {
       },
     });
   };
-
+  console.log(userData);
   useEffect(() => {
     chat &&
       userData &&
@@ -38,7 +40,18 @@ function ChatContactsListItem({ chat, userData, chatListId }) {
         const { firstName, lastName } = participants[0];
         return { firstName, lastName };
       });
+    checkNewEvents();
   }, [chat]);
+
+  //check if user is shown new-events
+  const checkNewEvents = () => {
+    const userIsUpdated = chat.userShownNewEvent.some(
+      (id) => id.toString() === userData._id
+    );
+    if (!userIsUpdated) {
+      setNewChatEvent(true);
+    }
+  };
 
   return (
     <>
@@ -59,6 +72,7 @@ function ChatContactsListItem({ chat, userData, chatListId }) {
               noWrap: true,
             }}
           />
+          {newChatEvent && <Typography color="green">Ny händelse</Typography>}
         </ListItemButton>
       </ListItem>
       <Divider />

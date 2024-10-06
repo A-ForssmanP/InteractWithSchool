@@ -331,6 +331,8 @@ if(process.env.NODE_ENV !== "production") {
     }
     //update message field on the chat document
     chat.messages.push(messageData)
+    //update userShownNewEvent field on the chat document
+    chat.userShownNewEvent = [userId]
     chat.save()
     // put updated chat to be first in chats array of the chatList document
     const chatList = await ChatList.findById(messageData.chatListId)
