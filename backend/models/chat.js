@@ -16,7 +16,10 @@ const chatSchema = new Schema({
         }
     }],
     messages: [],
-    lastMessage: {}
+    lastMessage: {},
+    userShownNewEvent: [{
+        type:mongoose.Types.ObjectId,
+    }]
 })
 
 const Chat = model("Chat",chatSchema)
