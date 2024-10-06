@@ -29,7 +29,7 @@ function ChatContactsListItem({ chat, userData, chatListId }) {
       },
     });
   };
-  console.log(userData);
+
   useEffect(() => {
     chat &&
       userData &&

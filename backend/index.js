@@ -347,6 +347,12 @@ if(process.env.NODE_ENV !== "production") {
     }
   })
 
+  app.put("/chat/:chatId/userShownNewEvent",isAuthenticated, async (req,res) => {
+    const {chatId} = req.params
+    const {userId} = req
+    //continue here!
+  })
+
   app.get("/absence",isAuthenticated, async(req,res) => {
     try {
       const userId = req.userId;

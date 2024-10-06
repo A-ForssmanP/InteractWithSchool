@@ -21,6 +21,31 @@ function ChatWindow() {
   const lastMessageRef = useRef(null);
   const [newText, setNewText] = useState("");
   const [messages, setMessages] = useState(state.messages);
+
+  const putUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/chat/${
+    state._id
+  }/userShownNewEvent`;
+
+  //check if user is shown new-events
+  const checkNewEvents = async () => {
+    const userIsUpdated = state.userShownNewEvent.some(
+      (id) => id.toString() === state.userData._id
+    );
+    if (!userIsUpdated) {
+      try {
+        //update chat in db that user has seen new events
+        await axios.put(putUrl, {}, { withCredentials: true });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
+  useState(() => {
+    state.messages && checkNewEvents();
+  }, [state?.messages]);
+  console.log(state);
+
   // const [messages, setMessages] = useState([
   //   {
   //     id: crypto.randomUUID(),
