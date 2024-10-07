@@ -139,12 +139,14 @@ function ChatWindow() {
       return [...curr, newMessage];
     });
     setNewText("");
-    //save message to db
+    //save message to db and update chatData state
     const putUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/chat/${state._id}`;
     try {
       const res = await axios.put(putUrl, newMessage, {
         withCredentials: true,
       });
+      const { chatList } = res.data;
+      updateChatData(chatList);
     } catch (err) {
       console.log(err.message);
     }

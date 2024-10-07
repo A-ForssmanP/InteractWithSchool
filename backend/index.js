@@ -335,12 +335,13 @@ if(process.env.NODE_ENV !== "production") {
     chat.userShownNewEvent = [userId]
     chat.save()
     // put updated chat to be first in chats array of the chatList document
-    const chatList = await ChatList.findById(messageData.chatListId)
+    const chatList = await ChatList.findById(messageData.chatListId).populate("chats").populate("userId",["_id","firstName"])
     chatList.chats.remove(chat._id)
     chatList.chats.unshift(chat)
     chatList.save()
+    const chatListData = {chats:chatList.chats,userData:chatList.userId,chatListId:chatList._id}
     //send back respons
-    res.status(200).send()
+    res.status(200).json({"chatList":chatListData})
     } catch(err) {
       //send back error status code
       res.status(404).json({"error":err.message})
