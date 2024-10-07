@@ -11,6 +11,7 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [newInboxMessage, setNewInboxMessage] = useState(0);
   const [chatData, setChatData] = useState({});
+  const [newChatMessages, setNewChatMessages] = useState(0);
 
   const newInboxCountUrl = `${
     import.meta.env.VITE_EXPRESS_SERVER
@@ -18,11 +19,16 @@ function App() {
 
   useEffect(() => {
     if (!isAuthenticated) {
+      setNewChatMessages(0);
       return setNewInboxMessage(0);
     }
     getNewInboxMessage();
     getChatData();
   }, [isAuthenticated]);
+
+  useEffect(() => {
+    chatData.userData && getNewChatMessages();
+  }, [chatData]);
 
   //get number of new inbox messages
   const getNewInboxMessage = async () => {
@@ -31,6 +37,22 @@ function App() {
       const { newMessages } = res.data;
       setNewInboxMessage(newMessages);
     } catch (err) {}
+  };
+  console.log(chatData);
+  //get number of new chat messages
+  const getNewChatMessages = () => {
+    console.log("hej");
+    const userId = chatData.userData._id;
+    let newMsgCount = 0;
+    chatData.chats.forEach((chat) => {
+      const isShownToUser = chat.userShownNewEvent.some((id) => id === userId);
+      if (!isShownToUser) {
+        newMsgCount++;
+      }
+    });
+    if (newMsgCount > 0) {
+      setNewChatMessages(newMsgCount);
+    }
   };
 
   //get  chat-contacts from db
@@ -63,7 +85,9 @@ function App() {
   };
 
   return (
-    <ChatContext.Provider value={{ chatData, findChatId, updateChatData }}>
+    <ChatContext.Provider
+      value={{ chatData, findChatId, updateChatData, newChatMessages }}
+    >
       <NewInboxCount.Provider value={{ newInboxMessage, setNewInboxMessage }}>
         <ThemeProvider theme={theme}>
           <Stack
