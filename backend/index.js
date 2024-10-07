@@ -350,7 +350,12 @@ if(process.env.NODE_ENV !== "production") {
   app.put("/chat/:chatId/userShownNewEvent",isAuthenticated, async (req,res) => {
     const {chatId} = req.params
     const {userId} = req
-    //continue here!
+    const chat = await Chat.findById(chatId);
+    chat.userShownNewEvent.push(userId)
+    chat.save()
+    const chatList = await ChatList.findOne({userId:userId}).populate("chats").populate("userId",["_id","firstName"])
+    const chatListData = {chats:chatList.chats,userData:chatList.userId,chatListId:chatList._id}
+    res.status(200).json({"chatList":chatListData})
   })
 
   app.get("/absence",isAuthenticated, async(req,res) => {

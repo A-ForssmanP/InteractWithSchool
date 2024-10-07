@@ -45,6 +45,11 @@ function App() {
     }
   };
 
+  // update chatData
+  const updateChatData = (newData) => {
+    setChatData(newData);
+  };
+
   // find chat between user and selected-parent
   const findChatId = (parentId) => {
     if (chatData.chats) {
@@ -58,7 +63,7 @@ function App() {
   };
 
   return (
-    <ChatContext.Provider value={{ chatData, findChatId }}>
+    <ChatContext.Provider value={{ chatData, findChatId, updateChatData }}>
       <NewInboxCount.Provider value={{ newInboxMessage, setNewInboxMessage }}>
         <ThemeProvider theme={theme}>
           <Stack

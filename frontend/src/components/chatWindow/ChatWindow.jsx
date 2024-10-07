@@ -8,11 +8,12 @@ import {
   List,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import ButtonBack from "../buttonBack/ButtonBack";
 import ChatWindowMessage from "../chatWindowMessage/ChatWindowMessage";
+import { ChatContext } from "../../context";
 
 function ChatWindow() {
   const theme = useTheme();
@@ -21,6 +22,8 @@ function ChatWindow() {
   const lastMessageRef = useRef(null);
   const [newText, setNewText] = useState("");
   const [messages, setMessages] = useState(state.messages);
+  const chatContext = useContext(ChatContext);
+  const { updateChatData } = chatContext;
 
   const putUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/chat/${
     state._id
@@ -34,7 +37,9 @@ function ChatWindow() {
     if (!userIsUpdated) {
       try {
         //update chat in db that user has seen new events
-        await axios.put(putUrl, {}, { withCredentials: true });
+        const res = await axios.put(putUrl, {}, { withCredentials: true });
+        const { chatList } = res.data;
+        updateChatData(chatList);
       } catch (err) {
         console.log(err);
       }
@@ -44,7 +49,6 @@ function ChatWindow() {
   useState(() => {
     state.messages && checkNewEvents();
   }, [state?.messages]);
-  console.log(state);
 
   // const [messages, setMessages] = useState([
   //   {
