@@ -38,10 +38,9 @@ function App() {
       setNewInboxMessage(newMessages);
     } catch (err) {}
   };
-  console.log(chatData);
+
   //get number of new chat messages
   const getNewChatMessages = () => {
-    console.log("hej");
     const userId = chatData.userData._id;
     let newMsgCount = 0;
     chatData.chats.forEach((chat) => {
