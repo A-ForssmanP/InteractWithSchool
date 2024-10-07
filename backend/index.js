@@ -352,8 +352,12 @@ if(process.env.NODE_ENV !== "production") {
     const {chatId} = req.params
     const {userId} = req
     const chat = await Chat.findById(chatId);
-    chat.userShownNewEvent.push(userId)
+    // check if user is already in array
+    const userExists = chat.userShownNewEvent.some(id => id.toString() === userId.toString())
+    if(!userExists) {
+      chat.userShownNewEvent.push(userId)
     chat.save()
+    }
     const chatList = await ChatList.findOne({userId:userId}).populate("chats").populate("userId",["_id","firstName"])
     const chatListData = {chats:chatList.chats,userData:chatList.userId,chatListId:chatList._id}
     res.status(200).json({"chatList":chatListData})
