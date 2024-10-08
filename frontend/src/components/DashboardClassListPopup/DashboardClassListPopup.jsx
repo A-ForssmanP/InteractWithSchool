@@ -9,12 +9,6 @@ function DashboardClassListPopup({ closePopup, content }) {
   const [showAlertInfo, setShowAlertInfo] = useState(false);
   const navigate = useNavigate();
   const { findChatId, chatData } = useContext(ChatContext);
-  // console.log(content);
-  // console.log(chatData);
-
-  // const getChatIdUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/chat/contact/${
-  //   content._id
-  // }`;
 
   // handle show/hide alert-info
   const handleAlertInfo = () => {
@@ -26,16 +20,6 @@ function DashboardClassListPopup({ closePopup, content }) {
     }
   };
 
-  // get id of chat between user and parent
-  // const getChatId = async () => {
-  //   try {
-  //     const res = await axios.get(getChatIdUrl, { withCredentials: true });
-  //     console.log(res.data);
-  //   } catch (err) {
-  //     console.log(err.message);
-  //   }
-  // };
-
   // find chat from users chat-list
   const findChatById = (id) => {
     const foundChat = chatData.chats.filter((chat) => chat._id === id);
@@ -45,7 +29,6 @@ function DashboardClassListPopup({ closePopup, content }) {
   // handle click of chat-icon button
   const handleChatButtonClick = () => {
     handleAlertInfo();
-    // const chatId = await getChatId();
     const chatId = findChatId(content._id);
     const chat = findChatById(chatId);
     navigate(`/chatt/${chatId}`, {
