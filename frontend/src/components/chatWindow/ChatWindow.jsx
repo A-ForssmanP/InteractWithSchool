@@ -50,69 +50,6 @@ function ChatWindow() {
     state.messages && checkNewEvents();
   }, [state?.messages]);
 
-  // const [messages, setMessages] = useState([
-  //   {
-  //     id: crypto.randomUUID(),
-  //     author: state.userData,
-  //     text: "Kaffe är gott!",
-  //     sendTime: "20.43",
-  //   },
-  //   {
-  //     id: crypto.randomUUID(),
-  //     author: state.userData,
-  //     text: "Det är klart!",
-  //     sendTime: "21.00",
-  //   },
-  //   {
-  //     id: crypto.randomUUID(),
-  //     author: state.contact,
-  //     text: "Fika!",
-  //     sendTime: 21.05,
-  //   },
-  //   {
-  //     id: crypto.randomUUID(),
-  //     author: state.contact,
-  //     text: "Fika!",
-  //     sendTime: 21.05,
-  //   },
-  //   {
-  //     id: crypto.randomUUID(),
-  //     author: state.contact,
-  //     text: "Fika!",
-  //     sendTime: 21.05,
-  //   },
-  //   {
-  //     id: crypto.randomUUID(),
-  //     author: state.contact,
-  //     text: "Fika!",
-  //     sendTime: 21.05,
-  //   },
-  //   {
-  //     id: crypto.randomUUID(),
-  //     author: state.contact,
-  //     text: "Fika!",
-  //     sendTime: 21.05,
-  //   },
-  //   {
-  //     id: crypto.randomUUID(),
-  //     author: state.contact,
-  //     text: "Fika!",
-  //     sendTime: 21.05,
-  //   },
-  //   {
-  //     id: crypto.randomUUID(),
-  //     author: state.contact,
-  //     text: "Fika!",
-  //     sendTime: 21.05,
-  //   },
-  //   {
-  //     id: crypto.randomUUID(),
-  //     author: state.contact,
-  //     text: "Fika!",
-  //     sendTime: 21.05,
-  //   },
-  // ]);
-
   useEffect(() => {
     //scroll down to last message
     lastMessageRef.current && lastMessageRef.current.scrollIntoView();
@@ -160,7 +97,6 @@ function ChatWindow() {
 
   return (
     <Box
-      border={"5px solid black"}
       height={{ xs: "calc(100dvh - 36px)", md: "100dvh" }}
       display="flex"
       flexDirection="column"
@@ -168,7 +104,6 @@ function ChatWindow() {
     >
       <Box
         sx={{
-          border: "1px solid red",
           display: "flex",
           flexDirection: { xs: "column-reverse", sm: "row" },
           justifyContent: { sm: "space-between" },
@@ -190,7 +125,6 @@ function ChatWindow() {
       </Box>
       <Box
         sx={{
-          border: "3px solid green",
           flex: 1,
           maxHeight: { xs: "calc(100% - 72px)", sm: "calc(100% - 43px)" },
           display: "flex",
@@ -200,13 +134,11 @@ function ChatWindow() {
         <div
           style={{
             flex: 1,
-            border: "4px solid blue",
             height: "calc(100% - 56px)",
           }}
         >
           <List
             sx={{
-              border: "3px solid red",
               height: "100%",
               flexShrink: 1,
               maxHeight: "100%",

@@ -12,7 +12,6 @@ function ChatContactsList({ chatData }) {
   return (
     <List
       sx={{
-        border: "1px solid blue",
         maxWidth: { xs: 800, xl: 1000 },
         margin: "0 auto",
       }}

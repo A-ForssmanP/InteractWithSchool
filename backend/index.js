@@ -356,7 +356,7 @@ if(process.env.NODE_ENV !== "production") {
     const userExists = chat.userShownNewEvent.some(id => id.toString() === userId.toString())
     if(!userExists) {
       chat.userShownNewEvent.push(userId)
-    chat.save()
+      chat.save()
     }
     const chatList = await ChatList.findOne({userId:userId}).populate("chats").populate("userId",["_id","firstName"])
     const chatListData = {chats:chatList.chats,userData:chatList.userId,chatListId:chatList._id}

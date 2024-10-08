@@ -4,7 +4,6 @@ import AlertInfo from "../alertInfo/AlertInfo";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChatContext } from "../../context";
-import axios from "axios";
 
 function DashboardClassListPopup({ closePopup, content }) {
   const [showAlertInfo, setShowAlertInfo] = useState(false);
