@@ -1,6 +1,7 @@
-import { Box, TextField } from "@mui/material";
+import { Box } from "@mui/material";
 import { useEffect, useState, useContext } from "react";
 import ChatContactsList from "../../components/chatContactsList/ChatContactsList";
+import ChatContactsSearch from "../../components/chatContactsSearch/ChatContactsSearch";
 import { ChatContext } from "../../context";
 
 function ChatContacts() {
@@ -25,13 +26,7 @@ function ChatContacts() {
           justifyContent: "center",
         }}
       >
-        <TextField
-          id="outlined-basic"
-          placeholder="Sök kontakt"
-          variant="outlined"
-          fullWidth
-          sx={{ maxWidth: { sm: 540 } }}
-        />
+        <ChatContactsSearch />
       </Box>
       <div
         style={{
