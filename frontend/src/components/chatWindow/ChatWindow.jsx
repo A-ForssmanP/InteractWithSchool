@@ -107,6 +107,9 @@ function ChatWindow() {
           display: "flex",
           flexDirection: { xs: "column-reverse", sm: "row" },
           justifyContent: { sm: "space-between" },
+          borderBottom: "1px solid lightgrey",
+          p: 1,
+          gap: { xs: 1, sm: 0 },
         }}
       >
         <div
@@ -126,7 +129,7 @@ function ChatWindow() {
       <Box
         sx={{
           flex: 1,
-          maxHeight: { xs: "calc(100% - 72px)", sm: "calc(100% - 43px)" },
+          maxHeight: { xs: "calc(100% - 95.33px)", sm: "calc(100% - 58.33px)" },
           display: "flex",
           flexDirection: "column",
         }}
@@ -143,6 +146,7 @@ function ChatWindow() {
               flexShrink: 1,
               maxHeight: "100%",
               overflow: "auto",
+              scrollbarColor: "lightgrey white",
             }}
           >
             {messages.map((msg) => {
@@ -175,7 +179,11 @@ function ChatWindow() {
           />
           <Button
             type="submit"
-            sx={{ marginTop: "auto", transform: "translateY(-20%)" }}
+            variant="contained"
+            sx={{
+              marginTop: "auto",
+              height: 56,
+            }}
           >
             <SendIcon />
           </Button>
