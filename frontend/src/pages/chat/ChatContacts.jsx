@@ -56,6 +56,7 @@ function ChatContacts() {
           border: "1px solid green",
           flex: "1",
           overflowY: "auto",
+          scrollbarColor: "rgb(247,51,120) white",
         }}
       >
         <ChatContactsList chatData={contacts} />
