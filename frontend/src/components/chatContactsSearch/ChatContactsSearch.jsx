@@ -1,12 +1,16 @@
 import { TextField } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function ChatContactsSearch() {
   const [searchText, setSearchText] = useState("");
 
-  const handleSearch = (e) => {
-    setSearchText(e.target.value);
-  };
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      console.log("kaffe");
+    }, 1000);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchText]);
 
   return (
     <TextField
