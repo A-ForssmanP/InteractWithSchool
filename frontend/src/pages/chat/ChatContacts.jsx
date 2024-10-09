@@ -26,7 +26,10 @@ function ChatContacts() {
           justifyContent: "center",
         }}
       >
-        <ChatContactsSearch />
+        <ChatContactsSearch
+          chatList={contacts.chats}
+          userId={contacts?.userData?._id}
+        />
       </Box>
       <div
         style={{
