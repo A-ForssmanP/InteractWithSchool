@@ -19,18 +19,18 @@ function ChatContacts() {
       display="flex"
       flexDirection="column"
     >
-      <Box
+      {/* <Box
         sx={{
           padding: { sm: 2 },
           display: "flex",
           justifyContent: "center",
         }}
-      >
-        <ChatContactsSearch
-          chatList={contacts.chats}
-          userId={contacts?.userData?._id}
-        />
-      </Box>
+      > */}
+      <ChatContactsSearch
+        chatList={contacts.chats}
+        userId={contacts?.userData?._id}
+      />
+      {/* </Box> */}
       <div
         style={{
           flex: "1",

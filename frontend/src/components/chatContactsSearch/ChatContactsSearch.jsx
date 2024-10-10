@@ -1,5 +1,6 @@
-import { TextField } from "@mui/material";
+import { TextField, Box } from "@mui/material";
 import { useState, useEffect } from "react";
+import ChatContactsSearchResult from "../chatContactsSearchResult/ChatContactsSearchResult";
 
 function ChatContactsSearch({ chatList, userId }) {
   const [searchText, setSearchText] = useState("");
@@ -7,6 +8,7 @@ function ChatContactsSearch({ chatList, userId }) {
   const [searchResult, setSearchResult] = useState([]);
 
   useEffect(() => {
+    !searchText && setSearchResult([]);
     if (searchText && chatList && userId) {
       const delayDebounceFn = setTimeout(() => {
         searchContact();
@@ -41,15 +43,25 @@ function ChatContactsSearch({ chatList, userId }) {
     setSearchResult(result);
   };
   return (
-    <TextField
-      id="outlined-basic"
-      placeholder="Sök kontakt"
-      variant="outlined"
-      fullWidth
-      sx={{ maxWidth: { sm: 540 } }}
-      value={searchText}
-      onChange={(e) => setSearchText(e.target.value)}
-    />
+    <Box
+      sx={{
+        padding: { sm: 2 },
+        display: "flex",
+        justifyContent: "center",
+        position: "relative",
+      }}
+    >
+      <TextField
+        id="outlined-basic"
+        placeholder="Sök kontakt"
+        variant="outlined"
+        fullWidth
+        sx={{ maxWidth: { sm: 540 } }}
+        value={searchText}
+        onChange={(e) => setSearchText(e.target.value)}
+      />
+      <ChatContactsSearchResult result={searchResult} />
+    </Box>
   );
 }
 
