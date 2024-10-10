@@ -5,8 +5,7 @@ function ChatContactsSearch({ chatList, userId }) {
   const [searchText, setSearchText] = useState("");
   const [names, setNames] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
-  // console.log(chatList);
-  // console.log(userId);
+
   useEffect(() => {
     if (searchText && chatList && userId) {
       const delayDebounceFn = setTimeout(() => {
@@ -32,7 +31,15 @@ function ChatContactsSearch({ chatList, userId }) {
   };
 
   //search contact
-  const searchContact = () => {};
+  const searchContact = () => {
+    const result = names.filter((name) => {
+      const nameSequece = name.firstName.slice(0, searchText.length);
+      if (nameSequece.toLowerCase() === searchText.toLowerCase()) {
+        return name;
+      }
+    });
+    setSearchResult(result);
+  };
   return (
     <TextField
       id="outlined-basic"
