@@ -12,6 +12,7 @@ import MessageIcon from "@mui/icons-material/Message";
 
 function ChatContactsSearchResult({ result }) {
   const theme = useTheme();
+
   return (
     <List
       sx={{
