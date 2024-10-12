@@ -9,7 +9,9 @@ const Note = require("./models/note")
 const SchoolClass = require("./models/schoolClass")
 const ChatList = require("./models/chatList")
 const Chat = require("./models/chat")
+
 const generateRandomName = require("./utils/generateRandomName")
+const generateRandomLastName = require("./utils/generateRandomLastName")
 
 const bcrypt = require("bcryptjs")
 const crypto = require("crypto"); 
@@ -38,11 +40,13 @@ const createSchoolClass = async (className) => {
   const schoolClass = new SchoolClass({className:className,teacher:teacher})
   // create mock parents 
   const parentNames = generateRandomName(6,10)
+  const lastNames = generateRandomLastName(parentNames.length)
   const mockParents = parentNames.map((name)=>{
+    const lastName = lastNames[parentNames.indexOf(name)]
     return {
       firstName:name,
-      lastName:"Mockparent",
-      mail: `${name.toLowerCase()}.mockparent@mail.com`,
+      lastName:lastName,
+      mail: `${name.toLowerCase()}.${lastName.toLowerCase()}@mail.com`,
       id:crypto.randomUUID()
     }
   })
