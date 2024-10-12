@@ -56,7 +56,7 @@ function ChatContactsSearchResult({ result }) {
       }}
     >
       <Card sx={{ bgcolor: theme.palette.grey[50] }}>
-        {result &&
+        {result.length ? (
           result.map((item, index) => {
             return (
               <ListItem key={index} sx={{ borderBottom: "1px solid grey" }}>
@@ -66,12 +66,17 @@ function ChatContactsSearchResult({ result }) {
                       sx={{ bgcolor: theme.palette.primary.main }}
                     ></Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary={item.firstName} />
+                  <ListItemText primary={item.name} />
                   <MessageIcon sx={{ color: theme.palette.primary.main }} />
                 </ListItemButton>
               </ListItem>
             );
-          })}
+          })
+        ) : (
+          <ListItem>
+            <ListItemText primary={"Ingen kontakt hittad..."} />
+          </ListItem>
+        )}
       </Card>
     </List>
   );

@@ -6,9 +6,13 @@ function ChatContactsSearch({ chatList, userId }) {
   const [searchText, setSearchText] = useState("");
   const [names, setNames] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
+  const [showResult, setShowResult] = useState(false);
 
   useEffect(() => {
-    !searchText && setSearchResult([]);
+    if (!searchText) {
+      setSearchResult([]);
+      setShowResult(false);
+    }
     if (searchText && chatList && userId) {
       const delayDebounceFn = setTimeout(() => {
         searchContact();
@@ -27,7 +31,10 @@ function ChatContactsSearch({ chatList, userId }) {
       const nameArray = chat.participants.filter(
         (user) => user.userId !== userId
       );
-      return { chatId: chat._id, firstName: nameArray[0].firstName };
+      return {
+        chatId: chat._id,
+        name: nameArray[0].firstName + " " + nameArray[0].lastName,
+      };
     });
     setNames(nameList);
   };
@@ -35,12 +42,13 @@ function ChatContactsSearch({ chatList, userId }) {
   //search contact
   const searchContact = () => {
     const result = names.filter((name) => {
-      const nameSequece = name.firstName.slice(0, searchText.length);
+      const nameSequece = name.name.slice(0, searchText.length);
       if (nameSequece.toLowerCase() === searchText.toLowerCase()) {
         return name;
       }
     });
     setSearchResult(result);
+    setShowResult(true);
   };
   return (
     <Box
@@ -60,7 +68,7 @@ function ChatContactsSearch({ chatList, userId }) {
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
       />
-      <ChatContactsSearchResult result={searchResult} />
+      {showResult && <ChatContactsSearchResult result={searchResult} />}
     </Box>
   );
 }
