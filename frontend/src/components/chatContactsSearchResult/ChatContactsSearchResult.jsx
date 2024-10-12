@@ -8,10 +8,42 @@ import {
   Card,
   useTheme,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { ChatContext } from "../../context";
 import MessageIcon from "@mui/icons-material/Message";
 
 function ChatContactsSearchResult({ result }) {
   const theme = useTheme();
+  const navigate = useNavigate();
+  const { chatData } = useContext(ChatContext);
+
+  // find chat from users chat-list
+  const findChatById = (id) => {
+    const foundChat = chatData.chats.filter((chat) => chat._id === id);
+    return foundChat[0];
+  };
+
+  //get data about chating parent
+  const parentData = (chat) => {
+    const parentData = chat.participants.filter(
+      (participant) => participant.userId !== chatData.userData._id
+    );
+    return parentData[0];
+  };
+
+  const handleClick = (chatId) => {
+    const chat = findChatById(chatId);
+    const parent = parentData(chat);
+    navigate(`/chatt/${chatId}`, {
+      state: {
+        ...chat,
+        contact: parent,
+        userData: chatData.userData,
+        chatListId: chatData.chatListId,
+      },
+    });
+  };
 
   return (
     <List
@@ -28,7 +60,7 @@ function ChatContactsSearchResult({ result }) {
           result.map((item, index) => {
             return (
               <ListItem key={index} sx={{ borderBottom: "1px solid grey" }}>
-                <ListItemButton>
+                <ListItemButton onClick={() => handleClick(item.chatId)}>
                   <ListItemAvatar>
                     <Avatar
                       sx={{ bgcolor: theme.palette.primary.main }}
