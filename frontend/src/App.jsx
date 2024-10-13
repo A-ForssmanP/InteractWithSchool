@@ -22,10 +22,12 @@ function App() {
   useEffect(() => {
     if (!isAuthenticated) {
       setNewChatMessages(0);
+      socket.disconnect();
       return setNewInboxMessage(0);
     }
     getNewInboxMessage();
     getChatData();
+    socket.connect();
   }, [isAuthenticated]);
 
   useEffect(() => {
@@ -36,6 +38,18 @@ function App() {
     socket.on("connect", () => {
       console.log("SOCKET CONNECTED");
     });
+    socket.on("disconnect", () => {
+      console.log("SOCKET SHUTDOWN!");
+    });
+
+    return () => {
+      socket.off("connect", () => {
+        console.log("SOCKET CONNECTED");
+      });
+      socket.off("disconnect", () => {
+        console.log("SOCKET SHUTDOWN!");
+      });
+    };
   }, []);
 
   //get number of new inbox messages

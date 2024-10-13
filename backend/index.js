@@ -49,6 +49,7 @@ if(process.env.NODE_ENV === "production") {
 }
 
 const port =process.env.PORT || process.env.SERVER_PORT
+const socketPort = 4000
 const corsOptions = {origin: process.env.VITE_SERVER, optionsSuccessStatus: 200,credentials:true}
 // const userId  = process.env.USER_ID
 
@@ -61,11 +62,16 @@ if(process.env.NODE_ENV !== "production") {
 }
 
 //socket server
-server.listen(4000)
+server.listen(socketPort)
 
-io.on("connection", (socket) => {
-  console.log("A user connected!")
-})
+io.on('connection', (socket) => {
+  console.log('a user connected');
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+});
+
+
 
   app.get('/', (req, res) => {
     res.status(200).send('Welcome to server!')
