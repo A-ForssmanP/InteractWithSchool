@@ -2,8 +2,12 @@ if(process.env.NODE_ENV !== "production") {
   require('dotenv').config()
 }
 const express = require("express")
+const {createServer} = require("node:http")
+const {Server} = require("socket.io")
 const cors = require("cors")
 const app = express()
+const server = createServer(app)
+const io = new Server(server)
 const jwt = require("jsonwebtoken")
 const mongoose = require('mongoose');
 const cookieParser = require("cookie-parser")
@@ -53,7 +57,9 @@ if(process.env.NODE_ENV !== "production") {
   app.use(cors(corsOptions))
 }
 
-
+io.on("connect", (socket) => {
+  console.log("A user connected!")
+})
 
   app.get('/', (req, res) => {
     res.status(200).send('Welcome to server!')
