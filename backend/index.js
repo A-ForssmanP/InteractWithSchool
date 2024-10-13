@@ -57,7 +57,7 @@ if(process.env.NODE_ENV !== "production") {
   app.use(cors(corsOptions))
 }
 
-io.on("connect", (socket) => {
+io.on("connection", (socket) => {
   console.log("A user connected!")
 })
 
