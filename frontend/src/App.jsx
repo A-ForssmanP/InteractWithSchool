@@ -6,7 +6,6 @@ import Menu from "./components/menu/Menu";
 import PagesWrapper from "./components/pagesWrapper/PagesWrapper";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import io from "socket.io-client";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -14,8 +13,6 @@ function App() {
   const [chatData, setChatData] = useState({});
   const [newChatMessages, setNewChatMessages] = useState(0);
 
-  const socket = io();
-  console.log(socket);
   const newInboxCountUrl = `${
     import.meta.env.VITE_EXPRESS_SERVER
   }/inbox/new_messages`;
@@ -27,19 +24,11 @@ function App() {
     }
     getNewInboxMessage();
     getChatData();
-    connectToSocket();
   }, [isAuthenticated]);
 
   useEffect(() => {
     chatData.userData && getNewChatMessages();
   }, [chatData]);
-
-  // connect to socket
-  const connectToSocket = () => {
-    socket.on("connection", () => {
-      console.log("Connected!");
-    });
-  };
 
   //get number of new inbox messages
   const getNewInboxMessage = async () => {
