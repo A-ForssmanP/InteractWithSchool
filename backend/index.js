@@ -7,7 +7,12 @@ const {Server} = require("socket.io")
 const cors = require("cors")
 const app = express()
 const server = createServer(app)
-const io = new Server(server)
+const io = new Server(server, process.env.NODE_ENV !== "production" && {
+  cors: {
+    origin: process.env.VITE_SERVER,
+    credentials:true
+  }
+})
 const jwt = require("jsonwebtoken")
 const mongoose = require('mongoose');
 const cookieParser = require("cookie-parser")
@@ -43,8 +48,6 @@ if(process.env.NODE_ENV === "production") {
 })
 }
 
-
-
 const port =process.env.PORT || process.env.SERVER_PORT
 const corsOptions = {origin: process.env.VITE_SERVER, optionsSuccessStatus: 200,credentials:true}
 // const userId  = process.env.USER_ID
@@ -56,6 +59,9 @@ app.use(cookieParser())
 if(process.env.NODE_ENV !== "production") {
   app.use(cors(corsOptions))
 }
+
+//socket server
+server.listen(4000)
 
 io.on("connection", (socket) => {
   console.log("A user connected!")

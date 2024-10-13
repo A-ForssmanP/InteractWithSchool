@@ -1,5 +1,6 @@
 import Stack from "@mui/material/Stack";
 import theme from "..//themeCustom";
+import { socket } from "./socket";
 import { ThemeProvider } from "@emotion/react";
 import { NewInboxCount, ChatContext } from "./context";
 import Menu from "./components/menu/Menu";
@@ -12,6 +13,7 @@ function App() {
   const [newInboxMessage, setNewInboxMessage] = useState(0);
   const [chatData, setChatData] = useState({});
   const [newChatMessages, setNewChatMessages] = useState(0);
+  const [socketIsConnected, setSocketIsConnected] = useState(socket.connected);
 
   const newInboxCountUrl = `${
     import.meta.env.VITE_EXPRESS_SERVER
@@ -29,6 +31,12 @@ function App() {
   useEffect(() => {
     chatData.userData && getNewChatMessages();
   }, [chatData]);
+
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log("SOCKET CONNECTED");
+    });
+  }, []);
 
   //get number of new inbox messages
   const getNewInboxMessage = async () => {
