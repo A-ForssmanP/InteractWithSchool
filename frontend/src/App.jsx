@@ -34,9 +34,15 @@ function App() {
     chatData.userData && getNewChatMessages();
   }, [chatData]);
 
+  // handling socketIo
   useEffect(() => {
     socket.on("connect", () => {
       console.log("SOCKET CONNECTED");
+      // socket.emit("newMsg", "New Message");
+      socket.on("newMsg", (msg) => {
+        console.log(msg);
+        getChatData();
+      });
     });
     socket.on("disconnect", () => {
       console.log("SOCKET SHUTDOWN!");
@@ -51,6 +57,11 @@ function App() {
       });
     };
   }, []);
+
+  // send message through socket
+  const sendSocketMessage = () => {
+    socket.emit("newMsg", "New Message!");
+  };
 
   //get number of new inbox messages
   const getNewInboxMessage = async () => {
@@ -107,7 +118,13 @@ function App() {
 
   return (
     <ChatContext.Provider
-      value={{ chatData, findChatId, updateChatData, newChatMessages }}
+      value={{
+        chatData,
+        findChatId,
+        updateChatData,
+        newChatMessages,
+        sendSocketMessage,
+      }}
     >
       <NewInboxCount.Provider value={{ newInboxMessage, setNewInboxMessage }}>
         <ThemeProvider theme={theme}>

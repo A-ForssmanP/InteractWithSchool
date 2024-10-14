@@ -23,7 +23,7 @@ function ChatWindow() {
   const [newText, setNewText] = useState("");
   const [messages, setMessages] = useState(state.messages);
   const chatContext = useContext(ChatContext);
-  const { updateChatData } = chatContext;
+  const { chatData, updateChatData, sendSocketMessage } = chatContext;
 
   const putUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/chat/${
     state._id
@@ -45,10 +45,14 @@ function ChatWindow() {
       }
     }
   };
-
+  // console.log(chatData);
   useState(() => {
     state.messages && checkNewEvents();
   }, [state?.messages]);
+
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
 
   useEffect(() => {
     //scroll down to last message
@@ -84,6 +88,8 @@ function ChatWindow() {
       });
       const { chatList } = res.data;
       updateChatData(chatList);
+      // send msg through socket
+      sendSocketMessage();
     } catch (err) {
       console.log(err.message);
     }

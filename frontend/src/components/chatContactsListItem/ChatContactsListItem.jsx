@@ -17,6 +17,12 @@ function ChatContactsListItem({ chat, userData, chatListId }) {
     lastName: "undefined",
   });
   const [newChatEvent, setNewChatEvent] = useState(false);
+  const [navState, setNavState] = useState({
+    ...chat,
+    contact: contact,
+    userData: userData,
+    chatListId: chatListId,
+  });
   const theme = useTheme();
   const navigate = useNavigate();
   const handleClick = () => {
@@ -29,6 +35,17 @@ function ChatContactsListItem({ chat, userData, chatListId }) {
       },
     });
   };
+
+  // useEffect(() => {
+  //   setNavState(() => {
+  //     return {
+  //       ...chat,
+  //       contact: contact,
+  //       userData: userData,
+  //       chatListId: chatListId,
+  //     };
+  //   });
+  // }, [state]);
 
   useEffect(() => {
     chat &&
