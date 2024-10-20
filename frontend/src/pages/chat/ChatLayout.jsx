@@ -1,7 +1,62 @@
+import { useEffect, useState, useContext } from "react";
 import { Outlet } from "react-router-dom";
+import { ChatContext } from "../../context";
 
 function ChatLayout() {
-  return <Outlet />;
+  const [contacts, setContacts] = useState({});
+  const chatContext = useContext(ChatContext);
+  const [list, setList] = useState([]);
+  const [isSelectedChat, setIsSelectedChat] = useState(null);
+
+  useEffect(() => {
+    setContacts(chatContext.chatData);
+  }, [chatContext]);
+
+  useEffect(() => {
+    const addedContact = contacts.chats?.map((chat) => {
+      const contact = chat.participants.filter(
+        (person) => person.userId !== contacts.userData._id
+      );
+      const { firstName, lastName } = contact[0];
+      return {
+        ...chat,
+        contact: { firstName: firstName, lastName: lastName },
+      };
+    });
+    // setList(contacts.chats);
+    setList(addedContact);
+  }, [contacts]);
+
+  useEffect(() => {
+    console.log(list);
+    console.log("KAFFE!!!!");
+  }, [list]);
+  console.log(list);
+  console.log(contacts);
+  console.log(chatContext);
+  console.log(isSelectedChat);
+  console.log("AAAAAAAAAAAAAAAAAAAA");
+
+  const addChat = (chat) => {
+    setList((curr) => {
+      return [...curr, chat];
+    });
+  };
+
+  const selectChatById = (id) => {
+    const chat = list?.filter((chat) => chat._id === id);
+    chat && setIsSelectedChat(chat[0]);
+  };
+
+  const selectChat = (chat) => {
+    setIsSelectedChat(chat);
+  };
+
+  return (
+    <Outlet
+      context={[isSelectedChat, addChat, selectChat, selectChatById, contacts]}
+    />
+  );
 }
 
 export default ChatLayout;

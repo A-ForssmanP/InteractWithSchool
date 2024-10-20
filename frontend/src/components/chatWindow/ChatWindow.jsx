@@ -9,30 +9,40 @@ import {
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useState, useRef, useEffect, useContext } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import {
+  useNavigate,
+  useLocation,
+  useOutletContext,
+  useParams,
+} from "react-router-dom";
 import axios from "axios";
 import ButtonBack from "../buttonBack/ButtonBack";
 import ChatWindowMessage from "../chatWindowMessage/ChatWindowMessage";
 import { ChatContext } from "../../context";
 
 function ChatWindow() {
+  const data = useOutletContext()[0];
+  const selectChatById = useOutletContext()[3];
+  const contact = useOutletContext()[4];
+  console.log(data);
   const theme = useTheme();
   const { state } = useLocation();
   const navigate = useNavigate();
+  const { id } = useParams();
   const lastMessageRef = useRef(null);
   const [newText, setNewText] = useState("");
-  const [messages, setMessages] = useState(state.messages);
+  const [messages, setMessages] = useState(data?.messages || []);
   const chatContext = useContext(ChatContext);
   const { chatData, updateChatData, sendSocketMessage } = chatContext;
 
   const putUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/chat/${
-    state._id
+    data?._id
   }/userShownNewEvent`;
 
   //check if user is shown new-events
   const checkNewEvents = async () => {
-    const userIsUpdated = state.userShownNewEvent.some(
-      (id) => id.toString() === state.userData._id
+    const userIsUpdated = data.userShownNewEvent.some(
+      (id) => id.toString() === contact.userData._id
     );
     if (!userIsUpdated) {
       try {
@@ -45,14 +55,26 @@ function ChatWindow() {
       }
     }
   };
-  // console.log(chatData);
+  console.log(data);
+  console.log(contact);
+
   useState(() => {
-    state.messages && checkNewEvents();
-  }, [state?.messages]);
+    data?.messages && checkNewEvents();
+    data?.messages && setMessages(data.messages);
+    console.log("ADSADS");
+  }, [data]);
 
   useEffect(() => {
-    console.log(state);
-  }, [state]);
+    !data && selectChatById(id);
+    console.log(data.messages);
+    setMessages(data.messages);
+    console.log("!!!!!!!!!!!!!!!!!");
+  }, [contact]);
+  !data && selectChatById(id);
+
+  // useEffect(() => {
+  //   console.log(state);
+  // }, [state]);
 
   useEffect(() => {
     //scroll down to last message
@@ -71,17 +93,17 @@ function ChatWindow() {
     }${date.getMinutes()}`;
     const newMessage = {
       id: crypto.randomUUID(),
-      author: state.userData,
+      author: contact.userData,
       text: msg,
       sendTime: currentTime,
-      chatListId: state.chatListId,
+      chatListId: contact.chatListId,
     };
     setMessages((curr) => {
       return [...curr, newMessage];
     });
     setNewText("");
     //save message to db and update chatData state
-    const putUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/chat/${state._id}`;
+    const putUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/chat/${data._id}`;
     try {
       const res = await axios.put(putUrl, newMessage, {
         withCredentials: true,
@@ -102,100 +124,105 @@ function ChatWindow() {
   };
 
   return (
-    <Box
-      height={{ xs: "calc(100dvh - 36px)", md: "100dvh" }}
-      display="flex"
-      flexDirection="column"
-      sx={{ maxWidth: { md: 900 }, maxHeight: 900, margin: "0 auto" }}
-    >
+    data && (
       <Box
-        sx={{
-          display: "flex",
-          flexDirection: { xs: "column-reverse", sm: "row" },
-          justifyContent: { sm: "space-between" },
-          borderBottom: "1px solid lightgrey",
-          p: 1,
-          gap: { xs: 1, sm: 0 },
-        }}
+        height={{ xs: "calc(100dvh - 36px)", md: "100dvh" }}
+        display="flex"
+        flexDirection="column"
+        sx={{ maxWidth: { md: 900 }, maxHeight: 900, margin: "0 auto" }}
       >
-        <div
-          style={{
+        <Box
+          sx={{
             display: "flex",
-            alignItems: "baseline",
-            gap: 6,
+            flexDirection: { xs: "column-reverse", sm: "row" },
+            justifyContent: { sm: "space-between" },
+            borderBottom: "1px solid lightgrey",
+            p: 1,
+            gap: { xs: 1, sm: 0 },
           }}
         >
-          <Avatar sx={{ bgcolor: theme.palette.secondary.light }} />
-          <Typography>
-            {state.contact.firstName + " " + state.contact.lastName}
-          </Typography>
-        </div>
-        <ButtonBack handleClick={() => navigate("..")} />
-      </Box>
-      <Box
-        sx={{
-          flex: 1,
-          maxHeight: { xs: "calc(100% - 95.33px)", sm: "calc(100% - 58.33px)" },
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <div
-          style={{
+          <div
+            style={{
+              display: "flex",
+              alignItems: "baseline",
+              gap: 6,
+            }}
+          >
+            <Avatar sx={{ bgcolor: theme.palette.secondary.light }} />
+            <Typography>
+              {data.contact.firstName + " " + data.contact.lastName}
+            </Typography>
+          </div>
+          <ButtonBack handleClick={() => navigate("..")} />
+        </Box>
+        <Box
+          sx={{
             flex: 1,
-            height: "calc(100% - 56px)",
-          }}
-        >
-          <List
-            sx={{
-              height: "100%",
-              flexShrink: 1,
-              maxHeight: "100%",
-              overflow: "auto",
-              scrollbarColor: "lightgrey white",
-            }}
-          >
-            {messages.map((msg) => {
-              return (
-                <ChatWindowMessage
-                  key={msg.id}
-                  message={msg}
-                  userData={state.userData}
-                />
-              );
-            })}
-            <div ref={lastMessageRef}></div>
-          </List>
-        </div>
-        <form
-          onSubmit={handleSubmit}
-          style={{
+            maxHeight: {
+              xs: "calc(100% - 95.33px)",
+              sm: "calc(100% - 58.33px)",
+            },
             display: "flex",
-            alignItems: "baseline",
-            justifyContent: "space-between",
+            flexDirection: "column",
           }}
         >
-          <TextField
-            id="outlined-textarea"
-            value={newText}
-            onChange={(e) => setNewText(e.target.value)}
-            placeholder="Skriv ett meddelande"
-            multiline
-            fullWidth
-          />
-          <Button
-            type="submit"
-            variant="contained"
-            sx={{
-              marginTop: "auto",
-              height: 56,
+          <div
+            style={{
+              flex: 1,
+              height: "calc(100% - 56px)",
             }}
           >
-            <SendIcon />
-          </Button>
-        </form>
+            <List
+              sx={{
+                height: "100%",
+                flexShrink: 1,
+                maxHeight: "100%",
+                overflow: "auto",
+                scrollbarColor: "lightgrey white",
+              }}
+            >
+              {messages?.map((msg) => {
+                return (
+                  <ChatWindowMessage
+                    key={msg.id}
+                    message={msg}
+                    userData={contact.userData}
+                  />
+                );
+              })}
+              <div ref={lastMessageRef}></div>
+            </List>
+          </div>
+          <form
+            onSubmit={handleSubmit}
+            style={{
+              display: "flex",
+              alignItems: "baseline",
+              justifyContent: "space-between",
+            }}
+          >
+            <TextField
+              id="outlined-textarea"
+              value={newText}
+              onChange={(e) => setNewText(e.target.value)}
+              placeholder="Skriv ett meddelande"
+              multiline
+              fullWidth
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{
+                marginTop: "auto",
+                height: 56,
+              }}
+            >
+              <SendIcon />
+            </Button>
+          </form>
+        </Box>
       </Box>
-    </Box>
+    )
   );
 }
 

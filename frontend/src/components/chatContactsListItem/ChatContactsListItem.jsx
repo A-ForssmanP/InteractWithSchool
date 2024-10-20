@@ -11,7 +11,13 @@ import {
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function ChatContactsListItem({ chat, userData, chatListId }) {
+function ChatContactsListItem({
+  chat,
+  userData,
+  chatListId,
+  addChat,
+  selectChatById,
+}) {
   const [contact, setContact] = useState({
     firstName: "undefined",
     lastName: "undefined",
@@ -26,13 +32,14 @@ function ChatContactsListItem({ chat, userData, chatListId }) {
   const theme = useTheme();
   const navigate = useNavigate();
   const handleClick = () => {
+    selectChatById(chat._id);
     navigate(`./${chat._id}`, {
-      state: {
-        ...chat,
-        contact: contact,
-        userData: userData,
-        chatListId: chatListId,
-      },
+      // state: {
+      //   ...chat,
+      //   contact: contact,
+      //   userData: userData,
+      //   chatListId: chatListId,
+      // },
     });
   };
 
@@ -59,6 +66,15 @@ function ChatContactsListItem({ chat, userData, chatListId }) {
       });
     checkNewEvents();
   }, [chat]);
+
+  // useEffect(() => {
+  //   addChat({
+  //     ...chat,
+  //     contact: contact,
+  //     userData: userData,
+  //     chatListId: chatListId,
+  //   });
+  // }, [contact]);
 
   //check if user is shown new-events
   const checkNewEvents = () => {
