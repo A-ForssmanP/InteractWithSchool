@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { ChatContext } from "../../context";
 
 function ChatLayout() {
@@ -7,10 +7,15 @@ function ChatLayout() {
   const chatContext = useContext(ChatContext);
   const [list, setList] = useState([]);
   const [isSelectedChat, setIsSelectedChat] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setContacts(chatContext.chatData);
+    setContacts({ ...chatContext.chatData });
   }, [chatContext]);
+  console.log(isSelectedChat);
+  useEffect(() => {
+    isSelectedChat && navigate(`./${isSelectedChat._id}`);
+  }, [isSelectedChat]);
 
   useEffect(() => {
     const addedContact = contacts.chats?.map((chat) => {
@@ -28,14 +33,16 @@ function ChatLayout() {
   }, [contacts]);
 
   useEffect(() => {
-    console.log(list);
-    console.log("KAFFE!!!!");
+    // console.log(list);
+    // console.log("KAFFE!!!!");
+    // console.log(isSelectedChat._id);
+    isSelectedChat && selectChatById(isSelectedChat._id);
   }, [list]);
-  console.log(list);
-  console.log(contacts);
-  console.log(chatContext);
-  console.log(isSelectedChat);
-  console.log("AAAAAAAAAAAAAAAAAAAA");
+  // console.log(list);
+  // console.log(contacts);
+  // console.log(chatContext);
+  // console.log(isSelectedChat);
+  // console.log("AAAAAAAAAAAAAAAAAAAA");
 
   const addChat = (chat) => {
     setList((curr) => {

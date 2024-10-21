@@ -24,7 +24,7 @@ function ChatWindow() {
   const data = useOutletContext()[0];
   const selectChatById = useOutletContext()[3];
   const contact = useOutletContext()[4];
-  console.log(data);
+  // console.log(data);
   const theme = useTheme();
   const { state } = useLocation();
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ function ChatWindow() {
 
   //check if user is shown new-events
   const checkNewEvents = async () => {
-    const userIsUpdated = data.userShownNewEvent.some(
+    const userIsUpdated = data?.userShownNewEvent.some(
       (id) => id.toString() === contact.userData._id
     );
     if (!userIsUpdated) {
@@ -55,22 +55,38 @@ function ChatWindow() {
       }
     }
   };
-  console.log(data);
-  console.log(contact);
 
-  useState(() => {
-    data?.messages && checkNewEvents();
-    data?.messages && setMessages(data.messages);
-    console.log("ADSADS");
-  }, [data]);
+  console.log(data);
 
   useEffect(() => {
-    !data && selectChatById(id);
-    console.log(data.messages);
-    setMessages(data.messages);
-    console.log("!!!!!!!!!!!!!!!!!");
-  }, [contact]);
-  !data && selectChatById(id);
+    if (!data) {
+      navigate("../");
+      selectChatById(id);
+      console.log("hejdå");
+    }
+  }, [data]);
+
+  // console.log(contact);
+
+  // useState(() => {
+  //   data?.messages && checkNewEvents();
+  //   setMessages([...data.messages]);
+  //   console.log("ADSADS");
+  // }, [useOutletContext()[0]]);
+
+  useEffect(() => {
+    console.log("SNÄLLA");
+    data && checkNewEvents();
+    data && setMessages(data.messages);
+  }, [useOutletContext()[0]]);
+
+  // useEffect(() => {
+  //   !data && selectChatById(id);
+  //   console.log(data.messages);
+  //   setMessages(data.messages);
+  //   console.log("!!!!!!!!!!!!!!!!!");
+  // }, [contact]);
+  // !data && selectChatById(id);
 
   // useEffect(() => {
   //   console.log(state);
