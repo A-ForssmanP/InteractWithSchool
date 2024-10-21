@@ -24,7 +24,6 @@ function ChatWindow() {
   const data = useOutletContext()[0];
   const selectChatById = useOutletContext()[3];
   const contact = useOutletContext()[4];
-  // console.log(data);
   const theme = useTheme();
   const { state } = useLocation();
   const navigate = useNavigate();
@@ -34,7 +33,6 @@ function ChatWindow() {
   const [messages, setMessages] = useState(data?.messages || []);
   const chatContext = useContext(ChatContext);
   const { chatData, updateChatData, sendSocketMessage } = chatContext;
-
   const putUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/chat/${
     data?._id
   }/userShownNewEvent`;
@@ -56,13 +54,10 @@ function ChatWindow() {
     }
   };
 
-  console.log(data);
-
   useEffect(() => {
     if (!data) {
-      navigate("../");
       selectChatById(id);
-      console.log("hejdå");
+      navigate("../", { state: { id } });
     }
   }, [data]);
 
@@ -75,7 +70,6 @@ function ChatWindow() {
   // }, [useOutletContext()[0]]);
 
   useEffect(() => {
-    console.log("SNÄLLA");
     data && checkNewEvents();
     data && setMessages(data.messages);
   }, [useOutletContext()[0]]);
