@@ -42,19 +42,9 @@ function ChatLayout() {
     isSelectedChat && selectChatById(isSelectedChat._id);
   }, [list]);
 
-  const addChat = (chat) => {
-    setList((curr) => {
-      return [...curr, chat];
-    });
-  };
-
   const selectChatById = (id) => {
     const chat = list?.filter((chat) => chat._id === id);
     chat && setIsSelectedChat(chat[0]);
-  };
-
-  const selectChat = (chat) => {
-    setIsSelectedChat(chat);
   };
 
   return <Outlet context={[isSelectedChat, selectChatById, contacts]} />;
