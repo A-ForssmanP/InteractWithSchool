@@ -34,7 +34,7 @@ function ChatLayout() {
         contact: { firstName: firstName, lastName: lastName },
       };
     });
-    // setList(contacts.chats);
+
     setList(addedContact);
   }, [contacts]);
 
@@ -57,11 +57,7 @@ function ChatLayout() {
     setIsSelectedChat(chat);
   };
 
-  return (
-    <Outlet
-      context={[isSelectedChat, addChat, selectChat, selectChatById, contacts]}
-    />
-  );
+  return <Outlet context={[isSelectedChat, selectChatById, contacts]} />;
 }
 
 export default ChatLayout;

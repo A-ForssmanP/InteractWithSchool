@@ -9,12 +9,7 @@ import {
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useState, useRef, useEffect, useContext } from "react";
-import {
-  useNavigate,
-  useLocation,
-  useOutletContext,
-  useParams,
-} from "react-router-dom";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import axios from "axios";
 import ButtonBack from "../buttonBack/ButtonBack";
 import ChatWindowMessage from "../chatWindowMessage/ChatWindowMessage";
@@ -22,17 +17,16 @@ import { ChatContext } from "../../context";
 
 function ChatWindow() {
   const data = useOutletContext()[0];
-  const selectChatById = useOutletContext()[3];
-  const contact = useOutletContext()[4];
+  const selectChatById = useOutletContext()[1];
+  const contact = useOutletContext()[2];
   const theme = useTheme();
-  const { state } = useLocation();
   const navigate = useNavigate();
   const { id } = useParams();
   const lastMessageRef = useRef(null);
   const [newText, setNewText] = useState("");
   const [messages, setMessages] = useState(data?.messages || []);
   const chatContext = useContext(ChatContext);
-  const { chatData, updateChatData, sendSocketMessage } = chatContext;
+  const { updateChatData, sendSocketMessage } = chatContext;
   const putUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/chat/${
     data?._id
   }/userShownNewEvent`;
@@ -61,30 +55,10 @@ function ChatWindow() {
     }
   }, [data]);
 
-  // console.log(contact);
-
-  // useState(() => {
-  //   data?.messages && checkNewEvents();
-  //   setMessages([...data.messages]);
-  //   console.log("ADSADS");
-  // }, [useOutletContext()[0]]);
-
   useEffect(() => {
     data && checkNewEvents();
     data && setMessages(data.messages);
   }, [useOutletContext()[0]]);
-
-  // useEffect(() => {
-  //   !data && selectChatById(id);
-  //   console.log(data.messages);
-  //   setMessages(data.messages);
-  //   console.log("!!!!!!!!!!!!!!!!!");
-  // }, [contact]);
-  // !data && selectChatById(id);
-
-  // useEffect(() => {
-  //   console.log(state);
-  // }, [state]);
 
   useEffect(() => {
     //scroll down to last message

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ChatContactsListItem from "../chatContactsListItem/ChatContactsListItem";
 import { List } from "@mui/material";
 
-function ChatContactsList({ chatData, addChat, selectChatById }) {
+function ChatContactsList({ chatData, selectChatById }) {
   const [chatListData, setChatListData] = useState([]);
 
   useEffect(() => {
@@ -22,8 +22,6 @@ function ChatContactsList({ chatData, addChat, selectChatById }) {
             key={chat._id}
             chat={chat}
             userData={chatData.userData}
-            chatListId={chatData.chatListId}
-            addChat={addChat}
             selectChatById={selectChatById}
           />
         );

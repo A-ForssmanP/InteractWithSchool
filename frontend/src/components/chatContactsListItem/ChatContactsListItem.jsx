@@ -11,48 +11,18 @@ import {
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function ChatContactsListItem({
-  chat,
-  userData,
-  chatListId,
-  addChat,
-  selectChatById,
-}) {
+function ChatContactsListItem({ chat, userData, selectChatById }) {
   const [contact, setContact] = useState({
     firstName: "undefined",
     lastName: "undefined",
   });
   const [newChatEvent, setNewChatEvent] = useState(false);
-  const [navState, setNavState] = useState({
-    ...chat,
-    contact: contact,
-    userData: userData,
-    chatListId: chatListId,
-  });
   const theme = useTheme();
   const navigate = useNavigate();
   const handleClick = () => {
     selectChatById(chat._id);
-    navigate(`./${chat._id}`, {
-      // state: {
-      //   ...chat,
-      //   contact: contact,
-      //   userData: userData,
-      //   chatListId: chatListId,
-      // },
-    });
+    navigate(`./${chat._id}`);
   };
-
-  // useEffect(() => {
-  //   setNavState(() => {
-  //     return {
-  //       ...chat,
-  //       contact: contact,
-  //       userData: userData,
-  //       chatListId: chatListId,
-  //     };
-  //   });
-  // }, [state]);
 
   useEffect(() => {
     chat &&
@@ -66,15 +36,6 @@ function ChatContactsListItem({
       });
     checkNewEvents();
   }, [chat]);
-
-  // useEffect(() => {
-  //   addChat({
-  //     ...chat,
-  //     contact: contact,
-  //     userData: userData,
-  //     chatListId: chatListId,
-  //   });
-  // }, [contact]);
 
   //check if user is shown new-events
   const checkNewEvents = () => {
