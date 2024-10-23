@@ -1,18 +1,10 @@
-import {
-  Box,
-  Avatar,
-  useTheme,
-  Typography,
-  Button,
-  TextField,
-  List,
-} from "@mui/material";
-import SendIcon from "@mui/icons-material/Send";
+import { Box, Avatar, useTheme, Typography, List } from "@mui/material";
 import { useState, useRef, useEffect, useContext } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import axios from "axios";
 import ButtonBack from "../buttonBack/ButtonBack";
 import ChatWindowMessage from "../chatWindowMessage/ChatWindowMessage";
+import ChatWindowTextInput from "../chatWindowTextInput/ChatWindowTextInput";
 import { ChatContext } from "../../context";
 
 function ChatWindow() {
@@ -23,7 +15,6 @@ function ChatWindow() {
   const navigate = useNavigate();
   const { id } = useParams();
   const lastMessageRef = useRef(null);
-  const [newText, setNewText] = useState("");
   const [messages, setMessages] = useState(data?.messages || []);
   const chatContext = useContext(ChatContext);
   const { updateChatData, sendSocketMessage } = chatContext;
@@ -66,7 +57,7 @@ function ChatWindow() {
   }, [messages]);
 
   //handle send message
-  const handleSend = async (msg) => {
+  const handleSend = async (msg, setNewText) => {
     const date = new Date();
     //check if minutes is a one digit number,if so add a 0 to the start of currentTime-variable for minutes
     const minutesIstwoDigit = date.getMinutes().toString().length > 1;
@@ -99,12 +90,6 @@ function ChatWindow() {
     } catch (err) {
       console.log(err.message);
     }
-  };
-
-  //handle submiting a message
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    newText.length && handleSend(newText);
   };
 
   return (
@@ -177,33 +162,7 @@ function ChatWindow() {
               <div ref={lastMessageRef}></div>
             </List>
           </div>
-          <form
-            onSubmit={handleSubmit}
-            style={{
-              display: "flex",
-              alignItems: "baseline",
-              justifyContent: "space-between",
-            }}
-          >
-            <TextField
-              id="outlined-textarea"
-              value={newText}
-              onChange={(e) => setNewText(e.target.value)}
-              placeholder="Skriv ett meddelande"
-              multiline
-              fullWidth
-            />
-            <Button
-              type="submit"
-              variant="contained"
-              sx={{
-                marginTop: "auto",
-                height: 56,
-              }}
-            >
-              <SendIcon />
-            </Button>
-          </form>
+          <ChatWindowTextInput handleSend={handleSend} />
         </Box>
       </Box>
     )
