@@ -8,41 +8,18 @@ import {
   Card,
   useTheme,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { ChatContext } from "../../context";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import MessageIcon from "@mui/icons-material/Message";
 
 function ChatContactsSearchResult({ result }) {
   const theme = useTheme();
   const navigate = useNavigate();
-  const { chatData } = useContext(ChatContext);
-
-  // find chat from users chat-list
-  const findChatById = (id) => {
-    const foundChat = chatData.chats.filter((chat) => chat._id === id);
-    return foundChat[0];
-  };
-
-  //get data about chating parent
-  const parentData = (chat) => {
-    const parentData = chat.participants.filter(
-      (participant) => participant.userId !== chatData.userData._id
-    );
-    return parentData[0];
-  };
+  const outletContext = useOutletContext();
+  const selectChatById = outletContext[1];
 
   const handleClick = (chatId) => {
-    const chat = findChatById(chatId);
-    const parent = parentData(chat);
-    navigate(`/chatt/${chatId}`, {
-      state: {
-        ...chat,
-        contact: parent,
-        userData: chatData.userData,
-        chatListId: chatData.chatListId,
-      },
-    });
+    selectChatById(chatId);
+    navigate(`/chatt/${chatId}`);
   };
 
   return (
