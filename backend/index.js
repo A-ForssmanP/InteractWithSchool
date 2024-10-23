@@ -350,6 +350,8 @@ io.on('connection', (socket) => {
     if(!isParticipantUser) {
       throw new Error("Invalid user")
     }
+    // get id of the resiever user 
+    const resiverUser = chat.participants.filter(user => user.userId.toString() !== userId)[0]
     //update message field on the chat document
     chat.messages.push(messageData)
     //update userShownNewEvent field on the chat document
@@ -360,6 +362,13 @@ io.on('connection', (socket) => {
     chatList.chats.remove(chat._id)
     chatList.chats.unshift(chat)
     chatList.save()
+    // update chat to be first in chats array of the resiever user chatList document
+    const resieverChatList = await ChatList.findOne({userId:resiverUser.userId})
+    if(resieverChatList) {
+    resieverChatList.chats.remove(chat._id)
+    resieverChatList.chats.unshift(chat)
+    resieverChatList.save()
+    }
     const chatListData = {chats:chatList.chats,userData:chatList.userId,chatListId:chatList._id}
     //send back respons
     res.status(200).json({"chatList":chatListData})
