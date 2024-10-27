@@ -86,7 +86,10 @@ function ChatWindow() {
       const { chatList } = res.data;
       updateChatData(chatList);
       // send msg through socket
-      sendSocketMessage();
+      const resieverUser = data.participants.filter(
+        (user) => user.userId !== contact.userData._id
+      )[0];
+      sendSocketMessage(resieverUser.userId);
     } catch (err) {
       console.log(err.message);
     }

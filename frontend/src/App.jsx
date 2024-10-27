@@ -32,13 +32,13 @@ function App() {
 
   useEffect(() => {
     chatData.userData && getNewChatMessages();
+    chatData.userData?._id && socket.emit("userId", chatData.userData._id);
   }, [chatData]);
 
   // handling socketIo
   useEffect(() => {
     socket.on("connect", () => {
       console.log("SOCKET CONNECTED");
-      // socket.emit("newMsg", "New Message");
       socket.on("newMsg", (msg) => {
         console.log(msg);
         getChatData();
@@ -59,8 +59,8 @@ function App() {
   }, []);
 
   // send message through socket
-  const sendSocketMessage = () => {
-    socket.emit("newMsg", "New Message!");
+  const sendSocketMessage = (roomId) => {
+    socket.emit("newMsg", roomId, "New Message!");
   };
 
   //get number of new inbox messages
