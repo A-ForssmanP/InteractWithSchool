@@ -2,8 +2,11 @@ import { Box } from "@mui/material";
 import { useOutletContext } from "react-router-dom";
 import ChatContactsList from "../../components/chatContactsList/ChatContactsList";
 import ChatContactsSearch from "../../components/chatContactsSearch/ChatContactsSearch";
+import { Alert } from "@mui/material";
+import { useState } from "react";
 
 function ChatContacts() {
+  const [showAlert, setShowAlert] = useState(true);
   const outletContext = useOutletContext();
 
   return (
@@ -17,6 +20,17 @@ function ChatContacts() {
         chatList={outletContext[2].chats}
         userId={outletContext[2]?.userData?._id}
       />
+      {showAlert && (
+        <Alert
+          severity="info"
+          onClose={() => {
+            setShowAlert(false);
+          }}
+        >
+          Testa att live-chatta genom att logga in med 2 användare på varsin
+          enhet eller använd olika webbläsare.
+        </Alert>
+      )}
       <div
         style={{
           flex: "1",
