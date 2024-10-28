@@ -7,7 +7,9 @@ const {Server} = require("socket.io")
 const cors = require("cors")
 const app = express()
 const server = createServer(app)
-const io = new Server(server, process.env.NODE_ENV !== "production" && {
+const io = new Server(server, process.env.NODE_ENV === "production" ?{
+  cleanupEmptyChildNamespaces: true,
+} :  {
   cors: {
     origin: process.env.VITE_SERVER,
     credentials:true
