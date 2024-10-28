@@ -497,7 +497,7 @@ io.on('connection', (socket) => {
   })
 
   // for render to health checks
-  app.get("//healthz", (req,res) => {
+  app.get("/healthz", (req,res) => {
     res.status(200).send()
   })
 
