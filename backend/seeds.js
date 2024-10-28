@@ -7,9 +7,14 @@ const InboxMessage = require("./models/inboxMessage")
 const Schedule = require("./models/schedule")
 const Note = require("./models/note")
 const SchoolClass = require("./models/schoolClass")
+const ChatList = require("./models/chatList")
+const Chat = require("./models/chat")
+
 const generateRandomName = require("./utils/generateRandomName")
+const generateRandomLastName = require("./utils/generateRandomLastName")
 
 const bcrypt = require("bcryptjs")
+const crypto = require("crypto"); 
 
 //mongodb+srv://afpdev91:<password>@cluster0.tnv2l.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 
@@ -35,11 +40,14 @@ const createSchoolClass = async (className) => {
   const schoolClass = new SchoolClass({className:className,teacher:teacher})
   // create mock parents 
   const parentNames = generateRandomName(6,10)
+  const lastNames = generateRandomLastName(parentNames.length)
   const mockParents = parentNames.map((name)=>{
+    const lastName = lastNames[parentNames.indexOf(name)]
     return {
       firstName:name,
-      lastName:"Mockparent",
-      mail: `${name.toLowerCase()}.mockparent@mail.com`,
+      lastName:lastName,
+      mail: `${name.toLowerCase()}.${lastName.toLowerCase()}@mail.com`,
+      id:crypto.randomUUID()
     }
   })
   schoolClass.parents.push(...mockParents)
@@ -266,10 +274,64 @@ const connectUserToClass = async () => {
     for(let student of populatedStudents.students){
       //find student class
       const studentClass = await SchoolClass.findById(student.schoolClass)
-      //push users firstName to parents array
-      studentClass["parents"].push({firstName:user.firstName,lastName:user.lastName})
+      //push users firstName and lastName to parents array
+      studentClass["parents"].push({firstName:user.firstName,lastName:user.lastName,_id:user})
       await studentClass.save()
     }
+  }
+}
+
+// establish chat between user and parents in classes the user is connected to
+const chatEstablish = async () => {
+  try{ 
+    // get all users
+    const users = await User.find().populate("students")
+    // chatlist for every user
+    for(let user of users) {
+      const chatList = new ChatList({userId:user})
+     await chatList.save()
+    }
+    // chat between every user
+    for(let i=0; i<users.length-1;i++) {
+      for(let j=i+1; j<users.length;j++) {
+        const firstChatList = await ChatList.findOne({userId:users[i]})
+        const secondChatList = await ChatList.findOne({userId:users[j]})
+        const firstUser = {userId:users[i],firstName:users[i].firstName,lastName:users[i].lastName}
+        const secondUser = {userId:users[j],firstName:users[j].firstName,lastName:users[j].lastName}
+        const chat = new Chat({participants:[firstUser,secondUser]})
+        await chat.save()
+        firstChatList.chats.push(chat)
+        secondChatList.chats.push(chat)
+        await secondChatList.save()
+        await firstChatList.save()
+      }
+    }
+    //chat between user and parents in same school-class
+    for(let user of users) {
+      const chatList = await ChatList.findOne({userId:user._id})
+      const users = await User.find()
+      // get id of every schollclass
+      const ids = user.students.map((student) => {
+        return student.schoolClass
+      })
+      for(let id of ids) {
+        const schoolClass = await SchoolClass.findById(id)
+        for(let parent of schoolClass.parents) {
+          //check if user id and parent id are not the same and parent are not a user that allready have chat established
+          if(parent._id.toString() !== user._id.toString() && !users.some(user => user._id.toString() === parent._id.toString())) {
+            const ownUser = {firstName:user.firstName,lastName:user.lastName,userId:user}
+            const parentUser = {firstName:parent.firstName,lastName:parent.lastName,userId:parent}
+            const chat = new Chat({participants: [ownUser,parentUser]})
+          // const chat = new Chat({participants: [user,parent]})
+            await chat.save()
+            chatList.chats.push(chat)
+          }
+        }
+      }
+      await chatList.save()
+    }
+  } catch(err) {
+    console.log(err)
   }
 }
 
@@ -282,6 +344,7 @@ const connectUserToClass = async () => {
   await insertNote()
   await putStudentInAClass()
   await connectUserToClass()
+  await chatEstablish()
   console.log("Data inserted to DB!")
  }
 

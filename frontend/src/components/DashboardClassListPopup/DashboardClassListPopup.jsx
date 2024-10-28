@@ -1,10 +1,14 @@
 import { Card, Button } from "@mui/material";
 import MessageIcon from "@mui/icons-material/Message";
 import AlertInfo from "../alertInfo/AlertInfo";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { ChatContext } from "../../context";
 
 function DashboardClassListPopup({ closePopup, content }) {
   const [showAlertInfo, setShowAlertInfo] = useState(false);
+  const navigate = useNavigate();
+  const { findChatId, chatData } = useContext(ChatContext);
 
   // handle show/hide alert-info
   const handleAlertInfo = () => {
@@ -14,6 +18,27 @@ function DashboardClassListPopup({ closePopup, content }) {
         setShowAlertInfo(false);
       }, 4000);
     }
+  };
+
+  // find chat from users chat-list
+  const findChatById = (id) => {
+    const foundChat = chatData.chats.filter((chat) => chat._id === id);
+    return foundChat[0];
+  };
+
+  // handle click of chat-icon button
+  const handleChatButtonClick = () => {
+    handleAlertInfo();
+    const chatId = findChatId(content._id);
+    const chat = findChatById(chatId);
+    navigate(`/chatt/${chatId}`, {
+      state: {
+        ...chat,
+        contact: content,
+        userData: chatData.userData,
+        chatListId: chatData.chatListId,
+      },
+    });
   };
 
   return (
@@ -53,7 +78,7 @@ function DashboardClassListPopup({ closePopup, content }) {
           }}
         >
           <div>
-            <Button onClick={handleAlertInfo}>
+            <Button onClick={handleChatButtonClick}>
               <MessageIcon />
             </Button>
             <p style={{ textAlign: "center" }}>Chatta</p>

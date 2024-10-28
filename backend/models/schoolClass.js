@@ -22,7 +22,8 @@ const schoolClassSchema = new Schema({
             type: String,
             required: true,
         },
-        mail: String
+        mail: String,
+        id: String
         }]
 })
 

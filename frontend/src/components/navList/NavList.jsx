@@ -6,7 +6,7 @@ import CancelScheduleSendIcon from "@mui/icons-material/CancelScheduleSend";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import MessageIcon from "@mui/icons-material/Message";
 import { Badge } from "@mui/material";
-import { NewInboxCount } from "../../context";
+import { NewInboxCount, ChatContext } from "../../context";
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -14,6 +14,7 @@ function NavList({ closeMenu, isAuthenticated }) {
   const [isSelected, setIsSelected] = useState("Hem");
   const navigate = useNavigate();
   const newMessage = useContext(NewInboxCount);
+  const { newChatMessages } = useContext(ChatContext);
 
   const listItems = [
     { id: crypto.randomUUID(), text: "Hem", ikon: <HomeIcon />, navPath: "/" },
@@ -33,7 +34,14 @@ function NavList({ closeMenu, isAuthenticated }) {
     {
       id: crypto.randomUUID(),
       text: "Chatt",
-      ikon: <MessageIcon />,
+      ikon: (
+        <Badge
+          badgeContent={isAuthenticated ? newChatMessages : 0}
+          color="error"
+        >
+          <MessageIcon />
+        </Badge>
+      ),
       navPath: "chatt",
     },
     {
