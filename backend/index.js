@@ -61,8 +61,8 @@ if(process.env.NODE_ENV !== "production") {
   app.use(cors(corsOptions))
 }
 
-//socket server
-server.listen(port)
+// //socket server
+// server.listen(socketPort)
 
 io.on('connection', (socket) => {
   console.log('a user connected');
@@ -507,4 +507,6 @@ io.on('connection', (socket) => {
 
 app.listen(port,()=>{
 console.log(`SERVER IS UP AND RUNNING ON PORT ${port}!`)
+//socket server
+server.listen(port)
 })
