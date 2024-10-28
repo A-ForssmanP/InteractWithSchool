@@ -62,7 +62,7 @@ if(process.env.NODE_ENV !== "production") {
 }
 
 //socket server
-server.listen(socketPort)
+server.listen(port)
 
 io.on('connection', (socket) => {
   console.log('a user connected');
