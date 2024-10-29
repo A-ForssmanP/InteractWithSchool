@@ -510,5 +510,7 @@ io.on('connection', (socket) => {
 app.listen(port,()=>{
 console.log(`SERVER IS UP AND RUNNING ON PORT ${port}!`)
 //socket server
-server.listen(socketPort)
+server.listen(socketPort,() => {
+  console.log(`SOCKET SERVER LISTENING ON PORT ${socketPort}`)
+})
 })
