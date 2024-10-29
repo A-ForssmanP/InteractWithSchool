@@ -54,8 +54,8 @@ if(process.env.NODE_ENV === "production") {
 })
 }
 
-const port =process.env.PORT || process.env.SERVER_PORT
-const socketPort = 4000
+const port = process.env.PORT || process.env.SERVER_PORT
+const socketPort = process.env.SERVER_PORT || 4000
 const corsOptions = {origin: process.env.VITE_SERVER, optionsSuccessStatus: 200,credentials:true}
 // const userId  = process.env.USER_ID
 
