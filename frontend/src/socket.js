@@ -1,6 +1,6 @@
 import {io} from "socket.io-client"
 
-const URL = process.env.NODE_ENV === 'production' ? "https://interactwithschool.onrender.com/" : `${import.meta.env.VITE_SOCKET_SERVER}`
+const URL = process.env.NODE_ENV === 'production' ? "https://interactwithschool.onrender.com:4000" : `${import.meta.env.VITE_SOCKET_SERVER}`
 
 export const socket = io(URL,{
     autoConnect:false,
