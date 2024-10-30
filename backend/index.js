@@ -201,14 +201,26 @@ io.on('connection', (socket) => {
         await secondUserChatList.save()
       }
     }
-    // chat between user and all mock parents in the same school-class
+    // chat between user,teacher and all mock parents in the same school-class
      const user = await User.findById(newUser).populate("students","schoolClass")
      const schoolClassIds = user.students.map(studen => studen.schoolClass)
      for(let classId of schoolClassIds) {
       const schoolClass = await SchoolClass.findById(classId)
+      const ownUser = {firstName:user.firstName,lastName:user.lastName,userId:user}
+      // chat between user and teacher
+      const userChatList = await ChatList.findOne({userId:user})
+      const {teacher} = schoolClass
+        const teacherUser = {
+          firstName:teacher.firstName,
+          lastName: teacher.lastName,
+          userId:teacher.id
+        }
+        teacherChat = new Chat({participants: [ownUser,teacherUser]})
+        await teacherChat.save()
+        userChatList.chats.push(teacherChat)
+        await userChatList.save()
       for(let parent of schoolClass.parents) {
         if(parent._id.toString() !== user._id.toString() && !users.some(u => u._id.toString() === parent._id.toString())) {
-          const ownUser = {firstName:user.firstName,lastName:user.lastName,userId:user}
           const parentUser = {firstName:parent.firstName,lastName:parent.lastName,userId:parent}
           const chat = new Chat({participants: [ownUser,parentUser]})
           await chat.save()

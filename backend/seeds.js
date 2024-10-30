@@ -35,7 +35,7 @@ const createSchoolClass = async (className) => {
   //get random name for teacher
   const teacherName = generateRandomName(1,1)
   // create mock teacher
-  const teacher = {firstName:teacherName[0],mail:`${teacherName}.mockteacher@mail.com`}
+  const teacher = {firstName:teacherName[0],lastName:"MockTeacher",mail:`${teacherName}.mockteacher@mail.com`,id: new mongoose.Types.ObjectId }
   //create SchoolClass document
   const schoolClass = new SchoolClass({className:className,teacher:teacher})
   // create mock parents 
@@ -306,7 +306,7 @@ const chatEstablish = async () => {
         await firstChatList.save()
       }
     }
-    //chat between user and parents in same school-class
+    //chat between user,teacher and parents in same school-class
     for(let user of users) {
       const chatList = await ChatList.findOne({userId:user._id})
       const users = await User.find()
@@ -316,10 +316,22 @@ const chatEstablish = async () => {
       })
       for(let id of ids) {
         const schoolClass = await SchoolClass.findById(id)
+        const ownUser = {firstName:user.firstName,lastName:user.lastName,userId:user}
+        //chat between user and teacher
+        const {teacher} = schoolClass
+        const teacherUser = {
+          firstName:teacher.firstName,
+          lastName: teacher.lastName,
+          userId:teacher.id
+        }
+        teacherChat = new Chat({participants: [ownUser,teacherUser]})
+        await teacherChat.save()
+        chatList.chats.push(teacherChat)
+
         for(let parent of schoolClass.parents) {
           //check if user id and parent id are not the same and parent are not a user that allready have chat established
           if(parent._id.toString() !== user._id.toString() && !users.some(user => user._id.toString() === parent._id.toString())) {
-            const ownUser = {firstName:user.firstName,lastName:user.lastName,userId:user}
+            // const ownUser = {firstName:user.firstName,lastName:user.lastName,userId:user}
             const parentUser = {firstName:parent.firstName,lastName:parent.lastName,userId:parent}
             const chat = new Chat({participants: [ownUser,parentUser]})
           // const chat = new Chat({participants: [user,parent]})

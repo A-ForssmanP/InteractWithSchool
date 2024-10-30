@@ -11,7 +11,9 @@ const schoolClassSchema = new Schema({
             type: String,
             required: true,
         },
-        mail: String
+        lastName: String,
+        mail: String,
+        id:String
     },
     parents: [{
         firstName: {
