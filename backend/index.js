@@ -511,10 +511,14 @@ io.on('connection', (socket) => {
     res.redirect("/")
   })
 
-app.listen(port,()=>{
-console.log(`SERVER IS UP AND RUNNING ON PORT ${port}!`)
-//socket server
-server.listen(socketPort,() => {
-  console.log(`SOCKET SERVER LISTENING ON PORT ${socketPort}`)
-})
+// app.listen(port,()=>{
+// console.log(`SERVER IS UP AND RUNNING ON PORT ${port}!`)
+// //socket server
+// server.listen(socketPort,() => {
+//   console.log(`SOCKET SERVER LISTENING ON PORT ${socketPort}`)
+// })
+// })
+
+server.listen(port, () => {
+  console.log(`SERVER IS UP AND RUNNING ON PORT ${port}` )
 })
