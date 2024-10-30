@@ -55,7 +55,6 @@ if(process.env.NODE_ENV === "production") {
 }
 
 const port = process.env.PORT || process.env.SERVER_PORT
-const socketPort = process.env.SERVER_PORT || 4000
 const corsOptions = {origin: process.env.VITE_SERVER, optionsSuccessStatus: 200,credentials:true}
 // const userId  = process.env.USER_ID
 
@@ -66,9 +65,6 @@ app.use(cookieParser())
 if(process.env.NODE_ENV !== "production") {
   app.use(cors(corsOptions))
 }
-
-// //socket server
-// server.listen(socketPort)
 
 io.on('connection', (socket) => {
   console.log('a user connected');
@@ -510,14 +506,6 @@ io.on('connection', (socket) => {
   app.get("/*", (req,res) => {
     res.redirect("/")
   })
-
-// app.listen(port,()=>{
-// console.log(`SERVER IS UP AND RUNNING ON PORT ${port}!`)
-// //socket server
-// server.listen(socketPort,() => {
-//   console.log(`SOCKET SERVER LISTENING ON PORT ${socketPort}`)
-// })
-// })
 
 server.listen(port, () => {
   console.log(`SERVER IS UP AND RUNNING ON PORT ${port}` )
