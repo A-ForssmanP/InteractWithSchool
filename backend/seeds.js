@@ -35,7 +35,7 @@ const createSchoolClass = async (className) => {
   //get random name for teacher
   const teacherName = generateRandomName(1,1)
   // create mock teacher
-  const teacher = {firstName:teacherName[0],lastName:"MockTeacher",mail:`${teacherName}.mockteacher@mail.com`,id: new mongoose.Types.ObjectId }
+  const teacher = {firstName:teacherName[0],lastName:"MockTeacher",mail:`${teacherName}.mockteacher@mail.com`,_id: new mongoose.Types.ObjectId }
   //create SchoolClass document
   const schoolClass = new SchoolClass({className:className,teacher:teacher})
   // create mock parents 
@@ -322,7 +322,7 @@ const chatEstablish = async () => {
         const teacherUser = {
           firstName:teacher.firstName,
           lastName: teacher.lastName,
-          userId:teacher.id
+          userId:teacher._id
         }
         teacherChat = new Chat({participants: [ownUser,teacherUser]})
         await teacherChat.save()

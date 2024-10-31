@@ -13,7 +13,7 @@ const schoolClassSchema = new Schema({
         },
         lastName: String,
         mail: String,
-        id:String
+        _id:mongoose.Types.ObjectId
     },
     parents: [{
         firstName: {
