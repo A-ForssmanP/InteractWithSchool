@@ -9,7 +9,7 @@ function DashboardClassListPopup({ closePopup, content }) {
   const [showAlertInfo, setShowAlertInfo] = useState(false);
   const navigate = useNavigate();
   const { findChatId, chatData } = useContext(ChatContext);
-  console.log(content);
+
   // handle show/hide alert-info
   const handleAlertInfo = () => {
     if (!showAlertInfo) {
