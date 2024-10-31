@@ -9,6 +9,7 @@ import axios from "axios";
 function DashBoard() {
   const [date, setDate] = useState(new Date());
   const [userFirstName, setUserFirstName] = useState("");
+  const [userId, setUserId] = useState(null);
   const theme = useTheme();
   const fetchUserUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/user`;
 
@@ -23,6 +24,7 @@ function DashBoard() {
       const res = await axios(fetchUserUrl, { withCredentials: true });
       const { user } = res.data;
       setUserFirstName(user.firstName);
+      setUserId(user._id);
     } catch (err) {
       setUserFirstName(err.message);
     }
@@ -160,7 +162,7 @@ function DashBoard() {
         pt={{ sm: 1, md: 0.5, lg: 1, xxl: 2 }}
         bgcolor={theme.palette.grey[50]}
       >
-        <DashboardClassList />
+        <DashboardClassList userId={userId && userId} />
       </Grid>
     </Grid>
   );

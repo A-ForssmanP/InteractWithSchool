@@ -5,7 +5,7 @@ import DashboardClassListItem from "../dashboardClassListItem/DashboardClassList
 import DashboardClassListPopup from "../DashboardClassListPopup/DashboardClassListPopup";
 import { useTheme } from "@emotion/react";
 
-function DashboardClassList() {
+function DashboardClassList({ userId }) {
   const [classList, setClassList] = useState([]);
   const [popup, setPopup] = useState({ isVisible: false, content: {} });
   const theme = useTheme();
@@ -93,6 +93,7 @@ function DashboardClassList() {
               key={list.class._id}
               list={list}
               showPopup={showPopup}
+              userId={userId && userId}
             />
           );
         })}
