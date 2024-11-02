@@ -104,7 +104,7 @@ function ChatWindow() {
     setShowSendError(true);
     setTimeout(() => {
       setShowSendError(false);
-    }, 4000);
+    }, 5000);
   };
 
   return (
