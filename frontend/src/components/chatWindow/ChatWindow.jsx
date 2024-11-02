@@ -1,4 +1,4 @@
-import { Box, Avatar, useTheme, Typography, List } from "@mui/material";
+import { Box, Avatar, useTheme, Typography, List, Alert } from "@mui/material";
 import { useState, useRef, useEffect, useContext } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import axios from "axios";
@@ -17,6 +17,7 @@ function ChatWindow() {
   const lastMessageRef = useRef(null);
   const [messages, setMessages] = useState(data?.messages || []);
   const chatContext = useContext(ChatContext);
+  const [showSendError, setShowSendError] = useState(false);
   const { updateChatData, sendSocketMessage } = chatContext;
   const putUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/chat/${
     data?._id
@@ -91,8 +92,19 @@ function ChatWindow() {
       )[0];
       sendSocketMessage(resieverUser.userId);
     } catch (err) {
-      console.log(err.message);
+      handleSendError();
+      setMessages((curr) => {
+        return curr.filter((msg) => msg.id !== newMessage.id);
+      });
     }
+  };
+
+  // show error msg if message cant be sendt
+  const handleSendError = () => {
+    setShowSendError(true);
+    setTimeout(() => {
+      setShowSendError(false);
+    }, 4000);
   };
 
   return (
@@ -136,8 +148,17 @@ function ChatWindow() {
             },
             display: "flex",
             flexDirection: "column",
+            position: "relative",
           }}
         >
+          {showSendError && (
+            <Alert
+              sx={{ position: "absolute", zIndex: 100, width: "100%" }}
+              severity="error"
+            >
+              Meddelandet kunde inte skickas.
+            </Alert>
+          )}
           <div
             style={{
               flex: 1,
