@@ -81,7 +81,7 @@ function DashboardClassList({ userId }) {
         }}
         navButtonsProps={{
           style: {
-            background: "none",
+            background: "rgba(211,211,211,.4)",
             color: theme.palette.secondary.main,
           },
         }}
