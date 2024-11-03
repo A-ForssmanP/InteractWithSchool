@@ -6,15 +6,15 @@ import CancelScheduleSendIcon from "@mui/icons-material/CancelScheduleSend";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import MessageIcon from "@mui/icons-material/Message";
 import { Badge } from "@mui/material";
-import { NewInboxCount, ChatContext } from "../../context";
-import { useState, useContext, useEffect } from "react";
+import { NewInboxCount, ChatContext, MenuContext } from "../../context";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function NavList({ closeMenu, isAuthenticated }) {
-  const [isSelected, setIsSelected] = useState("Hem");
   const navigate = useNavigate();
   const newMessage = useContext(NewInboxCount);
   const { newChatMessages } = useContext(ChatContext);
+  const { selectedMenu, handleSelectedMenu } = useContext(MenuContext);
 
   const listItems = [
     { id: crypto.randomUUID(), text: "Hem", ikon: <HomeIcon />, navPath: "/" },
@@ -60,14 +60,9 @@ function NavList({ closeMenu, isAuthenticated }) {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      setIsSelected("Hem");
+      handleSelectedMenu("Hem");
     }
   }, [isAuthenticated]);
-
-  // set selected menu item
-  const handleSelected = (text) => {
-    setIsSelected(text);
-  };
 
   // handle item click
   const handleClick = (item) => {
@@ -76,7 +71,7 @@ function NavList({ closeMenu, isAuthenticated }) {
     }
     closeMenu();
     navigate(item.navPath);
-    handleSelected(item.text);
+    handleSelectedMenu(item.text);
   };
 
   return (
@@ -87,7 +82,7 @@ function NavList({ closeMenu, isAuthenticated }) {
             key={item.id}
             item={item}
             handleClick={() => handleClick(item)}
-            isSelected={isSelected === item.text}
+            isSelected={selectedMenu === item.text}
           />
         );
       })}

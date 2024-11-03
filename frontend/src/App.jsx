@@ -2,7 +2,7 @@ import Stack from "@mui/material/Stack";
 import theme from "..//themeCustom";
 import { socket } from "./socket";
 import { ThemeProvider } from "@emotion/react";
-import { NewInboxCount, ChatContext } from "./context";
+import { NewInboxCount, ChatContext, MenuContext } from "./context";
 import Menu from "./components/menu/Menu";
 import PagesWrapper from "./components/pagesWrapper/PagesWrapper";
 import { useEffect, useState } from "react";
@@ -13,6 +13,7 @@ function App() {
   const [newInboxMessage, setNewInboxMessage] = useState(0);
   const [chatData, setChatData] = useState({});
   const [newChatMessages, setNewChatMessages] = useState(0);
+  const [selectedMenu, setSelectedMenu] = useState("Hem");
   const [socketIsConnected, setSocketIsConnected] = useState(socket.connected);
 
   const newInboxCountUrl = `${
@@ -116,6 +117,11 @@ function App() {
     }
   };
 
+  // select menu
+  const handleSelectedMenu = (text) => {
+    setSelectedMenu(text);
+  };
+
   return (
     <ChatContext.Provider
       value={{
@@ -127,19 +133,21 @@ function App() {
       }}
     >
       <NewInboxCount.Provider value={{ newInboxMessage, setNewInboxMessage }}>
-        <ThemeProvider theme={theme}>
-          <Stack
-            direction={{ xs: "column", md: "row" }}
-            height={{ sm: "100dvh" }}
-            sx={{ position: "relative" }}
-          >
-            <Menu isAuthenticated={isAuthenticated} />
-            <PagesWrapper
-              isAuthenticated={isAuthenticated}
-              setIsAuthenticated={setIsAuthenticated}
-            />
-          </Stack>
-        </ThemeProvider>
+        <MenuContext.Provider value={{ selectedMenu, handleSelectedMenu }}>
+          <ThemeProvider theme={theme}>
+            <Stack
+              direction={{ xs: "column", md: "row" }}
+              height={{ sm: "100dvh" }}
+              sx={{ position: "relative" }}
+            >
+              <Menu isAuthenticated={isAuthenticated} />
+              <PagesWrapper
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+              />
+            </Stack>
+          </ThemeProvider>
+        </MenuContext.Provider>
       </NewInboxCount.Provider>
     </ChatContext.Provider>
   );

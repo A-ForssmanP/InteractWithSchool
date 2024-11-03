@@ -3,12 +3,13 @@ import MessageIcon from "@mui/icons-material/Message";
 import AlertInfo from "../alertInfo/AlertInfo";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { ChatContext } from "../../context";
+import { ChatContext, MenuContext } from "../../context";
 
 function DashboardClassListPopup({ closePopup, content }) {
   const [showAlertInfo, setShowAlertInfo] = useState(false);
   const navigate = useNavigate();
   const { findChatId, chatData } = useContext(ChatContext);
+  const { handleSelectedMenu } = useContext(MenuContext);
 
   // handle show/hide alert-info
   const handleAlertInfo = () => {
@@ -39,6 +40,7 @@ function DashboardClassListPopup({ closePopup, content }) {
         chatListId: chatData.chatListId,
       },
     });
+    handleSelectedMenu("Chatt");
   };
 
   return (
