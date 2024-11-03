@@ -1,15 +1,17 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { Box, Typography, Paper, Grid, useTheme } from "@mui/material";
 import ReadOnlyDatePicker from "../../components/readOnlyDatePicker/ReadOnlyDatePicker";
 import ChartYearProg from "../../components/chartYearProg/ChartYearProg";
 import DashBoardNotes from "../../components/dashBoardNotes/DashBoardNotes";
 import DashboardClassList from "../../components/dashboardClassList/DashboardClassList";
+import DashboardMyChild from "../../components/dashboardMyChild/DashboardMyChild";
 import axios from "axios";
 
 function DashBoard() {
   const [date, setDate] = useState(new Date());
   const [userFirstName, setUserFirstName] = useState("");
   const [userId, setUserId] = useState(null);
+  const [studentNames, setStudentNames] = useState([]);
   const theme = useTheme();
   const fetchUserUrl = `${import.meta.env.VITE_EXPRESS_SERVER}/user`;
 
@@ -25,6 +27,10 @@ function DashBoard() {
       const { user } = res.data;
       setUserFirstName(user.firstName);
       setUserId(user._id);
+      const studentNamesList = user.students.map(
+        (student) => student.firstName
+      );
+      setStudentNames(studentNamesList);
     } catch (err) {
       setUserFirstName(err.message);
     }
@@ -34,7 +40,7 @@ function DashBoard() {
     <ChartYearProg />,
     <DashBoardNotes />,
     <ReadOnlyDatePicker />,
-    null,
+    <DashboardMyChild names={studentNames} />,
   ];
   const months = [
     "Jan",
