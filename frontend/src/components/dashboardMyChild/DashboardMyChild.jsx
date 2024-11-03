@@ -2,7 +2,7 @@ import { Box, Typography, List, ListItem, useTheme } from "@mui/material";
 
 function DashboardMyChild({ names }) {
   const theme = useTheme();
-  console.log(theme);
+
   return (
     <Box display="flex" flexDirection="column">
       <Typography
