@@ -52,7 +52,7 @@ function NavList({ closeMenu, isAuthenticated }) {
     },
     {
       id: crypto.randomUUID(),
-      text: "Tid-Schema",
+      text: "Tidsschema",
       ikon: <DateRangeIcon />,
       navPath: "tidsschema",
     },
