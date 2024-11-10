@@ -26,6 +26,11 @@ function ChatContacts() {
           onClose={() => {
             setShowAlert(false);
           }}
+          sx={{
+            width: "100%",
+            maxWidth: { xs: 800, xl: 1000 },
+            margin: "0 auto",
+          }}
         >
           Testa att live-chatta genom att logga in med 2 användare på varsin
           enhet eller använd olika webbläsare.
