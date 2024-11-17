@@ -36,7 +36,16 @@ const Chat = require("./models/chat")
 const isAuthenticated = require("./middleware/isAuthenticated")
 const generateRandomName = require("./utils/generateRandomName")
 
+// make request to render.com server for no spin-down
+const url = process.env.EXPRESS_SERVER || "https://interactwithschool.onrender.com/healtz"
+const intervall = 1200000
+const reloadWebsite = () => {
+  fetch(url)
+    .then(res => console.log(res))
+    .catch(err => console.log(err.message))
+}
 
+setInterval(reloadWebsite,intervall)
 
 //mongodb+srv://afpdev91:<password>@cluster0.tnv2l.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 
