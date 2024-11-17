@@ -38,7 +38,7 @@ const generateRandomName = require("./utils/generateRandomName")
 
 // make request to render.com server for no spin-down
 const url = process.env.EXPRESS_SERVER || "https://interactwithschool.onrender.com/healtz"
-const intervall = 1200000
+const intervall = 600000
 const reloadWebsite = () => {
   fetch(url)
     .then(res => console.log(res))
